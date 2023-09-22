@@ -38,7 +38,7 @@ namespace Teszt__.src.views
 
             Window window = (Window)this.Tag;
 
-            window.Show();
+            Scene.Switch(this, window);
         }
     }
 }
