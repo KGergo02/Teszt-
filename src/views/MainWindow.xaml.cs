@@ -11,6 +11,8 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Teszt__.src.views;
+using Teszt__.src.classes;
 
 namespace Teszt__
 {
@@ -23,16 +25,24 @@ namespace Teszt__
 
         private void hallgatoi_Button_Click(object sender, RoutedEventArgs e)
         {
-            this.Hide();
-
-            
-
-            window.Show();
+            sendToLogin(false);
         }
 
         private void oktatoi_Button_Click(object sender, RoutedEventArgs e)
         {
+            sendToLogin(true);
+        }
 
+        private void registerLabel_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            
+        }
+
+        private void sendToLogin(bool admin)
+        {
+            LoginWindow window = new LoginWindow(admin);
+
+            Scene.Switch(this, window);
         }
     }
 }

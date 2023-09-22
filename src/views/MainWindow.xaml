@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Teszt__"
         mc:Ignorable="d"
-        Title="Főoldal" Height="171.388" Width="274.767" WindowStartupLocation="CenterOwner" Foreground="Black" FontSize="20" HorizontalAlignment="Left" VerticalAlignment="Top" MinWidth="693.267" MinHeight="325.888">
+        Title="Főoldal" Height="171.388" Width="538.942" WindowStartupLocation="CenterOwner" Foreground="Black" FontSize="20" HorizontalAlignment="Left" VerticalAlignment="Top" MinWidth="693.267" MinHeight="325.888">
 
     <Canvas Margin="50,106,33,65" Background="#FF9C9C9C" Width="602" Height="124" HorizontalAlignment="Center" VerticalAlignment="Center">
         <StackPanel Canvas.Left="193" Canvas.Top="-97" HorizontalAlignment="Left">
@@ -13,6 +13,6 @@
         </StackPanel>
         <Button x:Name="hallgatoi_Button" Content="Hallgatói bejelentkezés" Width="230" FontSize="20" Height="42" HorizontalAlignment="Center" VerticalAlignment="Center" Canvas.Left="10" Canvas.Top="43" Click="hallgatoi_Button_Click" Cursor="Hand"/>
         <Button x:Name="oktatoi_Button" Content="Oktatói bejelentkezés" FontSize="20" HorizontalAlignment="Right" VerticalAlignment="Center" Width="230" Height="42" Canvas.Left="341" Canvas.Top="43" Click="oktatoi_Button_Click" Cursor="Hand"/>
-        <Label Content="Ha nincs még fiókod, akkor a regisztrációhoz kattints ide!" Canvas.Left="97" Canvas.Top="145" HorizontalAlignment="Right" Cursor="Hand" Foreground="Blue"/>
+        <Label x:Name="registerLabel" Content="Ha nincs még fiókod, akkor a regisztrációhoz kattints ide!" Canvas.Left="97" Canvas.Top="145" HorizontalAlignment="Right" Cursor="Hand" Foreground="Blue" MouseDown="registerLabel_MouseDown"/>
     </Canvas>
 </Window>

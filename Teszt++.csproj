@@ -119,6 +119,7 @@
     <Compile Include="src\classes\Database.cs" />
     <Compile Include="src\classes\JelszoTitkosito.cs" />
     <Compile Include="src\classes\Kiiras.cs" />
+    <Compile Include="src\classes\Scene.cs" />
     <Compile Include="src\views\LoginWindow.xaml.cs">
       <DependentUpon>LoginWindow.xaml</DependentUpon>
     </Compile>
@@ -162,6 +163,7 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="src\images\" />
     <Folder Include="src\views\hallgato_views\" />
     <Folder Include="src\views\oktato_views\" />
   </ItemGroup>

@@ -5,11 +5,11 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Teszt__.src.views"
         mc:Ignorable="d"
-        Title="Bejelentkezés" Height="409.06" Width="367.109" WindowStartupLocation="CenterOwner" MinWidth="367.109" MinHeight="409.06">
-    <Canvas>
-        <TextBox HorizontalAlignment="Left" Height="31" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="318" Canvas.Left="17" Canvas.Top="90" FontSize="20"/>
+        Title="Bejelentkezés" Height="366.06" Width="110.109" WindowStartupLocation="CenterOwner" MinWidth="367.109" MinHeight="409.06" Closed="Window_Closed">
+    <Canvas Height="369" VerticalAlignment="Top" HorizontalAlignment="Left" Width="357">
+        <TextBox Height="31" TextWrapping="Wrap" Width="318" Canvas.Left="17" Canvas.Top="90" FontSize="20" VerticalAlignment="Center"/>
         <Label Content="Név" Canvas.Left="133" Canvas.Top="16" FontSize="36" Width="83"/>
-        <TextBox HorizontalAlignment="Left" Height="31" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="327" Canvas.Left="17" Canvas.Top="230" FontSize="20"/>
+        <TextBox Height="31" TextWrapping="Wrap" Text="" Width="327" Canvas.Left="17" Canvas.Top="230" FontSize="20"/>
         <Label Content="Jelszó" Canvas.Left="133" Canvas.Top="152" FontSize="36" Width="102"/>
         <Button x:Name="loginButton" Content="Bejelentkezés" Canvas.Left="107" Canvas.Top="302" Width="145" FontSize="20" Height="40" Click="loginButton_Click"/>
     </Canvas>
