@@ -12,16 +12,19 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace Teszt__
+namespace Teszt__.src.views
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
-    public partial class MainWindow : Window
+    
+    public partial class LoginWindow : Window
     {
-        public MainWindow()
+        public LoginWindow(bool admin)
         {
             InitializeComponent();
+        }
+
+        private void loginButton_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

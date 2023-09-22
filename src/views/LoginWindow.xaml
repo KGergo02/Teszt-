@@ -1,0 +1,16 @@
+﻿<Window x:Class="Teszt__.src.views.LoginWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Teszt__.src.views"
+        mc:Ignorable="d"
+        Title="Bejelentkezés" Height="409.06" Width="367.109" WindowStartupLocation="CenterOwner" MinWidth="367.109" MinHeight="409.06">
+    <Canvas>
+        <TextBox HorizontalAlignment="Left" Height="31" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="318" Canvas.Left="17" Canvas.Top="90" FontSize="20"/>
+        <Label Content="Név" Canvas.Left="133" Canvas.Top="16" FontSize="36" Width="83"/>
+        <TextBox HorizontalAlignment="Left" Height="31" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="327" Canvas.Left="17" Canvas.Top="230" FontSize="20"/>
+        <Label Content="Jelszó" Canvas.Left="133" Canvas.Top="152" FontSize="36" Width="102"/>
+        <Button x:Name="loginButton" Content="Bejelentkezés" Canvas.Left="107" Canvas.Top="302" Width="145" FontSize="20" Height="40" Click="loginButton_Click"/>
+    </Canvas>
+</Window>
