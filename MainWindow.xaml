@@ -5,8 +5,13 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Teszt__"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
-        
-    </Grid>
+        Title="MainWindow" Height="171.388" Width="274.767" WindowStartupLocation="CenterOwner" Foreground="Black" FontSize="20" HorizontalAlignment="Left" VerticalAlignment="Top" MinWidth="693.267" MinHeight="325.888">
+
+    <Canvas Margin="50,106,33,65" Background="#FF9C9C9C" Width="602" Height="124" HorizontalAlignment="Center" VerticalAlignment="Center">
+        <StackPanel Canvas.Left="191" Canvas.Top="-78" HorizontalAlignment="Left">
+            <Label Content="Teszt++" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="40" FontFamily="Ravie" Background="#00000000" Foreground="Black"/>
+        </StackPanel>
+        <Button x:Name="hallgatoi_Button" Content="Hallgatói bejelentkezés" Width="230" FontSize="20" Height="42" HorizontalAlignment="Center" VerticalAlignment="Center" Canvas.Left="37" Canvas.Top="43"/>
+        <Button x:Name="oktatoi_Button" Content="Oktatói bejelentkezés" FontSize="20" HorizontalAlignment="Right" VerticalAlignment="Center" Width="230" Height="42" Canvas.Left="341" Canvas.Top="43"/>
+    </Canvas>
 </Window>
