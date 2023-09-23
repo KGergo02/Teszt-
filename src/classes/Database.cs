@@ -63,5 +63,10 @@ namespace Teszt__.src.classes
 
             command.ExecuteNonQuery();
         }
+
+        public static List<Dictionary<string, string>> getAllUsers()
+        {
+            return Query("SELECT * FROM users");
+        }
     }
 }

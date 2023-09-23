@@ -9,17 +9,17 @@
     <ScrollViewer>
         <StackPanel>
             <Label Content="Felhasználónév" FontSize="36" HorizontalAlignment="Center" Margin="0,50,0,5"/>
-            <TextBox x:Name="TB_username" Height="50" TextWrapping="Wrap" Width="300" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="25"/>
+            <TextBox x:Name="TB_username" Height="50" TextWrapping="Wrap" Width="300" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="25" BorderBrush="#FFABADB3" SelectionBrush="#FF0078D7"/>
 
             <Label Content="Jelszó" FontSize="36" HorizontalAlignment="Center" Margin="0,30,0,5"/>
-            <PasswordBox x:Name="TB_password1" Height="50" Width="300" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="25"  />
+            <PasswordBox x:Name="TB_password1" Height="50" Width="300" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="25" SelectionBrush="#FF0078D7"  />
 
             <Label Content="Jelszó újra" FontSize="36" HorizontalAlignment="Center" Margin="0,30,0,5"/>
-            <PasswordBox x:Name="TB_password2" Height="50" Width="300" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="25"  />
+            <PasswordBox x:Name="TB_password2" Height="50" Width="300" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="25" SelectionBrush="#FF0078D7"  />
 
             <Label Content="Email" FontSize="36" HorizontalAlignment="Center" Margin="0,30,0,5"/>
-            <TextBox x:Name="TB_email" Height="50" TextWrapping="Wrap" Width="300" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="25"/>
-            <Button x:Name="registerButton" Content="Regisztráció" Width="300" Margin="0,50" FontSize="25" Height="50" Click="registerButton_Click" />
+            <TextBox x:Name="TB_email" Height="50" TextWrapping="Wrap" Width="300" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="25" SelectionBrush="#FF0078D7"/>
+            <Button x:Name="registerButton" Content="Regisztráció" Width="300" Margin="0,99,0,50" FontSize="25" Height="50" Click="registerButton_Click" />
 
         </StackPanel>
     </ScrollViewer>

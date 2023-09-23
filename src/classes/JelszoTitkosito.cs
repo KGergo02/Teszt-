@@ -5,7 +5,7 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Piactér
+namespace Teszt__.src.classes
 {
     public static class JelszoTitkosito
     {
