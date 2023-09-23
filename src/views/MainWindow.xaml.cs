@@ -46,7 +46,9 @@ namespace Teszt__
         {
             LoginWindow window = new LoginWindow(admin);
 
-            Scene.Switch(this, window);
+            window.WindowState = this.WindowState;
+
+            window.ShowDialog();
         }
     }
 }

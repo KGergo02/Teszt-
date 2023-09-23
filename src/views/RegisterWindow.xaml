@@ -5,21 +5,21 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Teszt__.src.views"
         mc:Ignorable="d"
-        Title="Regisztráció" Height="294" Width="229" MinWidth="473" MinHeight="508" WindowStartupLocation="CenterOwner">
+        Title="Regisztráció" Height="127" Width="0" MinWidth="473" MinHeight="508" WindowStartupLocation="CenterScreen">
     <ScrollViewer>
-        <StackPanel>
-            <Label Content="Felhasználónév" FontSize="36" HorizontalAlignment="Center" Margin="0,50,0,5"/>
-            <TextBox x:Name="TB_username" Height="50" TextWrapping="Wrap" Width="300" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="25" BorderBrush="#FFABADB3" SelectionBrush="#FF0078D7"/>
+        <StackPanel Background="#FFFF7400">
+            <Label Content="Felhasználónév" FontSize="36" HorizontalAlignment="Center" Margin="0,50,0,5" Background="{x:Null}" Foreground="Black" FontWeight="Bold"/>
+            <TextBox x:Name="TB_username" Height="50" TextWrapping="Wrap" Width="300" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="25" Background="White" SelectionBrush="#FF0078D7" BorderBrush="{x:Null}"/>
 
-            <Label Content="Jelszó" FontSize="36" HorizontalAlignment="Center" Margin="0,30,0,5"/>
-            <PasswordBox x:Name="TB_password1" Height="50" Width="300" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="25" SelectionBrush="#FF0078D7"  />
+            <Label Content="Jelszó" FontSize="36" HorizontalAlignment="Center" Margin="0,20,0,5" Foreground="Black" FontWeight="Bold"/>
+            <PasswordBox x:Name="TB_password1" Height="50" Width="300" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="25" SelectionBrush="#FF0078D7" BorderBrush="{x:Null}"  />
 
-            <Label Content="Jelszó újra" FontSize="36" HorizontalAlignment="Center" Margin="0,30,0,5"/>
-            <PasswordBox x:Name="TB_password2" Height="50" Width="300" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="25" SelectionBrush="#FF0078D7"  />
+            <Label Content="Jelszó újra" FontSize="36" HorizontalAlignment="Center" Margin="0,20,0,5" Foreground="Black" FontWeight="Bold"/>
+            <PasswordBox x:Name="TB_password2" Height="50" Width="300" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="25" SelectionBrush="#FF0078D7" BorderBrush="{x:Null}"  />
 
-            <Label Content="Email" FontSize="36" HorizontalAlignment="Center" Margin="0,30,0,5"/>
-            <TextBox x:Name="TB_email" Height="50" TextWrapping="Wrap" Width="300" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="25" SelectionBrush="#FF0078D7"/>
-            <Button x:Name="registerButton" Content="Regisztráció" Width="300" Margin="0,99,0,50" FontSize="25" Height="50" Click="registerButton_Click" />
+            <Label Content="Email" FontSize="36" HorizontalAlignment="Center" Margin="0,20,0,5" Foreground="Black" FontWeight="Bold"/>
+            <TextBox x:Name="TB_email" Height="50" TextWrapping="Wrap" Width="300" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="25" SelectionBrush="#FF0078D7" BorderBrush="{x:Null}"/>
+            <Button x:Name="registerButton" Content="Regisztráció" Width="300" Margin="0,45,0,50" FontSize="25" Height="50" Click="registerButton_Click" FontStyle="Italic" FontWeight="Bold" />
 
         </StackPanel>
     </ScrollViewer>

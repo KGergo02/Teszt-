@@ -31,14 +31,5 @@ namespace Teszt__.src.views
         {
             
         }
-
-        private void Window_Closed(object sender, EventArgs e)
-        {
-            this.Close();
-
-            Window window = (Window)this.Tag;
-
-            Scene.Switch(this, window);
-        }
     }
 }

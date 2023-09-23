@@ -5,17 +5,17 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Teszt__.src.views"
         mc:Ignorable="d"
-        Title="Bejelentkezés" Height="366.06" Width="110.109" WindowStartupLocation="CenterOwner" MinWidth="367.109" MinHeight="409.06" Closed="Window_Closed" Topmost="True">
+        Title="Bejelentkezés" Height="366.06" Width="110.109" WindowStartupLocation="CenterOwner" MinWidth="367.109" MinHeight="409.06">
 
-    
+
 
     <Viewbox>
-        <Canvas Height="369" Width="357">
+        <Canvas Height="376" Width="357" Background="#FFFF7400">
             <TextBox Height="31" TextWrapping="Wrap" Width="318" Canvas.Left="17" Canvas.Top="90" FontSize="20" VerticalAlignment="Center"/>
-            <Label Content="Név" Canvas.Left="133" Canvas.Top="16" FontSize="36" Width="83"/>
+            <Label Content="Név" Canvas.Left="144" Canvas.Top="17" FontSize="36" Width="83" FontWeight="Bold"/>
             <TextBox Height="31" TextWrapping="Wrap" Text="" Width="327" Canvas.Left="17" Canvas.Top="230" FontSize="20" VerticalAlignment="Center"/>
-            <Label Content="Jelszó" Canvas.Left="133" Canvas.Top="152" FontSize="36" Width="102"/>
-            <Button x:Name="loginButton" Content="Bejelentkezés" Canvas.Left="107" Canvas.Top="302" Width="145" FontSize="20" Height="40" Click="loginButton_Click" Cursor="Hand"/>
+            <Label Content="Jelszó" Canvas.Left="130" Canvas.Top="153" FontSize="36" Width="111" FontWeight="Bold"/>
+            <Button x:Name="loginButton" Content="Bejelentkezés" Canvas.Left="107" Canvas.Top="302" Width="145" FontSize="20" Height="40" Click="loginButton_Click" Cursor="Hand" FontWeight="Bold"/>
         </Canvas>
     </Viewbox>
 

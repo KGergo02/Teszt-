@@ -64,7 +64,7 @@ namespace Teszt__.src.views
                 {
                     error += "Már létezik ilyen felhasználó!\n";
 
-                    TB_username.BorderBrush = Brushes.Red;
+                    TB_username.Background = Brushes.Red;
 
                     break;
                 }
@@ -73,17 +73,13 @@ namespace Teszt__.src.views
 
         private void ClearErrorColors()
         {
-            Color defTB = Color.FromRgb(171, 173, 179);
+            TB_username.Background = Brushes.White;
 
-            SolidColorBrush defaultBrush = new SolidColorBrush(defTB);
+            TB_password1.Background = Brushes.White;
 
-            TB_username.BorderBrush = defaultBrush;
+            TB_password2.Background = Brushes.White;
 
-            TB_password1.BorderBrush = defaultBrush;
-
-            TB_password2.BorderBrush = defaultBrush;
-
-            TB_email.BorderBrush = defaultBrush;
+            TB_email.Background = Brushes.White;
         }
 
         private void CheckForEmptyInputs()
@@ -106,7 +102,7 @@ namespace Teszt__.src.views
             {
                 if(item.Text == String.Empty)
                 {
-                    item.BorderBrush = Brushes.Red;
+                    item.Background = Brushes.Red;
 
                     foundError = true;
                 }
@@ -116,7 +112,7 @@ namespace Teszt__.src.views
             {
                 if(item.Password == String.Empty)
                 {
-                    item.BorderBrush = Brushes.Red;
+                    item.Background = Brushes.Red;
 
                     foundError = true;
                 }
@@ -132,9 +128,9 @@ namespace Teszt__.src.views
         {
             if(TB_password1.Password != TB_password2.Password)
             {
-                TB_password1.BorderBrush = Brushes.Red;
+                TB_password1.Background = Brushes.Red;
 
-                TB_password2.BorderBrush = Brushes.Red;
+                TB_password2.Background = Brushes.Red;
 
                 error += "A két jelszó nem egyezik!\n";
             }
@@ -150,7 +146,7 @@ namespace Teszt__.src.views
             {
                 error += "Az email hibás formátumban van, használd így: example@example.com\n";
 
-                TB_email.BorderBrush = Brushes.Red;
+                TB_email.Background = Brushes.Red;
             }
         }
     }
