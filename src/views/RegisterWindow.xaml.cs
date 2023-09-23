@@ -14,14 +14,17 @@ using System.Windows.Shapes;
 
 namespace Teszt__.src.views
 {
-    /// <summary>
-    /// Interaction logic for RegisterWindow.xaml
-    /// </summary>
+    
     public partial class RegisterWindow : Window
     {
         public RegisterWindow()
         {
             InitializeComponent();
+        }
+
+        private void registerButton_Click(object sender, RoutedEventArgs e)
+        {
+            
         }
     }
 }

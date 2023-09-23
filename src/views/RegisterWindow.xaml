@@ -5,8 +5,22 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Teszt__.src.views"
         mc:Ignorable="d"
-        Title="RegisterWindow" Height="513" Width="684.5">
-    <Viewbox>
-        
-    </Viewbox>
+        Title="Regisztráció" Height="294" Width="229" MinWidth="473" MinHeight="508" WindowStartupLocation="CenterOwner">
+    <ScrollViewer>
+        <StackPanel>
+            <Label Content="Felhasználónév" FontSize="36" HorizontalAlignment="Center" Margin="0,50,0,5"/>
+            <TextBox x:Name="TB_username" Height="50" TextWrapping="Wrap" Width="300" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="25"/>
+
+            <Label Content="Jelszó" FontSize="36" HorizontalAlignment="Center" Margin="0,30,0,5"/>
+            <PasswordBox x:Name="TB_password1" Height="50" Width="300" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="25"  />
+
+            <Label Content="Jelszó újra" FontSize="36" HorizontalAlignment="Center" Margin="0,30,0,5"/>
+            <PasswordBox x:Name="TB_password2" Height="50" Width="300" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="25"  />
+
+            <Label Content="Email" FontSize="36" HorizontalAlignment="Center" Margin="0,30,0,5"/>
+            <TextBox x:Name="TB_email" Height="50" TextWrapping="Wrap" Width="300" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="25"/>
+            <Button x:Name="registerButton" Content="Regisztráció" Width="300" Margin="0,50" FontSize="25" Height="50" Click="registerButton_Click" />
+
+        </StackPanel>
+    </ScrollViewer>
 </Window>

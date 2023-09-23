@@ -35,7 +35,11 @@ namespace Teszt__
 
         private void registerLabel_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            
+            RegisterWindow window = new RegisterWindow();
+
+            window.WindowState = this.WindowState;
+
+            window.ShowDialog();
         }
 
         private void sendToLogin(bool admin)
