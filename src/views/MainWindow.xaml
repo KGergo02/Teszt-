@@ -10,7 +10,7 @@
     <Viewbox>
         <Canvas Margin="50,106,33,65" Background="Black" Width="602" Height="124" HorizontalAlignment="Center" VerticalAlignment="Center">
             <StackPanel Canvas.Left="193" Canvas.Top="-97" HorizontalAlignment="Left">
-                <Label Content="Teszt++" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="40" FontFamily="Ravie" Background="White" Foreground="Black" FontWeight="Bold"/>
+                <Label Content="Teszt++" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="40" FontFamily="Lucida Console" Background="{x:Null}" Foreground="Black" FontWeight="Bold" Margin="20,20,0,0"/>
             </StackPanel>
             <Button x:Name="hallgatoi_Button" Content="Hallgatói bejelentkezés" Width="230" FontSize="20" Height="42" HorizontalAlignment="Center" VerticalAlignment="Center" Canvas.Left="10" Canvas.Top="43" Click="hallgatoi_Button_Click" Cursor="Hand" FontWeight="Bold"/>
             <Button x:Name="oktatoi_Button" Content="Oktatói bejelentkezés" FontSize="20" HorizontalAlignment="Right" VerticalAlignment="Center" Width="230" Height="42" Canvas.Left="341" Canvas.Top="43" Click="oktatoi_Button_Click" Cursor="Hand" FontWeight="Bold"/>
