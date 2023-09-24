@@ -20,7 +20,7 @@ namespace Teszt__.src.classes
             return new TripleDESCryptoServiceProvider() { Key = kulcs, Mode = CipherMode.ECB, Padding = PaddingMode.PKCS7 };
         }
 
-        public static string Titkosit(string jelszo)
+        public static string Encrypt(string jelszo)
         {
             var adat = Encoding.UTF8.GetBytes(jelszo);
 
@@ -33,7 +33,7 @@ namespace Teszt__.src.classes
             return Convert.ToBase64String(vegeredmenyek_tomb);
         }
 
-        public static string Visszafejt(string titkositottSzoveg)
+        public static string Decrypt(string titkositottSzoveg)
         {
             var data = Convert.FromBase64String(titkositottSzoveg);
 

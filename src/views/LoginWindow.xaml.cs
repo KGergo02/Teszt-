@@ -29,7 +29,37 @@ namespace Teszt__.src.views
 
         private void loginButton_Click(object sender, RoutedEventArgs e)
         {
-            
+            if(TB_username.Text == String.Empty || TB_password.Password == String.Empty)
+            {
+                Kiiras.Hiba("Nem töltöttél ki minden mezőt!");
+
+                return;
+            }
+
+            List<Dictionary<string, string>> users = Database.getAllUsers();
+
+            for (int i = 0; i < users.Count; i++)
+            {
+                if(users[i]["name"] != TB_username.Text || users[i]["password"] != JelszoTitkosito.Encrypt(TB_password.Password))
+                {
+                    Kiiras.Hiba("Hibás felhasználónév vagy jelszó!");
+
+                    return;
+                }
+            }
+
+            Kiiras.Siker("Sikeres bejelentkezés!");
+
+            if(admin)
+            {
+                // admin view
+            }
+            else
+            {
+                // hallgató view
+            }
+
+            this.Close();
         }
     }
 }

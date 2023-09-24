@@ -46,7 +46,7 @@ namespace Teszt__.src.views
             }
             else
             {
-                Database.Execute($"INSERT INTO `users` (`id`, `name`, `password`, `email`, `admin`) VALUES ('', '{TB_username.Text}', '{JelszoTitkosito.Titkosit(TB_password1.Password)}', '{TB_email.Text}', '0');");
+                Database.Execute($"INSERT INTO `users` (`id`, `name`, `password`, `email`, `admin`) VALUES ('', '{TB_username.Text}', '{JelszoTitkosito.Encrypt(TB_password1.Password)}', '{TB_email.Text}', '0');");
 
                 Kiiras.Siker("A regisztráció sikeres volt!");
 
@@ -60,7 +60,7 @@ namespace Teszt__.src.views
 
             for (int i = 0; i < users.Count; i++)
             {
-                if (users[i]["name"].Contains(TB_username.Text) && TB_username.Text != String.Empty)
+                if (users[i]["name"] == TB_username.Text && TB_username.Text != String.Empty)
                 {
                     error += "Már létezik ilyen felhasználó!\n";
 

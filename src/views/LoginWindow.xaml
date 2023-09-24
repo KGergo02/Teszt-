@@ -11,10 +11,10 @@
 
     <Viewbox>
         <Canvas Height="376" Width="357" Background="#FFFF7400">
-            <TextBox Height="31" TextWrapping="Wrap" Width="318" Canvas.Left="17" Canvas.Top="90" FontSize="20" VerticalAlignment="Center"/>
-            <Label Content="Név" Canvas.Left="144" Canvas.Top="17" FontSize="36" Width="83" FontWeight="Bold"/>
-            <TextBox Height="31" TextWrapping="Wrap" Text="" Width="327" Canvas.Left="17" Canvas.Top="230" FontSize="20" VerticalAlignment="Center"/>
-            <Label Content="Jelszó" Canvas.Left="130" Canvas.Top="153" FontSize="36" Width="111" FontWeight="Bold"/>
+            <TextBox x:Name="TB_username" Height="31" TextWrapping="Wrap" Width="318" Canvas.Left="17" Canvas.Top="90" FontSize="20" VerticalAlignment="Center"/>
+            <Label Content="Név" Canvas.Left="134" Canvas.Top="19" FontSize="36" Width="83" FontWeight="Bold"/>
+            <PasswordBox x:Name="TB_password" Height="31" Width="327" Canvas.Left="17" Canvas.Top="230" FontSize="20" VerticalAlignment="Center"/>
+            <Label Content="Jelszó" Canvas.Left="122" Canvas.Top="153" FontSize="36" Width="111" FontWeight="Bold"/>
             <Button x:Name="loginButton" Content="Bejelentkezés" Canvas.Left="107" Canvas.Top="302" Width="145" FontSize="20" Height="40" Click="loginButton_Click" Cursor="Hand" FontWeight="Bold"/>
         </Canvas>
     </Viewbox>
