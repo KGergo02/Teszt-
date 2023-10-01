@@ -56,8 +56,11 @@
     <Reference Include="Microsoft.Bcl.AsyncInterfaces, Version=5.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>packages\Microsoft.Bcl.AsyncInterfaces.5.0.0\lib\net461\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.Expression.Interactions, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>packages\MicrosoftExpressionInteractions.3.0.40218.0\lib\net45\Microsoft.Expression.Interactions.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Xaml.Behaviors, Version=1.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>packages\Microsoft.Xaml.Behaviors.Wpf.1.1.19\lib\net45\Microsoft.Xaml.Behaviors.dll</HintPath>
+      <HintPath>packages\Microsoft.Xaml.Behaviors.Wpf.1.1.39\lib\net45\Microsoft.Xaml.Behaviors.dll</HintPath>
     </Reference>
     <Reference Include="MySql.Data, Version=8.1.0.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
       <HintPath>packages\MySql.Data.8.1.0\lib\net462\MySql.Data.dll</HintPath>
@@ -123,20 +126,28 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="src\views\RegisterWindow.xaml.cs">
-      <DependentUpon>RegisterWindow.xaml</DependentUpon>
+    <Compile Include="src\Commands\CommandBase.cs" />
+    <Compile Include="src\Commands\HallgatoLoginCommand.cs" />
+    <Compile Include="src\Commands\OktatoLoginCommand.cs" />
+    <Compile Include="src\Commands\RegisterCommand.cs" />
+    <Compile Include="src\ViewModels\LoginWindowViewModel.cs" />
+    <Compile Include="src\ViewModels\MainWindowViewModel.cs" />
+    <Compile Include="src\ViewModels\RegisterWindowViewModel.cs" />
+    <Compile Include="src\ViewModels\ViewModelBase.cs" />
+    <Compile Include="src\Views\RegisterWindowView.xaml.cs">
+      <DependentUpon>RegisterWindowView.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="src\classes\Database.cs" />
-    <Compile Include="src\classes\JelszoTitkosito.cs" />
-    <Compile Include="src\classes\Kiiras.cs" />
-    <Compile Include="src\classes\Scene.cs" />
-    <Compile Include="src\views\LoginWindow.xaml.cs">
-      <DependentUpon>LoginWindow.xaml</DependentUpon>
+    <Compile Include="src\Models\Database.cs" />
+    <Compile Include="src\Models\JelszoTitkosito.cs" />
+    <Compile Include="src\Models\Kiiras.cs" />
+    <Compile Include="src\Models\Scene.cs" />
+    <Compile Include="src\Views\LoginWindowView.xaml.cs">
+      <DependentUpon>LoginWindowView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="src\views\MainWindow.xaml.cs">
-      <DependentUpon>MainWindow.xaml</DependentUpon>
+    <Compile Include="src\Views\MainWindowView.xaml.cs">
+      <DependentUpon>MainWindowView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
@@ -165,23 +176,22 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Page Include="src\views\LoginWindow.xaml">
+    <Page Include="src\Views\LoginWindowView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="src\views\MainWindow.xaml">
+    <Page Include="src\Views\MainWindowView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="src\views\RegisterWindow.xaml">
+    <Page Include="src\Views\RegisterWindowView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="src\images\" />
-    <Folder Include="src\views\hallgato_views\" />
-    <Folder Include="src\views\oktato_views\" />
+    <Folder Include="src\Views\hallgato_views\" />
+    <Folder Include="src\Views\oktato_views\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

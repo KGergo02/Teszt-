@@ -5,7 +5,7 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Teszt__.src.classes
+namespace Teszt__.src.Models
 {
     public static class JelszoTitkosito
     {

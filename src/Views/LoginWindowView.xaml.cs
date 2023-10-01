@@ -11,16 +11,16 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using Teszt__.src.classes;
+using Teszt__.src.Models;
 
-namespace Teszt__.src.views
+namespace Teszt__.src.Views
 {
     
-    public partial class LoginWindow : Window
+    public partial class LoginWindowView : Window
     {
         public bool admin;
 
-        public LoginWindow(bool admin)
+        public LoginWindowView(bool admin)
         {
             this.admin = admin;
 

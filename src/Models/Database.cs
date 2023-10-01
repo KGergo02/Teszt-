@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 
-namespace Teszt__.src.classes
+namespace Teszt__.src.Models
 {
     public static class Database
     {

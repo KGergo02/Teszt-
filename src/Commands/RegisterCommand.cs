@@ -1,33 +1,51 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security;
 using System.Text;
-using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
+using Teszt__.src.ViewModels;
+using Teszt__.src.Models;
+using System.Windows.Controls;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
-using Teszt__.src.classes;
+using System.Text.RegularExpressions;
 
-namespace Teszt__.src.views
+namespace Teszt__.src.Commands
 {
-    
-    public partial class RegisterWindow : Window
+    public class RegisterCommand : ICommand
     {
-        public RegisterWindow()
+        private RegisterWindowViewModel _viewModel;
+
+        public string error = "";
+
+        public TextBox TB_username;
+
+        public TextBox TB_email;
+
+        public PasswordBox TB_password1;
+
+        public PasswordBox TB_password2;
+
+        public RegisterCommand(RegisterWindowViewModel viewModel)
         {
-            InitializeComponent();
+            _viewModel = viewModel;           
         }
 
-        private string error = "";
+        public event EventHandler CanExecuteChanged;
 
-        private void registerButton_Click(object sender, RoutedEventArgs e)
+        public bool CanExecute(object parameter)
         {
+            return true;
+        }
+
+        public void Execute(object parameter)
+        {
+
+            SecureString password1 = _viewModel.Password1;
+            SecureString password2 = _viewModel.Password2;
+
             error = "";
 
             ClearErrorColors();
@@ -40,7 +58,7 @@ namespace Teszt__.src.views
 
             CheckEmail();
 
-            if(error != "")
+            if (error != "")
             {
                 Kiiras.Hiba(error);
             }
@@ -49,8 +67,19 @@ namespace Teszt__.src.views
                 Database.Execute($"INSERT INTO `users` (`id`, `name`, `password`, `email`, `admin`) VALUES ('', '{TB_username.Text}', '{JelszoTitkosito.Encrypt(TB_password1.Password)}', '{TB_email.Text}', '0');");
 
                 Kiiras.Siker("A regisztráció sikeres volt!");
+            }
+        }
 
-                this.Close();
+        private string SecureStringToString(SecureString secureString)
+        {
+            IntPtr ptr = System.Runtime.InteropServices.Marshal.SecureStringToBSTR(secureString);
+            try
+            {
+                return System.Runtime.InteropServices.Marshal.PtrToStringBSTR(ptr);
+            }
+            finally
+            {
+                System.Runtime.InteropServices.Marshal.ZeroFreeBSTR(ptr);
             }
         }
 
@@ -85,22 +114,22 @@ namespace Teszt__.src.views
         private void CheckForEmptyInputs()
         {
             List<TextBox> textboxes = new List<TextBox>();
-            
+
             List<PasswordBox> passwordboxes = new List<PasswordBox>();
-            
+
             textboxes.Add(TB_username);
-            
+
             textboxes.Add(TB_email);
-            
+
             passwordboxes.Add(TB_password1);
-            
+
             passwordboxes.Add(TB_password2);
 
             bool foundError = false;
 
-            foreach(TextBox item in textboxes)
+            foreach (TextBox item in textboxes)
             {
-                if(item.Text == String.Empty)
+                if (item.Text == String.Empty)
                 {
                     item.Background = Brushes.Red;
 
@@ -110,15 +139,15 @@ namespace Teszt__.src.views
 
             foreach (PasswordBox item in passwordboxes)
             {
-                if(item.Password == String.Empty)
+                if (item.Password == String.Empty)
                 {
                     item.Background = Brushes.Red;
 
                     foundError = true;
                 }
             }
-            
-            if(foundError)
+
+            if (foundError)
             {
                 error += "Nem töltöttél ki minden mezőt!\n";
             }
@@ -126,7 +155,7 @@ namespace Teszt__.src.views
 
         private void CheckMatchingPassword()
         {
-            if(TB_password1.Password != TB_password2.Password)
+            if (TB_password1.Password != TB_password2.Password)
             {
                 TB_password1.Background = Brushes.Red;
 
@@ -142,7 +171,7 @@ namespace Teszt__.src.views
 
             Regex regex = new Regex(pattern);
 
-            if(regex.Matches(TB_email.Text).Count == 0)
+            if (regex.Matches(TB_email.Text).Count == 0)
             {
                 error += "Az email hibás formátumban van, használd így: example@example.com\n";
 
