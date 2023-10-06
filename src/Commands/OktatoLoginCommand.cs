@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Teszt__.src.ViewModels;
 using Teszt__.src.Views;
 
 namespace Teszt__.src.Commands
@@ -12,6 +13,8 @@ namespace Teszt__.src.Commands
         public override void Execute(object parameter)
         {
             LoginWindowView window = new LoginWindowView(true);
+
+            window.DataContext = new LoginWindowViewModel(window, true);
 
             window.ShowDialog();
         }

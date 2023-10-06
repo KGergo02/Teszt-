@@ -14,41 +14,20 @@ using System.Text.RegularExpressions;
 
 namespace Teszt__.src.Commands
 {
-    public class RegisterCommand : ICommand
+    public class RegisterCommand : CommandBase
     {
-        private RegisterWindowViewModel _viewModel;
+        private RegisterWindowViewModel viewModel;
 
         public string error = "";
 
-        public TextBox TB_username;
-
-        public TextBox TB_email;
-
-        public PasswordBox TB_password1;
-
-        public PasswordBox TB_password2;
-
         public RegisterCommand(RegisterWindowViewModel viewModel)
         {
-            _viewModel = viewModel;           
+            this.viewModel = viewModel;
         }
 
-        public event EventHandler CanExecuteChanged;
-
-        public bool CanExecute(object parameter)
+        public override void Execute(object parameter)
         {
-            return true;
-        }
-
-        public void Execute(object parameter)
-        {
-
-            SecureString password1 = _viewModel.Password1;
-            SecureString password2 = _viewModel.Password2;
-
             error = "";
-
-            ClearErrorColors();
 
             CheckIfUserExists();
 
@@ -64,22 +43,23 @@ namespace Teszt__.src.Commands
             }
             else
             {
-                Database.Execute($"INSERT INTO `users` (`id`, `name`, `password`, `email`, `admin`) VALUES ('', '{TB_username.Text}', '{JelszoTitkosito.Encrypt(TB_password1.Password)}', '{TB_email.Text}', '0');");
+                Database.Execute($"INSERT INTO `users` (`id`, `name`, `password`, `email`, `admin`) VALUES ('', '{viewModel.Username}', '{JelszoTitkosito.Encrypt(SecureStringToString(viewModel.Password1))}', '{viewModel.Email}', '0');");
 
                 Kiiras.Siker("A regisztráció sikeres volt!");
-            }
+
+                viewModel.RegisterWindow.Close();
+            }            
         }
 
         private string SecureStringToString(SecureString secureString)
         {
-            IntPtr ptr = System.Runtime.InteropServices.Marshal.SecureStringToBSTR(secureString);
-            try
+            if(viewModel.Password1 != null && viewModel.Password2 != null)
             {
-                return System.Runtime.InteropServices.Marshal.PtrToStringBSTR(ptr);
+                return SecureStringConvert.ToString(secureString);
             }
-            finally
+            else
             {
-                System.Runtime.InteropServices.Marshal.ZeroFreeBSTR(ptr);
+                return "";
             }
         }
 
@@ -89,78 +69,39 @@ namespace Teszt__.src.Commands
 
             for (int i = 0; i < users.Count; i++)
             {
-                if (users[i]["name"] == TB_username.Text && TB_username.Text != String.Empty)
+                if (users[i]["name"] == viewModel.Username && viewModel.Username != String.Empty)
                 {
                     error += "Már létezik ilyen felhasználó!\n";
-
-                    TB_username.Background = Brushes.Red;
 
                     break;
                 }
             }
         }
 
-        private void ClearErrorColors()
-        {
-            TB_username.Background = Brushes.White;
-
-            TB_password1.Background = Brushes.White;
-
-            TB_password2.Background = Brushes.White;
-
-            TB_email.Background = Brushes.White;
-        }
-
         private void CheckForEmptyInputs()
         {
-            List<TextBox> textboxes = new List<TextBox>();
-
-            List<PasswordBox> passwordboxes = new List<PasswordBox>();
-
-            textboxes.Add(TB_username);
-
-            textboxes.Add(TB_email);
-
-            passwordboxes.Add(TB_password1);
-
-            passwordboxes.Add(TB_password2);
-
-            bool foundError = false;
-
-            foreach (TextBox item in textboxes)
+            if (viewModel.Username == null)
             {
-                if (item.Text == String.Empty)
-                {
-                    item.Background = Brushes.Red;
-
-                    foundError = true;
-                }
+                error += "Nem töltötted ki a Felhasználónév mezőt!\n";
             }
-
-            foreach (PasswordBox item in passwordboxes)
+            if (SecureStringToString(viewModel.Password1) == String.Empty)
             {
-                if (item.Password == String.Empty)
-                {
-                    item.Background = Brushes.Red;
-
-                    foundError = true;
-                }
+                error += "Nem töltötted ki a Jelszó mezőt!\n";
             }
-
-            if (foundError)
+            if (SecureStringToString(viewModel.Password2) == String.Empty)
             {
-                error += "Nem töltöttél ki minden mezőt!\n";
+                error += "Nem töltötted ki a Jelszó újra mezőt!\n";
+            }
+            if (viewModel.Email == null)
+            {
+                error += "Nem töltötted ki az Email mezőt!\n";
             }
         }
 
         private void CheckMatchingPassword()
         {
-            if (TB_password1.Password != TB_password2.Password)
+            if (SecureStringToString(viewModel.Password1) != SecureStringToString(viewModel.Password2))
             {
-                TB_password1.Background = Brushes.Red;
-
-                TB_password2.Background = Brushes.Red;
-
                 error += "A két jelszó nem egyezik!\n";
             }
         }
@@ -171,11 +112,9 @@ namespace Teszt__.src.Commands
 
             Regex regex = new Regex(pattern);
 
-            if (regex.Matches(TB_email.Text).Count == 0)
+            if (viewModel.Email != null && regex.Matches(viewModel.Email).Count == 0)
             {
                 error += "Az email hibás formátumban van, használd így: example@example.com\n";
-
-                TB_email.Background = Brushes.Red;
             }
         }
     }

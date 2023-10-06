@@ -19,9 +19,8 @@
 
             <Label Content="Email" FontSize="36" HorizontalAlignment="Center" Margin="0,20,0,5" Foreground="Black" FontWeight="Bold"/>
             <TextBox x:Name="TB_email" Height="50" Text="{Binding Email, UpdateSourceTrigger=PropertyChanged}" TextWrapping="Wrap" Width="300" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="25" SelectionBrush="#FF0078D7" BorderBrush="{x:Null}"/>
-            <Button x:Name="registerButton" Command="{Binding RegisterCommand}" Content="Regisztráció" Width="300" Margin="0,45,0,50" FontSize="25" Height="50" FontStyle="Italic" FontWeight="Bold">
-            </Button>
-            
+            <Button x:Name="registerButton" Command="{Binding RegisterCommand}" Content="Regisztráció" Width="300" Margin="0,45,0,50" FontSize="25" Height="50" FontStyle="Italic" FontWeight="Bold"/>
+
 
         </StackPanel>
     </ScrollViewer>

@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Security;
+using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
 using Teszt__.src.Commands;
+using Teszt__.src.Views;
 
 namespace Teszt__.src.ViewModels
 {
@@ -32,11 +35,15 @@ namespace Teszt__.src.ViewModels
         public SecureString Password1 { get; private set; }
         public SecureString Password2 { get; private set; }
 
+        public Window RegisterWindow;
+
         public ICommand RegisterCommand { get; }
 
-        public RegisterWindowViewModel()
+        public RegisterWindowViewModel(RegisterWindowView window)
         {
             RegisterCommand = new RegisterCommand(this);
+
+            RegisterWindow = window;
         }
 
         public void SetPasswords(SecureString password1, SecureString password2)

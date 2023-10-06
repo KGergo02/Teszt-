@@ -26,10 +26,6 @@ namespace Teszt__.src.Views
         
         public SecureString Password2;
 
-        public TextBox Username;
-
-        public TextBox Email;
-
         public RegisterWindowView()
         {
             InitializeComponent();
@@ -37,10 +33,6 @@ namespace Teszt__.src.Views
             Password1 = TB_password1.SecurePassword;
 
             Password2 = TB_password2.SecurePassword;
-
-            Username = TB_username;
-
-            Email = TB_email;
         }
 
         private void TB_password1_LostFocus(object sender, RoutedEventArgs e)

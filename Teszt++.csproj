@@ -128,8 +128,11 @@
     </Compile>
     <Compile Include="src\Commands\CommandBase.cs" />
     <Compile Include="src\Commands\HallgatoLoginCommand.cs" />
+    <Compile Include="src\Commands\LoginCommand.cs" />
     <Compile Include="src\Commands\OktatoLoginCommand.cs" />
     <Compile Include="src\Commands\RegisterCommand.cs" />
+    <Compile Include="src\Commands\RegisterLabelCommand.cs" />
+    <Compile Include="src\Models\SecureStringConvert.cs" />
     <Compile Include="src\ViewModels\LoginWindowViewModel.cs" />
     <Compile Include="src\ViewModels\MainWindowViewModel.cs" />
     <Compile Include="src\ViewModels\RegisterWindowViewModel.cs" />
@@ -142,7 +145,6 @@
     <Compile Include="src\Models\Database.cs" />
     <Compile Include="src\Models\JelszoTitkosito.cs" />
     <Compile Include="src\Models\Kiiras.cs" />
-    <Compile Include="src\Models\Scene.cs" />
     <Compile Include="src\Views\LoginWindowView.xaml.cs">
       <DependentUpon>LoginWindowView.xaml</DependentUpon>
     </Compile>

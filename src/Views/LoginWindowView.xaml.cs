@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using Teszt__.src.Models;
+using Teszt__.src.ViewModels;
 
 namespace Teszt__.src.Views
 {
@@ -27,39 +28,12 @@ namespace Teszt__.src.Views
             InitializeComponent();
         }
 
-        private void loginButton_Click(object sender, RoutedEventArgs e)
+        private void TB_password_LostFocus(object sender, RoutedEventArgs e)
         {
-            if(TB_username.Text == String.Empty || TB_password.Password == String.Empty)
+            if (DataContext is LoginWindowViewModel viewModel)
             {
-                Kiiras.Hiba("Nem töltöttél ki minden mezőt!");
-
-                return;
+                viewModel.SetPassword(TB_password.SecurePassword);
             }
-
-            List<Dictionary<string, string>> users = Database.getAllUsers();
-
-            for (int i = 0; i < users.Count; i++)
-            {
-                if(users[i]["name"] != TB_username.Text || users[i]["password"] != JelszoTitkosito.Encrypt(TB_password.Password))
-                {
-                    Kiiras.Hiba("Hibás felhasználónév vagy jelszó!");
-
-                    return;
-                }
-            }
-
-            Kiiras.Siker("Sikeres bejelentkezés!");
-
-            if(admin)
-            {
-                // admin view
-            }
-            else
-            {
-                // hallgató view
-            }
-
-            this.Close();
         }
     }
 }

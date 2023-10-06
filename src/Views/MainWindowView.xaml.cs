@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Teszt__.src.Commands;
 using Teszt__.src.Views;
 
 namespace Teszt__
@@ -24,9 +25,9 @@ namespace Teszt__
 
         private void registerLabel_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            RegisterWindowView window = new RegisterWindowView();
+            RegisterLabelCommand command = new RegisterLabelCommand();
 
-            window.ShowDialog();
+            command.Execute(this);
         }
     }
 }

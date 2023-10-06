@@ -8,13 +8,13 @@ using Teszt__.src.Views;
 
 namespace Teszt__.src.Commands
 {
-    class HallgatoLoginCommand : CommandBase
+    class RegisterLabelCommand : CommandBase
     {
         public override void Execute(object parameter)
         {
-            LoginWindowView window = new LoginWindowView(false);
+            RegisterWindowView window = new RegisterWindowView();
 
-            window.DataContext = new LoginWindowViewModel(window, false);
+            window.DataContext = new RegisterWindowViewModel(window);
 
             window.ShowDialog();
         }
