@@ -8,13 +8,34 @@
         Title="Teszt++" Height="171.388" Width="538.942" WindowStartupLocation="CenterScreen" Foreground="Black" FontSize="20" HorizontalAlignment="Left" VerticalAlignment="Top" MinWidth="693.267" MinHeight="325.888" Background="#FFFF7400">
 
     <Viewbox>
-        <Canvas Margin="50,106,33,65" Background="Black" Width="602" Height="124" HorizontalAlignment="Center" VerticalAlignment="Center">
+        <Canvas Margin="50,106,33,65" Width="602" Height="124" HorizontalAlignment="Center" VerticalAlignment="Center">
             <StackPanel Canvas.Left="193" Canvas.Top="-97" HorizontalAlignment="Left">
-                <Label Content="Teszt++" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="40" FontFamily="Lucida Console" Background="{x:Null}" Foreground="Black" FontWeight="Bold" Margin="20,20,0,0"/>
+                <Label Content="Teszt++" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="40" FontFamily="Lucida Console" Background="{x:Null}" FontWeight="Bold" Margin="20,20,0,0">
+                    <Label.Foreground>
+                        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                            <GradientStop Color="Black" Offset="1"/>
+                            <GradientStop Color="#FF00D1FF" Offset="0.745"/>
+                        </LinearGradientBrush>
+                    </Label.Foreground>
+                </Label>
             </StackPanel>
-            <Button x:Name="hallgatoi_Button" Command="{Binding HallgatoLoginCommand}" Content="Hallgatói bejelentkezés" Width="230" FontSize="20" Height="42" HorizontalAlignment="Center" VerticalAlignment="Center" Canvas.Left="10" Canvas.Top="43" Cursor="Hand" FontWeight="Bold"/>
-            <Button x:Name="oktatoi_Button" Command="{Binding OktatoLoginCommand}" Content="Oktatói bejelentkezés" FontSize="20" HorizontalAlignment="Right" VerticalAlignment="Center" Width="230" Height="42" Canvas.Left="341" Canvas.Top="43" Cursor="Hand" FontWeight="Bold"/>
-            <Label x:Name="registerLabel" Content="Ha nincs még fiókod, akkor a regisztrációhoz kattints ide!" Canvas.Left="49" Canvas.Top="143" HorizontalAlignment="Right" Cursor="Hand" Foreground="Blue" MouseDown="registerLabel_MouseDown" Background="Black" FontWeight="Bold"/>
+            <Button x:Name="hallgatoi_Button" Command="{Binding HallgatoLoginCommand}" Content="Hallgatói bejelentkezés" Width="230" FontSize="20" Height="42" HorizontalAlignment="Center" VerticalAlignment="Center" Canvas.Left="10" Canvas.Top="43" Cursor="Hand" FontWeight="Bold" Foreground="#FFFF7400"/>
+            <Button x:Name="oktatoi_Button" Command="{Binding OktatoLoginCommand}" Content="Oktatói bejelentkezés" FontSize="20" HorizontalAlignment="Right" VerticalAlignment="Center" Width="230" Height="42" Canvas.Left="341" Canvas.Top="43" Cursor="Hand" FontWeight="Bold">
+                <Button.Foreground>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="#FFFF6616" Offset="0"/>
+                        <GradientStop Color="#FFFF7400" Offset="1"/>
+                    </LinearGradientBrush>
+                </Button.Foreground>
+            </Button>
+            <Label x:Name="registerLabel" Content="Ha nincs még fiókod, akkor a regisztrációhoz kattints ide!" Canvas.Left="49" Canvas.Top="143" HorizontalAlignment="Right" Cursor="Hand" Foreground="Red" MouseDown="registerLabel_MouseDown" FontWeight="Bold">
+                <Label.Background>
+                    <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
+                        <GradientStop Color="Black" Offset="1"/>
+                        <GradientStop Color="White" Offset="0.621"/>
+                    </LinearGradientBrush>
+                </Label.Background>
+            </Label>
         </Canvas>
     </Viewbox>
 </Window>
