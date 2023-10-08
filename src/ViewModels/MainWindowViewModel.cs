@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Teszt__.src.Commands;
+using Teszt__.src.Models;
 
 namespace Teszt__.src.ViewModels
 {

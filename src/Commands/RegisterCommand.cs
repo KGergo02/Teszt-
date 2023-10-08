@@ -69,7 +69,7 @@ namespace Teszt__.src.Commands
 
             for (int i = 0; i < users.Count; i++)
             {
-                if (users[i]["name"] == viewModel.Username && viewModel.Username != String.Empty)
+                if (users[i]["name"].ToUpper() == viewModel.Username.ToUpper() && viewModel.Username != String.Empty)
                 {
                     error += "Már létezik ilyen felhasználó!\n";
 

@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Teszt__.src.ViewModels;
 using Teszt__.src.Models;
 using Teszt__.src.Views;
+using Teszt__.src.Services;
 
 namespace Teszt__.src.Commands
 {
@@ -17,13 +18,22 @@ namespace Teszt__.src.Commands
 
         LoginWindowView LoginWindow;
 
-        public LoginCommand(LoginWindowViewModel viewModel, LoginWindowView window ,bool admin)
+        private readonly Navigation _navigation;
+
+        private readonly NavigationService _navigationService;
+
+        public LoginCommand(LoginWindowViewModel viewModel, LoginWindowView window, bool admin,
+            Navigation navigation, NavigationService navigationService)
         {
             this.admin = admin;
 
             this.viewModel = viewModel;
 
             LoginWindow = window;
+            
+            _navigation = navigation;
+            
+            _navigationService = navigationService;
         }
 
         public override void Execute(object parameter)
@@ -35,31 +45,38 @@ namespace Teszt__.src.Commands
                 return;
             }
 
-            List<Dictionary<string, string>> users = Database.getAllUsers();
+            Dictionary<string, string> user = Database.getUserByName(viewModel.Username);
 
-            for (int i = 0; i < users.Count; i++)
+            if(user["name"] == viewModel.Username && user["password"] == JelszoTitkosito.Encrypt(SecureStringConvert.ToString(viewModel.Password)))
             {
-                if(users[i]["name"] == viewModel.Username && users[i]["password"] == JelszoTitkosito.Encrypt(SecureStringConvert.ToString(viewModel.Password)))
+                if (admin)
                 {
-                    Kiiras.Siker("Sikeres bejelentkezés!");
-
-                    LoginWindow.Close();
-
-                    if (admin)
+                    if(Convert.ToBoolean(user["admin"]) == true)
                     {
-                        // admin view
+                        // oktató view
+
+                        Kiiras.Siker("Sikeres bejelentkezés!");
+
+                        LoginWindow.Close();
                     }
                     else
                     {
-                        // hallgató view
+                        Kiiras.Hiba("Nem vagy oktató!");
                     }
+                }
+                else
+                {
+                    // hallgató view
 
-                    return;
+                    Kiiras.Siker("Sikeres bejelentkezés!");
+
+                    LoginWindow.Close();
                 }
             }
-
-            Kiiras.Hiba("Hibás felhasználónév vagy jelszó!");
-            
+            else
+            {
+                Kiiras.Hiba("Hibás felhasználónév vagy jelszó!");
+            }
         }
     }
 }

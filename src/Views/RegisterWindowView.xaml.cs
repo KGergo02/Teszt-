@@ -19,7 +19,6 @@ using Teszt__.src.ViewModels;
 
 namespace Teszt__.src.Views
 {
-    
     public partial class RegisterWindowView : Window
     {
         public SecureString Password1;

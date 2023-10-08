@@ -129,14 +129,28 @@
     <Compile Include="src\Commands\CommandBase.cs" />
     <Compile Include="src\Commands\HallgatoLoginCommand.cs" />
     <Compile Include="src\Commands\LoginCommand.cs" />
+    <Compile Include="src\Commands\NavigateCommand.cs" />
     <Compile Include="src\Commands\OktatoLoginCommand.cs" />
     <Compile Include="src\Commands\RegisterCommand.cs" />
     <Compile Include="src\Commands\RegisterLabelCommand.cs" />
+    <Compile Include="src\Models\Navigation.cs" />
     <Compile Include="src\Models\SecureStringConvert.cs" />
+    <Compile Include="src\Services\NavigationService.cs" />
+    <Compile Include="src\ViewModels\Hallgato_ViewModels\HallgatoMainViewModel.cs" />
     <Compile Include="src\ViewModels\LoginWindowViewModel.cs" />
+    <Compile Include="src\ViewModels\MainWindowNavigationViewModel.cs" />
     <Compile Include="src\ViewModels\MainWindowViewModel.cs" />
     <Compile Include="src\ViewModels\RegisterWindowViewModel.cs" />
     <Compile Include="src\ViewModels\ViewModelBase.cs" />
+    <Compile Include="src\Views\hallgato_views\HallgatoMainView.xaml.cs">
+      <DependentUpon>HallgatoMainView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="src\Views\MainWindow.xaml.cs">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="src\Views\Oktato_Views\OktatoMainView.xaml.cs">
+      <DependentUpon>OktatoMainView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="src\Views\RegisterWindowView.xaml.cs">
       <DependentUpon>RegisterWindowView.xaml</DependentUpon>
     </Compile>
@@ -178,11 +192,23 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Page Include="src\Views\hallgato_views\HallgatoMainView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="src\Views\LoginWindowView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="src\Views\MainWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="src\Views\MainWindowView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="src\Views\Oktato_Views\OktatoMainView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -191,9 +217,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="src\Views\hallgato_views\" />
-    <Folder Include="src\Views\oktato_views\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

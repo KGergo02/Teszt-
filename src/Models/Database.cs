@@ -68,5 +68,10 @@ namespace Teszt__.src.Models
         {
             return Query("SELECT * FROM users");
         }
+
+        public static Dictionary<string, string> getUserByName(string name)
+        {
+            return Query($"SELECT * FROM users WHERE name = '{name}'")[0];
+        }
     }
 }
