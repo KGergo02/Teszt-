@@ -10,6 +10,7 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace Teszt__.src.Views.Oktato_Views
@@ -17,7 +18,7 @@ namespace Teszt__.src.Views.Oktato_Views
     /// <summary>
     /// Interaction logic for OktatoMainView.xaml
     /// </summary>
-    public partial class OktatoMainView : Window
+    public partial class OktatoMainView : Page
     {
         public OktatoMainView()
         {

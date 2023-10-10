@@ -6,34 +6,32 @@ using System.Threading.Tasks;
 using Teszt__.src.ViewModels;
 using Teszt__.src.Models;
 using Teszt__.src.Views;
-using Teszt__.src.Services;
+using Teszt__.src.DAL;
+using System.Windows.Navigation;
+using Teszt__.src.Views.Hallgato_Views;
+using Teszt__.src.Views.Oktato_Views;
 
 namespace Teszt__.src.Commands
 {
-    class LoginCommand : CommandBase
+    public class LoginCommand : CommandBase
     {
         public bool admin;
 
-        LoginWindowViewModel viewModel;
+        private LoginWindowViewModel viewModel;
 
-        LoginWindowView LoginWindow;
+        private LoginWindowView LoginWindow;
 
-        private readonly Navigation _navigation;
+        private NavigationWindow _navigationWindow;
 
-        private readonly NavigationService _navigationService;
-
-        public LoginCommand(LoginWindowViewModel viewModel, LoginWindowView window, bool admin,
-            Navigation navigation, NavigationService navigationService)
+        public LoginCommand(LoginWindowViewModel viewModel, LoginWindowView window, bool admin, NavigationWindow navWindow)
         {
             this.admin = admin;
 
             this.viewModel = viewModel;
 
             LoginWindow = window;
-            
-            _navigation = navigation;
-            
-            _navigationService = navigationService;
+
+            this._navigationWindow = navWindow;
         }
 
         public override void Execute(object parameter)
@@ -47,17 +45,28 @@ namespace Teszt__.src.Commands
 
             Dictionary<string, string> user = Database.getUserByName(viewModel.Username);
 
-            if(user["name"] == viewModel.Username && user["password"] == JelszoTitkosito.Encrypt(SecureStringConvert.ToString(viewModel.Password)))
+            if (user == null)
+            {
+                Kiiras.Hiba("Hibás felhasználónév vagy jelszó!");
+
+                return;
+            }
+
+            if (user["name"] == viewModel.Username && user["password"] == JelszoTitkosito.Encrypt(SecureStringConvert.ToString(viewModel.Password)))
             {
                 if (admin)
                 {
-                    if(Convert.ToBoolean(user["admin"]) == true)
+                    if (Convert.ToBoolean(user["admin"]) == true)
                     {
                         // oktató view
 
                         Kiiras.Siker("Sikeres bejelentkezés!");
 
                         LoginWindow.Close();
+
+                        _navigationWindow.Navigate(new OktatoMainView());
+
+                        _navigationWindow.RemoveBackEntry();
                     }
                     else
                     {
@@ -71,6 +80,10 @@ namespace Teszt__.src.Commands
                     Kiiras.Siker("Sikeres bejelentkezés!");
 
                     LoginWindow.Close();
+
+                    _navigationWindow.Navigate(new HallgatoMainView());
+
+                    _navigationWindow.RemoveBackEntry();
                 }
             }
             else

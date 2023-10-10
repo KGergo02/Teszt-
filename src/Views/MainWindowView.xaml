@@ -1,41 +1,59 @@
-﻿<Window x:Class="Teszt__.src.Views.MainWindowView"
+﻿<Page x:Class="Teszt__.src.Views.MainWindowView"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:Teszt__"
-        mc:Ignorable="d"
-        Title="Teszt++" Height="171.388" Width="538.942" WindowStartupLocation="CenterScreen" Foreground="Black" FontSize="20" HorizontalAlignment="Left" VerticalAlignment="Top" MinWidth="693.267" MinHeight="325.888" Background="#FFFF7400">
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Teszt__"
+      xmlns:vms="clr-namespace:Teszt__.src.ViewModels"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="Home"
+      KeepAlive="False"
+      >
+
+    <Page.Background>
+        <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
+            <GradientStop Color="Black" Offset="1"/>
+            <GradientStop Color="#FFFF7400"/>
+        </LinearGradientBrush>
+    </Page.Background>
 
     <Viewbox>
         <Canvas Margin="50,106,33,65" Width="602" Height="124" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <Canvas.Background>
+                <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
+                    <GradientStop Color="Black" Offset="1"/>
+                    <GradientStop Color="#FFFF5A00"/>
+                </LinearGradientBrush>
+            </Canvas.Background>
             <StackPanel Canvas.Left="193" Canvas.Top="-97" HorizontalAlignment="Left">
                 <Label Content="Teszt++" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="40" FontFamily="Lucida Console" Background="{x:Null}" FontWeight="Bold" Margin="20,20,0,0">
                     <Label.Foreground>
                         <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                             <GradientStop Color="Black" Offset="1"/>
-                            <GradientStop Color="#FF00D1FF" Offset="0.745"/>
+                            <GradientStop Color="White" Offset="0.798"/>
                         </LinearGradientBrush>
                     </Label.Foreground>
                 </Label>
             </StackPanel>
-            <Button x:Name="hallgatoi_Button" Command="{Binding HallgatoLoginCommand}" Content="Hallgatói bejelentkezés" Width="230" FontSize="20" Height="42" HorizontalAlignment="Center" VerticalAlignment="Center" Canvas.Left="10" Canvas.Top="43" Cursor="Hand" FontWeight="Bold" Foreground="#FFFF7400"/>
-            <Button x:Name="oktatoi_Button" Command="{Binding OktatoLoginCommand}" Content="Oktatói bejelentkezés" FontSize="20" HorizontalAlignment="Right" VerticalAlignment="Center" Width="230" Height="42" Canvas.Left="341" Canvas.Top="43" Cursor="Hand" FontWeight="Bold">
+            <Button x:Name="hallgatoi_Button" Command="{Binding HallgatoLoginCommand}" Content="Hallgatói bejelentkezés" Width="230" FontSize="20" Height="42" HorizontalAlignment="Center" VerticalAlignment="Center" Canvas.Left="10" Canvas.Top="43" Cursor="Hand" FontWeight="Bold">
                 <Button.Foreground>
                     <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                        <GradientStop Color="#FFFF6616" Offset="0"/>
-                        <GradientStop Color="#FFFF7400" Offset="1"/>
+                        <GradientStop Color="Black" Offset="1"/>
+                        <GradientStop Color="#FFFF7400" Offset="0.526"/>
                     </LinearGradientBrush>
                 </Button.Foreground>
             </Button>
-            <Label x:Name="registerLabel" Content="Ha nincs még fiókod, akkor a regisztrációhoz kattints ide!" Canvas.Left="49" Canvas.Top="143" HorizontalAlignment="Right" Cursor="Hand" Foreground="Red" MouseDown="registerLabel_MouseDown" FontWeight="Bold">
-                <Label.Background>
+            <Button x:Name="oktatoi_Button" Command="{Binding OktatoLoginCommand}" Content="Oktatói bejelentkezés" FontSize="20" HorizontalAlignment="Right" VerticalAlignment="Center" Width="230" Height="42" Canvas.Left="341" Canvas.Top="43" Cursor="Hand" FontWeight="Bold">
+                <Button.Foreground>
                     <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
+                        <GradientStop Color="#FFFF6616" Offset="0.299"/>
                         <GradientStop Color="Black" Offset="1"/>
-                        <GradientStop Color="White" Offset="0.621"/>
                     </LinearGradientBrush>
-                </Label.Background>
-            </Label>
+                </Button.Foreground>
+            </Button>
+            <Label x:Name="registerLabel" Content="Ha nincs még fiókod, akkor a regisztrációhoz kattints ide!" Canvas.Left="261" Canvas.Top="187" HorizontalAlignment="Right" Cursor="Hand" MouseDown="registerLabel_MouseDown" FontWeight="Bold" Background="{x:Null}" Foreground="Red"/>
+
         </Canvas>
     </Viewbox>
-</Window>
+</Page>

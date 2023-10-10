@@ -19,12 +19,8 @@ namespace Teszt__.src.Views
     
     public partial class LoginWindowView : Window
     {
-        public bool admin;
-
-        public LoginWindowView(bool admin)
+        public LoginWindowView()
         {
-            this.admin = admin;
-
             InitializeComponent();
         }
 

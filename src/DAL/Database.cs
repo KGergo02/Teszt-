@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 
-namespace Teszt__.src.Models
+namespace Teszt__.src.DAL
 {
     public static class Database
     {
@@ -71,7 +71,16 @@ namespace Teszt__.src.Models
 
         public static Dictionary<string, string> getUserByName(string name)
         {
-            return Query($"SELECT * FROM users WHERE name = '{name}'")[0];
+            List<Dictionary<string, string>> user = Query($"SELECT * FROM users WHERE name = '{name}'");
+
+            if (user.Count == 1)
+            {
+                return user[0];
+            }
+            else
+            {
+                return null;
+            }
         }
     }
 }

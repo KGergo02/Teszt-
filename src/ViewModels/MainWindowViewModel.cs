@@ -4,18 +4,24 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using System.Windows.Navigation;
 using Teszt__.src.Commands;
 using Teszt__.src.Models;
+using Teszt__.src.Views;
 
 namespace Teszt__.src.ViewModels
 {
     public class MainWindowViewModel : ViewModelBase
     {
-        public MainWindowViewModel()
-        {
-            HallgatoLoginCommand = new HallgatoLoginCommand();
+        private NavigationWindow _navigationWindow;
 
-            OktatoLoginCommand = new OktatoLoginCommand();
+        public MainWindowViewModel(NavigationWindow navWindow)
+        {
+            _navigationWindow = navWindow;
+
+            HallgatoLoginCommand = new BeforeLoginCommand(_navigationWindow, false);
+
+            OktatoLoginCommand = new BeforeLoginCommand(_navigationWindow, true);
         }
 
         public ICommand HallgatoLoginCommand

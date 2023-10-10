@@ -16,31 +16,6 @@ namespace Teszt__
     /// </summary>
     public partial class App : Application
     {
-        private readonly Navigation _navigation = new Navigation();
-
-        protected override void OnStartup(StartupEventArgs e)
-        {
-            _navigation.CurrentViewModel = CreateMainWindowNavigationViewModel();
-
-            MainWindow = new MainWindowView()
-            {
-                DataContext = new MainWindowViewModel()
-            };
-
-            MainWindow.Show();
-
-            base.OnStartup(e);
-        }
-
-        private MainWindowNavigationViewModel CreateMainWindowNavigationViewModel()
-        {
-            return new MainWindowNavigationViewModel(_navigation, CreateHallgatoMainViewModel);
-        }
-
-        private HallgatoMainViewModel CreateHallgatoMainViewModel()
-        {
-            return new HallgatoMainViewModel(_navigation);
-        }
     }
 }
 

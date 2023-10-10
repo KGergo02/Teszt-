@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
+using System.Windows.Navigation;
 using Teszt__.src.Commands;
 using Teszt__.src.Views;
 
@@ -24,9 +25,12 @@ namespace Teszt__.src.ViewModels
             }
         }
 
-        public SecureString Password { get; private set; }
+        public LoginWindowViewModel(LoginWindowView window, bool admin, NavigationWindow navigationWindow)
+        {
+            LoginCommand = new LoginCommand(this, window, admin, navigationWindow);
+        }
 
-        public Window LoginWindow;
+        public SecureString Password { get; private set; }
 
         public ICommand LoginCommand
         {
@@ -36,11 +40,6 @@ namespace Teszt__.src.ViewModels
         public void SetPassword(SecureString password)
         {
             Password = password;
-        }
-
-        public LoginWindowViewModel(LoginWindowView window, bool admin)
-        {           
-            LoginCommand = new LoginCommand(this, window, admin);
         }
     }
 }

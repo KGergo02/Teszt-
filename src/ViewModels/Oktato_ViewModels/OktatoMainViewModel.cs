@@ -3,11 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Teszt__.src.Models;
 
-namespace Teszt__.src.ViewModels
+namespace Teszt__.src.ViewModels.Oktato_ViewModels
 {
-    public class HallgatoMainViewModel : ViewModelBase
+    public class OktatoMainViewModel : ViewModelBase
     {
     }
 }
