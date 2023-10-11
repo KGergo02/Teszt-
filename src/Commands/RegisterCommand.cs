@@ -7,11 +7,12 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 using Teszt__.src.ViewModels;
-using Teszt__.src.Models;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Text.RegularExpressions;
 using Teszt__.src.DAL;
+using Teszt__.src.Services;
+using Teszt__.src.Models;
 
 namespace Teszt__.src.Commands
 {
@@ -30,7 +31,9 @@ namespace Teszt__.src.Commands
         {
             error = "";
 
-            CheckIfUserExists();
+            Database database = new Database();
+
+            CheckIfUserExists(database);
 
             CheckForEmptyInputs();
 
@@ -44,7 +47,11 @@ namespace Teszt__.src.Commands
             }
             else
             {
-                Database.Execute($"INSERT INTO `users` (`id`, `name`, `password`, `email`, `admin`) VALUES ('', '{viewModel.Username}', '{JelszoTitkosito.Encrypt(SecureStringToString(viewModel.Password1))}', '{viewModel.Email}', '0');");
+                User user = new User(viewModel.Username, JelszoTitkosito.Encrypt(SecureStringToString(viewModel.Password1)), viewModel.Email, false);
+
+                database.Users.Add(user);
+
+                database.SaveChanges();
 
                 Kiiras.Siker("A regisztráció sikeres volt!");
 
@@ -64,13 +71,13 @@ namespace Teszt__.src.Commands
             }
         }
 
-        private void CheckIfUserExists()
+        private void CheckIfUserExists(Database db)
         {
-            List<Dictionary<string, string>> users = Database.getAllUsers();
+            List<User> users = db.Users.ToList();
 
             for (int i = 0; i < users.Count; i++)
             {
-                if (users[i]["name"].ToUpper() == viewModel.Username.ToUpper() && viewModel.Username != String.Empty)
+                if (users[i].name.ToUpper() == viewModel.Username.ToUpper() && viewModel.Username != String.Empty)
                 {
                     error += "Már létezik ilyen felhasználó!\n";
 

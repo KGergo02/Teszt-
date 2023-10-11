@@ -5,7 +5,7 @@ using System.Security;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Teszt__.src.Models
+namespace Teszt__.src.Services
 {
     public static class SecureStringConvert
     {

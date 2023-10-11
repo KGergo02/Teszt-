@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using System.Windows.Navigation;
 using Teszt__.src.Commands;
-using Teszt__.src.Models;
 using Teszt__.src.Views;
 
 namespace Teszt__.src.ViewModels

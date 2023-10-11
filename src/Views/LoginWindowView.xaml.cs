@@ -11,7 +11,6 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using Teszt__.src.Models;
 using Teszt__.src.ViewModels;
 
 namespace Teszt__.src.Views

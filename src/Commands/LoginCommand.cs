@@ -4,12 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Teszt__.src.ViewModels;
-using Teszt__.src.Models;
 using Teszt__.src.Views;
 using Teszt__.src.DAL;
 using System.Windows.Navigation;
 using Teszt__.src.Views.Hallgato_Views;
 using Teszt__.src.Views.Oktato_Views;
+using Teszt__.src.Services;
+using Teszt__.src.Models;
 
 namespace Teszt__.src.Commands
 {
@@ -43,7 +44,9 @@ namespace Teszt__.src.Commands
                 return;
             }
 
-            Dictionary<string, string> user = Database.getUserByName(viewModel.Username);
+            Database database = new Database();
+
+            User user = database.GetUserByName(viewModel.Username);
 
             if (user == null)
             {
@@ -52,11 +55,11 @@ namespace Teszt__.src.Commands
                 return;
             }
 
-            if (user["name"] == viewModel.Username && user["password"] == JelszoTitkosito.Encrypt(SecureStringConvert.ToString(viewModel.Password)))
+            if (user.name.ToUpper() == viewModel.Username.ToUpper() && user.password == JelszoTitkosito.Encrypt(SecureStringConvert.ToString(viewModel.Password)))
             {
                 if (admin)
                 {
-                    if (Convert.ToBoolean(user["admin"]) == true)
+                    if (user.admin)
                     {
                         // oktató view
 
@@ -65,8 +68,6 @@ namespace Teszt__.src.Commands
                         LoginWindow.Close();
 
                         _navigationWindow.Navigate(new OktatoMainView());
-
-                        _navigationWindow.RemoveBackEntry();
                     }
                     else
                     {
@@ -82,8 +83,6 @@ namespace Teszt__.src.Commands
                     LoginWindow.Close();
 
                     _navigationWindow.Navigate(new HallgatoMainView());
-
-                    _navigationWindow.RemoveBackEntry();
                 }
             }
             else

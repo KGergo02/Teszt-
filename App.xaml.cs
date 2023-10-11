@@ -5,7 +5,6 @@ using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
-using Teszt__.src.Models;
 using Teszt__.src.ViewModels;
 using Teszt__.src.Views;
 

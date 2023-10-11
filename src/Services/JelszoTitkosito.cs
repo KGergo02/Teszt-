@@ -5,7 +5,7 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Teszt__.src.Models
+namespace Teszt__.src.Services
 {
     public static class JelszoTitkosito
     {
@@ -31,19 +31,6 @@ namespace Teszt__.src.Models
             var vegeredmenyek_tomb = atalakit.TransformFinalBlock(adat, 0, adat.Length);
 
             return Convert.ToBase64String(vegeredmenyek_tomb);
-        }
-
-        public static string Decrypt(string titkositottSzoveg)
-        {
-            var data = Convert.FromBase64String(titkositottSzoveg);
-
-            var felulet = GetCryproProvider();
-
-            var atalakit = felulet.CreateDecryptor();
-
-            var vegeredmenyek_tomb = atalakit.TransformFinalBlock(data, 0, data.Length);
-
-            return Encoding.UTF8.GetString(vegeredmenyek_tomb);
         }
     }
 }
