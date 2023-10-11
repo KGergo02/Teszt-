@@ -231,7 +231,7 @@
     <Compile Include="src\Commands\RegisterLabelCommand.cs" />
     <Compile Include="src\Models\User.cs" />
     <Compile Include="src\Services\JelszoTitkosito.cs" />
-    <Compile Include="src\Services\Kiiras.cs" />
+    <Compile Include="src\Services\Message.cs" />
     <Compile Include="src\Services\SecureStringConvert.cs" />
     <Compile Include="src\ViewModels\Hallgato_ViewModels\HallgatoMainViewModel.cs" />
     <Compile Include="src\ViewModels\LoginWindowViewModel.cs" />

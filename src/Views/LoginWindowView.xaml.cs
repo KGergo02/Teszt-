@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Teszt__.src.Commands;
 using Teszt__.src.ViewModels;
 
 namespace Teszt__.src.Views
@@ -28,6 +29,16 @@ namespace Teszt__.src.Views
             if (DataContext is LoginWindowViewModel viewModel)
             {
                 viewModel.SetPassword(TB_password.SecurePassword);
+            }
+        }
+
+        private void TB_KeyDown(object sender, KeyEventArgs e)
+        {
+            if(e.Key == Key.Enter && DataContext is LoginWindowViewModel viewModel)
+            {
+                viewModel.SetPassword(TB_password.SecurePassword);
+
+                viewModel.LoginCommand.Execute(this);
             }
         }
     }

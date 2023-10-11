@@ -33,9 +33,9 @@ namespace Teszt__.src.Commands
 
             Database database = new Database();
 
-            CheckIfUserExists(database);
-
             CheckForEmptyInputs();
+
+            CheckIfUserExists(database);
 
             CheckMatchingPassword();
 
@@ -43,7 +43,7 @@ namespace Teszt__.src.Commands
 
             if (error != "")
             {
-                Kiiras.Hiba(error);
+                Message.Error(error);
             }
             else
             {
@@ -53,7 +53,7 @@ namespace Teszt__.src.Commands
 
                 database.SaveChanges();
 
-                Kiiras.Siker("A regisztráció sikeres volt!");
+                Message.Success("A regisztráció sikeres volt!");
 
                 viewModel.RegisterWindow.Close();
             }            
@@ -73,15 +73,25 @@ namespace Teszt__.src.Commands
 
         private void CheckIfUserExists(Database db)
         {
-            List<User> users = db.Users.ToList();
-
-            for (int i = 0; i < users.Count; i++)
+            if(viewModel.Username != null)
             {
-                if (users[i].name.ToUpper() == viewModel.Username.ToUpper() && viewModel.Username != String.Empty)
-                {
-                    error += "Már létezik ilyen felhasználó!\n";
+                List<User> users = db.Users.ToList();
 
-                    break;
+                for (int i = 0; i < users.Count; i++)
+                {
+                    if (users[i].name.ToUpper() == viewModel.Username.ToUpper() && viewModel.Username != String.Empty)
+                    {
+                        error += "Már létezik ilyen felhasználó!\n";
+
+                        break;
+                    }
+                }
+            }
+            else
+            {
+                if(!error.Contains("Nem töltötted ki a Felhasználónév mezőt!\n"))
+                {
+                    error += "Nem töltötted ki a Felhasználónév mezőt!\n";
                 }
             }
         }

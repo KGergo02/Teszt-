@@ -39,7 +39,7 @@ namespace Teszt__.src.Commands
         {
             if (viewModel.Username == null || viewModel.Password == null || SecureStringConvert.ToString(viewModel.Password) == null)
             {
-                Kiiras.Hiba("Nem töltöttél ki minden mezőt!");
+                Message.Error("Nem töltöttél ki minden mezőt!");
 
                 return;
             }
@@ -50,7 +50,7 @@ namespace Teszt__.src.Commands
 
             if (user == null)
             {
-                Kiiras.Hiba("Hibás felhasználónév vagy jelszó!");
+                Message.Error("Hibás felhasználónév vagy jelszó!");
 
                 return;
             }
@@ -63,7 +63,7 @@ namespace Teszt__.src.Commands
                     {
                         // oktató view
 
-                        Kiiras.Siker("Sikeres bejelentkezés!");
+                        Message.Success("Sikeres bejelentkezés!");
 
                         LoginWindow.Close();
 
@@ -71,14 +71,14 @@ namespace Teszt__.src.Commands
                     }
                     else
                     {
-                        Kiiras.Hiba("Nem vagy oktató!");
+                        Message.Error("Nem vagy oktató!");
                     }
                 }
                 else
                 {
                     // hallgató view
 
-                    Kiiras.Siker("Sikeres bejelentkezés!");
+                    Message.Success("Sikeres bejelentkezés!");
 
                     LoginWindow.Close();
 
@@ -87,7 +87,7 @@ namespace Teszt__.src.Commands
             }
             else
             {
-                Kiiras.Hiba("Hibás felhasználónév vagy jelszó!");
+                Message.Error("Hibás felhasználónév vagy jelszó!");
             }
         }
     }

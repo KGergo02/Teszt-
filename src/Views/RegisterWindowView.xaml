@@ -9,16 +9,16 @@
     <ScrollViewer>
         <StackPanel Background="#FFFF7400">
             <Label Content="Felhasználónév" FontSize="36" HorizontalAlignment="Center" Margin="0,50,0,5" Background="{x:Null}" Foreground="Black" FontWeight="Bold"/>
-            <TextBox x:Name="TB_username" Text="{Binding Username, UpdateSourceTrigger=PropertyChanged}" Height="50" TextWrapping="Wrap" Width="300" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="25" Background="White" SelectionBrush="#FF0078D7" BorderBrush="{x:Null}"/>
+            <TextBox x:Name="TB_username" Text="{Binding Username, UpdateSourceTrigger=PropertyChanged}" Height="50" TextWrapping="Wrap" Width="300" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="25" Background="White" SelectionBrush="#FF0078D7" BorderBrush="{x:Null}" KeyDown="TB_KeyDown"/>
 
             <Label Content="Jelszó" FontSize="36" HorizontalAlignment="Center" Margin="0,20,0,5" Foreground="Black" FontWeight="Bold"/>
-            <PasswordBox x:Name="TB_password1" Height="50" Width="300" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="25" SelectionBrush="#FF0078D7" BorderBrush="{x:Null}" LostFocus="TB_password1_LostFocus" />
+            <PasswordBox x:Name="TB_password1" Height="50" Width="300" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="25" SelectionBrush="#FF0078D7" BorderBrush="{x:Null}" LostFocus="TB_password1_LostFocus" KeyDown="TB_KeyDown"/>
 
             <Label Content="Jelszó újra" FontSize="36" HorizontalAlignment="Center" Margin="0,20,0,5" Foreground="Black" FontWeight="Bold"/>
-            <PasswordBox x:Name="TB_password2" Height="50" Width="300" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="25" SelectionBrush="#FF0078D7" BorderBrush="{x:Null}" LostFocus="TB_password2_LostFocus" />
+            <PasswordBox x:Name="TB_password2" Height="50" Width="300" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="25" SelectionBrush="#FF0078D7" BorderBrush="{x:Null}" LostFocus="TB_password2_LostFocus" KeyDown="TB_KeyDown"/>
 
             <Label Content="Email" FontSize="36" HorizontalAlignment="Center" Margin="0,20,0,5" Foreground="Black" FontWeight="Bold"/>
-            <TextBox x:Name="TB_email" Height="50" Text="{Binding Email, UpdateSourceTrigger=PropertyChanged}" TextWrapping="Wrap" Width="300" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="25" SelectionBrush="#FF0078D7" BorderBrush="{x:Null}"/>
+            <TextBox x:Name="TB_email" Height="50" Text="{Binding Email, UpdateSourceTrigger=PropertyChanged}" TextWrapping="Wrap" Width="300" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="25" SelectionBrush="#FF0078D7" BorderBrush="{x:Null}" KeyDown="TB_KeyDown"/>
             <Button x:Name="registerButton" Command="{Binding RegisterCommand}" Content="Regisztráció" Width="300" Margin="0,45,0,50" FontSize="25" Height="50" FontStyle="Italic" FontWeight="Bold"/>
 
 

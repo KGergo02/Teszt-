@@ -48,5 +48,15 @@ namespace Teszt__.src.Views
                 viewModel.SetPasswords(TB_password1.SecurePassword, TB_password2.SecurePassword);
             }
         }
+
+        private void TB_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter && DataContext is RegisterWindowViewModel viewModel)
+            {
+                viewModel.SetPasswords(TB_password1.SecurePassword, TB_password2.SecurePassword);
+
+                viewModel.RegisterCommand.Execute(this);
+            }
+        }
     }
 }
