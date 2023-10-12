@@ -41,6 +41,16 @@ namespace Teszt__.src.Commands
             {
                 Message.Error("Nem töltöttél ki minden mezőt!");
 
+                if(viewModel.Username == null)
+                {
+                    viewModel.inputField.ChangeColor("username");
+                }
+
+                if(viewModel.Password == null)
+                {
+                    viewModel.inputField.ChangeColor("password");
+                }
+
                 return;
             }
 
@@ -50,7 +60,9 @@ namespace Teszt__.src.Commands
 
             if (user == null)
             {
-                Message.Error("Hibás felhasználónév vagy jelszó!");
+                Message.Error("Nem létezik ilyen felhasználó!");
+
+                viewModel.inputField.ChangeColor("username");
 
                 return;
             }
@@ -72,6 +84,8 @@ namespace Teszt__.src.Commands
                     else
                     {
                         Message.Error("Nem vagy oktató!");
+
+                        viewModel.inputField.ChangeColor("username");
                     }
                 }
                 else
@@ -88,6 +102,16 @@ namespace Teszt__.src.Commands
             else
             {
                 Message.Error("Hibás felhasználónév vagy jelszó!");
+
+                if(user.name.ToUpper() != viewModel.Username.ToUpper())
+                {
+                    viewModel.inputField.ChangeColor("username");
+                }
+
+                if (user.password != JelszoTitkosito.Encrypt(SecureStringConvert.ToString(viewModel.Password)))
+                {
+                    viewModel.inputField.ChangeColor("password");
+                }
             }
         }
     }

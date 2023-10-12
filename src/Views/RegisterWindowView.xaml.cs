@@ -13,6 +13,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Teszt__.src.Models;
 using Teszt__.src.ViewModels;
 
 
@@ -20,6 +21,8 @@ namespace Teszt__.src.Views
 {
     public partial class RegisterWindowView : Window
     {
+        public InputField inputField;
+
         public SecureString Password1;
         
         public SecureString Password2;
@@ -28,9 +31,23 @@ namespace Teszt__.src.Views
         {
             InitializeComponent();
 
+            inputField = new InputField();
+
             Password1 = TB_password1.SecurePassword;
 
             Password2 = TB_password2.SecurePassword;
+
+            inputField += new Dictionary<string, TextBox>()
+            {
+                {"username", TB_username},
+                {"email", TB_email}
+            };
+
+            inputField += new Dictionary<string, PasswordBox>()
+            {
+                {"password1", TB_password1},
+                {"password2", TB_password2}
+            };
         }
 
         private void TB_password1_LostFocus(object sender, RoutedEventArgs e)
@@ -49,7 +66,7 @@ namespace Teszt__.src.Views
             }
         }
 
-        private void TB_KeyDown(object sender, KeyEventArgs e)
+        private void SendRegisterData(object sender, KeyEventArgs e)
         {
             if (e.Key == Key.Enter && DataContext is RegisterWindowViewModel viewModel)
             {

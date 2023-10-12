@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using Teszt__.src.Models;
+using Teszt__.src.Services;
 
 namespace Teszt__.src.DAL
 {
@@ -22,7 +23,16 @@ namespace Teszt__.src.DAL
 
         public User GetUserByName(string name)
         {
-            return this.Users.Where(b => b.name == name).ToList().Count == 1 ? this.Users.Where(b => b.name == name).ToList()[0] : null;
+            try
+            {
+                return this.Users.Where(b => b.name == name).ToList().Count == 1 ? this.Users.Where(b => b.name == name).ToList()[0] : null;
+            }
+            catch(InvalidOperationException)
+            {
+                Message.Error("Nem sikerült kapcsolódni az adatbázishoz!");
+
+                return null;
+            }
         }
     }
 }

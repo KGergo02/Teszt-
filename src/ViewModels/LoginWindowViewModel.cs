@@ -8,6 +8,7 @@ using System.Windows;
 using System.Windows.Input;
 using System.Windows.Navigation;
 using Teszt__.src.Commands;
+using Teszt__.src.Models;
 using Teszt__.src.Views;
 
 namespace Teszt__.src.ViewModels
@@ -25,8 +26,12 @@ namespace Teszt__.src.ViewModels
             }
         }
 
+        public InputField inputField;
+
         public LoginWindowViewModel(LoginWindowView window, bool admin, NavigationWindow navigationWindow)
         {
+            inputField = window.inputField;
+
             LoginCommand = new LoginCommand(this, window, admin, navigationWindow);
         }
 

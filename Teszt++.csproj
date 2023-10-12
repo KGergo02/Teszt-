@@ -229,6 +229,7 @@
     <Compile Include="src\Commands\LoginCommand.cs" />
     <Compile Include="src\Commands\RegisterCommand.cs" />
     <Compile Include="src\Commands\RegisterLabelCommand.cs" />
+    <Compile Include="src\Models\InputField.cs" />
     <Compile Include="src\Models\User.cs" />
     <Compile Include="src\Services\JelszoTitkosito.cs" />
     <Compile Include="src\Services\Message.cs" />
