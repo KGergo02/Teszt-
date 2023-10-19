@@ -4,5 +4,8 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
-        Title="Teszt++" Height="450" Width="800" Source="MainWindowView.xaml">
+        Title="Teszt++" Height="450" Width="800" 
+        Source="MainWindowView.xaml"
+        ShowsNavigationUI="False"
+                  >
 </NavigationWindow>

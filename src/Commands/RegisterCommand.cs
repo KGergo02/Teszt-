@@ -105,7 +105,12 @@ namespace Teszt__.src.Commands
 
         private void CheckForEmptyInputs()
         {
-            if (viewModel.Username == null)
+            if(viewModel.Username != null)
+            {
+                viewModel.Username = viewModel.Username.Trim();
+            }
+
+            if (viewModel.Username == null || viewModel.Username == String.Empty)
             {
                 error += "Nem töltötted ki a Felhasználónév mezőt!\n";
 
@@ -123,7 +128,7 @@ namespace Teszt__.src.Commands
 
                 viewModel.inputField.ChangeColor("password2");
             }
-            if (viewModel.Email == null)
+            if (viewModel.Email == null || viewModel.Email == String.Empty)
             {
                 error += "Nem töltötted ki az Email mezőt!\n";
 

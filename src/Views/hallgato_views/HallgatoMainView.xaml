@@ -6,11 +6,11 @@
       xmlns:local="clr-namespace:Teszt__.src.Views.Hallgato_Views"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="Főoldal"
-      KeepAlive="False"
+      Title="{Binding TitleName}"
+      KeepAlive="True"
       >
     <Viewbox>
-        <Label Content="HALLGATÓ VIEW"></Label>
+        <Label Content="{Binding Username}"></Label>
     </Viewbox>
 
 

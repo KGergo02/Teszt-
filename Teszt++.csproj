@@ -224,9 +224,14 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="src\Commands\AddNewRowCommand.cs" />
     <Compile Include="src\Commands\CommandBase.cs" />
     <Compile Include="src\Commands\BeforeLoginCommand.cs" />
     <Compile Include="src\Commands\LoginCommand.cs" />
+    <Compile Include="src\Commands\LogOutCommand.cs" />
+    <Compile Include="src\Commands\Oktato_Commands\CreateCourseCommand.cs" />
+    <Compile Include="src\Commands\Oktato_Commands\CreateQuestionCommand.cs" />
+    <Compile Include="src\Commands\Oktato_Commands\CreateTestCommand.cs" />
     <Compile Include="src\Commands\RegisterCommand.cs" />
     <Compile Include="src\Commands\RegisterLabelCommand.cs" />
     <Compile Include="src\Models\InputField.cs" />
@@ -237,6 +242,7 @@
     <Compile Include="src\ViewModels\Hallgato_ViewModels\HallgatoMainViewModel.cs" />
     <Compile Include="src\ViewModels\LoginWindowViewModel.cs" />
     <Compile Include="src\ViewModels\MainWindowViewModel.cs" />
+    <Compile Include="src\ViewModels\Oktato_ViewModels\OktatoMainViewModel.cs" />
     <Compile Include="src\ViewModels\RegisterWindowViewModel.cs" />
     <Compile Include="src\ViewModels\ViewModelBase.cs" />
     <Compile Include="src\Views\Hallgato_Views\HallgatoMainView.xaml.cs">
@@ -312,7 +318,9 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="src\Commands\Hallgato_Commands\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="packages\Microsoft.Data.SqlClient.SNI.1.1.0\build\net46\Microsoft.Data.SqlClient.SNI.targets" Condition="Exists('packages\Microsoft.Data.SqlClient.SNI.1.1.0\build\net46\Microsoft.Data.SqlClient.SNI.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

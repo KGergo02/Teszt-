@@ -11,6 +11,7 @@ using Teszt__.src.Views.Hallgato_Views;
 using Teszt__.src.Views.Oktato_Views;
 using Teszt__.src.Services;
 using Teszt__.src.Models;
+using Teszt__.src.ViewModels.Oktato_ViewModels;
 
 namespace Teszt__.src.Commands
 {
@@ -79,7 +80,11 @@ namespace Teszt__.src.Commands
 
                         LoginWindow.Close();
 
-                        _navigationWindow.Navigate(new OktatoMainView());
+                        OktatoMainView window = new OktatoMainView();
+
+                        window.DataContext = new OktatoMainViewModel(user, window, _navigationWindow);
+
+                        _navigationWindow.Navigate(window);
                     }
                     else
                     {
@@ -96,7 +101,11 @@ namespace Teszt__.src.Commands
 
                     LoginWindow.Close();
 
-                    _navigationWindow.Navigate(new HallgatoMainView());
+                    _navigationWindow.Navigate(new HallgatoMainView()
+                    {
+                        DataContext = new HallgatoMainViewModel(user, _navigationWindow)
+                    }
+                    );
                 }
             }
             else
