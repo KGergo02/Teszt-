@@ -10,6 +10,7 @@ using Teszt__.src.Commands;
 using Teszt__.src.Commands.Oktato_Commands;
 using Teszt__.src.Models;
 using Teszt__.src.Views.Oktato_Views;
+using static Teszt__.src.DAL.Database;
 
 namespace Teszt__.src.ViewModels.Oktato_ViewModels
 {
@@ -37,6 +38,8 @@ namespace Teszt__.src.ViewModels.Oktato_ViewModels
 
         private readonly User _user;
 
+        private int modelType = 0;
+
         public OktatoMainViewModel(User user, OktatoMainView window, NavigationWindow navigationWindow)
         {
             TitleName = $"Főoldal - {user.name}";
@@ -47,9 +50,9 @@ namespace Teszt__.src.ViewModels.Oktato_ViewModels
 
             _mainStackPanel = window._mainStackPanel;
 
-            InitializeCourseGrid();
+            grid = InitializeCourseGrid(_mainStackPanel);
 
-            CreateCourseCommand = new CreateCourseCommand(_user, _navigationWindow);
+            CreateCourseCommand = new CreateCourseCommand(ref grid, ref _mainStackPanel, InitializeCourseGrid);
             
             CreateTestCommand = new CreateTestCommand();
             
@@ -57,12 +60,17 @@ namespace Teszt__.src.ViewModels.Oktato_ViewModels
 
             LogOutCommand = new LogOutCommand(_navigationWindow);
 
-            AddNewRowCommand = new AddNewRowCommand(ref grid);
+            AddNewRowCommand = new AddNewRowCommand(grid);
+
+            SendCommand = new SendCommand(grid, _mainStackPanel, ref modelType, InitializeCourseGrid);
         }
 
-        private void InitializeCourseGrid()
+        private Grid InitializeCourseGrid(StackPanel mainStackPanel)
         {
-            grid = new Grid();
+            if(grid.Children.Count != 0)
+            {
+                grid.Children.RemoveRange(0, grid.Children.Count);
+            }
 
             Label labelCourseName = new Label();
 
@@ -116,7 +124,9 @@ namespace Teszt__.src.ViewModels.Oktato_ViewModels
 
             grid.Children.Add(tb2);
 
-            _mainStackPanel.Children.Add(grid);
+            mainStackPanel.Children.Add(grid);
+
+            return grid;
         }
 
         public ICommand CreateCourseCommand { get; }
@@ -125,5 +135,6 @@ namespace Teszt__.src.ViewModels.Oktato_ViewModels
         public ICommand LogOutCommand { get; }
         public ICommand AddNewRowCommand { get; }
         public ICommand SendCommand { get; }
+        public ICommand ViewCourseCommand { get; }
     }
 }

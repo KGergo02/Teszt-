@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Navigation;
 using Teszt__.src.Models;
+using static Teszt__.src.DAL.Database;
 
 namespace Teszt__.src.ViewModels
 {

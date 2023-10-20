@@ -12,6 +12,7 @@ using Teszt__.src.Views.Oktato_Views;
 using Teszt__.src.Services;
 using Teszt__.src.Models;
 using Teszt__.src.ViewModels.Oktato_ViewModels;
+using static Teszt__.src.DAL.Database;
 
 namespace Teszt__.src.Commands
 {

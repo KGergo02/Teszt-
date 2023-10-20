@@ -1,6 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System;
-using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
 using System.Runtime.CompilerServices;
@@ -12,9 +11,11 @@ using Teszt__.src.Services;
 
 namespace Teszt__.src.DAL
 {
-    public class Database : DbContext
+    public partial class Database : DbContext
     {
         public DbSet<User> Users { get; set; }
+
+        public DbSet<Course> Courses { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

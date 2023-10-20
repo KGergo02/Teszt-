@@ -9,33 +9,30 @@ namespace Teszt__.src.Commands
 {
     class AddNewRowCommand : CommandBase
     {
-        public AddNewRowCommand(ref Grid grid)
+        public AddNewRowCommand(Grid grid)
         {
             _grid = grid;
         }
-        public Grid _grid { get; }
+        private Grid _grid;
 
         public override void Execute(object parameter)
         {
-            RowDefinition rowdef = new RowDefinition();
+            int rowcount = _grid.RowDefinitions.Count + 1;
 
-            _grid.RowDefinitions.Add(rowdef);
+            for (int i = 0; i < _grid.ColumnDefinitions.Count; i++)
+            {
+                RowDefinition rowdef = new RowDefinition();
 
-            TextBox tb1 = new TextBox();
+                _grid.RowDefinitions.Add(rowdef);
 
-            TextBox tb2 = new TextBox();
+                TextBox tb1 = new TextBox();
 
-            Grid.SetRow(tb1, _grid.RowDefinitions.Count - 1);
-                                                        
-            Grid.SetRow(tb2, _grid.RowDefinitions.Count - 1);
+                Grid.SetRow(tb1, rowcount - 1);
 
-            Grid.SetColumn(tb1, 0);
+                Grid.SetColumn(tb1, i);
 
-            Grid.SetColumn(tb2, 1);
-
-            _grid.Children.Add(tb1);
-
-            _grid.Children.Add(tb2);
+                _grid.Children.Add(tb1);
+            }
         }
     }
 }

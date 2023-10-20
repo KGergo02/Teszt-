@@ -13,9 +13,18 @@
         <Viewbox VerticalAlignment="Top">
             <StackPanel>
                 <Menu FontWeight="Bold">
-                    <MenuItem Header="Kurzus létrehozása" Command="{Binding CreateCourseCommand}"/>
-                    <MenuItem Header="Teszt létrehozása" Command="{Binding CreateTestCommand}"/>
-                    <MenuItem Header="Kérdés létrehozása" Command="{Binding CreateQuestionCommand}"/>
+                    <MenuItem Header="Kurzus">
+                        <MenuItem Header="Kurzusok megtekintése" Command="{Binding ViewCoursesCommand}"></MenuItem>
+                        <MenuItem Header="Új kurzus létrehozása" Command="{Binding CreateCourseCommand}"></MenuItem>
+                    </MenuItem>
+                    <MenuItem Header="Teszt">
+                        <MenuItem Header="Tesztek megtekintése"></MenuItem>
+                        <MenuItem Header="Új Teszt létrehozása" Command="{Binding CreateTestCommand}"/>
+                    </MenuItem>
+                    <MenuItem Header="Kérdés">
+                        <MenuItem Header="Kérdések megtekintése"></MenuItem>
+                        <MenuItem Header="Új kérdés létrehozása" Command="{Binding CreateQuestionCommand}"/>
+                    </MenuItem>
                     <MenuItem Header="Eredmények megtekintése" Margin="0,0,13,0"/>
                     <MenuItem Header="Profil">
                         <MenuItem Header="Adatok módosítása" FontSize="10"/>
