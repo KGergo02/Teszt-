@@ -235,9 +235,6 @@
     <Compile Include="src\Commands\Oktato_Commands\SendCommand.cs" />
     <Compile Include="src\Commands\RegisterCommand.cs" />
     <Compile Include="src\Commands\RegisterLabelCommand.cs" />
-    <Compile Include="src\DAL\Course.cs" />
-    <Compile Include="src\DAL\Test.cs" />
-    <Compile Include="src\DAL\User.cs" />
     <Compile Include="src\Models\InputField.cs" />
     <Compile Include="src\Services\GridService.cs" />
     <Compile Include="src\Services\JelszoTitkosito.cs" />
