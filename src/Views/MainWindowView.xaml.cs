@@ -18,5 +18,12 @@ namespace Teszt__.src.Views
 
             command.Execute(this);
         }
+
+        private void Page_Loaded(object sender, RoutedEventArgs e)
+        {
+            LoadedMainCommand command = new LoadedMainCommand();
+
+            command.Execute(this);
+        }
     }
 }

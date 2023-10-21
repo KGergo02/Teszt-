@@ -22,6 +22,8 @@ namespace Teszt__.src.ViewModels
             HallgatoLoginCommand = new BeforeLoginCommand(_navigationWindow, false);
 
             OktatoLoginCommand = new BeforeLoginCommand(_navigationWindow, true);
+
+            LoadedMainCommand = new LoadedMainCommand();
         }
 
         public ICommand HallgatoLoginCommand
@@ -30,6 +32,11 @@ namespace Teszt__.src.ViewModels
         }
 
         public ICommand OktatoLoginCommand
+        {
+            get;
+        }
+
+        public ICommand LoadedMainCommand
         {
             get;
         }

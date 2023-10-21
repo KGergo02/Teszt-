@@ -224,6 +224,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="src\Commands\LoadedMainCommand.cs" />
     <Compile Include="src\Commands\Oktato_Commands\AddNewRowCommand.cs" />
     <Compile Include="src\Commands\CommandBase.cs" />
     <Compile Include="src\Commands\BeforeLoginCommand.cs" />
