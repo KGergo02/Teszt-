@@ -21,7 +21,7 @@ namespace Teszt__.src.Commands.Oktato_Commands
 
         private Func<StackPanel, Grid> _initializeCourseGrid;
 
-        public SendCommand(Grid grid, StackPanel mainStackPanel , ref int modelType, Func<StackPanel, Grid> initializeCourseGrid)
+        public SendCommand(ref Grid grid, ref StackPanel mainStackPanel , ref int modelType, Func<StackPanel, Grid> initializeCourseGrid)
         {
             _grid = grid;
 
@@ -34,35 +34,44 @@ namespace Teszt__.src.Commands.Oktato_Commands
 
         public override void Execute(object parameter)
         {
-            for (int i = _grid.ColumnDefinitions.Count; i < _grid.Children.Count; i += _grid.ColumnDefinitions.Count)
+            foreach (var item in _grid.Children)
             {
-                List<TextBox> textBoxes = new List<TextBox>();
-                
-                for (int j = 0; j < _grid.ColumnDefinitions.Count; j++)
+                if(item is TextBox)
                 {
-                    TextBox item = (TextBox)_grid.Children[i + j];
+                    TextBox tb = (TextBox)item;
 
-                    textBoxes.Add(item);
-                }
-
-                foreach (TextBox item in textBoxes)
-                {
-                    if(item.Text == null || item.Text == String.Empty)
+                    if(tb.Text == String.Empty)
                     {
                         Message.Error("Nem töltöttél ki minden mezőt!");
 
                         return;
                     }
                 }
+            }
+
+            for (int i = _grid.ColumnDefinitions.Count; i < _grid.Children.Count; i += _grid.ColumnDefinitions.Count)
+            {
+                List<Control> controls = new List<Control>();
+                
+                for (int j = 0; j < _grid.ColumnDefinitions.Count; j++)
+                {
+                    Control item = (Control)_grid.Children[i + j];
+
+                    controls.Add(item);
+                }
 
                 switch (_modelType)
                 {
                     case 0:
-                        SaveCourse(textBoxes);
+                        if (CheckCourseInputs())
+                        {
+                            SaveCourse(controls);
+                        }
+                        else return;
                         break;
                 }
 
-                textBoxes.Clear();
+                controls.Clear();
             }
 
             GridService.ClearGrid(ref _grid, ref _mainStackPanel);
@@ -72,9 +81,42 @@ namespace Teszt__.src.Commands.Oktato_Commands
             Message.Success("Kurzus sikeresen létrehozva!");
         }
 
-        private void SaveCourse(List<TextBox> textBoxes)
+        private bool CheckCourseInputs()
         {
-            Course course = new Course(textBoxes[0].Text, Convert.ToInt32(textBoxes[1].Text), new List<Test>());
+            foreach (var item in _grid.Children)
+            {
+                if(item is TextBox)
+                {
+                    TextBox tb = (TextBox)item;
+
+#pragma warning disable CS0252 // Possible unintended reference comparison; left hand side needs cast
+                    if (tb.Tag == "number")
+#pragma warning restore CS0252 // Possible unintended reference comparison; left hand side needs cast
+                    {
+                        int number = 0;
+
+                        if (!int.TryParse(tb.Text, out number))
+                        {
+                            Message.Error("Nem számot adtál meg!");
+
+                            return false;
+                        }
+                    }
+                }
+            }
+
+            return true;
+        }
+
+        private void SaveCourse(List<Control> controls)
+        {
+            TextBox name = (TextBox)controls[0];
+            
+            TextBox limit = (TextBox)controls[1];
+
+            int number = Convert.ToInt32(limit.Text);
+
+            Course course = new Course(name.Text, number, new List<Test>());
 
             Database database = new Database();
 

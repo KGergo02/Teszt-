@@ -224,7 +224,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="src\Commands\AddNewRowCommand.cs" />
+    <Compile Include="src\Commands\Oktato_Commands\AddNewRowCommand.cs" />
     <Compile Include="src\Commands\CommandBase.cs" />
     <Compile Include="src\Commands\BeforeLoginCommand.cs" />
     <Compile Include="src\Commands\LoginCommand.cs" />
@@ -235,6 +235,10 @@
     <Compile Include="src\Commands\Oktato_Commands\SendCommand.cs" />
     <Compile Include="src\Commands\RegisterCommand.cs" />
     <Compile Include="src\Commands\RegisterLabelCommand.cs" />
+    <Compile Include="src\DAL\Course.cs" />
+    <Compile Include="src\DAL\Question.cs" />
+    <Compile Include="src\DAL\Test.cs" />
+    <Compile Include="src\DAL\User.cs" />
     <Compile Include="src\Models\InputField.cs" />
     <Compile Include="src\Services\GridService.cs" />
     <Compile Include="src\Services\JelszoTitkosito.cs" />

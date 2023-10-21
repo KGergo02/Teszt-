@@ -14,7 +14,7 @@
             <StackPanel>
                 <Menu FontWeight="Bold">
                     <MenuItem Header="Kurzus">
-                        <MenuItem Header="Kurzusok megtekintése" Command="{Binding ViewCoursesCommand}"></MenuItem>
+                        <MenuItem Header="Kurzusok megtekintése"></MenuItem>
                         <MenuItem Header="Új kurzus létrehozása" Command="{Binding CreateCourseCommand}"></MenuItem>
                     </MenuItem>
                     <MenuItem Header="Teszt">

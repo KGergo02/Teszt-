@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Gép: 127.0.0.1
--- Létrehozás ideje: 2023. Sze 24. 16:58
+-- Létrehozás ideje: 2023. Okt 20. 23:56
 -- Kiszolgáló verziója: 10.4.25-MariaDB
 -- PHP verzió: 8.1.10
 
@@ -32,9 +32,51 @@ USE `teszt++`;
 CREATE TABLE `courses` (
   `id` int(11) NOT NULL,
   `name` varchar(100) COLLATE utf8_hungarian_ci NOT NULL,
-  `credit` tinyint(4) NOT NULL,
-  `student_limit` tinyint(4) NOT NULL,
-  `teacher` varchar(100) COLLATE utf8_hungarian_ci NOT NULL
+  `user_limit` int(11) NOT NULL,
+  `tests` blob NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_hungarian_ci;
+
+--
+-- A tábla adatainak kiíratása `courses`
+--
+
+INSERT INTO `courses` (`id`, `name`, `user_limit`, `tests`) VALUES
+(20, 'A', 10, ''),
+(21, 'B', 20, ''),
+(22, 'Első', 100, ''),
+(23, 'Második', 50, ''),
+(24, 'Teszt', 2, ''),
+(25, 'CS:GO', 10, ''),
+(26, 'League of Legends', 5, '');
+
+-- --------------------------------------------------------
+
+--
+-- Tábla szerkezet ehhez a táblához `questions`
+--
+
+CREATE TABLE `questions` (
+  `id` int(11) NOT NULL,
+  `name` varchar(100) COLLATE utf8_hungarian_ci NOT NULL,
+  `listOfAnswers` blob NOT NULL,
+  `questionType` varchar(100) COLLATE utf8_hungarian_ci NOT NULL,
+  `test` varchar(100) COLLATE utf8_hungarian_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_hungarian_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Tábla szerkezet ehhez a táblához `tests`
+--
+
+CREATE TABLE `tests` (
+  `id` int(11) NOT NULL,
+  `name` varchar(100) COLLATE utf8_hungarian_ci NOT NULL,
+  `questions` blob NOT NULL,
+  `submit_limit` int(11) NOT NULL,
+  `date` date NOT NULL,
+  `startTime` time NOT NULL,
+  `endTime` time NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_hungarian_ci;
 
 -- --------------------------------------------------------
@@ -56,7 +98,9 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `password`, `email`, `admin`) VALUES
-(1, 'KGergo02', 'UQH6OyTUF0PU8A/9fJOrkg==', 'kassa.gergo2002@gmail.com', 1);
+(1, 'KGergo02', 'UQH6OyTUF0PU8A/9fJOrkg==', 'kassa.gergo2002@gmail.com', 1),
+(6, 'Teszt', '/rA2D/Mil+M=', 'teszt@teszt.com', 0),
+(8, 'ASD', '/rA2D/Mil+M=', 'asd@asd.com', 1);
 
 --
 -- Indexek a kiírt táblákhoz
@@ -66,6 +110,18 @@ INSERT INTO `users` (`id`, `name`, `password`, `email`, `admin`) VALUES
 -- A tábla indexei `courses`
 --
 ALTER TABLE `courses`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- A tábla indexei `questions`
+--
+ALTER TABLE `questions`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- A tábla indexei `tests`
+--
+ALTER TABLE `tests`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -82,13 +138,25 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT a táblához `courses`
 --
 ALTER TABLE `courses`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+
+--
+-- AUTO_INCREMENT a táblához `questions`
+--
+ALTER TABLE `questions`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT a táblához `tests`
+--
+ALTER TABLE `tests`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT a táblához `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

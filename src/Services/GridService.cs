@@ -11,7 +11,9 @@ namespace Teszt__.src.Services
     {
         public static void ClearGrid(ref Grid grid, ref StackPanel stackPanel)
         {
-            stackPanel.Children.RemoveRange(0, stackPanel.Children.Count);
+            grid.Children.Clear();
+
+            stackPanel.Children.Clear();
 
             grid.ColumnDefinitions.Clear();
 

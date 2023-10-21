@@ -34,7 +34,11 @@ namespace Teszt__.src.ViewModels.Oktato_ViewModels
 
         public StackPanel _mainStackPanel;
 
-        public Grid grid = new Grid();
+        public Grid grid = new Grid()
+        {
+            Margin = new System.Windows.Thickness(5)
+        };
+            
 
         private readonly User _user;
 
@@ -52,17 +56,17 @@ namespace Teszt__.src.ViewModels.Oktato_ViewModels
 
             grid = InitializeCourseGrid(_mainStackPanel);
 
-            CreateCourseCommand = new CreateCourseCommand(ref grid, ref _mainStackPanel, InitializeCourseGrid);
+            CreateCourseCommand = new CreateCourseCommand(ref grid, ref _mainStackPanel, InitializeCourseGrid, ref modelType);
             
-            CreateTestCommand = new CreateTestCommand();
+            CreateTestCommand = new CreateTestCommand(ref grid, ref _mainStackPanel, ref modelType);
             
             CreateQuestionCommand = new CreateQuestionCommand();
 
             LogOutCommand = new LogOutCommand(_navigationWindow);
 
-            AddNewRowCommand = new AddNewRowCommand(grid);
+            AddNewRowCommand = new AddNewRowCommand(ref grid, ref modelType);
 
-            SendCommand = new SendCommand(grid, _mainStackPanel, ref modelType, InitializeCourseGrid);
+            SendCommand = new SendCommand(ref grid, ref _mainStackPanel, ref modelType, InitializeCourseGrid);
         }
 
         private Grid InitializeCourseGrid(StackPanel mainStackPanel)
@@ -106,7 +110,10 @@ namespace Teszt__.src.ViewModels.Oktato_ViewModels
 
             TextBox tb1 = new TextBox();
 
-            TextBox tb2 = new TextBox();
+            TextBox tb2 = new TextBox() 
+            {
+                Tag = "number"
+            };
 
             Grid.SetColumn(tb1, 0);
 
