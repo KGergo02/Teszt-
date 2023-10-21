@@ -1,39 +1,30 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace Teszt__.src.DAL
 {
-    public partial class Database
+    public partial class TestDatabaseContext
     {
         public class Test
         {
-            public int id { get; set; }
+            [Key]
             public string name { get; set; }
 
             public int submit_limit { get; set; }
 
-            public DateTime date { get; set; }
+            public string date { get; set; }
 
-            public TimeSpan startTime { get; set; }
+            public string startTime { get; set; }
 
-            public TimeSpan endTime { get; set; }
+            public string endTime { get; set; }
 
             public Test()
             {
 
             }
 
-            public Test(int id, string name, int submit_limit, DateTime date, TimeSpan startTime, TimeSpan endTime)
-            {
-                this.id = id;
-                this.name = name;
-                this.submit_limit = submit_limit;
-                this.date = date;
-                this.startTime = startTime;
-                this.endTime = endTime;
-            }
-
-            public Test(string name, int submit_limit, DateTime date, TimeSpan startTime, TimeSpan endTime)
+            public Test(string name, int submit_limit, string date, string startTime, string endTime)
             {
                 this.name = name;
                 this.submit_limit = submit_limit;

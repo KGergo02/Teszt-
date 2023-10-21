@@ -5,15 +5,15 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static Teszt__.src.DAL.TestDatabaseContext;
 
 namespace Teszt__.src.DAL
 {
-    public partial class Database
+    public partial class UserDatabaseContext
     {
         public class Question
         {
             [Key]
-            public int id { get; set; }
             public string name { get; set; }
 
             [NotMapped]
@@ -26,15 +26,6 @@ namespace Teszt__.src.DAL
             public Question()
             {
 
-            }
-
-            public Question(int id, string name, List<string> listOfAnswers, string questionType, Test test)
-            {
-                this.id = id;
-                this.name = name;
-                this.listOfAnswers = listOfAnswers;
-                this.questionType = questionType;
-                this.test = test;
             }
 
             public Question(string name, List<string> listOfAnswers, string questionType, Test test)

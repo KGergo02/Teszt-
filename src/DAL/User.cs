@@ -1,10 +1,12 @@
-﻿namespace Teszt__.src.DAL
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace Teszt__.src.DAL
 {
-    public partial class Database
+    public partial class UserDatabaseContext
     {
         public class User
         {
-            public int id { get; set; }
+            [Key]
             public string name { get; set; }
             public string password { get; set; }
             public string email { get; set; }
@@ -13,15 +15,6 @@
             public User()
             {
 
-            }
-
-            public User(int id, string name, string password, string email, bool admin)
-            {
-                this.id = id;
-                this.name = name;
-                this.password = password;
-                this.email = email;
-                this.admin = admin;
             }
 
             public User(string name, string password, string email, bool admin)

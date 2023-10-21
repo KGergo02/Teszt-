@@ -14,7 +14,7 @@ using Teszt__.src.DAL;
 using Teszt__.src.Services;
 using Teszt__.src.Models;
 using Teszt__.src.Views;
-using static Teszt__.src.DAL.Database;
+using static Teszt__.src.DAL.UserDatabaseContext;
 
 namespace Teszt__.src.Commands
 {
@@ -35,7 +35,7 @@ namespace Teszt__.src.Commands
 
             viewModel.inputField.ClearColorOfInputFields();
 
-            Database database = new Database();
+            UserDatabaseContext database = new UserDatabaseContext();
 
             CheckForEmptyInputs();
 
@@ -75,7 +75,7 @@ namespace Teszt__.src.Commands
             }
         }
 
-        private void CheckIfUserExists(Database db)
+        private void CheckIfUserExists(UserDatabaseContext db)
         {
             if(viewModel.Username != null)
             {

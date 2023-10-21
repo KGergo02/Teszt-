@@ -4,19 +4,20 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls;
+using Teszt__.src.ViewModels.Oktato_ViewModels;
 
 namespace Teszt__.src.Commands.Oktato_Commands
 {
     class AddNewRowCommand : CommandBase
     {
         private Grid _grid;
-        private int _modelType;
+        private OktatoMainViewModel _viewModel;
 
-        public AddNewRowCommand(ref Grid grid, ref int modelType)
+        public AddNewRowCommand(ref Grid grid, OktatoMainViewModel viewModel)
         {
             _grid = grid;
 
-            _modelType = modelType;
+            _viewModel = viewModel;
         }
 
 
@@ -24,7 +25,7 @@ namespace Teszt__.src.Commands.Oktato_Commands
         {
             int rowcount = _grid.RowDefinitions.Count;
 
-            switch (_modelType)
+            switch (_viewModel.modelType)
             {
                 case 0:
                     AddCourseRow(rowcount);
@@ -74,6 +75,8 @@ namespace Teszt__.src.Commands.Oktato_Commands
 
             TextBox submitLimitTb = new TextBox();
 
+            submitLimitTb.Tag = "number";
+
             Grid.SetColumn(submitLimitTb, 1);
             Grid.SetRow(submitLimitTb, rowcount);
 
@@ -84,10 +87,14 @@ namespace Teszt__.src.Commands.Oktato_Commands
 
             TextBox startTimeTb = new TextBox();
 
+            startTimeTb.Tag = "time";
+
             Grid.SetColumn(startTimeTb, 3);
             Grid.SetRow(startTimeTb, rowcount);
 
             TextBox endTimeTb = new TextBox();
+
+            endTimeTb.Tag = "time";
 
             Grid.SetColumn(endTimeTb, 4);
             Grid.SetRow(endTimeTb, rowcount);

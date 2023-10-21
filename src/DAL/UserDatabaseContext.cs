@@ -11,15 +11,9 @@ using Teszt__.src.Services;
 
 namespace Teszt__.src.DAL
 {
-    public partial class Database : DbContext
+    public partial class UserDatabaseContext : DbContext
     {
         public DbSet<User> Users { get; set; }
-
-        public DbSet<Course> Courses { get; set; }
-
-        public DbSet<Test> Tests { get; set; }
-
-        public DbSet<Question> Questions { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

@@ -9,8 +9,9 @@ using System.Windows.Navigation;
 using Teszt__.src.Commands;
 using Teszt__.src.Commands.Oktato_Commands;
 using Teszt__.src.Models;
+using Teszt__.src.Services;
 using Teszt__.src.Views.Oktato_Views;
-using static Teszt__.src.DAL.Database;
+using static Teszt__.src.DAL.UserDatabaseContext;
 
 namespace Teszt__.src.ViewModels.Oktato_ViewModels
 {
@@ -42,7 +43,7 @@ namespace Teszt__.src.ViewModels.Oktato_ViewModels
 
         private readonly User _user;
 
-        private int modelType = 0;
+        public int modelType = 0;
 
         public OktatoMainViewModel(User user, OktatoMainView window, NavigationWindow navigationWindow)
         {
@@ -54,86 +55,19 @@ namespace Teszt__.src.ViewModels.Oktato_ViewModels
 
             _mainStackPanel = window._mainStackPanel;
 
-            grid = InitializeCourseGrid(_mainStackPanel);
+            grid = GridService.CreateCourseGrid(ref grid, ref _mainStackPanel);
 
-            CreateCourseCommand = new CreateCourseCommand(ref grid, ref _mainStackPanel, InitializeCourseGrid, ref modelType);
+            CreateCourseCommand = new CreateCourseCommand(ref grid, ref _mainStackPanel, this);
             
-            CreateTestCommand = new CreateTestCommand(ref grid, ref _mainStackPanel, ref modelType);
+            CreateTestCommand = new CreateTestCommand(ref grid, ref _mainStackPanel, this);
             
             CreateQuestionCommand = new CreateQuestionCommand();
 
             LogOutCommand = new LogOutCommand(_navigationWindow);
 
-            AddNewRowCommand = new AddNewRowCommand(ref grid, ref modelType);
+            AddNewRowCommand = new AddNewRowCommand(ref grid, this);
 
-            SendCommand = new SendCommand(ref grid, ref _mainStackPanel, ref modelType, InitializeCourseGrid);
-        }
-
-        private Grid InitializeCourseGrid(StackPanel mainStackPanel)
-        {
-            if(grid.Children.Count != 0)
-            {
-                grid.Children.RemoveRange(0, grid.Children.Count);
-            }
-
-            Label labelCourseName = new Label();
-
-            labelCourseName.Content = "Kurzus neve";
-
-            Label labelCourseLimit = new Label();
-
-            labelCourseLimit.Content = "Kurzus limit";
-
-            ColumnDefinition coldef1 = new ColumnDefinition();
-            
-            ColumnDefinition coldef2 = new ColumnDefinition();
-
-            grid.ColumnDefinitions.Add(coldef1);
-
-            grid.ColumnDefinitions.Add(coldef2);
-
-            RowDefinition rowdef1 = new RowDefinition();
-            
-            RowDefinition rowdef2 = new RowDefinition();
-
-            grid.RowDefinitions.Add(rowdef1);
-
-            grid.RowDefinitions.Add(rowdef2);
-
-            Grid.SetColumn(labelCourseName, 0);
-
-            Grid.SetRow(labelCourseName, 0);
-
-            Grid.SetColumn(labelCourseLimit, 1);
-
-            Grid.SetRow(labelCourseLimit, 0);
-
-            TextBox tb1 = new TextBox();
-
-            TextBox tb2 = new TextBox() 
-            {
-                Tag = "number"
-            };
-
-            Grid.SetColumn(tb1, 0);
-
-            Grid.SetRow(tb1, 1);
-
-            Grid.SetColumn(tb2, 1);
-
-            Grid.SetRow(tb2, 1);
-
-            grid.Children.Add(labelCourseName);
-
-            grid.Children.Add(labelCourseLimit);
-
-            grid.Children.Add(tb1);
-
-            grid.Children.Add(tb2);
-
-            mainStackPanel.Children.Add(grid);
-
-            return grid;
+            SendCommand = new SendCommand(ref grid, ref _mainStackPanel, this);
         }
 
         public ICommand CreateCourseCommand { get; }

@@ -1,12 +1,14 @@
 ﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using static Teszt__.src.DAL.TestDatabaseContext;
 
 namespace Teszt__.src.DAL
 {
-    public partial class Database
+    public partial class CourseDatabaseContext
     {
         public class Course
         {
-            public int id { get; set; }
+            [Key]
             public string name { get; set; }
             public int user_limit { get; set; }
             public List<Test> tests { get; set; }
@@ -14,14 +16,6 @@ namespace Teszt__.src.DAL
             public Course()
             {
 
-            }
-
-            public Course(int id, string name, int user_limit, List<Test> tests)
-            {
-                this.id = id;
-                this.name = name;
-                this.user_limit = user_limit;
-                this.tests = tests;
             }
 
             public Course(string name, int user_limit, List<Test> tests)

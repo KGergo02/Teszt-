@@ -17,26 +17,23 @@ namespace Teszt__.src.Commands.Oktato_Commands
         private StackPanel _mainStackPanel;
 
         private Grid _grid;
-        
-        private Func<StackPanel, Grid> _initializeCourseGrid;
 
-        private int _modelType;
+        private OktatoMainViewModel _viewModel;
 
-        public CreateCourseCommand(ref Grid grid, ref StackPanel mainStackPanel, Func<StackPanel, Grid> initializeCourseGrid, ref int modelType)
+        public CreateCourseCommand(ref Grid grid, ref StackPanel mainStackPanel, OktatoMainViewModel viewModel)
         {
             _grid = grid;
             _mainStackPanel = mainStackPanel;
-            _initializeCourseGrid = initializeCourseGrid;
-            _modelType = modelType;
+            _viewModel = viewModel;
         }
 
         public override void Execute(object parameter)
         {
-            _modelType = 0;
+            _viewModel.modelType = 0;
 
             GridService.ClearGrid(ref _grid, ref _mainStackPanel);
 
-            _grid = _initializeCourseGrid(_mainStackPanel);
+            _grid = GridService.CreateCourseGrid(ref _grid, ref _mainStackPanel);
         }
     }
 }
