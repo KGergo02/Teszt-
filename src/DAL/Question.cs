@@ -21,19 +21,19 @@ namespace Teszt__.src.DAL
 
             public string questionType { get; set; }
 
-            public Test test;
+            public string testName;
 
             public Question()
             {
 
             }
 
-            public Question(string name, List<string> listOfAnswers, string questionType, Test test)
+            public Question(string name, List<string> listOfAnswers, string questionType, string testName)
             {
                 this.name = name;
                 this.listOfAnswers = listOfAnswers;
                 this.questionType = questionType;
-                this.test = test;
+                this.testName = testName;
             }
         }
     }

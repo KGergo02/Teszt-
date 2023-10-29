@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls;
 using Teszt__.src.ViewModels.Oktato_ViewModels;
+using Teszt__.src.Services;
 
 namespace Teszt__.src.Commands.Oktato_Commands
 {
@@ -20,7 +21,6 @@ namespace Teszt__.src.Commands.Oktato_Commands
             _viewModel = viewModel;
         }
 
-
         public override void Execute(object parameter)
         {
             int rowcount = _grid.RowDefinitions.Count;
@@ -32,6 +32,9 @@ namespace Teszt__.src.Commands.Oktato_Commands
                     break;
                 case 1:
                     AddTestRow(rowcount);
+                    break;
+                case 2:
+                    AddQuestionRow();
                     break;
             }
         }
@@ -104,6 +107,40 @@ namespace Teszt__.src.Commands.Oktato_Commands
             _grid.Children.Add(date);
             _grid.Children.Add(startTimeTb);
             _grid.Children.Add(endTimeTb);
+        }
+
+        private void AddQuestionRow()
+        {
+            Grid grid = (Grid)_grid.Children[4];
+
+            RowDefinition rowdef = new RowDefinition();
+
+            int rowcount = grid.RowDefinitions.Count;
+
+            if (grid.Tag.ToString() == "checkbox" || grid.Tag.ToString() == "radiobutton")
+            {
+                grid.RowDefinitions.Add(rowdef);
+
+                TextBox tb = new TextBox();
+
+                Grid.SetColumn(tb, 1);
+                Grid.SetRow(tb, rowcount);
+
+                CheckBox cb = new CheckBox()
+                {
+                    Content = "Válasz?"
+                };
+
+                Grid.SetColumn(cb, 2);
+                Grid.SetRow(cb, rowcount);
+
+                grid.Children.Add(tb);
+                grid.Children.Add(cb);
+            }
+            else if(grid.Tag.ToString() == "single")
+            {
+                Message.Error("Több választ nem adhatsz hozzá!");
+            }
         }
     }
 }

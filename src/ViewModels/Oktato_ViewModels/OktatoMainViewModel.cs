@@ -35,12 +35,13 @@ namespace Teszt__.src.ViewModels.Oktato_ViewModels
 
         public StackPanel _mainStackPanel;
 
+        public Button _AddNewRowButton;
+
         public Grid grid = new Grid()
         {
             Margin = new System.Windows.Thickness(5)
         };
             
-
         private readonly User _user;
 
         public int modelType = 0;
@@ -53,7 +54,9 @@ namespace Teszt__.src.ViewModels.Oktato_ViewModels
 
             _navigationWindow = navigationWindow;
 
-            _mainStackPanel = window._mainStackPanel;
+            _mainStackPanel = window.mainStackPanel;
+
+            _AddNewRowButton = window.AddNewRowButton;
 
             grid = GridService.CreateCourseGrid(ref grid, ref _mainStackPanel);
 
@@ -61,7 +64,7 @@ namespace Teszt__.src.ViewModels.Oktato_ViewModels
             
             CreateTestCommand = new CreateTestCommand(ref grid, ref _mainStackPanel, this);
             
-            CreateQuestionCommand = new CreateQuestionCommand();
+            CreateQuestionCommand = new CreateQuestionCommand(ref grid, ref _mainStackPanel, this);
 
             LogOutCommand = new LogOutCommand(_navigationWindow);
 

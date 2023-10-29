@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,6 +15,8 @@ namespace Teszt__.src.Services
             grid.Children.Clear();
 
             stackPanel.Children.Clear();
+
+            questionGrid.Children.Clear();
 
             grid.ColumnDefinitions.Clear();
 
@@ -123,7 +126,7 @@ namespace Teszt__.src.Services
 
             Label submitLimitLabel = new Label()
             {
-                Content = "Kitölthetőségi szám"
+                Content = "Kitöltési limit"
             };
 
             Grid.SetColumn(submitLimitLabel, 1);
@@ -203,6 +206,195 @@ namespace Teszt__.src.Services
             mainStackPanel.Children.Add(grid);
 
             return grid;
+        }
+
+        private static Grid questionGrid = new Grid();
+
+        private static Grid CreateQuestionControls(Grid grid, StackPanel mainStackPanel)
+        {
+            ColumnDefinition coldef1 = new ColumnDefinition();
+            ColumnDefinition coldef2 = new ColumnDefinition();
+            ColumnDefinition coldef3 = new ColumnDefinition();
+            grid.ColumnDefinitions.Add(coldef1);
+            grid.ColumnDefinitions.Add(coldef2);
+            grid.ColumnDefinitions.Add(coldef3);
+
+            RowDefinition rowdef1 = new RowDefinition();
+            RowDefinition rowdef2 = new RowDefinition();
+            RowDefinition rowdef3 = new RowDefinition();
+            RowDefinition rowdef4 = new RowDefinition();
+            RowDefinition rowdef5 = new RowDefinition();
+            grid.RowDefinitions.Add(rowdef1);
+            grid.RowDefinitions.Add(rowdef2);
+            grid.RowDefinitions.Add(rowdef3);
+            grid.RowDefinitions.Add(rowdef4);
+            grid.RowDefinitions.Add(rowdef5);
+
+            Label QTypeLabel = new Label();
+
+            QTypeLabel.Content = "Kérdés típusa";
+
+            Grid.SetColumn(QTypeLabel, 1);
+            Grid.SetRow(QTypeLabel, 0);
+
+            grid.Children.Add(QTypeLabel);
+
+            mainStackPanel.Children.Add(grid);
+
+            return grid;
+        }
+
+        public static Grid CreateQuestionGrid(Grid grid, StackPanel mainStackPanel)
+        {
+            grid = CreateQuestionControls(grid, mainStackPanel);
+
+            ComboBox CBType = new ComboBox();
+
+            CBType.Items.Add("Jelölődoboz");
+            CBType.Items.Add("Rádiógomb");
+            CBType.Items.Add("Egyválaszos");
+
+            CBType.SelectedIndex = 0;
+
+            CBType.SelectionChanged += (sender, e) => CBType_SelectionChanged(sender, e, grid, mainStackPanel);
+
+            Grid.SetColumn(CBType, 1);
+
+            Grid.SetRow(CBType, 1);
+
+            grid.Children.Add(CBType);
+
+            Label QNameLabel = new Label();
+
+            QNameLabel.Content = "Kérdés";
+
+            Grid.SetColumn(QNameLabel, 1);
+            Grid.SetRow(QNameLabel, 2);
+
+            grid.Children.Add(QNameLabel);
+
+            TextBox QNameTB = new TextBox();
+
+            QNameTB.AcceptsReturn = true;
+
+            QNameTB.TextWrapping = System.Windows.TextWrapping.Wrap;
+
+            Grid.SetColumn(QNameTB, 1);
+            Grid.SetRow(QNameTB, 3);
+
+            grid.Children.Add(QNameTB);
+
+            CreateQuestionGridCheckBoxAndRadioButtonControls(questionGrid);
+
+            Grid.SetColumn(questionGrid, 1);
+            Grid.SetRow(questionGrid, 5);
+
+            questionGrid.Tag = "checkbox";
+
+            grid.Children.Add(questionGrid);
+
+            return grid;
+        }
+
+        private static void CBType_SelectionChanged(object sender, SelectionChangedEventArgs e, Grid grid, StackPanel mainStackPanel)
+        {
+            ComboBox cb = (ComboBox)sender;
+
+            switch (cb.SelectedValue)
+            {
+                case "Jelölődoboz":
+                    questionGrid.Children.Clear();
+                    CreateQuestionGridCheckBoxAndRadioButtonControls(questionGrid);
+                    questionGrid.Tag = "checkbox";
+                    break;
+                case "Rádiógomb":
+                    questionGrid.Children.Clear();
+                    CreateQuestionGridCheckBoxAndRadioButtonControls(questionGrid);
+                    questionGrid.Tag = "radiobutton";
+                    break;
+                case "Egyválaszos":
+                    questionGrid.Children.Clear();
+                    CreateQuestionTextBoxControls(questionGrid);
+                    questionGrid.Tag = "single";
+                    break;
+            }
+        }
+
+        private static void CreateQuestionGridCheckBoxAndRadioButtonControls(Grid questionGrid)
+        {
+            ColumnDefinition coldef1 = new ColumnDefinition();
+            ColumnDefinition coldef2 = new ColumnDefinition();
+            ColumnDefinition coldef3 = new ColumnDefinition();
+
+            RowDefinition rowdef1 = new RowDefinition();
+            RowDefinition rowdef2 = new RowDefinition();
+
+            questionGrid.ColumnDefinitions.Add(coldef1);
+            questionGrid.ColumnDefinitions.Add(coldef2);
+            questionGrid.ColumnDefinitions.Add(coldef3);
+
+            questionGrid.RowDefinitions.Add(rowdef1);
+            questionGrid.RowDefinitions.Add(rowdef2);
+
+            Label ValaszokLabel = new Label()
+            {
+                Content = "Válaszlehetőségek"
+            };
+
+            Grid.SetColumn(ValaszokLabel, 1);
+            Grid.SetRow(ValaszokLabel, 0);
+            
+            questionGrid.Children.Add(ValaszokLabel);
+
+            TextBox tb = new TextBox();
+
+            Grid.SetColumn(tb, 1);
+            Grid.SetRow(tb, 1);
+
+            questionGrid.Children.Add(tb);
+
+            CheckBox cb = new CheckBox()
+            {
+                Content = "Válasz?"
+            };
+
+            Grid.SetColumn(cb, 2);
+            Grid.SetRow(cb, 1);
+
+            questionGrid.Children.Add(cb);
+        }
+
+        private static void CreateQuestionTextBoxControls(Grid questionGrid)
+        {
+            ColumnDefinition coldef1 = new ColumnDefinition();
+            ColumnDefinition coldef2 = new ColumnDefinition();
+            ColumnDefinition coldef3 = new ColumnDefinition();
+
+            RowDefinition rowdef1 = new RowDefinition();
+            RowDefinition rowdef2 = new RowDefinition();
+
+            questionGrid.ColumnDefinitions.Add(coldef1);
+            questionGrid.ColumnDefinitions.Add(coldef2);
+            questionGrid.ColumnDefinitions.Add(coldef3);
+
+            Label label = new Label()
+            {
+                Content = "Válasz"
+            };
+
+            Grid.SetColumn(label, 1);
+            Grid.SetRow(label, 0);
+
+            TextBox tb = new TextBox()
+            {
+                Width = 100
+            };
+
+            Grid.SetColumn(tb, 1);
+            Grid.SetRow(tb, 1);
+
+            questionGrid.Children.Add(label);
+            questionGrid.Children.Add(tb);
         }
     }
 }

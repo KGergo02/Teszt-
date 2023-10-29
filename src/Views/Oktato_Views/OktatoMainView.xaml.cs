@@ -20,13 +20,9 @@ namespace Teszt__.src.Views.Oktato_Views
     /// </summary>
     public partial class OktatoMainView : Page
     {
-        public StackPanel _mainStackPanel;
-
         public OktatoMainView()
         {
             InitializeComponent();
-
-            _mainStackPanel = mainStackPanel;
         }
     }
 }

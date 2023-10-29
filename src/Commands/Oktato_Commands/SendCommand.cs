@@ -65,11 +65,14 @@ namespace Teszt__.src.Commands.Oktato_Commands
             {
                 List<Control> controls = new List<Control>();
                 
-                for (int j = 0; j < _grid.ColumnDefinitions.Count; j++)
+                if(_viewModel.modelType != 2)
                 {
-                    Control item = (Control)_grid.Children[i + j];
+                    for (int j = 0; j < _grid.ColumnDefinitions.Count; j++)
+                    {
+                        Control item = (Control)_grid.Children[i + j];
 
-                    controls.Add(item);
+                        controls.Add(item);
+                    }
                 }
 
                 switch (_viewModel.modelType)
@@ -122,6 +125,10 @@ namespace Teszt__.src.Commands.Oktato_Commands
                     type = "Teszt";
                     _grid = GridService.CreateTestGrid(ref _grid, ref _mainStackPanel);
                     break;
+                case 2:
+                    type = "Kérdés";
+                    _grid = GridService.CreateQuestionGrid(_grid, _mainStackPanel);
+                    break;
 
             }
 
@@ -147,7 +154,7 @@ namespace Teszt__.src.Commands.Oktato_Commands
         {
             if(tag == "time")
             {
-                string pattern = @"^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$";
+                string pattern = @"^([0-1]?[0-9]|2[0-3]){2}:[0-5][0-9]$";
 
                 Regex regex = new Regex(pattern);
 
@@ -187,7 +194,7 @@ namespace Teszt__.src.Commands.Oktato_Commands
                 {
                     return false;
                 }
-                else if(Convert.ToInt32(numbers1[1]) >= Convert.ToInt32(numbers2[1]))
+                else if(Convert.ToInt32(numbers1[1]) >= Convert.ToInt32(numbers2[1]) && Convert.ToInt32(numbers1[1]) != 0)
                 {
                     return false;
                 }

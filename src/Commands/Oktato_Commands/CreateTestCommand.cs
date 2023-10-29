@@ -27,6 +27,8 @@ namespace Teszt__.src.Commands.Oktato_Commands
         {
             _viewModel.modelType = 1;
 
+            _viewModel._AddNewRowButton.Content = "Új sor";
+
             GridService.ClearGrid(ref grid, ref mainStackPanel);
 
             grid = GridService.CreateTestGrid(ref grid, ref mainStackPanel);
