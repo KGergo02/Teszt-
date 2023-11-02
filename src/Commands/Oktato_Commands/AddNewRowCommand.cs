@@ -34,7 +34,7 @@ namespace Teszt__.src.Commands.Oktato_Commands
                     AddTestRow(rowcount);
                     break;
                 case 2:
-                    AddQuestionRow();
+                    AddAnswerRow();
                     break;
             }
         }
@@ -45,7 +45,14 @@ namespace Teszt__.src.Commands.Oktato_Commands
 
             _grid.RowDefinitions.Add(rowdef);
 
-            TextBox tb1 = new TextBox();
+            TextBox tb1 = new TextBox()
+            {
+                FontSize = 10,
+                Width = 100,
+                Margin = new System.Windows.Thickness(5),
+                VerticalAlignment = System.Windows.VerticalAlignment.Center,
+                HorizontalAlignment = System.Windows.HorizontalAlignment.Center,
+            };
 
             Grid.SetColumn(tb1, 0);
 
@@ -55,7 +62,11 @@ namespace Teszt__.src.Commands.Oktato_Commands
 
             TextBox tb2 = new TextBox()
             {
-                Tag = "number"
+                Tag = "number",
+                FontSize = 10,
+                Width = 100,
+                VerticalAlignment = System.Windows.VerticalAlignment.Center,
+                HorizontalAlignment = System.Windows.HorizontalAlignment.Center,
             };
 
             Grid.SetColumn(tb2, 1);
@@ -76,28 +87,43 @@ namespace Teszt__.src.Commands.Oktato_Commands
             Grid.SetColumn(testNameTb, 0);
             Grid.SetRow(testNameTb, rowcount);
 
-            TextBox submitLimitTb = new TextBox();
-
-            submitLimitTb.Tag = "number";
+            TextBox submitLimitTb = new TextBox()
+            {
+                Tag = "number",
+                FontSize = 10,
+                VerticalAlignment = System.Windows.VerticalAlignment.Center,
+                HorizontalAlignment = System.Windows.HorizontalAlignment.Center,
+            };
 
             Grid.SetColumn(submitLimitTb, 1);
             Grid.SetRow(submitLimitTb, rowcount);
 
-            DatePicker date = new DatePicker();
+            DatePicker date = new DatePicker()
+            {
+                VerticalAlignment = System.Windows.VerticalAlignment.Center,
+                HorizontalAlignment = System.Windows.HorizontalAlignment.Center,
+            };
 
             Grid.SetColumn(date, 2);
             Grid.SetRow(date, rowcount);
 
-            TextBox startTimeTb = new TextBox();
-
-            startTimeTb.Tag = "time";
+            TextBox startTimeTb = new TextBox()
+            {
+                Tag = "time",
+                FontSize = 10,
+                VerticalAlignment = System.Windows.VerticalAlignment.Center,
+                HorizontalAlignment = System.Windows.HorizontalAlignment.Center,
+            };
 
             Grid.SetColumn(startTimeTb, 3);
             Grid.SetRow(startTimeTb, rowcount);
 
-            TextBox endTimeTb = new TextBox();
-
-            endTimeTb.Tag = "time";
+            TextBox endTimeTb = new TextBox()
+            {
+                Tag = "time",
+                VerticalAlignment = System.Windows.VerticalAlignment.Center,
+                HorizontalAlignment = System.Windows.HorizontalAlignment.Center,
+            };
 
             Grid.SetColumn(endTimeTb, 4);
             Grid.SetRow(endTimeTb, rowcount);
@@ -109,7 +135,7 @@ namespace Teszt__.src.Commands.Oktato_Commands
             _grid.Children.Add(endTimeTb);
         }
 
-        private void AddQuestionRow()
+        private void AddAnswerRow()
         {
             Grid grid = (Grid)_grid.Children[4];
 
@@ -121,14 +147,22 @@ namespace Teszt__.src.Commands.Oktato_Commands
             {
                 grid.RowDefinitions.Add(rowdef);
 
-                TextBox tb = new TextBox();
+                TextBox tb = new TextBox()
+                {
+                    FontSize = 10,
+                    VerticalAlignment = System.Windows.VerticalAlignment.Center,
+                    HorizontalAlignment = System.Windows.HorizontalAlignment.Center,
+                };
 
                 Grid.SetColumn(tb, 1);
                 Grid.SetRow(tb, rowcount);
 
                 CheckBox cb = new CheckBox()
                 {
-                    Content = "Válasz?"
+                    Content = "Válasz?",
+                    FontSize = 10,
+                    VerticalAlignment = System.Windows.VerticalAlignment.Center,
+                    HorizontalAlignment = System.Windows.HorizontalAlignment.Center,
                 };
 
                 Grid.SetColumn(cb, 2);

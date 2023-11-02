@@ -275,7 +275,7 @@ namespace Teszt__.src.Commands.Oktato_Commands
             }
             catch(DbUpdateException)
             {
-                Message.Error("Ilyen kurzus már létezik az adatbázisban!");
+                Message.Error($"Ilyen kurzus már létezik az adatbázisban!\n{course}");
 
                 return false;
             }
