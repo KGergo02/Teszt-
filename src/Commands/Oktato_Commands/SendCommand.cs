@@ -78,7 +78,7 @@ namespace Teszt__.src.Commands.Oktato_Commands
                 switch (_viewModel.modelType)
                 {
                     case 0:
-                        if (CheckCourseInputs())
+                        if (CheckCourseInputs() && CheckIfInCourses())
                         {
                             if(!SaveCourse(controls))
                             {
@@ -197,11 +197,15 @@ namespace Teszt__.src.Commands.Oktato_Commands
 
         private bool CheckCourseInputs()
         {
+            HashSet<string> inputNames = new HashSet<string>();
+
             foreach (var item in _grid.Children)
             {
                 if(item is TextBox)
                 {
                     TextBox tb = (TextBox)item;
+
+                    inputNames.Add(tb.Text.ToUpper());
 
                     if(tb.Tag != null && !CheckIfNumber(tb.Text, tb.Tag.ToString()))
                     {
@@ -210,6 +214,12 @@ namespace Teszt__.src.Commands.Oktato_Commands
                         return false;
                     }
                 }
+            }
+
+            if(inputNames.Count != _grid.RowDefinitions.Count - 1)
+            {
+                Message.Error("Nem lehet azonos nevű kurzus a bemenetben!");
+                return false;
             }
 
             return true;
@@ -247,6 +257,50 @@ namespace Teszt__.src.Commands.Oktato_Commands
             return true;
         }
 
+        private bool CheckIfInCourses()
+        {
+            bool inputIsInCourses = false;
+
+            string errorMessage = "";
+
+            foreach (var item in _grid.Children)
+            {
+                if(item is TextBox)
+                {
+                    TextBox tb = (TextBox)item;
+
+                    CourseDatabaseContext database = new CourseDatabaseContext();
+
+                    foreach (Course course in database.Courses)
+                    {
+                        if(course.name.ToUpper() == tb.Text.ToUpper())
+                        {
+                            if(errorMessage == String.Empty)
+                            {
+                                errorMessage += $"Ilyen kurzus már szerepel az adatbázisban!\n\nKurzusok:\n{course.name}";
+                            }
+                            else
+                            {
+                                errorMessage += "\n" + course.name;
+                            }
+
+                            inputIsInCourses = true;
+                        }
+                    }
+                }
+            }
+
+            if(inputIsInCourses)
+            {
+                Message.Error(errorMessage);
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
+
         private bool SaveCourse(List<Control> controls)
         {
             TextBox name = (TextBox)controls[0];
@@ -259,18 +313,9 @@ namespace Teszt__.src.Commands.Oktato_Commands
 
             CourseDatabaseContext database = new CourseDatabaseContext();
 
-            try
-            {
-                database.Courses.Add(course);
+            database.Courses.Add(course);
 
-                database.SaveChanges();
-            }
-            catch(DbUpdateException)
-            {
-                Message.Error($"Ilyen kurzus már létezik az adatbázisban!\n{course}");
-
-                return false;
-            }
+            database.SaveChanges();
 
             return true;
         }

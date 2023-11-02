@@ -24,11 +24,6 @@ namespace Teszt__.src.DAL
                 this.user_limit = user_limit;
                 this.tests = tests;
             }
-
-            public override string ToString()
-            {
-                return $"Kurzus neve: {this.name}\n";
-            }
         }
     }
 }
