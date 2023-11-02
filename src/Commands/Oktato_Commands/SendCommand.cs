@@ -85,11 +85,7 @@ namespace Teszt__.src.Commands.Oktato_Commands
                                 return;
                             }
                         }
-                        else
-                        {
-                            return;
-                        }
-                        break;
+                        return;
 
                     case 1:
                         if(CheckTestInputs())
@@ -99,11 +95,7 @@ namespace Teszt__.src.Commands.Oktato_Commands
                                 return;
                             }
                         }
-                        else
-                        {
-                            return;
-                        }
-                        break;
+                        return;
                 }
 
                 controls.Clear();

@@ -27,8 +27,7 @@ namespace Teszt__.src.DAL
 
             public override string ToString()
             {
-                return $"Kurzus neve: {this.name}\n" +
-                    $"Kurzus limit: {this.user_limit}";
+                return $"Kurzus neve: {this.name}\n";
             }
         }
     }
