@@ -47,8 +47,8 @@ namespace Teszt__.src.Commands.Oktato_Commands
 
             TextBox tb1 = new TextBox()
             {
-                FontSize = 10,
-                Width = 100,
+                FontSize = 30,
+                Width = 300,
                 Margin = new System.Windows.Thickness(5),
                 VerticalAlignment = System.Windows.VerticalAlignment.Center,
                 HorizontalAlignment = System.Windows.HorizontalAlignment.Center,
@@ -63,8 +63,10 @@ namespace Teszt__.src.Commands.Oktato_Commands
             TextBox tb2 = new TextBox()
             {
                 Tag = "number",
-                FontSize = 10,
+                FontSize = 30,
                 Width = 100,
+                HorizontalContentAlignment = System.Windows.HorizontalAlignment.Center,
+                VerticalContentAlignment = System.Windows.VerticalAlignment.Center,
                 VerticalAlignment = System.Windows.VerticalAlignment.Center,
                 HorizontalAlignment = System.Windows.HorizontalAlignment.Center,
             };
@@ -82,7 +84,13 @@ namespace Teszt__.src.Commands.Oktato_Commands
 
             _grid.RowDefinitions.Add(rowdef);
 
-            TextBox testNameTb = new TextBox();
+            TextBox testNameTb = new TextBox()
+            {
+                FontSize = 30,
+                Width = 300,
+                VerticalAlignment = System.Windows.VerticalAlignment.Center,
+                HorizontalAlignment = System.Windows.HorizontalAlignment.Center,
+            };
 
             Grid.SetColumn(testNameTb, 0);
             Grid.SetRow(testNameTb, rowcount);
@@ -90,7 +98,10 @@ namespace Teszt__.src.Commands.Oktato_Commands
             TextBox submitLimitTb = new TextBox()
             {
                 Tag = "number",
-                FontSize = 10,
+                FontSize = 30,
+                Width = 100,
+                HorizontalContentAlignment = System.Windows.HorizontalAlignment.Center,
+                VerticalContentAlignment = System.Windows.VerticalAlignment.Center,
                 VerticalAlignment = System.Windows.VerticalAlignment.Center,
                 HorizontalAlignment = System.Windows.HorizontalAlignment.Center,
             };
@@ -100,6 +111,8 @@ namespace Teszt__.src.Commands.Oktato_Commands
 
             DatePicker date = new DatePicker()
             {
+                FontSize = 30,
+                Width = 300,
                 VerticalAlignment = System.Windows.VerticalAlignment.Center,
                 HorizontalAlignment = System.Windows.HorizontalAlignment.Center,
             };
@@ -110,9 +123,11 @@ namespace Teszt__.src.Commands.Oktato_Commands
             TextBox startTimeTb = new TextBox()
             {
                 Tag = "time",
-                FontSize = 10,
+                Width = 100,
+                FontSize = 30,
                 VerticalAlignment = System.Windows.VerticalAlignment.Center,
                 HorizontalAlignment = System.Windows.HorizontalAlignment.Center,
+                HorizontalContentAlignment = System.Windows.HorizontalAlignment.Center,
             };
 
             Grid.SetColumn(startTimeTb, 3);
@@ -121,8 +136,11 @@ namespace Teszt__.src.Commands.Oktato_Commands
             TextBox endTimeTb = new TextBox()
             {
                 Tag = "time",
+                Width = 100,
+                FontSize = 30,
                 VerticalAlignment = System.Windows.VerticalAlignment.Center,
                 HorizontalAlignment = System.Windows.HorizontalAlignment.Center,
+                HorizontalContentAlignment = System.Windows.HorizontalAlignment.Center,
             };
 
             Grid.SetColumn(endTimeTb, 4);
@@ -137,20 +155,21 @@ namespace Teszt__.src.Commands.Oktato_Commands
 
         private void AddAnswerRow()
         {
-            Grid grid = (Grid)_grid.Children[4];
-
             RowDefinition rowdef = new RowDefinition();
 
-            int rowcount = grid.RowDefinitions.Count;
+            int rowcount = _grid.RowDefinitions.Count;
 
-            if (grid.Tag.ToString() == "checkbox" || grid.Tag.ToString() == "radiobutton")
+            if (_grid.Tag.ToString() == "checkbox")
             {
-                grid.RowDefinitions.Add(rowdef);
+                _grid.RowDefinitions.Add(rowdef);
 
                 TextBox tb = new TextBox()
                 {
-                    FontSize = 10,
-                    VerticalAlignment = System.Windows.VerticalAlignment.Center,
+                    Width = 200,
+                    FontSize = 30,
+                    Margin = new System.Windows.Thickness(5),
+                    TextWrapping = System.Windows.TextWrapping.Wrap,
+                    VerticalAlignment = System.Windows.VerticalAlignment.Top,
                     HorizontalAlignment = System.Windows.HorizontalAlignment.Center,
                 };
 
@@ -160,18 +179,51 @@ namespace Teszt__.src.Commands.Oktato_Commands
                 CheckBox cb = new CheckBox()
                 {
                     Content = "Válasz?",
-                    FontSize = 10,
-                    VerticalAlignment = System.Windows.VerticalAlignment.Center,
-                    HorizontalAlignment = System.Windows.HorizontalAlignment.Center,
+                    FontSize = 30,
+                    HorizontalContentAlignment = System.Windows.HorizontalAlignment.Center,
+                    VerticalContentAlignment = System.Windows.VerticalAlignment.Center,
+                    VerticalAlignment = System.Windows.VerticalAlignment.Top,
                 };
 
                 Grid.SetColumn(cb, 2);
                 Grid.SetRow(cb, rowcount);
 
-                grid.Children.Add(tb);
-                grid.Children.Add(cb);
+                _grid.Children.Add(tb);
+                _grid.Children.Add(cb);
             }
-            else if(grid.Tag.ToString() == "single")
+            else if(_grid.Tag.ToString() == "radiobutton")
+            {
+                _grid.RowDefinitions.Add(rowdef);
+
+                TextBox tb = new TextBox()
+                {
+                    Width = 200,
+                    FontSize = 30,
+                    Margin = new System.Windows.Thickness(5),
+                    TextWrapping = System.Windows.TextWrapping.Wrap,
+                    VerticalAlignment = System.Windows.VerticalAlignment.Bottom,
+                    HorizontalAlignment = System.Windows.HorizontalAlignment.Center,
+                };
+
+                Grid.SetColumn(tb, 1);
+                Grid.SetRow(tb, rowcount);
+
+                RadioButton cb = new RadioButton()
+                {
+                    Content = "Helyes válasz",
+                    FontSize = 30,
+                    HorizontalContentAlignment = System.Windows.HorizontalAlignment.Center,
+                    VerticalContentAlignment = System.Windows.VerticalAlignment.Center,
+                    VerticalAlignment = System.Windows.VerticalAlignment.Bottom,
+                };
+
+                Grid.SetColumn(cb, 2);
+                Grid.SetRow(cb, rowcount);
+
+                _grid.Children.Add(tb);
+                _grid.Children.Add(cb);
+            }
+            else if(_grid.Tag.ToString() == "single")
             {
                 Message.Error("Több választ nem adhatsz hozzá!");
             }

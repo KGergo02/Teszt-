@@ -9,39 +9,38 @@
       KeepAlive="True"
       Title="{Binding TitleName}" Background="#FFFF7400">
 
-    <StackPanel>
-        <DockPanel>
-            <Menu DockPanel.Dock="Top" FontWeight="Bold" HorizontalContentAlignment="Center">
-                <MenuItem Header="Kurzus" Height="Auto" FontSize="30px">
-                    <MenuItem Header="Kurzusok megtekintése" FontSize="20px" Height="30px"></MenuItem>
-                    <MenuItem Header="Új kurzus létrehozása" FontSize="20px" Height="30px" Command="{Binding CreateCourseCommand}"></MenuItem>
-                </MenuItem>
-                <MenuItem Header="Teszt" FontSize="30px">
-                    <MenuItem Header="Tesztek megtekintése" FontSize="20px" Height="30px"></MenuItem>
-                    <MenuItem Header="Új Teszt létrehozása" FontSize="20px" Height="30px" Command="{Binding CreateTestCommand}"/>
-                </MenuItem>
-                <MenuItem Header="Kérdés" FontSize="30px">
-                    <MenuItem Header="Kérdések megtekintése" FontSize="20px" Height="30px"></MenuItem>
-                    <MenuItem Header="Új Kérdés létrehozása" FontSize="20px" Height="30px" Command="{Binding CreateQuestionCommand}"/>
-                </MenuItem>
-                <MenuItem Header="Eredmények megtekintése" FontSize="30px"/>
-                <MenuItem Header="Profil" FontSize="30px">
-                    <MenuItem Header="Adatok módosítása" FontSize="20px" Height="30px"/>
-                    <MenuItem Header="Kijelentkezés" FontSize="20px" Height="30px" Command="{Binding LogOutCommand}"/>
-                </MenuItem>
-            </Menu>
-        </DockPanel>
-        <ScrollViewer VerticalScrollBarVisibility="Hidden">
-            <StackPanel>
-                <StackPanel x:Name="mainStackPanel" Margin="0,50,0,0" HorizontalAlignment="Center" VerticalAlignment="Center">
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
+        <StackPanel>
+            <DockPanel>
+                <Menu DockPanel.Dock="Top" FontWeight="Bold" HorizontalContentAlignment="Center">
+                    <MenuItem Header="Kurzus" Height="Auto" FontSize="30px">
+                        <MenuItem Header="Kurzusok megtekintése" FontSize="20px" Height="30px"></MenuItem>
+                        <MenuItem Header="Új kurzus létrehozása" FontSize="20px" Height="30px" Command="{Binding CreateCourseCommand}"></MenuItem>
+                    </MenuItem>
+                    <MenuItem Header="Teszt" FontSize="30px">
+                        <MenuItem Header="Tesztek megtekintése" FontSize="20px" Height="30px"></MenuItem>
+                        <MenuItem Header="Új Teszt létrehozása" FontSize="20px" Height="30px" Command="{Binding CreateTestCommand}"/>
+                    </MenuItem>
+                    <MenuItem Header="Kérdés" FontSize="30px">
+                        <MenuItem Header="Kérdések megtekintése" FontSize="20px" Height="30px"></MenuItem>
+                        <MenuItem Header="Új Kérdés létrehozása" FontSize="20px" Height="30px" Command="{Binding CreateQuestionCommand}"/>
+                    </MenuItem>
+                    <MenuItem Header="Eredmények megtekintése" FontSize="30px"/>
+                    <MenuItem Header="Profil" FontSize="30px">
+                        <MenuItem Header="Adatok módosítása" FontSize="20px" Height="30px"/>
+                        <MenuItem Header="Kijelentkezés" FontSize="20px" Height="30px" Command="{Binding LogOutCommand}"/>
+                    </MenuItem>
+                </Menu>
+            </DockPanel>
 
-                </StackPanel>
+            <WrapPanel HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,30,0,10">
+                <Button x:Name="AddNewRowButton" Content="Új sor" FontSize="30px" Width="120px" Height="45px" Command="{Binding AddNewRowCommand}" Margin="0,0,16,0"/>
+                <Button Content="Küldés" FontSize="30px" Width="120px" Height="45px" Command="{Binding SendCommand}"/>
+            </WrapPanel>
 
-                <WrapPanel HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,10,0,10">
-                    <Button x:Name="AddNewRowButton" Content="Új sor" FontSize="30px" Width="100px" Height="45px" Command="{Binding AddNewRowCommand}" Margin="0,0,16,0"/>
-                    <Button Content="Küldés" FontSize="30px" Width="100px" Height="45px" Command="{Binding SendCommand}"/>
-                </WrapPanel>
+            <StackPanel x:Name="mainStackPanel" Margin="0,20,0,0" HorizontalAlignment="Center" VerticalAlignment="Center">
+                
             </StackPanel>
-        </ScrollViewer>
-    </StackPanel>
+        </StackPanel>
+    </ScrollViewer>
 </Page>

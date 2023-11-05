@@ -5,6 +5,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls;
+using Teszt__.src.DAL;
+using static Teszt__.src.DAL.TestDatabaseContext;
 
 namespace Teszt__.src.Services
 {
@@ -16,7 +18,7 @@ namespace Teszt__.src.Services
 
             stackPanel.Children.Clear();
 
-            questionGrid.Children.Clear();
+            //questionGrid.Children.Clear();
 
             grid.ColumnDefinitions.Clear();
 
@@ -197,7 +199,7 @@ namespace Teszt__.src.Services
             TextBox testNameTb = new TextBox()
             {
                 FontSize = 30,
-                Width = 100,
+                Width = 300,
                 VerticalAlignment = System.Windows.VerticalAlignment.Center,
                 HorizontalAlignment = System.Windows.HorizontalAlignment.Center,
             };
@@ -210,6 +212,8 @@ namespace Teszt__.src.Services
                 Tag = "number",
                 FontSize = 30,
                 Width = 100,
+                HorizontalContentAlignment = System.Windows.HorizontalAlignment.Center,
+                VerticalContentAlignment = System.Windows.VerticalAlignment.Center,
                 VerticalAlignment = System.Windows.VerticalAlignment.Center,
                 HorizontalAlignment = System.Windows.HorizontalAlignment.Center,
             };
@@ -219,7 +223,8 @@ namespace Teszt__.src.Services
 
             DatePicker date = new DatePicker()
             {
-                Width = 150,
+                FontSize = 30,
+                Width = 300,
                 VerticalAlignment = System.Windows.VerticalAlignment.Center,
                 HorizontalAlignment = System.Windows.HorizontalAlignment.Center,
             };
@@ -230,10 +235,11 @@ namespace Teszt__.src.Services
             TextBox startTimeTb = new TextBox()
             {
                 Tag = "time",
-                Width = 30,
+                Width = 100,
                 FontSize = 30,
                 VerticalAlignment = System.Windows.VerticalAlignment.Center,
                 HorizontalAlignment = System.Windows.HorizontalAlignment.Center,
+                HorizontalContentAlignment = System.Windows.HorizontalAlignment.Center,
             };
 
             Grid.SetColumn(startTimeTb, 3);
@@ -242,10 +248,11 @@ namespace Teszt__.src.Services
             TextBox endTimeTb = new TextBox()
             {
                 Tag = "time",
-                Width = 30,
+                Width = 100,
                 FontSize = 30,
                 VerticalAlignment = System.Windows.VerticalAlignment.Center,
                 HorizontalAlignment = System.Windows.HorizontalAlignment.Center,
+                HorizontalContentAlignment = System.Windows.HorizontalAlignment.Center,
             };
 
             Grid.SetColumn(endTimeTb, 4);
@@ -268,37 +275,50 @@ namespace Teszt__.src.Services
             return grid;
         }
 
-        private static Grid questionGrid = new Grid();
+        private static Grid _grid;
 
         private static Grid CreateQuestionControls(Grid grid, StackPanel mainStackPanel)
         {
-            ColumnDefinition coldef1 = new ColumnDefinition();
+            ColumnDefinition coldef1 = new ColumnDefinition()
+            {
+                Width = new System.Windows.GridLength(500),
+            };
             ColumnDefinition coldef2 = new ColumnDefinition();
             ColumnDefinition coldef3 = new ColumnDefinition();
-            grid.ColumnDefinitions.Add(coldef1);
-            grid.ColumnDefinitions.Add(coldef2);
-            grid.ColumnDefinitions.Add(coldef3);
+
+            _grid.ColumnDefinitions.Add(coldef1);
+            _grid.ColumnDefinitions.Add(coldef2);
+            _grid.ColumnDefinitions.Add(coldef3);
 
             RowDefinition rowdef1 = new RowDefinition();
             RowDefinition rowdef2 = new RowDefinition();
             RowDefinition rowdef3 = new RowDefinition();
             RowDefinition rowdef4 = new RowDefinition();
-            RowDefinition rowdef5 = new RowDefinition();
-            grid.RowDefinitions.Add(rowdef1);
-            grid.RowDefinitions.Add(rowdef2);
-            grid.RowDefinitions.Add(rowdef3);
-            grid.RowDefinitions.Add(rowdef4);
-            grid.RowDefinitions.Add(rowdef5);
+            RowDefinition rowdef5 = new RowDefinition()
+            {
+                Height = new System.Windows.GridLength(50),
+            };
+            RowDefinition rowdef6 = new RowDefinition();
+            RowDefinition rowdef7 = new RowDefinition();
+            RowDefinition rowdef8 = new RowDefinition();
+            _grid.RowDefinitions.Add(rowdef1);
+            _grid.RowDefinitions.Add(rowdef2);
+            _grid.RowDefinitions.Add(rowdef3);
+            _grid.RowDefinitions.Add(rowdef4);
+            _grid.RowDefinitions.Add(rowdef5);
+            _grid.RowDefinitions.Add(rowdef6);
+            _grid.RowDefinitions.Add(rowdef7);
+            _grid.RowDefinitions.Add(rowdef8);
 
             Label QTypeLabel = new Label()
             {
                 Content = "Kérdés típusa",
                 FontSize = 30,
-                VerticalAlignment = System.Windows.VerticalAlignment.Center,
-                HorizontalAlignment = System.Windows.HorizontalAlignment.Center,
+                VerticalAlignment = System.Windows.VerticalAlignment.Top,
+                HorizontalAlignment = System.Windows.HorizontalAlignment.Left,
             };
 
-            Grid.SetColumn(QTypeLabel, 1);
+            Grid.SetColumn(QTypeLabel, 0);
             Grid.SetRow(QTypeLabel, 0);
 
             grid.Children.Add(QTypeLabel);
@@ -310,13 +330,18 @@ namespace Teszt__.src.Services
 
         public static Grid CreateQuestionGrid(Grid grid, StackPanel mainStackPanel)
         {
+            grid.Children.Clear();
+
+            _grid = grid;
+
             grid = CreateQuestionControls(grid, mainStackPanel);
 
             ComboBox CBType = new ComboBox()
             {
-                Height = 20,
                 Width = 200,
                 FontSize = 30,
+                HorizontalAlignment = System.Windows.HorizontalAlignment.Left,
+                VerticalAlignment = System.Windows.VerticalAlignment.Top,
                 HorizontalContentAlignment = System.Windows.HorizontalAlignment.Center,
                 VerticalContentAlignment = System.Windows.VerticalAlignment.Center,
             };
@@ -325,15 +350,48 @@ namespace Teszt__.src.Services
             CBType.Items.Add("Rádiógomb");
             CBType.Items.Add("Egyválaszos");
 
-            CBType.SelectedIndex = 0;
+            CBType.SelectionChanged += (sender, e) => CBType_SelectionChanged(sender);
 
-            CBType.SelectionChanged += (sender, e) => CBType_SelectionChanged(sender, e, grid, mainStackPanel);
-
-            Grid.SetColumn(CBType, 1);
+            Grid.SetColumn(CBType, 0);
 
             Grid.SetRow(CBType, 1);
 
-            grid.Children.Add(CBType);
+            _grid.Children.Add(CBType);
+
+            Label TestLabel = new Label()
+            {
+                Content = "Válaszd ki a tesztet",
+                FontSize = 30,
+                VerticalAlignment = System.Windows.VerticalAlignment.Top,
+                HorizontalAlignment = System.Windows.HorizontalAlignment.Left,
+                HorizontalContentAlignment = System.Windows.HorizontalAlignment.Center,
+                VerticalContentAlignment = System.Windows.VerticalAlignment.Center,
+            };
+
+            Grid.SetColumn(TestLabel, 0);
+            Grid.SetRow(TestLabel, 2);
+
+            _grid.Children.Add(TestLabel);
+
+            ComboBox TestComboBox = new ComboBox()
+            {
+                Width = 200,
+                FontSize = 30,
+                VerticalAlignment = System.Windows.VerticalAlignment.Top,
+                HorizontalAlignment = System.Windows.HorizontalAlignment.Left,
+            };
+
+            TestDatabaseContext testDatabaseContext = new TestDatabaseContext();
+
+            foreach (Test item in testDatabaseContext.Tests)
+            {
+                TestComboBox.Items.Add(item.name);
+            }
+
+            Grid.SetColumn(TestComboBox, 0);
+            Grid.SetRow(TestComboBox, 3);
+
+            _grid.Children.Add(TestComboBox);
 
             Label QNameLabel = new Label()
             {
@@ -341,134 +399,153 @@ namespace Teszt__.src.Services
                 FontSize = 30,
             };
 
-            Grid.SetColumn(QNameLabel, 1);
-            Grid.SetRow(QNameLabel, 2);
+            Grid.SetColumn(QNameLabel, 0);
+            Grid.SetRow(QNameLabel, 5);
 
-            grid.Children.Add(QNameLabel);
+            _grid.Children.Add(QNameLabel);
 
             TextBox QNameTB = new TextBox()
             {
                 FontSize = 30,
-                Height = 50,
-                Width = 200,
+                Width = 300,
+                Height = 250,
                 AcceptsReturn = true,
                 TextWrapping = System.Windows.TextWrapping.Wrap,
-                VerticalAlignment = System.Windows.VerticalAlignment.Center,
-                HorizontalAlignment = System.Windows.HorizontalAlignment.Center,
+                HorizontalAlignment = System.Windows.HorizontalAlignment.Left,
             };
 
-            Grid.SetColumn(QNameTB, 1);
-            Grid.SetRow(QNameTB, 3);
+            Grid.SetColumn(QNameTB, 0);
+            Grid.SetRow(QNameTB, 6);
 
-            grid.Children.Add(QNameTB);
+            _grid.Children.Add(QNameTB);
 
-            CreateQuestionGridCheckBoxAndRadioButtonControls(questionGrid);
+            CBType.SelectedIndex = 0;
 
-            Grid.SetColumn(questionGrid, 1);
-            Grid.SetRow(questionGrid, 5);
-
-            questionGrid.Tag = "checkbox";
-
-            grid.Children.Add(questionGrid);
-
-            return grid;
+            return _grid;
         }
 
-        private static void CBType_SelectionChanged(object sender, SelectionChangedEventArgs e, Grid grid, StackPanel mainStackPanel)
+        private static void CBType_SelectionChanged(object sender)
         {
             ComboBox cb = (ComboBox)sender;
 
             switch (cb.SelectedValue)
             {
                 case "Jelölődoboz":
-                    questionGrid.Children.Clear();
-                    CreateQuestionGridCheckBoxAndRadioButtonControls(questionGrid);
-                    questionGrid.Tag = "checkbox";
+                    CreateQuestionGridCheckBoxControls();
+                    _grid.Tag = "checkbox";
                     break;
                 case "Rádiógomb":
-                    questionGrid.Children.Clear();
-                    CreateQuestionGridCheckBoxAndRadioButtonControls(questionGrid);
-                    questionGrid.Tag = "radiobutton";
+                    CreateQuestionGridRadioButtonControls();
+                    _grid.Tag = "radiobutton";
                     break;
                 case "Egyválaszos":
-                    questionGrid.Children.Clear();
-                    CreateQuestionTextBoxControls(questionGrid);
-                    questionGrid.Tag = "single";
+                    CreateQuestionTextBoxControls();
+                    _grid.Tag = "single";
                     break;
             }
         }
 
-        private static void CreateQuestionGridCheckBoxAndRadioButtonControls(Grid questionGrid)
+        private static void CreateQuestionGridCheckBoxControls()
         {
-            ColumnDefinition coldef1 = new ColumnDefinition();
-            ColumnDefinition coldef2 = new ColumnDefinition();
-            ColumnDefinition coldef3 = new ColumnDefinition();
-
-            RowDefinition rowdef1 = new RowDefinition();
-            RowDefinition rowdef2 = new RowDefinition();
-
-            questionGrid.ColumnDefinitions.Add(coldef1);
-            questionGrid.ColumnDefinitions.Add(coldef2);
-            questionGrid.ColumnDefinitions.Add(coldef3);
-
-            questionGrid.RowDefinitions.Add(rowdef1);
-            questionGrid.RowDefinitions.Add(rowdef2);
+            if(_grid.Children.Count > 6)
+            {
+                _grid.Children.RemoveRange(6, _grid.Children.Count - 6);
+            }
 
             Label ValaszokLabel = new Label()
             {
                 Content = "Válaszlehetőségek",
                 FontSize = 30,
-                VerticalAlignment = System.Windows.VerticalAlignment.Center,
+                VerticalAlignment = System.Windows.VerticalAlignment.Top,
                 HorizontalAlignment = System.Windows.HorizontalAlignment.Center,
             };
 
             Grid.SetColumn(ValaszokLabel, 1);
-            Grid.SetRow(ValaszokLabel, 0);
-            
-            questionGrid.Children.Add(ValaszokLabel);
+            Grid.SetRow(ValaszokLabel, 5);
+
+            _grid.Children.Add(ValaszokLabel);
 
             TextBox tb = new TextBox()
             {
-                Height = 20,
-                Width = 100,
+                Width = 200,
                 FontSize = 30,
+                Margin = new System.Windows.Thickness(5),
                 TextWrapping = System.Windows.TextWrapping.Wrap,
-                VerticalAlignment = System.Windows.VerticalAlignment.Center,
+                VerticalAlignment = System.Windows.VerticalAlignment.Bottom,
                 HorizontalAlignment = System.Windows.HorizontalAlignment.Center,
             };
 
             Grid.SetColumn(tb, 1);
-            Grid.SetRow(tb, 1);
+            Grid.SetRow(tb, 6);
 
-            questionGrid.Children.Add(tb);
+            _grid.Children.Add(tb);
 
             CheckBox cb = new CheckBox()
             {
                 Content = "Válasz?",
                 FontSize = 30,
-                VerticalAlignment = System.Windows.VerticalAlignment.Center,
-                HorizontalAlignment = System.Windows.HorizontalAlignment.Center,
+                HorizontalContentAlignment = System.Windows.HorizontalAlignment.Center,
+                VerticalContentAlignment = System.Windows.VerticalAlignment.Center,
+                VerticalAlignment = System.Windows.VerticalAlignment.Bottom,
             };
 
             Grid.SetColumn(cb, 2);
-            Grid.SetRow(cb, 1);
+            Grid.SetRow(cb, 6);
 
-            questionGrid.Children.Add(cb);
+            _grid.Children.Add(cb);
         }
 
-        private static void CreateQuestionTextBoxControls(Grid questionGrid)
+        private static void CreateQuestionGridRadioButtonControls()
         {
-            ColumnDefinition coldef1 = new ColumnDefinition();
-            ColumnDefinition coldef2 = new ColumnDefinition();
-            ColumnDefinition coldef3 = new ColumnDefinition();
+            _grid.Children.RemoveRange(6, _grid.Children.Count - 6);
+            
+            Label ValaszokLabel = new Label()
+            {
+                Content = "Válaszlehetőségek",
+                FontSize = 30,
+                VerticalAlignment = System.Windows.VerticalAlignment.Top,
+                HorizontalAlignment = System.Windows.HorizontalAlignment.Center,
+            };
 
-            RowDefinition rowdef1 = new RowDefinition();
-            RowDefinition rowdef2 = new RowDefinition();
+            Grid.SetColumn(ValaszokLabel, 1);
+            Grid.SetRow(ValaszokLabel, 5);
 
-            questionGrid.ColumnDefinitions.Add(coldef1);
-            questionGrid.ColumnDefinitions.Add(coldef2);
-            questionGrid.ColumnDefinitions.Add(coldef3);
+            _grid.Children.Add(ValaszokLabel);
 
+            TextBox tb = new TextBox()
+            {
+                Width = 200,
+                FontSize = 30,
+                Margin = new System.Windows.Thickness(5),
+                TextWrapping = System.Windows.TextWrapping.Wrap,
+                VerticalAlignment = System.Windows.VerticalAlignment.Bottom,
+                HorizontalAlignment = System.Windows.HorizontalAlignment.Center,
+            };
+
+            Grid.SetColumn(tb, 1);
+            Grid.SetRow(tb, 6);
+
+            _grid.Children.Add(tb);
+
+            RadioButton cb = new RadioButton()
+            {
+                Content = "Helyes válasz",
+                FontSize = 30,
+                HorizontalContentAlignment = System.Windows.HorizontalAlignment.Center,
+                VerticalContentAlignment = System.Windows.VerticalAlignment.Center,
+                VerticalAlignment = System.Windows.VerticalAlignment.Bottom,
+            };
+
+            Grid.SetColumn(cb, 2);
+            Grid.SetRow(cb, 6);
+
+            _grid.Children.Add(cb);
+        }
+
+        private static void CreateQuestionTextBoxControls()
+        {
+            _grid.Children.RemoveRange(6, _grid.Children.Count - 6);
+            
             Label label = new Label()
             {
                 Content = "Válasz",
@@ -478,21 +555,22 @@ namespace Teszt__.src.Services
             };
 
             Grid.SetColumn(label, 1);
-            Grid.SetRow(label, 0);
+            Grid.SetRow(label, 5);
 
             TextBox tb = new TextBox()
             {
-                Width = 100,
+                Width = 300,
                 Height = 100,
                 TextWrapping = System.Windows.TextWrapping.Wrap,
                 FontSize = 30,
+                VerticalAlignment = System.Windows.VerticalAlignment.Top,
             };
 
             Grid.SetColumn(tb, 1);
-            Grid.SetRow(tb, 1);
+            Grid.SetRow(tb, 6);
 
-            questionGrid.Children.Add(label);
-            questionGrid.Children.Add(tb);
+            _grid.Children.Add(label);
+            _grid.Children.Add(tb);
         }
     }
 }
