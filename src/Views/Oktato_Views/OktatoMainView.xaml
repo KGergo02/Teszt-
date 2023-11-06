@@ -33,14 +33,16 @@
                 </Menu>
             </DockPanel>
 
+
+            <StackPanel x:Name="mainStackPanel" Margin="0,20,0,0" HorizontalAlignment="Center" VerticalAlignment="Center">
+
+            </StackPanel>
+
             <WrapPanel HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,30,0,10">
                 <Button x:Name="AddNewRowButton" Content="Új sor" FontSize="30px" Width="120px" Height="45px" Command="{Binding AddNewRowCommand}" Margin="0,0,16,0"/>
                 <Button Content="Küldés" FontSize="30px" Width="120px" Height="45px" Command="{Binding SendCommand}"/>
             </WrapPanel>
 
-            <StackPanel x:Name="mainStackPanel" Margin="0,20,0,0" HorizontalAlignment="Center" VerticalAlignment="Center">
-                
-            </StackPanel>
         </StackPanel>
     </ScrollViewer>
 </Page>

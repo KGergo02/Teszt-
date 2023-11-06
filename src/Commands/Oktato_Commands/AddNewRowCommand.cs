@@ -169,7 +169,7 @@ namespace Teszt__.src.Commands.Oktato_Commands
                     FontSize = 30,
                     Margin = new System.Windows.Thickness(5),
                     TextWrapping = System.Windows.TextWrapping.Wrap,
-                    VerticalAlignment = System.Windows.VerticalAlignment.Top,
+                    VerticalAlignment = System.Windows.VerticalAlignment.Bottom,
                     HorizontalAlignment = System.Windows.HorizontalAlignment.Center,
                 };
 
@@ -182,7 +182,7 @@ namespace Teszt__.src.Commands.Oktato_Commands
                     FontSize = 30,
                     HorizontalContentAlignment = System.Windows.HorizontalAlignment.Center,
                     VerticalContentAlignment = System.Windows.VerticalAlignment.Center,
-                    VerticalAlignment = System.Windows.VerticalAlignment.Top,
+                    VerticalAlignment = System.Windows.VerticalAlignment.Bottom,
                 };
 
                 Grid.SetColumn(cb, 2);

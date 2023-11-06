@@ -18,8 +18,6 @@ namespace Teszt__.src.Services
 
             stackPanel.Children.Clear();
 
-            //questionGrid.Children.Clear();
-
             grid.ColumnDefinitions.Clear();
 
             grid.RowDefinitions.Clear();
@@ -174,7 +172,7 @@ namespace Teszt__.src.Services
 
             Label startTimeLabel = new Label()
             {
-                Content = "Indítási idő (óra:perc)",
+                Content = "Indítási idő",
                 FontSize = 30,
                 VerticalAlignment = System.Windows.VerticalAlignment.Center,
                 HorizontalAlignment = System.Windows.HorizontalAlignment.Center,
@@ -186,7 +184,7 @@ namespace Teszt__.src.Services
 
             Label endTimeLabel = new Label()
             {
-                Content = "Kitölthető eddig (óra:perc)",
+                Content = "Kitölthető eddig",
                 FontSize = 30,
                 VerticalAlignment = System.Windows.VerticalAlignment.Center,
                 HorizontalAlignment = System.Windows.HorizontalAlignment.Center,
@@ -281,7 +279,7 @@ namespace Teszt__.src.Services
         {
             ColumnDefinition coldef1 = new ColumnDefinition()
             {
-                Width = new System.Windows.GridLength(500),
+                Width = new System.Windows.GridLength(300),
             };
             ColumnDefinition coldef2 = new ColumnDefinition();
             ColumnDefinition coldef3 = new ColumnDefinition();
@@ -291,7 +289,10 @@ namespace Teszt__.src.Services
             _grid.ColumnDefinitions.Add(coldef3);
 
             RowDefinition rowdef1 = new RowDefinition();
-            RowDefinition rowdef2 = new RowDefinition();
+            RowDefinition rowdef2 = new RowDefinition()
+            {
+                Height = new System.Windows.GridLength(50),
+            };
             RowDefinition rowdef3 = new RowDefinition();
             RowDefinition rowdef4 = new RowDefinition();
             RowDefinition rowdef5 = new RowDefinition()
@@ -314,7 +315,7 @@ namespace Teszt__.src.Services
             {
                 Content = "Kérdés típusa",
                 FontSize = 30,
-                VerticalAlignment = System.Windows.VerticalAlignment.Top,
+                VerticalAlignment = System.Windows.VerticalAlignment.Center,
                 HorizontalAlignment = System.Windows.HorizontalAlignment.Left,
             };
 
@@ -338,17 +339,15 @@ namespace Teszt__.src.Services
 
             ComboBox CBType = new ComboBox()
             {
-                Width = 200,
+                Width = 400,
                 FontSize = 30,
                 HorizontalAlignment = System.Windows.HorizontalAlignment.Left,
-                VerticalAlignment = System.Windows.VerticalAlignment.Top,
-                HorizontalContentAlignment = System.Windows.HorizontalAlignment.Center,
-                VerticalContentAlignment = System.Windows.VerticalAlignment.Center,
+                VerticalAlignment = System.Windows.VerticalAlignment.Center,
             };
 
             CBType.Items.Add("Jelölődoboz");
             CBType.Items.Add("Rádiógomb");
-            CBType.Items.Add("Egyválaszos");
+            CBType.Items.Add("Szöveges válasz");
 
             CBType.SelectionChanged += (sender, e) => CBType_SelectionChanged(sender);
 
@@ -362,10 +361,8 @@ namespace Teszt__.src.Services
             {
                 Content = "Válaszd ki a tesztet",
                 FontSize = 30,
-                VerticalAlignment = System.Windows.VerticalAlignment.Top,
+                VerticalAlignment = System.Windows.VerticalAlignment.Center,
                 HorizontalAlignment = System.Windows.HorizontalAlignment.Left,
-                HorizontalContentAlignment = System.Windows.HorizontalAlignment.Center,
-                VerticalContentAlignment = System.Windows.VerticalAlignment.Center,
             };
 
             Grid.SetColumn(TestLabel, 0);
@@ -375,9 +372,9 @@ namespace Teszt__.src.Services
 
             ComboBox TestComboBox = new ComboBox()
             {
-                Width = 200,
+                Width = 400,
                 FontSize = 30,
-                VerticalAlignment = System.Windows.VerticalAlignment.Top,
+                VerticalAlignment = System.Windows.VerticalAlignment.Center,
                 HorizontalAlignment = System.Windows.HorizontalAlignment.Left,
             };
 
@@ -397,6 +394,7 @@ namespace Teszt__.src.Services
             {
                 Content = "Kérdés",
                 FontSize = 30,
+                HorizontalAlignment = System.Windows.HorizontalAlignment.Left,
             };
 
             Grid.SetColumn(QNameLabel, 0);
@@ -412,6 +410,7 @@ namespace Teszt__.src.Services
                 AcceptsReturn = true,
                 TextWrapping = System.Windows.TextWrapping.Wrap,
                 HorizontalAlignment = System.Windows.HorizontalAlignment.Left,
+                VerticalAlignment = System.Windows.VerticalAlignment.Center,
             };
 
             Grid.SetColumn(QNameTB, 0);
@@ -438,7 +437,7 @@ namespace Teszt__.src.Services
                     CreateQuestionGridRadioButtonControls();
                     _grid.Tag = "radiobutton";
                     break;
-                case "Egyválaszos":
+                case "Szöveges válasz":
                     CreateQuestionTextBoxControls();
                     _grid.Tag = "single";
                     break;
@@ -456,12 +455,12 @@ namespace Teszt__.src.Services
             {
                 Content = "Válaszlehetőségek",
                 FontSize = 30,
-                VerticalAlignment = System.Windows.VerticalAlignment.Top,
+                VerticalAlignment = System.Windows.VerticalAlignment.Center,
                 HorizontalAlignment = System.Windows.HorizontalAlignment.Center,
             };
 
             Grid.SetColumn(ValaszokLabel, 1);
-            Grid.SetRow(ValaszokLabel, 5);
+            Grid.SetRow(ValaszokLabel, 6);
 
             _grid.Children.Add(ValaszokLabel);
 
@@ -469,7 +468,7 @@ namespace Teszt__.src.Services
             {
                 Width = 200,
                 FontSize = 30,
-                Margin = new System.Windows.Thickness(5),
+                Margin = new System.Windows.Thickness(30),
                 TextWrapping = System.Windows.TextWrapping.Wrap,
                 VerticalAlignment = System.Windows.VerticalAlignment.Bottom,
                 HorizontalAlignment = System.Windows.HorizontalAlignment.Center,
@@ -484,9 +483,12 @@ namespace Teszt__.src.Services
             {
                 Content = "Válasz?",
                 FontSize = 30,
+                Height = 100,
+                Width = 120,
                 HorizontalContentAlignment = System.Windows.HorizontalAlignment.Center,
                 VerticalContentAlignment = System.Windows.VerticalAlignment.Center,
                 VerticalAlignment = System.Windows.VerticalAlignment.Bottom,
+                HorizontalAlignment = System.Windows.HorizontalAlignment.Right,
             };
 
             Grid.SetColumn(cb, 2);
@@ -503,12 +505,12 @@ namespace Teszt__.src.Services
             {
                 Content = "Válaszlehetőségek",
                 FontSize = 30,
-                VerticalAlignment = System.Windows.VerticalAlignment.Top,
+                VerticalAlignment = System.Windows.VerticalAlignment.Center,
                 HorizontalAlignment = System.Windows.HorizontalAlignment.Center,
             };
 
             Grid.SetColumn(ValaszokLabel, 1);
-            Grid.SetRow(ValaszokLabel, 5);
+            Grid.SetRow(ValaszokLabel, 6);
 
             _grid.Children.Add(ValaszokLabel);
 
@@ -516,7 +518,7 @@ namespace Teszt__.src.Services
             {
                 Width = 200,
                 FontSize = 30,
-                Margin = new System.Windows.Thickness(5),
+                Margin = new System.Windows.Thickness(30),
                 TextWrapping = System.Windows.TextWrapping.Wrap,
                 VerticalAlignment = System.Windows.VerticalAlignment.Bottom,
                 HorizontalAlignment = System.Windows.HorizontalAlignment.Center,
@@ -531,9 +533,12 @@ namespace Teszt__.src.Services
             {
                 Content = "Helyes válasz",
                 FontSize = 30,
+                Height = 100,
+                Width = 200,
                 HorizontalContentAlignment = System.Windows.HorizontalAlignment.Center,
                 VerticalContentAlignment = System.Windows.VerticalAlignment.Center,
                 VerticalAlignment = System.Windows.VerticalAlignment.Bottom,
+                HorizontalAlignment = System.Windows.HorizontalAlignment.Right,
             };
 
             Grid.SetColumn(cb, 2);
@@ -550,20 +555,23 @@ namespace Teszt__.src.Services
             {
                 Content = "Válasz",
                 FontSize = 30,
-                VerticalAlignment = System.Windows.VerticalAlignment.Center,
+                Margin = new System.Windows.Thickness(50),
+                VerticalAlignment = System.Windows.VerticalAlignment.Top,
                 HorizontalAlignment = System.Windows.HorizontalAlignment.Center,
             };
 
             Grid.SetColumn(label, 1);
-            Grid.SetRow(label, 5);
+            Grid.SetRow(label, 6);
 
             TextBox tb = new TextBox()
             {
                 Width = 300,
                 Height = 100,
+                Margin = new System.Windows.Thickness(30),
                 TextWrapping = System.Windows.TextWrapping.Wrap,
                 FontSize = 30,
-                VerticalAlignment = System.Windows.VerticalAlignment.Top,
+                VerticalAlignment = System.Windows.VerticalAlignment.Bottom,
+                HorizontalAlignment = System.Windows.HorizontalAlignment.Center,
             };
 
             Grid.SetColumn(tb, 1);
