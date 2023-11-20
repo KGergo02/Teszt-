@@ -45,6 +45,7 @@
                 <Menu HorizontalAlignment="Left" FontWeight="Bold" Foreground="Cyan" Background="Black">
                     <MenuItem Header="Kurzus" Height="Auto" FontSize="30px">
                         <MenuItem Header="Kurzusok megtekintése" FontSize="20px" Height="30px" Background="Black" Foreground="Cyan" Style="{StaticResource NoHoverMenuItemStyle}"></MenuItem>
+                        <MenuItem Header="Teszt hozzárendelése" FontSize="20px" Height="30px" Background="Black" Foreground="Cyan" Style="{StaticResource NoHoverMenuItemStyle}"></MenuItem>
                         <MenuItem Header="Új kurzus létrehozása" FontSize="20px" Height="30px" Background="Black" Foreground="Cyan" Style="{StaticResource NoHoverMenuItemStyle}" Command="{Binding CreateCourseCommand}"></MenuItem>
                     </MenuItem>
                     <MenuItem Header="Teszt" FontSize="30px">
