@@ -180,6 +180,7 @@ namespace Teszt__.src.Commands.Oktato_Commands
                 {
                     Content = "Válasz?",
                     FontSize = 30,
+                    Foreground = System.Windows.Media.Brushes.White,
                     HorizontalContentAlignment = System.Windows.HorizontalAlignment.Center,
                     VerticalContentAlignment = System.Windows.VerticalAlignment.Center,
                     VerticalAlignment = System.Windows.VerticalAlignment.Bottom,
@@ -212,6 +213,7 @@ namespace Teszt__.src.Commands.Oktato_Commands
                 {
                     Content = "Helyes válasz",
                     FontSize = 30,
+                    Foreground = System.Windows.Media.Brushes.White,
                     HorizontalContentAlignment = System.Windows.HorizontalAlignment.Center,
                     VerticalContentAlignment = System.Windows.VerticalAlignment.Center,
                     VerticalAlignment = System.Windows.VerticalAlignment.Bottom,

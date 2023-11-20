@@ -182,11 +182,8 @@ namespace Teszt__.src.Commands.Oktato_Commands
 
             if (numbers1.Count == 2 && numbers2.Count == 2)
             {
-                if(Convert.ToInt32(numbers1[0]) > Convert.ToInt32(numbers2[0]))
-                {
-                    return false;
-                }
-                else if(Convert.ToInt32(numbers1[1]) >= Convert.ToInt32(numbers2[1]) && Convert.ToInt32(numbers1[1]) != 0)
+                if(Convert.ToInt32(numbers1[0]) > Convert.ToInt32(numbers2[0]) || 
+                   Convert.ToInt32(numbers1[1]) >= Convert.ToInt32(numbers2[1]) && Convert.ToInt32(numbers1[1]) != 0)
                 {
                     return false;
                 }

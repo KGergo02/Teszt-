@@ -7,31 +7,63 @@
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       KeepAlive="True"
-      Title="{Binding TitleName}" Background="#FFFF7400">
+      Title="{Binding TitleName}" MinWidth="466" MinHeight="413">
+
+    <Page.Resources>
+        <Style x:Key="NoHoverMenuItemStyle" TargetType="MenuItem">
+            <Setter Property="OverridesDefaultStyle" Value="True"/>
+            <Setter Property="Foreground" Value="Cyan"/>
+            <Setter Property="Background" Value="Black"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="MenuItem">
+                        <Border x:Name="Border" Background="{TemplateBinding Background}">
+                            <ContentPresenter Content="{TemplateBinding Header}" />
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="Border" Property="TextBlock.Foreground" Value="Yellow"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Page.Resources>
+
+    <Page.Background>
+        <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
+            <GradientStop Color="Black" Offset="1"/>
+            <GradientStop Color="#FF03389A"/>
+        </LinearGradientBrush>
+    </Page.Background>
+    
 
     <ScrollViewer VerticalScrollBarVisibility="Auto">
         <StackPanel>
-            <DockPanel>
-                <Menu DockPanel.Dock="Top" FontWeight="Bold" HorizontalContentAlignment="Center">
+            <Grid>
+                <Menu HorizontalAlignment="Left" FontWeight="Bold" Foreground="Cyan" Background="Black">
                     <MenuItem Header="Kurzus" Height="Auto" FontSize="30px">
-                        <MenuItem Header="Kurzusok megtekintése" FontSize="20px" Height="30px"></MenuItem>
-                        <MenuItem Header="Új kurzus létrehozása" FontSize="20px" Height="30px" Command="{Binding CreateCourseCommand}"></MenuItem>
+                        <MenuItem Header="Kurzusok megtekintése" FontSize="20px" Height="30px" Background="Black" Foreground="Cyan" Style="{StaticResource NoHoverMenuItemStyle}"></MenuItem>
+                        <MenuItem Header="Új kurzus létrehozása" FontSize="20px" Height="30px" Background="Black" Foreground="Cyan" Style="{StaticResource NoHoverMenuItemStyle}" Command="{Binding CreateCourseCommand}"></MenuItem>
                     </MenuItem>
                     <MenuItem Header="Teszt" FontSize="30px">
-                        <MenuItem Header="Tesztek megtekintése" FontSize="20px" Height="30px"></MenuItem>
-                        <MenuItem Header="Új Teszt létrehozása" FontSize="20px" Height="30px" Command="{Binding CreateTestCommand}"/>
+                        <MenuItem Header="Tesztek megtekintése" FontSize="20px" Height="30px" Background="Black" Foreground="Cyan" Style="{StaticResource NoHoverMenuItemStyle}"></MenuItem>
+                        <MenuItem Header="Új Teszt létrehozása" FontSize="20px" Height="30px" Background="Black" Foreground="Cyan" Style="{StaticResource NoHoverMenuItemStyle}" Command="{Binding CreateTestCommand}"/>
                     </MenuItem>
                     <MenuItem Header="Kérdés" FontSize="30px">
-                        <MenuItem Header="Kérdések megtekintése" FontSize="20px" Height="30px"></MenuItem>
-                        <MenuItem Header="Új Kérdés létrehozása" FontSize="20px" Height="30px" Command="{Binding CreateQuestionCommand}"/>
+                        <MenuItem Header="Kérdések megtekintése" FontSize="20px" Height="30px" Background="Black" Foreground="Cyan" Style="{StaticResource NoHoverMenuItemStyle}"></MenuItem>
+                        <MenuItem Header="Új Kérdés létrehozása" FontSize="20px" Height="30px" Background="Black" Foreground="Cyan" Style="{StaticResource NoHoverMenuItemStyle}" Command="{Binding CreateQuestionCommand}"/>
                     </MenuItem>
                     <MenuItem Header="Eredmények megtekintése" FontSize="30px"/>
-                    <MenuItem Header="Profil" FontSize="30px">
-                        <MenuItem Header="Adatok módosítása" FontSize="20px" Height="30px"/>
-                        <MenuItem Header="Kijelentkezés" FontSize="20px" Height="30px" Command="{Binding LogOutCommand}"/>
+                </Menu>
+                <Menu HorizontalAlignment="Right" Background="Black" Foreground="Cyan">
+                    <MenuItem Header="Profil" FontSize="30px"  VerticalAlignment="Top">
+                        <MenuItem Header="Adatok módosítása" FontSize="20px" Height="30px" Background="Black" Foreground="Cyan" Style="{StaticResource NoHoverMenuItemStyle}"/>
+                        <MenuItem Header="Kijelentkezés" FontSize="20px" Height="30px" Background="Black" Foreground="Cyan" Style="{StaticResource NoHoverMenuItemStyle}" Command="{Binding LogOutCommand}"/>
                     </MenuItem>
                 </Menu>
-            </DockPanel>
+            </Grid>
 
 
             <StackPanel x:Name="mainStackPanel" Margin="0,20,0,0" HorizontalAlignment="Center" VerticalAlignment="Center">

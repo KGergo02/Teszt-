@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -28,6 +29,7 @@ namespace Teszt__.src.Services
             Label labelCourseName = new Label()
             {
                 Content = "Kurzus neve",
+                Foreground = System.Windows.Media.Brushes.White,
                 FontSize = 30,
                 VerticalAlignment = System.Windows.VerticalAlignment.Center,
                 HorizontalAlignment = System.Windows.HorizontalAlignment.Center,
@@ -36,6 +38,7 @@ namespace Teszt__.src.Services
             Label labelCourseLimit = new Label()
             {
                 Content = "Kurzus limit",
+                Foreground = System.Windows.Media.Brushes.White,
                 FontSize = 30,
                 VerticalAlignment = System.Windows.VerticalAlignment.Center,
                 HorizontalAlignment = System.Windows.HorizontalAlignment.Center,
@@ -129,6 +132,7 @@ namespace Teszt__.src.Services
             Label testName = new Label()
             {
                 Content = "Teszt neve",
+                Foreground = System.Windows.Media.Brushes.White,
                 FontSize = 30,
                 VerticalAlignment = System.Windows.VerticalAlignment.Center,
                 HorizontalAlignment = System.Windows.HorizontalAlignment.Center,
@@ -138,17 +142,10 @@ namespace Teszt__.src.Services
 
             Grid.SetRow(testName, 0);
 
-            Label questionsLabel = new Label()
-            {
-                Content = "Kérdés",
-                FontSize = 30,
-                VerticalAlignment = System.Windows.VerticalAlignment.Center,
-                HorizontalAlignment = System.Windows.HorizontalAlignment.Center,
-            };
-
             Label submitLimitLabel = new Label()
             {
                 Content = "Kitöltési limit",
+                Foreground = System.Windows.Media.Brushes.White,
                 FontSize = 30,
                 VerticalAlignment = System.Windows.VerticalAlignment.Center,
                 HorizontalAlignment = System.Windows.HorizontalAlignment.Center,
@@ -161,6 +158,7 @@ namespace Teszt__.src.Services
             Label dateLabel = new Label()
             {
                 Content = "Teszt időpontja",
+                Foreground = System.Windows.Media.Brushes.White,
                 FontSize = 30,
                 VerticalAlignment = System.Windows.VerticalAlignment.Center,
                 HorizontalAlignment = System.Windows.HorizontalAlignment.Center,
@@ -173,6 +171,7 @@ namespace Teszt__.src.Services
             Label startTimeLabel = new Label()
             {
                 Content = "Indítási idő",
+                Foreground = System.Windows.Media.Brushes.White,
                 FontSize = 30,
                 VerticalAlignment = System.Windows.VerticalAlignment.Center,
                 HorizontalAlignment = System.Windows.HorizontalAlignment.Center,
@@ -185,6 +184,7 @@ namespace Teszt__.src.Services
             Label endTimeLabel = new Label()
             {
                 Content = "Kitölthető eddig",
+                Foreground = System.Windows.Media.Brushes.White,
                 FontSize = 30,
                 VerticalAlignment = System.Windows.VerticalAlignment.Center,
                 HorizontalAlignment = System.Windows.HorizontalAlignment.Center,
@@ -314,6 +314,7 @@ namespace Teszt__.src.Services
             Label QTypeLabel = new Label()
             {
                 Content = "Kérdés típusa",
+                Foreground = System.Windows.Media.Brushes.White,
                 FontSize = 30,
                 VerticalAlignment = System.Windows.VerticalAlignment.Center,
                 HorizontalAlignment = System.Windows.HorizontalAlignment.Left,
@@ -360,6 +361,7 @@ namespace Teszt__.src.Services
             Label TestLabel = new Label()
             {
                 Content = "Válaszd ki a tesztet",
+                Foreground = System.Windows.Media.Brushes.White,
                 FontSize = 30,
                 VerticalAlignment = System.Windows.VerticalAlignment.Center,
                 HorizontalAlignment = System.Windows.HorizontalAlignment.Left,
@@ -393,6 +395,7 @@ namespace Teszt__.src.Services
             Label QNameLabel = new Label()
             {
                 Content = "Kérdés",
+                Foreground = System.Windows.Media.Brushes.White,
                 FontSize = 30,
                 HorizontalAlignment = System.Windows.HorizontalAlignment.Left,
             };
@@ -454,6 +457,7 @@ namespace Teszt__.src.Services
             Label ValaszokLabel = new Label()
             {
                 Content = "Válaszlehetőségek",
+                Foreground = System.Windows.Media.Brushes.White,
                 FontSize = 30,
                 VerticalAlignment = System.Windows.VerticalAlignment.Center,
                 HorizontalAlignment = System.Windows.HorizontalAlignment.Center,
@@ -485,6 +489,7 @@ namespace Teszt__.src.Services
                 FontSize = 30,
                 Height = 100,
                 Width = 120,
+                Foreground = System.Windows.Media.Brushes.White,
                 HorizontalContentAlignment = System.Windows.HorizontalAlignment.Center,
                 VerticalContentAlignment = System.Windows.VerticalAlignment.Center,
                 VerticalAlignment = System.Windows.VerticalAlignment.Bottom,
@@ -504,6 +509,7 @@ namespace Teszt__.src.Services
             Label ValaszokLabel = new Label()
             {
                 Content = "Válaszlehetőségek",
+                Foreground = System.Windows.Media.Brushes.White,
                 FontSize = 30,
                 VerticalAlignment = System.Windows.VerticalAlignment.Center,
                 HorizontalAlignment = System.Windows.HorizontalAlignment.Center,
@@ -535,6 +541,7 @@ namespace Teszt__.src.Services
                 FontSize = 30,
                 Height = 100,
                 Width = 200,
+                Foreground = System.Windows.Media.Brushes.White,
                 HorizontalContentAlignment = System.Windows.HorizontalAlignment.Center,
                 VerticalContentAlignment = System.Windows.VerticalAlignment.Center,
                 VerticalAlignment = System.Windows.VerticalAlignment.Bottom,
@@ -554,6 +561,7 @@ namespace Teszt__.src.Services
             Label label = new Label()
             {
                 Content = "Válasz",
+                Foreground = System.Windows.Media.Brushes.White,
                 FontSize = 30,
                 Margin = new System.Windows.Thickness(50),
                 VerticalAlignment = System.Windows.VerticalAlignment.Top,

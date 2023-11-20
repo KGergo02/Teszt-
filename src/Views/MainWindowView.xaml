@@ -14,7 +14,7 @@
     <Page.Background>
         <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
             <GradientStop Color="Black" Offset="1"/>
-            <GradientStop Color="#FFFF7400"/>
+            <GradientStop Color="Blue"/>
         </LinearGradientBrush>
     </Page.Background>
 
@@ -23,7 +23,7 @@
             <Canvas.Background>
                 <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
                     <GradientStop Color="Black" Offset="1"/>
-                    <GradientStop Color="#FFFF5A00"/>
+                    <GradientStop Color="#FF03389A"/>
                 </LinearGradientBrush>
             </Canvas.Background>
             <StackPanel Canvas.Left="193" Canvas.Top="-97" HorizontalAlignment="Left">
@@ -40,7 +40,7 @@
                 <Button.Foreground>
                     <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                         <GradientStop Color="Black" Offset="1"/>
-                        <GradientStop Color="#FFFF7400" Offset="0.526"/>
+                        <GradientStop Color="Blue" Offset="0.526"/>
                     </LinearGradientBrush>
                 </Button.Foreground>
             </Button>
@@ -48,11 +48,11 @@
                 <Button.Foreground>
                     <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                         <GradientStop Color="Black" Offset="1"/>
-                        <GradientStop Color="#FFFF7400" Offset="0.526"/>
+                        <GradientStop Color="Blue" Offset="0.526"/>
                     </LinearGradientBrush>
                 </Button.Foreground>
             </Button>
-            <Label x:Name="registerLabel" Content="Ha nincs még fiókod, akkor a regisztrációhoz kattints ide!" Canvas.Left="261" Canvas.Top="187" HorizontalAlignment="Right" Cursor="Hand" MouseDown="registerLabel_MouseDown" FontWeight="Bold" Background="{x:Null}" Foreground="Red"/>
+            <Label x:Name="registerLabel" Content="Ha nincs még fiókod, akkor a regisztrációhoz kattints ide!" Canvas.Left="261" Canvas.Top="187" HorizontalAlignment="Right" Cursor="Hand" MouseDown="registerLabel_MouseDown" FontWeight="Bold" Background="{x:Null}" Foreground="Cyan"/>
 
         </Canvas>
     </Viewbox>
