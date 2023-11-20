@@ -47,14 +47,15 @@
                         <MenuItem Header="Kurzusok megtekintése" FontSize="20px" Height="30px" Background="Black" Foreground="Cyan" Style="{StaticResource NoHoverMenuItemStyle}"></MenuItem>
                         <MenuItem Header="Teszt hozzárendelése" FontSize="20px" Height="30px" Background="Black" Foreground="Cyan" Style="{StaticResource NoHoverMenuItemStyle}"></MenuItem>
                         <MenuItem Header="Új kurzus létrehozása" FontSize="20px" Height="30px" Background="Black" Foreground="Cyan" Style="{StaticResource NoHoverMenuItemStyle}" Command="{Binding CreateCourseCommand}"></MenuItem>
+                        <MenuItem Header="Kurzusok megtekintése" FontSize="20px" Height="30px" Background="Black" Foreground="Cyan" Style="{StaticResource NoHoverMenuItemStyle}"></MenuItem>
                     </MenuItem>
                     <MenuItem Header="Teszt" FontSize="30px">
-                        <MenuItem Header="Tesztek megtekintése" FontSize="20px" Height="30px" Background="Black" Foreground="Cyan" Style="{StaticResource NoHoverMenuItemStyle}"></MenuItem>
                         <MenuItem Header="Új Teszt létrehozása" FontSize="20px" Height="30px" Background="Black" Foreground="Cyan" Style="{StaticResource NoHoverMenuItemStyle}" Command="{Binding CreateTestCommand}"/>
+                        <MenuItem Header="Tesztek megtekintése" FontSize="20px" Height="30px" Background="Black" Foreground="Cyan" Style="{StaticResource NoHoverMenuItemStyle}"></MenuItem>
                     </MenuItem>
                     <MenuItem Header="Kérdés" FontSize="30px">
-                        <MenuItem Header="Kérdések megtekintése" FontSize="20px" Height="30px" Background="Black" Foreground="Cyan" Style="{StaticResource NoHoverMenuItemStyle}"></MenuItem>
                         <MenuItem Header="Új Kérdés létrehozása" FontSize="20px" Height="30px" Background="Black" Foreground="Cyan" Style="{StaticResource NoHoverMenuItemStyle}" Command="{Binding CreateQuestionCommand}"/>
+                        <MenuItem Header="Kérdések megtekintése" FontSize="20px" Height="30px" Background="Black" Foreground="Cyan" Style="{StaticResource NoHoverMenuItemStyle}"></MenuItem>
                     </MenuItem>
                     <MenuItem Header="Eredmények megtekintése" FontSize="30px"/>
                 </Menu>
