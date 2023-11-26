@@ -288,12 +288,14 @@ namespace Teszt__.src.Services
             grid.Children.Add(dateLabel);
             grid.Children.Add(startTimeLabel);
             grid.Children.Add(endTimeLabel);
+            grid.Children.Add(CourseLabel);
 
             grid.Children.Add(testNameTb);
             grid.Children.Add(submitLimitTb);
             grid.Children.Add(date);
             grid.Children.Add(startTimeTb);
             grid.Children.Add(endTimeTb);
+            grid.Children.Add(CoursesComboBox);
 
             mainStackPanel.Children.Add(grid);
 
