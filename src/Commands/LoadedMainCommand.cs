@@ -11,9 +11,10 @@ namespace Teszt__.src.Commands
     {
         public override void Execute(object parameter)
         {
-            UserDatabaseContext database = new UserDatabaseContext();
-
-            database.GetUserByName("KGergo02");
+            using (DatabaseContext database = new DatabaseContext())
+            {
+                database.GetUserByName("KGergo02");
+            }
         }
     }
 }

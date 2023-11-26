@@ -7,7 +7,7 @@ using System.Windows.Controls;
 using Teszt__.src.DAL;
 using Teszt__.src.Services;
 using Teszt__.src.ViewModels.Oktato_ViewModels;
-using static Teszt__.src.DAL.UserDatabaseContext;
+using static Teszt__.src.DAL.DatabaseContext;
 
 namespace Teszt__.src.Commands.Oktato_Commands
 {

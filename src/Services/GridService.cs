@@ -1,13 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Controls;
+﻿using System.Windows.Controls;
 using Teszt__.src.DAL;
-using static Teszt__.src.DAL.TestDatabaseContext;
+using static Teszt__.src.Models.DatabaseContext;
 
 namespace Teszt__.src.Services
 {
@@ -116,12 +109,14 @@ namespace Teszt__.src.Services
             ColumnDefinition coldef3 = new ColumnDefinition();
             ColumnDefinition coldef4 = new ColumnDefinition();
             ColumnDefinition coldef5 = new ColumnDefinition();
+            ColumnDefinition coldef6 = new ColumnDefinition();
 
             grid.ColumnDefinitions.Add(coldef1);
             grid.ColumnDefinitions.Add(coldef2);
             grid.ColumnDefinitions.Add(coldef3);
             grid.ColumnDefinitions.Add(coldef4);
             grid.ColumnDefinitions.Add(coldef5);
+            grid.ColumnDefinitions.Add(coldef6);
 
             RowDefinition rowdef1 = new RowDefinition();
             RowDefinition rowdef2 = new RowDefinition();
@@ -194,6 +189,19 @@ namespace Teszt__.src.Services
 
             Grid.SetRow(endTimeLabel, 0);
 
+            Label CourseLabel = new Label()
+            {
+                Content = "Kurzus",
+                Foreground = System.Windows.Media.Brushes.White,
+                FontSize = 30,
+                VerticalAlignment = System.Windows.VerticalAlignment.Center,
+                HorizontalAlignment = System.Windows.HorizontalAlignment.Center,
+            };
+
+            Grid.SetColumn(endTimeLabel, 5);
+
+            Grid.SetRow(endTimeLabel, 0);
+
             TextBox testNameTb = new TextBox()
             {
                 FontSize = 30,
@@ -255,6 +263,25 @@ namespace Teszt__.src.Services
 
             Grid.SetColumn(endTimeTb, 4);
             Grid.SetRow(endTimeTb, 1);
+
+            ComboBox CoursesComboBox = new ComboBox()
+            {
+                Width = 400,
+                FontSize = 30,
+                HorizontalAlignment = System.Windows.HorizontalAlignment.Left,
+                VerticalAlignment = System.Windows.VerticalAlignment.Center,
+            };
+
+            using (DatabaseContext database = new DatabaseContext())
+            {
+                foreach (Course item in database.Courses)
+                {
+                    CoursesComboBox.Items.Add(item.Name);
+                }
+            }
+
+            Grid.SetColumn(CoursesComboBox, 5);
+            Grid.SetRow(CoursesComboBox, 1);
 
             grid.Children.Add(testName);
             grid.Children.Add(submitLimitLabel);
@@ -380,12 +407,13 @@ namespace Teszt__.src.Services
                 HorizontalAlignment = System.Windows.HorizontalAlignment.Left,
             };
 
-            TestDatabaseContext testDatabaseContext = new TestDatabaseContext();
-
-            foreach (Test item in testDatabaseContext.Tests)
+            using (DatabaseContext testDatabaseContext = new DatabaseContext())
             {
-                TestComboBox.Items.Add(item.name);
-            }
+                foreach (Test item in testDatabaseContext.Tests)
+                {
+                    TestComboBox.Items.Add(item.Name);
+                }
+            }    
 
             Grid.SetColumn(TestComboBox, 0);
             Grid.SetRow(TestComboBox, 3);

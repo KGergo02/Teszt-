@@ -236,13 +236,11 @@
     <Compile Include="src\Commands\Oktato_Commands\SendCommand.cs" />
     <Compile Include="src\Commands\RegisterCommand.cs" />
     <Compile Include="src\Commands\RegisterLabelCommand.cs" />
-    <Compile Include="src\DAL\Course.cs" />
-    <Compile Include="src\DAL\CourseDatabaseContext.cs" />
-    <Compile Include="src\DAL\TestDatabaseContext.cs" />
-    <Compile Include="src\DAL\User.cs" />
+    <Compile Include="src\Models\Course.cs" />
     <Compile Include="src\Models\InputField.cs" />
-    <Compile Include="src\DAL\Question.cs" />
-    <Compile Include="src\DAL\Test.cs" />
+    <Compile Include="src\Models\Question.cs" />
+    <Compile Include="src\Models\Test.cs" />
+    <Compile Include="src\Models\User.cs" />
     <Compile Include="src\Services\GridService.cs" />
     <Compile Include="src\Services\JelszoTitkosito.cs" />
     <Compile Include="src\Services\Message.cs" />
@@ -267,7 +265,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="src\DAL\UserDatabaseContext.cs" />
+    <Compile Include="src\DAL\DatabaseContext.cs" />
     <Compile Include="src\Views\LoginWindowView.xaml.cs">
       <DependentUpon>LoginWindowView.xaml</DependentUpon>
     </Compile>

@@ -7,12 +7,12 @@ using System.Windows.Controls;
 using Teszt__.src.Services;
 using Teszt__.src.Models;
 using Teszt__.src.DAL;
-using static Teszt__.src.DAL.UserDatabaseContext;
+using static Teszt__.src.DAL.DatabaseContext;
 using Teszt__.src.ViewModels.Oktato_ViewModels;
 using System.Text.RegularExpressions;
-using static Teszt__.src.DAL.TestDatabaseContext;
-using static Teszt__.src.DAL.CourseDatabaseContext;
 using Microsoft.EntityFrameworkCore;
+using DatabaseContext = Teszt__.src.DAL.DatabaseContext;
+using static Teszt__.src.Models.DatabaseContext;
 
 namespace Teszt__.src.Commands.Oktato_Commands
 {
@@ -85,7 +85,11 @@ namespace Teszt__.src.Commands.Oktato_Commands
                                 return;
                             }
                         }
-                        return;
+                        else
+                        {
+                            return;
+                        }
+                        break;
 
                     case 1:
                         if(CheckTestInputs())
@@ -95,15 +99,17 @@ namespace Teszt__.src.Commands.Oktato_Commands
                                 return;
                             }
                         }
-                        return;
+                        else
+                        {
+                            return;
+                        }
+                        break;
                 }
 
                 controls.Clear();
             }
 
             GridService.ClearGrid(ref _grid, ref _mainStackPanel);
-
-            
 
             string type = "";
 
@@ -194,7 +200,7 @@ namespace Teszt__.src.Commands.Oktato_Commands
 
         private bool CheckCourseInputs()
         {
-            HashSet<string> inputNames = new HashSet<string>();
+            List<string> inputNames = new List<string>();
 
             foreach (var item in _grid.Children)
             {
@@ -202,7 +208,10 @@ namespace Teszt__.src.Commands.Oktato_Commands
                 {
                     TextBox tb = (TextBox)item;
 
-                    inputNames.Add(tb.Text.ToUpper());
+                    if(tb.Tag == null)
+                    {
+                        inputNames.Add(tb.Text.ToUpper());
+                    }
 
                     if(tb.Tag != null && !CheckIfNumber(tb.Text, tb.Tag.ToString()))
                     {
@@ -213,7 +222,7 @@ namespace Teszt__.src.Commands.Oktato_Commands
                 }
             }
 
-            if(inputNames.Count != _grid.RowDefinitions.Count - 1)
+            if(inputNames.Count != inputNames.Distinct().Count())
             {
                 Message.Error("Nem lehet azonos nevű kurzus a bemenetben!");
                 return false;
@@ -266,24 +275,25 @@ namespace Teszt__.src.Commands.Oktato_Commands
                 {
                     TextBox tb = (TextBox)item;
 
-                    CourseDatabaseContext database = new CourseDatabaseContext();
-
-                    foreach (Course course in database.Courses)
+                    using (DatabaseContext database = new DatabaseContext())
                     {
-                        if(course.name.ToUpper() == tb.Text.ToUpper())
+                        foreach (Course course in database.Courses)
                         {
-                            if(errorMessage == String.Empty)
+                            if (course.Name.ToUpper() == tb.Text.ToUpper())
                             {
-                                errorMessage += $"Ilyen kurzus már szerepel az adatbázisban!\n\nKurzusok:\n{course.name}";
-                            }
-                            else
-                            {
-                                errorMessage += "\n" + course.name;
-                            }
+                                if (errorMessage == String.Empty)
+                                {
+                                    errorMessage += $"Ilyen kurzus már szerepel az adatbázisban!\n\nKurzusok:\n{course.Name}";
+                                }
+                                else
+                                {
+                                    errorMessage += "\n" + course.Name;
+                                }
 
-                            inputIsInCourses = true;
+                                inputIsInCourses = true;
+                            }
                         }
-                    }
+                    } 
                 }
             }
 
@@ -306,13 +316,14 @@ namespace Teszt__.src.Commands.Oktato_Commands
 
             int number = Convert.ToInt32(limit.Text);
 
-            Course course = new Course(name.Text, number, new List<Test>());
+            Course course = new Course(name.Text, number);
 
-            CourseDatabaseContext database = new CourseDatabaseContext();
+            using (DatabaseContext database = new DatabaseContext())
+            {
+                database.Courses.Add(course);
 
-            database.Courses.Add(course);
-
-            database.SaveChanges();
+                database.SaveChanges();
+            } 
 
             return true;
         }
@@ -329,23 +340,25 @@ namespace Teszt__.src.Commands.Oktato_Commands
             
             TextBox endTime = (TextBox)controls[4];
 
-            Test test = new Test(name.Text, Convert.ToInt32(submit_limit.Text), datePicker.SelectedDate.Value.Date.ToShortDateString(), startTime.Text, endTime.Text);
+            ComboBox course = (ComboBox)controls[5];
 
-            TestDatabaseContext database = new TestDatabaseContext();
+            Test test = new Test(name.Text, Convert.ToInt32(submit_limit.Text), datePicker.SelectedDate.Value.Date.ToShortDateString(), startTime.Text, endTime.Text, Convert.ToInt32(course.SelectedValue));
 
-            try
+            using (DatabaseContext database = new DatabaseContext())
             {
-                database.Tests.Add(test);
+                try
+                {
+                    database.Tests.Add(test);
 
-                database.SaveChanges();
+                    database.SaveChanges();
+                }
+                catch (DbUpdateException)
+                {
+                    Message.Error("Ilyen teszt már létezik az adatbázisban!");
+
+                    return false;
+                }
             }
-            catch (DbUpdateException)
-            {
-                Message.Error("Ilyen teszt már létezik az adatbázisban!");
-
-                return false;
-            }
-
             return true;
         }
     }

@@ -1,18 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Teszt__.src.ViewModels;
+﻿using Teszt__.src.ViewModels;
 using Teszt__.src.Views;
-using Teszt__.src.DAL;
 using System.Windows.Navigation;
 using Teszt__.src.Views.Hallgato_Views;
 using Teszt__.src.Views.Oktato_Views;
 using Teszt__.src.Services;
-using Teszt__.src.Models;
 using Teszt__.src.ViewModels.Oktato_ViewModels;
-using static Teszt__.src.DAL.UserDatabaseContext;
+using static Teszt__.src.Models.DatabaseContext;
+using DatabaseContext = Teszt__.src.DAL.DatabaseContext;
 
 namespace Teszt__.src.Commands
 {
@@ -56,9 +50,12 @@ namespace Teszt__.src.Commands
                 return;
             }
 
-            UserDatabaseContext database = new UserDatabaseContext();
+            User user = null;
 
-            User user = database.GetUserByName(viewModel.Username);
+            using (DatabaseContext database = new DatabaseContext())
+            {
+                user = database.GetUserByName(viewModel.Username);
+            }
 
             if (user == null)
             {
@@ -69,11 +66,11 @@ namespace Teszt__.src.Commands
                 return;
             }
 
-            if (user.name.ToUpper() == viewModel.Username.ToUpper() && user.password == JelszoTitkosito.Encrypt(SecureStringConvert.ToString(viewModel.Password)))
+            if (user.Name.ToUpper() == viewModel.Username.ToUpper() && user.Password == JelszoTitkosito.Encrypt(SecureStringConvert.ToString(viewModel.Password)))
             {
                 if (admin)
                 {
-                    if (user.admin)
+                    if (user.Admin)
                     {
                         // oktató view
 
@@ -113,12 +110,12 @@ namespace Teszt__.src.Commands
             {
                 Message.Error("Hibás felhasználónév vagy jelszó!");
 
-                if(user.name.ToUpper() != viewModel.Username.ToUpper())
+                if(user.Name.ToUpper() != viewModel.Username.ToUpper())
                 {
                     viewModel.inputField.ChangeColor("username");
                 }
 
-                if (user.password != JelszoTitkosito.Encrypt(SecureStringConvert.ToString(viewModel.Password)))
+                if (user.Password != JelszoTitkosito.Encrypt(SecureStringConvert.ToString(viewModel.Password)))
                 {
                     viewModel.inputField.ChangeColor("password");
                 }

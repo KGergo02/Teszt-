@@ -1,19 +1,19 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System;
-using System.Configuration;
 using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using Teszt__.src.Models;
 using Teszt__.src.Services;
+using static Teszt__.src.Models.DatabaseContext;
 
 namespace Teszt__.src.DAL
 {
-    public partial class UserDatabaseContext : DbContext
+    public partial class DatabaseContext : DbContext
     {
         public DbSet<User> Users { get; set; }
+        public DbSet<Course> Courses { get; set; }
+        public DbSet<Test> Tests { get; set; }
+
+        public DbSet<Question> Questions { get; set; }
+
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -24,7 +24,7 @@ namespace Teszt__.src.DAL
         {
             try
             {
-                return this.Users.Where(b => b.name == name).ToList().Count == 1 ? this.Users.Where(b => b.name == name).ToList()[0] : null;
+                return this.Users.Where(b => b.Name == name).ToList().Count == 1 ? this.Users.Where(b => b.Name == name).ToList()[0] : null;
             }
             catch(InvalidOperationException e)
             {

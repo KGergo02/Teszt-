@@ -1,17 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Controls;
+﻿using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Navigation;
 using Teszt__.src.Commands;
 using Teszt__.src.Commands.Oktato_Commands;
-using Teszt__.src.Models;
 using Teszt__.src.Services;
 using Teszt__.src.Views.Oktato_Views;
-using static Teszt__.src.DAL.UserDatabaseContext;
+using static Teszt__.src.Models.DatabaseContext;
 
 namespace Teszt__.src.ViewModels.Oktato_ViewModels
 {
@@ -48,7 +42,7 @@ namespace Teszt__.src.ViewModels.Oktato_ViewModels
 
         public OktatoMainViewModel(User user, OktatoMainView window, NavigationWindow navigationWindow)
         {
-            TitleName = $"Főoldal - {user.name}";
+            TitleName = $"Főoldal - {user.Name}";
 
             _user = user;
 

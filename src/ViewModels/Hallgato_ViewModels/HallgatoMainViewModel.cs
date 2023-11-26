@@ -1,11 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Navigation;
-using Teszt__.src.Models;
-using static Teszt__.src.DAL.UserDatabaseContext;
+﻿using System.Windows.Navigation;
+using static Teszt__.src.Models.DatabaseContext;
 
 namespace Teszt__.src.ViewModels
 {
@@ -45,9 +39,9 @@ namespace Teszt__.src.ViewModels
         {
             _navigationWindow = navigationWindow;
             
-            _username = user.name;
+            _username = user.Name;
 
-            _titleName = $"Főoldal - {user.name}";
+            _titleName = $"Főoldal - {user.Name}";
         }
     }
 }

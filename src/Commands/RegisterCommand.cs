@@ -2,19 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Security;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Input;
 using Teszt__.src.ViewModels;
-using System.Windows.Controls;
-using System.Windows.Media;
 using System.Text.RegularExpressions;
-using Teszt__.src.DAL;
 using Teszt__.src.Services;
-using Teszt__.src.Models;
-using Teszt__.src.Views;
-using static Teszt__.src.DAL.UserDatabaseContext;
+using DatabaseContext = Teszt__.src.DAL.DatabaseContext;
+using static Teszt__.src.Models.DatabaseContext;
 
 namespace Teszt__.src.Commands
 {
@@ -35,32 +27,33 @@ namespace Teszt__.src.Commands
 
             viewModel.inputField.ClearColorOfInputFields();
 
-            UserDatabaseContext database = new UserDatabaseContext();
-
-            CheckForEmptyInputs();
-
-            CheckIfUserExists(database);
-
-            CheckMatchingPassword();
-
-            CheckEmail();
-
-            if (error != "")
+            using (DatabaseContext database = new DatabaseContext())
             {
-                Message.Error(error);
-            }
-            else
-            {
-                User user = new User(viewModel.Username, JelszoTitkosito.Encrypt(SecureStringToString(viewModel.Password1)), viewModel.Email, false);
+                CheckForEmptyInputs();
 
-                database.Users.Add(user);
+                CheckIfUserExists(database);
 
-                database.SaveChanges();
+                CheckMatchingPassword();
 
-                Message.Success("A regisztráció sikeres volt!");
+                CheckEmail();
 
-                viewModel.RegisterWindow.Close();
-            }            
+                if (error != "")
+                {
+                    Message.Error(error);
+                }
+                else
+                {
+                    User user = new User(viewModel.Username, JelszoTitkosito.Encrypt(SecureStringToString(viewModel.Password1)), viewModel.Email, false);
+
+                    database.Users.Add(user);
+
+                    database.SaveChanges();
+
+                    Message.Success("A regisztráció sikeres volt!");
+
+                    viewModel.RegisterWindow.Close();
+                }
+            }          
         }
 
         private string SecureStringToString(SecureString secureString)
@@ -75,7 +68,7 @@ namespace Teszt__.src.Commands
             }
         }
 
-        private void CheckIfUserExists(UserDatabaseContext db)
+        private void CheckIfUserExists(DatabaseContext db)
         {
             if(viewModel.Username != null)
             {
@@ -83,7 +76,7 @@ namespace Teszt__.src.Commands
 
                 for (int i = 0; i < users.Count; i++)
                 {
-                    if (users[i].name.ToUpper() == viewModel.Username.ToUpper() && viewModel.Username != String.Empty)
+                    if (users[i].Name.ToUpper() == viewModel.Username.ToUpper() && viewModel.Username != String.Empty)
                     {
                         error += "Már létezik ilyen felhasználó!\n";
 
