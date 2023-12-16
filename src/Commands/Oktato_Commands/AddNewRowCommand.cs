@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 using System.Windows.Controls;
 using Teszt__.src.ViewModels.Oktato_ViewModels;
 using Teszt__.src.Services;
+using static Teszt__.src.Models.DatabaseContext;
+using Teszt__.src.DAL;
 
 namespace Teszt__.src.Commands.Oktato_Commands
 {
@@ -34,7 +36,7 @@ namespace Teszt__.src.Commands.Oktato_Commands
                     AddTestRow(rowcount);
                     break;
                 case 2:
-                    AddAnswerRow();
+                    AddAnswerRow(rowcount);
                     break;
             }
         }
@@ -146,18 +148,36 @@ namespace Teszt__.src.Commands.Oktato_Commands
             Grid.SetColumn(endTimeTb, 4);
             Grid.SetRow(endTimeTb, rowcount);
 
+            ComboBox CoursesComboBox = new ComboBox()
+            {
+                Width = 400,
+                FontSize = 30,
+                HorizontalAlignment = System.Windows.HorizontalAlignment.Left,
+                VerticalAlignment = System.Windows.VerticalAlignment.Center,
+            };
+
+            using (DatabaseContext database = new DatabaseContext())
+            {
+                foreach (Course item in database.Courses)
+                {
+                    CoursesComboBox.Items.Add(item.Name);
+                }
+            }
+
+            Grid.SetColumn(CoursesComboBox, 5);
+            Grid.SetRow(CoursesComboBox, rowcount);
+
             _grid.Children.Add(testNameTb);
             _grid.Children.Add(submitLimitTb);
             _grid.Children.Add(date);
             _grid.Children.Add(startTimeTb);
             _grid.Children.Add(endTimeTb);
+            _grid.Children.Add(CoursesComboBox);
         }
 
-        private void AddAnswerRow()
+        private void AddAnswerRow(int rowcount)
         {
             RowDefinition rowdef = new RowDefinition();
-
-            int rowcount = _grid.RowDefinitions.Count;
 
             if (_grid.Tag.ToString() == "checkbox")
             {
@@ -167,27 +187,29 @@ namespace Teszt__.src.Commands.Oktato_Commands
                 {
                     Width = 200,
                     FontSize = 30,
-                    Margin = new System.Windows.Thickness(5),
+                    Margin = new System.Windows.Thickness(20),
                     TextWrapping = System.Windows.TextWrapping.Wrap,
-                    VerticalAlignment = System.Windows.VerticalAlignment.Bottom,
+                    VerticalAlignment = rowcount == 8 ? System.Windows.VerticalAlignment.Center : rowcount == 9 ? System.Windows.VerticalAlignment.Bottom : System.Windows.VerticalAlignment.Top,
                     HorizontalAlignment = System.Windows.HorizontalAlignment.Center,
                 };
 
                 Grid.SetColumn(tb, 1);
-                Grid.SetRow(tb, rowcount);
+                Grid.SetRow(tb, rowcount <= 9 ? 6 : rowcount);
 
                 CheckBox cb = new CheckBox()
                 {
                     Content = "Válasz?",
                     FontSize = 30,
+                    Margin = new System.Windows.Thickness(20),
                     Foreground = System.Windows.Media.Brushes.White,
                     HorizontalContentAlignment = System.Windows.HorizontalAlignment.Center,
                     VerticalContentAlignment = System.Windows.VerticalAlignment.Center,
-                    VerticalAlignment = System.Windows.VerticalAlignment.Bottom,
+                    VerticalAlignment = rowcount == 8 ? System.Windows.VerticalAlignment.Center : rowcount == 9 ? System.Windows.VerticalAlignment.Bottom : System.Windows.VerticalAlignment.Top,
+                    HorizontalAlignment = System.Windows.HorizontalAlignment.Right,
                 };
 
                 Grid.SetColumn(cb, 2);
-                Grid.SetRow(cb, rowcount);
+                Grid.SetRow(cb, rowcount <= 9 ? 6 : rowcount);
 
                 _grid.Children.Add(tb);
                 _grid.Children.Add(cb);
@@ -200,34 +222,35 @@ namespace Teszt__.src.Commands.Oktato_Commands
                 {
                     Width = 200,
                     FontSize = 30,
-                    Margin = new System.Windows.Thickness(5),
+                    Margin = new System.Windows.Thickness(20),
                     TextWrapping = System.Windows.TextWrapping.Wrap,
-                    VerticalAlignment = System.Windows.VerticalAlignment.Bottom,
+                    VerticalAlignment = rowcount == 8 ? System.Windows.VerticalAlignment.Center : rowcount == 9 ? System.Windows.VerticalAlignment.Bottom : System.Windows.VerticalAlignment.Top,
                     HorizontalAlignment = System.Windows.HorizontalAlignment.Center,
                 };
 
                 Grid.SetColumn(tb, 1);
-                Grid.SetRow(tb, rowcount);
+                Grid.SetRow(tb, rowcount <= 9 ? 6 : rowcount);
 
                 RadioButton cb = new RadioButton()
                 {
                     Content = "Helyes válasz",
                     FontSize = 30,
+                    Margin = new System.Windows.Thickness(20),
                     Foreground = System.Windows.Media.Brushes.White,
                     HorizontalContentAlignment = System.Windows.HorizontalAlignment.Center,
                     VerticalContentAlignment = System.Windows.VerticalAlignment.Center,
-                    VerticalAlignment = System.Windows.VerticalAlignment.Bottom,
+                    VerticalAlignment = rowcount == 8 ? System.Windows.VerticalAlignment.Center : rowcount == 9 ? System.Windows.VerticalAlignment.Bottom : System.Windows.VerticalAlignment.Top,
                 };
 
                 Grid.SetColumn(cb, 2);
-                Grid.SetRow(cb, rowcount);
+                Grid.SetRow(cb, rowcount <= 9 ? 6 : rowcount);
 
                 _grid.Children.Add(tb);
                 _grid.Children.Add(cb);
             }
             else if(_grid.Tag.ToString() == "single")
             {
-                Message.Error("Több választ nem adhatsz hozzá!");
+                Message.Error("Több választ nem adhatsz hozzá a kérdéshez!");
             }
         }
     }

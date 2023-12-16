@@ -1,16 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Controls;
 using Teszt__.src.Services;
-using Teszt__.src.Models;
-using Teszt__.src.DAL;
-using static Teszt__.src.DAL.DatabaseContext;
 using Teszt__.src.ViewModels.Oktato_ViewModels;
 using System.Text.RegularExpressions;
-using Microsoft.EntityFrameworkCore;
 using DatabaseContext = Teszt__.src.DAL.DatabaseContext;
 using static Teszt__.src.Models.DatabaseContext;
 
@@ -35,31 +29,7 @@ namespace Teszt__.src.Commands.Oktato_Commands
 
         public override void Execute(object parameter)
         {
-            foreach (var item in _grid.Children)
-            {
-                if(item is TextBox)
-                {
-                    TextBox tb = (TextBox)item;
-
-                    if(tb.Text == String.Empty)
-                    {
-                        Message.Error("Nem töltöttél ki minden mezőt!");
-
-                        return;
-                    }
-                }
-                else if(item is DatePicker)
-                {
-                    DatePicker dp = (DatePicker)item;
-
-                    if(dp.SelectedDate == null)
-                    {
-                        Message.Error("Nem töltöttél ki minden mezőt!");
-
-                        return;
-                    }
-                }
-            }
+            if (!CheckControlInputs(_grid.Children)) return;
 
             for (int i = _grid.ColumnDefinitions.Count; i < _grid.Children.Count; i += _grid.ColumnDefinitions.Count)
             {
@@ -74,13 +44,31 @@ namespace Teszt__.src.Commands.Oktato_Commands
                         controls.Add(item);
                     }
                 }
+                else if(_viewModel.modelType == 2)
+                {
+                    for (int j = 0; j < _grid.Children.Count; j++)
+                    {
+                        if (
+                            _grid.Children[j] is TextBox ||
+                            _grid.Children[j] is DatePicker ||
+                            _grid.Children[j] is ComboBox ||
+                            _grid.Children[j] is CheckBox ||
+                            _grid.Children[j] is RadioButton
+                            )
+                        {
+                            Control item = (Control)_grid.Children[j];
+
+                            controls.Add(item);
+                        }
+                    }
+                }
 
                 switch (_viewModel.modelType)
                 {
                     case 0:
-                        if (CheckCourseInputs() && CheckIfInCourses())
+                        if (CheckCourseInputs() && CheckIfInCourses(controls))
                         {
-                            if(!SaveCourse(controls))
+                            if(!IfSaveCourseWasSuccessful(controls))
                             {
                                 return;
                             }
@@ -92,18 +80,20 @@ namespace Teszt__.src.Commands.Oktato_Commands
                         break;
 
                     case 1:
-                        if(CheckTestInputs())
+                        if(!IfSaveTestWasSuccessful(controls))
                         {
-                            if(!SaveTest(controls))
-                            {
-                                return;
-                            }
+                            return;
+                        }
+                        break;
+                    case 2:
+                        if (IfSaveQuestionWasSuccessful(controls))
+                        {
+                            return;
                         }
                         else
                         {
                             return;
                         }
-                        break;
                 }
 
                 controls.Clear();
@@ -123,14 +113,74 @@ namespace Teszt__.src.Commands.Oktato_Commands
                     type = "Teszt";
                     _grid = GridService.CreateTestGrid(ref _grid, ref _mainStackPanel);
                     break;
-                case 2:
-                    type = "Kérdés";
-                    _grid = GridService.CreateQuestionGrid(_grid, _mainStackPanel);
-                    break;
+
 
             }
 
             Message.Success($"{type} sikeresen létrehozva!");
+        }
+
+        private bool CheckControlInputs(UIElementCollection controls)
+        {
+            foreach (var item in controls)
+            {
+                if (item is TextBox)
+                {
+                    TextBox tb = (TextBox)item;
+
+                    if (tb.Text == String.Empty)
+                    {
+                        Message.Error("Nem töltöttél ki minden mezőt!");
+
+                        return false;
+                    }
+
+                    if (tb.Tag != null && !CheckIfNumber(tb.Text, tb.Tag.ToString()))
+                    {
+                        Message.Error("Nem számot adtál meg!");
+
+                        return false;
+                    }
+
+                    if (tb.Tag != null && !CheckIfTime(tb.Text, tb.Tag.ToString()))
+                    {
+                        Message.Error("Nem jó formátumban adtad meg az időt!\nHelyes formátum: 00:00");
+
+                        return false;
+                    }
+                    else if (tb.Tag != null && tb.Tag.ToString() == "time" && !CheckIfStartTimeIsLessThanEndTime())
+                    {
+                        Message.Error("Az indítási időpont nem lehet előbb, mint a befejezési idő!");
+
+                        return false;
+                    }
+
+                }
+                else if (item is DatePicker)
+                {
+                    DatePicker dp = (DatePicker)item;
+
+                    if (dp.SelectedDate == null)
+                    {
+                        Message.Error("Nem adtál meg dátumot!");
+
+                        return false;
+                    }
+                }
+                else if (item is ComboBox)
+                {
+                    ComboBox cb = (ComboBox)item;
+
+                    if (cb.SelectedIndex == -1)
+                    {
+                        Message.Error("Nem választottál a listából!");
+
+                        return false;
+                    }
+                }
+            }
+
+            return true;
         }
 
         private bool CheckIfNumber(string text, string tag)
@@ -212,13 +262,6 @@ namespace Teszt__.src.Commands.Oktato_Commands
                     {
                         inputNames.Add(tb.Text.ToUpper());
                     }
-
-                    if(tb.Tag != null && !CheckIfNumber(tb.Text, tb.Tag.ToString()))
-                    {
-                        Message.Error("Nem számot adtál meg!");
-
-                        return false;
-                    }
                 }
             }
 
@@ -231,45 +274,13 @@ namespace Teszt__.src.Commands.Oktato_Commands
             return true;
         }
 
-        private bool CheckTestInputs()
-        {
-            foreach (var item in _grid.Children)
-            {
-                if(item is TextBox)
-                {
-                    TextBox tb = (TextBox)item;
-
-                    if(tb.Tag != null && !CheckIfNumber(tb.Text, tb.Tag.ToString()))
-                    {
-                        Message.Error("Nem számot adtál meg!");
-
-                        return false;
-                    }
-                    else if(tb.Tag != null && !CheckIfTime(tb.Text, tb.Tag.ToString()))
-                    {
-                        Message.Error("Nem jó formátumban adtad meg az időt!\nHelyes formátum: óra:perc");
-
-                        return false;
-                    }
-                    else if(tb.Tag != null && tb.Tag.ToString() == "time" && !CheckIfStartTimeIsLessThanEndTime())
-                    {
-                        Message.Error("A kezdési időpont nem lehet előbb, mint a befejezés");
-
-                        return false;
-                    }
-                }
-            }
-
-            return true;
-        }
-
-        private bool CheckIfInCourses()
+        private bool CheckIfInCourses(List<Control> controls)
         {
             bool inputIsInCourses = false;
 
             string errorMessage = "";
 
-            foreach (var item in _grid.Children)
+            foreach (var item in controls)
             {
                 if(item is TextBox)
                 {
@@ -308,7 +319,7 @@ namespace Teszt__.src.Commands.Oktato_Commands
             }
         }
 
-        private bool SaveCourse(List<Control> controls)
+        private bool IfSaveCourseWasSuccessful(List<Control> controls)
         {
             TextBox name = (TextBox)controls[0];
             
@@ -318,47 +329,98 @@ namespace Teszt__.src.Commands.Oktato_Commands
 
             Course course = new Course(name.Text, number);
 
-            using (DatabaseContext database = new DatabaseContext())
-            {
-                database.Courses.Add(course);
-
-                database.SaveChanges();
-            } 
+            DatabaseContext.SaveCourse(course);
 
             return true;
         }
 
-        private bool SaveTest(List<Control> controls)
+        private bool IfSaveTestWasSuccessful(List<Control> controls)
         {
-            TextBox name = (TextBox)controls[0];
-
-            TextBox submit_limit = (TextBox)controls[1];
-
-            DatePicker datePicker = (DatePicker)controls[2];
-
-            TextBox startTime = (TextBox)controls[3];
-            
-            TextBox endTime = (TextBox)controls[4];
-
-            ComboBox course = (ComboBox)controls[5];
-
-            Test test = new Test(name.Text, Convert.ToInt32(submit_limit.Text), datePicker.SelectedDate.Value.Date.ToShortDateString(), startTime.Text, endTime.Text, Convert.ToInt32(course.SelectedValue));
-
             using (DatabaseContext database = new DatabaseContext())
             {
-                try
-                {
-                    database.Tests.Add(test);
 
-                    database.SaveChanges();
-                }
-                catch (DbUpdateException)
-                {
-                    Message.Error("Ilyen teszt már létezik az adatbázisban!");
+                TextBox name = (TextBox)controls[0];
 
-                    return false;
+                TextBox submit_limit = (TextBox)controls[1];
+
+                DatePicker datePicker = (DatePicker)controls[2];
+
+                TextBox startTime = (TextBox)controls[3];
+            
+                TextBox endTime = (TextBox)controls[4];
+
+                ComboBox course = (ComboBox)controls[5];
+
+                Course currentCourse = (Course) database.FindByName(course.SelectedValue.ToString(), typeof(Course));
+
+                Test newTest = new Test(name.Text.ToString(), Convert.ToInt32(submit_limit.Text), datePicker.SelectedDate.Value.Date.ToShortDateString(), startTime.Text.ToString(), endTime.Text.ToString(), currentCourse.Id);
+
+                DatabaseContext.SaveTest(newTest);
+            }
+
+            return true;
+        }
+
+        private bool IfSaveQuestionWasSuccessful(List<Control> controls)
+        {
+            using (DatabaseContext database = new DatabaseContext())
+            {
+                ComboBox questionType = (ComboBox)controls[0];
+
+                ComboBox testName = (ComboBox)controls[1];
+
+                TextBox pont = (TextBox)controls[2];
+
+                TextBox questionName = (TextBox)controls[3];
+
+                Test currentTest = (Test)database.FindByName(testName.SelectedValue.ToString(), typeof(Test));
+
+                Question question = new Question(questionName.Text.ToString(), questionType.SelectedValue.ToString(), Convert.ToInt32(pont.Text), currentTest.Id);
+
+                DatabaseContext.SaveQuestion(question);
+
+                int step = controls.Count % 2 == 0 ? 2 : 1;
+
+                for (int i = 4; i < controls.Count; i += step)
+                {
+                    TextBox questionValue = (TextBox)controls[i];
+
+                    bool answer = false;
+
+                    if(step == 2)
+                    {
+                        if (controls[i + 1] is CheckBox)
+                        {
+                            CheckBox answerCheckBox = (CheckBox)controls[i + 1];
+
+                            answer = (bool)answerCheckBox.IsChecked;
+                        }
+                        else if (controls[i + 1] is RadioButton)
+                        {
+                            RadioButton answerRadioButton = (RadioButton)controls[i + 1];
+
+                            answer = (bool)answerRadioButton.IsChecked;
+                        }
+                    }
+                    else
+                    {
+                        answer = true;
+                    }
+
+                    Question questionForAnswer = database.Questions.Where(item => item.Name == questionName.Text.ToString()).FirstOrDefault();
+
+                    Answer newAnswer = new Answer(questionValue.Text.ToString(), answer, questionForAnswer.Id);
+
+                    DatabaseContext.SaveAnswer(newAnswer);
                 }
             }
+
+            GridService.ClearGrid(ref _grid, ref _mainStackPanel);
+
+            _grid = GridService.CreateQuestionGrid(_grid, _mainStackPanel);
+
+            Message.Success($"Kérdés sikeresen létrehozva!");
+
             return true;
         }
     }

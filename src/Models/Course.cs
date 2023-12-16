@@ -23,6 +23,13 @@ namespace Teszt__.src.Models
                 this.Name = name;
                 this.User_limit = user_limit;
             }
+
+            public Course(int id, string name, int user_limit)
+            {
+                Id = id;
+                Name = name;
+                User_limit = user_limit;
+            }
         }
     }
 }

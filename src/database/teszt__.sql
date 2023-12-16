@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Gép: localhost
--- Létrehozás ideje: 2023. Nov 26. 16:51
+-- Létrehozás ideje: 2023. Dec 15. 20:30
 -- Kiszolgáló verziója: 10.4.25-MariaDB
 -- PHP verzió: 8.1.10
 
@@ -22,6 +22,28 @@ SET time_zone = "+00:00";
 --
 CREATE DATABASE IF NOT EXISTS `teszt++` DEFAULT CHARACTER SET utf8 COLLATE utf8_hungarian_ci;
 USE `teszt++`;
+
+-- --------------------------------------------------------
+
+--
+-- Tábla szerkezet ehhez a táblához `answers`
+--
+
+CREATE TABLE `answers` (
+  `id` int(11) NOT NULL,
+  `value` varchar(100) COLLATE utf8_hungarian_ci NOT NULL,
+  `correct` tinyint(1) NOT NULL,
+  `questionId` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_hungarian_ci;
+
+--
+-- A tábla adatainak kiíratása `answers`
+--
+
+INSERT INTO `answers` (`id`, `value`, `correct`, `questionId`) VALUES
+(1, 'A', 0, 1),
+(2, 'B', 1, 1),
+(3, 'C', 0, 1);
 
 -- --------------------------------------------------------
 
@@ -49,11 +71,19 @@ INSERT INTO `courses` (`id`, `name`, `user_limit`) VALUES
 --
 
 CREATE TABLE `questions` (
+  `id` int(11) NOT NULL,
   `name` varchar(100) COLLATE utf8_hungarian_ci NOT NULL,
-  `answers` blob NOT NULL,
   `questionType` varchar(100) COLLATE utf8_hungarian_ci NOT NULL,
-  `testName` varchar(100) COLLATE utf8_hungarian_ci NOT NULL
+  `value` int(11) NOT NULL,
+  `testId` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_hungarian_ci;
+
+--
+-- A tábla adatainak kiíratása `questions`
+--
+
+INSERT INTO `questions` (`id`, `name`, `questionType`, `value`, `testId`) VALUES
+(1, 'Q', 'Rádiógomb', 0, NULL);
 
 -- --------------------------------------------------------
 
@@ -68,7 +98,7 @@ CREATE TABLE `tests` (
   `date` varchar(100) COLLATE utf8_hungarian_ci NOT NULL,
   `startTime` varchar(100) COLLATE utf8_hungarian_ci NOT NULL,
   `endTime` varchar(100) COLLATE utf8_hungarian_ci NOT NULL,
-  `CourseId` int(11) NOT NULL
+  `CourseId` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_hungarian_ci;
 
 --
@@ -76,8 +106,7 @@ CREATE TABLE `tests` (
 --
 
 INSERT INTO `tests` (`id`, `name`, `submit_limit`, `date`, `startTime`, `endTime`, `CourseId`) VALUES
-(1, 'CS2', 2, '2023. 10. 30.', '10:00', '12:00', 1),
-(2, 'League of Legends', 1, '2023. 10. 31.', '01:00', '02:00', 1);
+(1, 'League Of Legends', 2, '2023. 12. 15.', '10:00', '12:00', 1);
 
 -- --------------------------------------------------------
 
@@ -105,6 +134,13 @@ INSERT INTO `users` (`name`, `password`, `email`, `admin`) VALUES
 --
 
 --
+-- A tábla indexei `answers`
+--
+ALTER TABLE `answers`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `Question` (`questionId`);
+
+--
 -- A tábla indexei `courses`
 --
 ALTER TABLE `courses`
@@ -114,16 +150,15 @@ ALTER TABLE `courses`
 -- A tábla indexei `questions`
 --
 ALTER TABLE `questions`
-  ADD PRIMARY KEY (`name`),
-  ADD KEY `testName` (`testName`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `Test` (`testId`);
 
 --
 -- A tábla indexei `tests`
 --
 ALTER TABLE `tests`
   ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `name` (`name`),
-  ADD KEY `CourseId` (`CourseId`);
+  ADD KEY `CourseId` (`CourseId`) USING BTREE;
 
 --
 -- A tábla indexei `users`
@@ -136,32 +171,50 @@ ALTER TABLE `users`
 --
 
 --
+-- AUTO_INCREMENT a táblához `answers`
+--
+ALTER TABLE `answers`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
 -- AUTO_INCREMENT a táblához `courses`
 --
 ALTER TABLE `courses`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+
+--
+-- AUTO_INCREMENT a táblához `questions`
+--
+ALTER TABLE `questions`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- AUTO_INCREMENT a táblához `tests`
 --
 ALTER TABLE `tests`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- Megkötések a kiírt táblákhoz
 --
 
 --
+-- Megkötések a táblához `answers`
+--
+ALTER TABLE `answers`
+  ADD CONSTRAINT `Question` FOREIGN KEY (`questionId`) REFERENCES `questions` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
 -- Megkötések a táblához `questions`
 --
 ALTER TABLE `questions`
-  ADD CONSTRAINT `Question` FOREIGN KEY (`testName`) REFERENCES `tests` (`name`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `Test` FOREIGN KEY (`testId`) REFERENCES `tests` (`id`) ON DELETE SET NULL ON UPDATE CASCADE;
 
 --
 -- Megkötések a táblához `tests`
 --
 ALTER TABLE `tests`
-  ADD CONSTRAINT `Course` FOREIGN KEY (`CourseId`) REFERENCES `courses` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `Course` FOREIGN KEY (`CourseId`) REFERENCES `courses` (`id`) ON DELETE SET NULL ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

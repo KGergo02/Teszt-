@@ -40,12 +40,24 @@
             <GradientStop Color="#FF03389A"/>
         </LinearGradientBrush>
     </Page.Background>
-    
+
 
     <ScrollViewer VerticalScrollBarVisibility="Auto">
         <StackPanel>
-            <Grid Background="Black" >
-                <Menu HorizontalAlignment="Left" FontWeight="Bold" Foreground="Cyan" Background="Black">
+            <Grid >
+                <Grid.Background>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="Black" Offset="0.977"/>
+                        <GradientStop Color="Cyan" Offset="1"/>
+                    </LinearGradientBrush>
+                </Grid.Background>
+                <Menu HorizontalAlignment="Left" FontWeight="Bold" Foreground="Cyan">
+                    <Menu.Background>
+                        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                            <GradientStop Color="Black" Offset="0.977"/>
+                            <GradientStop Color="Cyan" Offset="1"/>
+                        </LinearGradientBrush>
+                    </Menu.Background>
                     <MenuItem Header="Kurzus" Height="Auto" FontSize="30px" Style="{StaticResource MenuItem}">
                         <MenuItem Header="Kurzusok megtekintése" FontSize="20px" Height="30px" Background="Black" Foreground="Cyan" Style="{StaticResource NoHoverMenuItemStyle}"></MenuItem>
                         <MenuItem Header="Teszt hozzárendelése" FontSize="20px" Height="30px" Background="Black" Foreground="Cyan" Style="{StaticResource NoHoverMenuItemStyle}"></MenuItem>
@@ -61,7 +73,13 @@
                     </MenuItem>
                     <MenuItem Header="Eredmények megtekintése" FontSize="30px" Style="{StaticResource MenuItem}"/>
                 </Menu>
-                <Menu HorizontalAlignment="Right" Background="Black" Foreground="Cyan">
+                <Menu HorizontalAlignment="Right" Foreground="Cyan">
+                    <Menu.Background>
+                        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                            <GradientStop Color="Black" Offset="0.977"/>
+                            <GradientStop Color="Cyan" Offset="1"/>
+                        </LinearGradientBrush>
+                    </Menu.Background>
                     <MenuItem Header="Profil" FontSize="30px"  VerticalAlignment="Top" FontWeight="Bold" Margin="0,0,50,0">
                         <MenuItem Header="Adatok módosítása" FontSize="20px" Height="30px" Background="Black" Foreground="Cyan" Style="{StaticResource NoHoverMenuItemStyle}"/>
                         <MenuItem Header="Kijelentkezés" FontSize="20px" Height="30px" Background="Black" Foreground="Cyan" Style="{StaticResource NoHoverMenuItemStyle}" Command="{Binding LogOutCommand}"/>
@@ -74,9 +92,9 @@
 
             </StackPanel>
 
-            <WrapPanel HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,30,0,10">
-                <Button x:Name="AddNewRowButton" Content="Új sor" FontSize="30px" Width="120px" Height="45px" Command="{Binding AddNewRowCommand}" Margin="0,0,16,0"/>
-                <Button Content="Küldés" FontSize="30px" Width="120px" Height="45px" Command="{Binding SendCommand}"/>
+            <WrapPanel HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,100,0,10">
+                <Button x:Name="AddNewRowButton" Content="Új sor" FontSize="30px" Width="150px" Height="45px" Command="{Binding AddNewRowCommand}" Margin="0,0,100,0"/>
+                <Button Content="Küldés" FontSize="30px" Width="150px" Height="45px" Command="{Binding SendCommand}"/>
             </WrapPanel>
 
         </StackPanel>

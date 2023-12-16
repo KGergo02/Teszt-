@@ -9,26 +9,43 @@ namespace Teszt__.src.Models
         public class Question
         {
             [Key]
+            public int Id { get; set; }
+
             public string Name { get; set; }
 
-            [NotMapped]
-            public List<string> Answers { get; set; }
+            public string QuestionType { get; set; }
 
-            public string questionType { get; set; }
+            public int Value { get; set; }
 
-            public string testName;
+            public int? TestId { get; set; }
 
             public Question()
             {
 
             }
 
-            public Question(string name, List<string> answers, string questionType, string testName)
+            public Question(string name, string questionType, int value, int? testId)
             {
                 Name = name;
-                Answers = answers;
-                this.questionType = questionType;
-                this.testName = testName;
+                QuestionType = questionType;
+                Value = value;
+                TestId = testId;
+            }
+
+            public Question(int id, string name, string questionType, int value, int testId)
+            {
+                Id = id;
+                Name = name;
+                QuestionType = questionType;
+                Value = value;
+                TestId = testId;
+            }
+
+            public static Question operator + (Question question, Test test)
+            {
+                question.TestId = test.Id;
+
+                return question;
             }
         }
     }

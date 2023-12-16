@@ -236,6 +236,7 @@
     <Compile Include="src\Commands\Oktato_Commands\SendCommand.cs" />
     <Compile Include="src\Commands\RegisterCommand.cs" />
     <Compile Include="src\Commands\RegisterLabelCommand.cs" />
+    <Compile Include="src\Models\Answer.cs" />
     <Compile Include="src\Models\Course.cs" />
     <Compile Include="src\Models\InputField.cs" />
     <Compile Include="src\Models\Question.cs" />

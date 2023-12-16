@@ -45,9 +45,7 @@ namespace Teszt__.src.Commands
                 {
                     User user = new User(viewModel.Username, JelszoTitkosito.Encrypt(SecureStringToString(viewModel.Password1)), viewModel.Email, false);
 
-                    database.Users.Add(user);
-
-                    database.SaveChanges();
+                    DatabaseContext.SaveUser(user);
 
                     Message.Success("A regisztráció sikeres volt!");
 

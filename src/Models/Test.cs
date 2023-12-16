@@ -1,4 +1,7 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Teszt__.src.Models
 {
@@ -8,6 +11,7 @@ namespace Teszt__.src.Models
         {
             [Key]
             public int Id { get; set; }
+            
             public string Name { get; set; }
 
             public int Submit_Limit { get; set; }
@@ -18,7 +22,7 @@ namespace Teszt__.src.Models
 
             public string EndTime { get; set; }
 
-            public int CourseId { get; set; }
+            public int? CourseId { get; set; }
 
             public Test()
             {
@@ -33,6 +37,27 @@ namespace Teszt__.src.Models
                 this.StartTime = startTime;
                 this.EndTime = endTime;
                 this.CourseId = courseid;
+            }
+
+            public Test(string name, int submit_Limit, string date, string startTime, string endTime, int? courseId)
+            {
+                Name = name;
+                Submit_Limit = submit_Limit;
+                Date = date;
+                StartTime = startTime;
+                EndTime = endTime;
+                CourseId = courseId;
+            }
+
+            public Test(int id, string name, int submit_Limit, string date, string startTime, string endTime, int courseId)
+            {
+                Id = id;
+                Name = name;
+                Submit_Limit = submit_Limit;
+                Date = date;
+                StartTime = startTime;
+                EndTime = endTime;
+                CourseId = courseId;
             }
         }
     }

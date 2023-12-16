@@ -7,5 +7,4 @@
         Title="Teszt++" Height="450" Width="800" 
         Source="MainWindowView.xaml"
         ShowsNavigationUI="False"
-                  >
-</NavigationWindow>
+                  />

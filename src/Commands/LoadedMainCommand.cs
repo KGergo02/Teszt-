@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Teszt__.src.DAL;
+using static Teszt__.src.Models.DatabaseContext;
 
 namespace Teszt__.src.Commands
 {
