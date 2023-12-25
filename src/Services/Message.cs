@@ -9,19 +9,19 @@ namespace Teszt__.src.Services
 {
     public static class Message
     {
-        public static void Error(string uzenet)
+        public static void Error(string message)
         {
-            MessageBox.Show(uzenet, "Hiba", MessageBoxButton.OK, MessageBoxImage.Error);
+            MessageBox.Show(message, "Hiba", MessageBoxButton.OK, MessageBoxImage.Error);
         }
 
-        public static void Success(string uzenet)
+        public static void Success(string message)
         {
-            MessageBox.Show(uzenet, "Siker", MessageBoxButton.OK, MessageBoxImage.Information);
+            MessageBox.Show(message, "Siker", MessageBoxButton.OK, MessageBoxImage.Information);
         }
 
-        public static MessageBoxResult Question(string uzenet)
+        public static MessageBoxResult Question(string message)
         {
-            return MessageBox.Show(uzenet, "Kérdés", MessageBoxButton.YesNo, MessageBoxImage.Question);
+            return MessageBox.Show(message, "Kérdés", MessageBoxButton.YesNo, MessageBoxImage.Question);
         }
     }
 }
