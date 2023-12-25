@@ -1,4 +1,5 @@
 ﻿using System.Windows.Navigation;
+using Teszt__.src.Services;
 using static Teszt__.src.Models.DatabaseContext;
 
 namespace Teszt__.src.ViewModels
@@ -42,6 +43,8 @@ namespace Teszt__.src.ViewModels
             _username = user.Name;
 
             _titleName = $"Főoldal - {user.Name}";
+
+            navigationWindow.Closing += WindowService.OnWindowClosingLogoutUserQuestion;
         }
     }
 }
