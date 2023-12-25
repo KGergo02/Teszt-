@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Teszt__.src.Views"
         mc:Ignorable="d"
-        Title="Regisztráció" Height="127" Width="0" MinWidth="473" MinHeight="508" WindowStartupLocation="CenterScreen" KeyDown="SendRegisterData">
+        Title="Regisztráció" Height="127" Width="0" MinWidth="473" MinHeight="508" WindowStartupLocation="CenterScreen" KeyDown="SendRegisterData" Icon="/src/Resources/favicon.ico">
     <ScrollViewer>
         <StackPanel Background="Blue">
             <Label Content="Felhasználónév" FontSize="36" HorizontalAlignment="Center" Margin="0,50,0,5" Foreground="White" FontWeight="Bold"/>

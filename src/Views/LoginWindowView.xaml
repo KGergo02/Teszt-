@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Teszt__.src.Views"
         mc:Ignorable="d"
-        Title="Bejelentkezés" Height="366.06" Width="110.109" WindowStartupLocation="CenterScreen" MinWidth="367.109" MinHeight="409.06" KeyDown="SendLoginData">
+        Title="Bejelentkezés" Height="366.06" Width="110.109" WindowStartupLocation="CenterScreen" MinWidth="367.109" MinHeight="409.06" KeyDown="SendLoginData" Icon="/src/Resources/favicon.ico">
 
 
 

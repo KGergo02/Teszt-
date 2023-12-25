@@ -5,6 +5,7 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using Teszt__.src.Commands;
 using Teszt__.src.Models;
+using Teszt__.src.Services;
 using Teszt__.src.Views;
 
 namespace Teszt__.src.ViewModels
@@ -49,6 +50,8 @@ namespace Teszt__.src.ViewModels
             inputField = window.inputField;
 
             RegisterCommand = new RegisterCommand(this);
+
+            window.Closing += WindowService.OnWindowClosing;
         }
 
         public void SetPasswords(SecureString password1, SecureString password2)

@@ -246,6 +246,7 @@
     <Compile Include="src\Services\JelszoTitkosito.cs" />
     <Compile Include="src\Services\Message.cs" />
     <Compile Include="src\Services\SecureStringConvert.cs" />
+    <Compile Include="src\Services\WindowService.cs" />
     <Compile Include="src\ViewModels\Hallgato_ViewModels\HallgatoMainViewModel.cs" />
     <Compile Include="src\ViewModels\LoginWindowViewModel.cs" />
     <Compile Include="src\ViewModels\MainWindowViewModel.cs" />
@@ -327,6 +328,9 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="src\Commands\Hallgato_Commands\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="src\Resources\favicon.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="packages\Microsoft.Data.SqlClient.SNI.1.1.0\build\net46\Microsoft.Data.SqlClient.SNI.targets" Condition="Exists('packages\Microsoft.Data.SqlClient.SNI.1.1.0\build\net46\Microsoft.Data.SqlClient.SNI.targets')" />

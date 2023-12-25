@@ -55,9 +55,9 @@ namespace Teszt__.src.ViewModels.Oktato_ViewModels
             grid = GridService.CreateCourseGrid(ref grid, ref _mainStackPanel);
 
             CreateCourseCommand = new CreateCourseCommand(ref grid, ref _mainStackPanel, this);
-            
+
             CreateTestCommand = new CreateTestCommand(ref grid, ref _mainStackPanel, this);
-            
+
             CreateQuestionCommand = new CreateQuestionCommand(ref grid, ref _mainStackPanel, this);
 
             LogOutCommand = new LogOutCommand(_navigationWindow);
@@ -65,6 +65,8 @@ namespace Teszt__.src.ViewModels.Oktato_ViewModels
             AddNewRowCommand = new AddNewRowCommand(ref grid, this);
 
             SendCommand = new SendCommand(ref grid, ref _mainStackPanel, this);
+
+            navigationWindow.Closing += WindowService.OnWindowClosingLogoutUserQuestion;
         }
 
         public ICommand CreateCourseCommand { get; }

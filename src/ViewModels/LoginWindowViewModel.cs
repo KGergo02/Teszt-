@@ -9,6 +9,7 @@ using System.Windows.Input;
 using System.Windows.Navigation;
 using Teszt__.src.Commands;
 using Teszt__.src.Models;
+using Teszt__.src.Services;
 using Teszt__.src.Views;
 
 namespace Teszt__.src.ViewModels
@@ -33,6 +34,8 @@ namespace Teszt__.src.ViewModels
             inputField = window.inputField;
 
             LoginCommand = new LoginCommand(this, window, admin, navigationWindow);
+
+            window.Closing += WindowService.OnWindowClosing;
         }
 
         public SecureString Password { get; private set; }
@@ -41,10 +44,16 @@ namespace Teszt__.src.ViewModels
         {
             get;
         }
+        
+        public ICommand ClosingCommand
+        {
+            get;
+        }
 
         public void SetPassword(SecureString password)
         {
             Password = password;
         }
+
     }
 }

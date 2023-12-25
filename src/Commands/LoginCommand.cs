@@ -76,6 +76,8 @@ namespace Teszt__.src.Commands
 
                         Message.Success("Sikeres bejelentkezés!");
 
+                        LoginWindow.Closing -= WindowService.OnWindowClosing;
+
                         LoginWindow.Close();
 
                         OktatoMainView window = new OktatoMainView();
@@ -96,6 +98,8 @@ namespace Teszt__.src.Commands
                     // hallgató view
 
                     Message.Success("Sikeres bejelentkezés!");
+
+                    LoginWindow.Closing -= WindowService.OnWindowClosing;
 
                     LoginWindow.Close();
 
