@@ -32,5 +32,14 @@ namespace Teszt__.src.Services
 
             return Convert.ToBase64String(vegeredmenyek_tomb);
         }
+
+        public static string Decrypt(string encryptedString)
+        {
+            var data = Convert.FromBase64String(encryptedString);
+            var tripleDes = GetCryproProvider();
+            var transform = tripleDes.CreateDecryptor();
+            var resultsByteArray = transform.TransformFinalBlock(data, 0, data.Length);
+            return Encoding.UTF8.GetString(resultsByteArray);
+        }
     }
 }
