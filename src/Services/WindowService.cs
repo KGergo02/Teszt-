@@ -40,7 +40,7 @@ namespace Teszt__.src.Services
 
                 navigationWindow.Closing -= OnWindowClosingLogoutUserQuestion;
 
-                navigationWindow.Navigate(new Uri("src/Views/MainWindowView.xaml", UriKind.Relative));
+                NavigationService.NavigateToHomePage(navigationWindow);
             }
         }
 
