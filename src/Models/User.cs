@@ -24,6 +24,18 @@ namespace Teszt__.src.Models
                 this.Email = email;
                 this.Admin = admin;
             }
+
+            public override bool Equals(object obj)
+            {
+                User user = (User)obj;
+
+                return this.Name == user.Name && this.Email == user.Email && this.Password == user.Password && this.Admin == user.Admin;
+            }
+
+            public override int GetHashCode()
+            {
+                return base.GetHashCode();
+            }
         }
     }
 }

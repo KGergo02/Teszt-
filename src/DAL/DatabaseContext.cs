@@ -186,6 +186,11 @@ namespace Teszt__.src.DAL
             {
                 User savedUser = database.Users.Find(initialUsername);
 
+                if(savedUser == user)
+                {
+                    return;
+                }
+
                 if(savedUser != null)
                 {
                     database.Users.Remove(savedUser);
