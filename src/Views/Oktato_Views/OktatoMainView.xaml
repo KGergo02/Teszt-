@@ -81,7 +81,7 @@
                         </LinearGradientBrush>
                     </Menu.Background>
                     <MenuItem Header="Profil" FontSize="30px"  VerticalAlignment="Top" FontWeight="Bold" Margin="0,0,50,0">
-                        <MenuItem Header="Adatok módosítása" FontSize="20px" Height="30px" Background="Black" Foreground="Cyan" Style="{StaticResource NoHoverMenuItemStyle}"/>
+                        <MenuItem Header="Adatok módosítása" FontSize="20px" Height="30px" Background="Black" Foreground="Cyan" Style="{StaticResource NoHoverMenuItemStyle}" Command="{Binding ShowUserProfileCommand}"/>
                         <MenuItem Header="Kijelentkezés" FontSize="20px" Height="30px" Background="Black" Foreground="Cyan" Style="{StaticResource NoHoverMenuItemStyle}" Command="{Binding LogOutCommand}"/>
                     </MenuItem>
                 </Menu>
