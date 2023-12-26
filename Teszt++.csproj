@@ -239,6 +239,7 @@
     <Compile Include="src\Commands\User_Commands\DeleteUserCommand.cs" />
     <Compile Include="src\Commands\User_Commands\EditUserInfoCommand.cs" />
     <Compile Include="src\Commands\User_Commands\ShowUserProfileCommand.cs" />
+    <Compile Include="src\Commands\User_Commands\UpdateUserInfoCommand.cs" />
     <Compile Include="src\Models\Answer.cs" />
     <Compile Include="src\Models\Course.cs" />
     <Compile Include="src\Models\InputField.cs" />
@@ -250,12 +251,14 @@
     <Compile Include="src\Services\Message.cs" />
     <Compile Include="src\Services\NavigationService.cs" />
     <Compile Include="src\Services\SecureStringConvert.cs" />
+    <Compile Include="src\Services\UserService.cs" />
     <Compile Include="src\Services\WindowService.cs" />
     <Compile Include="src\ViewModels\Hallgato_ViewModels\HallgatoMainViewModel.cs" />
     <Compile Include="src\ViewModels\LoginWindowViewModel.cs" />
     <Compile Include="src\ViewModels\MainWindowViewModel.cs" />
     <Compile Include="src\ViewModels\Oktato_ViewModels\OktatoMainViewModel.cs" />
     <Compile Include="src\ViewModels\RegisterWindowViewModel.cs" />
+    <Compile Include="src\ViewModels\User_ViewModels\EditUserInfoViewModel.cs" />
     <Compile Include="src\ViewModels\User_ViewModels\UserProfileViewModel.cs" />
     <Compile Include="src\ViewModels\ViewModelBase.cs" />
     <Compile Include="src\Views\Hallgato_Views\HallgatoMainView.xaml.cs">
@@ -269,6 +272,9 @@
     </Compile>
     <Compile Include="src\Views\RegisterWindowView.xaml.cs">
       <DependentUpon>RegisterWindowView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="src\Views\User_Views\EditUserInfoView.xaml.cs">
+      <DependentUpon>EditUserInfoView.xaml</DependentUpon>
     </Compile>
     <Compile Include="src\Views\User_Views\UserProfileView.xaml.cs">
       <DependentUpon>UserProfileView.xaml</DependentUpon>
@@ -330,6 +336,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="src\Views\RegisterWindowView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="src\Views\User_Views\EditUserInfoView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
