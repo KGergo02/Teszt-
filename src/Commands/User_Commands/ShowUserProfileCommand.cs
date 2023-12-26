@@ -15,12 +15,12 @@ namespace Teszt__.src.Commands.User_Commands
         private DatabaseContext.User user;
         private NavigationWindow navigationWindow;
 
-        public ShowUserProfileCommand(DatabaseContext.User user)
+        public ShowUserProfileCommand(ref DatabaseContext.User user)
         {
             this.user = user;
         }
 
-        public ShowUserProfileCommand(DatabaseContext.User user, NavigationWindow navigationWindow) : this(user)
+        public ShowUserProfileCommand(ref DatabaseContext.User user, NavigationWindow navigationWindow) : this(ref user)
         {
             this.navigationWindow = navigationWindow;
         }
@@ -29,7 +29,7 @@ namespace Teszt__.src.Commands.User_Commands
         {
             UserProfileView profileView = new UserProfileView();
 
-            profileView.DataContext = new UserProfileViewModel(user, profileView, navigationWindow);
+            profileView.DataContext = new UserProfileViewModel(ref user, profileView, navigationWindow);
            
             profileView.ShowDialog();
         }

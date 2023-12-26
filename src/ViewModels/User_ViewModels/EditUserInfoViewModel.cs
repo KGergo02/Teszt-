@@ -45,7 +45,7 @@ namespace Teszt__.src.ViewModels.User_ViewModels
         public SecureString Password1 { get; private set; }
         public SecureString Password2 { get; private set; }
 
-        public EditUserInfoViewModel(DatabaseContext.User user, EditUserInfoView window)
+        public EditUserInfoViewModel(ref DatabaseContext.User user, EditUserInfoView window)
         {
             this.user = user;
             
@@ -63,7 +63,7 @@ namespace Teszt__.src.ViewModels.User_ViewModels
             
             inputField.passwordBoxes["password2"].Password = JelszoTitkosito.Decrypt(user.Password);
 
-            UpdateUserInfoCommand = new UpdateUserInfoCommand(user.Name, inputField, user.Admin, window);
+            UpdateUserInfoCommand = new UpdateUserInfoCommand(ref user, inputField, window);
         }
 
         public void SetPasswords(SecureString password1, SecureString password2)

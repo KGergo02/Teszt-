@@ -15,11 +15,11 @@ namespace Teszt__.src.Services
             navigationWindow.Navigate(new Uri("src/Views/MainWindowView.xaml", UriKind.Relative));
         }
 
-        public static void NavigateToOktatoView(User user, NavigationWindow navigationWindow)
+        public static void NavigateToOktatoView(ref User user, NavigationWindow navigationWindow)
         {
             OktatoMainView window = new OktatoMainView();
 
-            window.DataContext = new OktatoMainViewModel(user, window, navigationWindow);
+            window.DataContext = new OktatoMainViewModel(ref user, window, navigationWindow);
 
             navigationWindow.Navigate(window);
         }

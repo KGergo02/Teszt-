@@ -14,6 +14,8 @@ namespace Teszt__.src.Commands.User_Commands
 {
     public class UpdateUserInfoCommand : CommandBase
     {
+        private User user;
+
         private string initialUsername;
 
         private InputField inputField;
@@ -22,13 +24,15 @@ namespace Teszt__.src.Commands.User_Commands
 
         EditUserInfoView window;
 
-        public UpdateUserInfoCommand(string name, InputField inputField, bool admin, Views.User_Views.EditUserInfoView window)
+        public UpdateUserInfoCommand(ref User user, InputField inputField, Views.User_Views.EditUserInfoView window)
         {
-            initialUsername = name;
+            this.user = user;
+
+            initialUsername = user.Name;
 
             this.inputField = inputField;
 
-            isAdmin = admin;
+            isAdmin = user.Admin;
 
             this.window = window;
         }
@@ -65,9 +69,17 @@ namespace Teszt__.src.Commands.User_Commands
                 }
                 else
                 {
-                    User user = new User(username, JelszoTitkosito.Encrypt(SecureStringConvert.ToString(password1)), email, isAdmin);
+                    //user = new User(username, JelszoTitkosito.Encrypt(SecureStringConvert.ToString(password1)), email, isAdmin);
 
-                    DAL.DatabaseContext.UpdateUser(initialUsername, user);
+                    user.Name = username;
+
+                    user.Email = email;
+
+                    user.Password = JelszoTitkosito.Encrypt(SecureStringConvert.ToString(password1));
+
+                    user.Admin = isAdmin;
+
+                    DAL.DatabaseContext.UpdateUser(initialUsername, ref user);
 
                     window.Closing -= WindowService.OnWindowClosing;
 

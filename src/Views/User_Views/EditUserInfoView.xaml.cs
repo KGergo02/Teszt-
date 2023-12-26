@@ -15,6 +15,7 @@ using System.Windows.Shapes;
 using Teszt__.src.Commands.User_Commands;
 using Teszt__.src.Models;
 using Teszt__.src.ViewModels;
+using Teszt__.src.ViewModels.User_ViewModels;
 
 namespace Teszt__.src.Views.User_Views
 {
@@ -65,6 +66,16 @@ namespace Teszt__.src.Views.User_Views
             if (DataContext is RegisterWindowViewModel viewModel)
             {
                 viewModel.SetPasswords(TB_password1.SecurePassword, TB_password2.SecurePassword);
+            }
+        }
+
+        private void SendUserData(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter && DataContext is EditUserInfoViewModel viewModel)
+            {
+                viewModel.SetPasswords(TB_password1.SecurePassword, TB_password2.SecurePassword);
+
+                viewModel.UpdateUserInfoCommand.Execute(this);
             }
         }
     }

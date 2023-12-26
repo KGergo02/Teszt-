@@ -19,14 +19,14 @@ namespace Teszt__.src.Commands.User_Commands
         private NavigationWindow navigationWindow;
         private UserProfileView window;
 
-        public DeleteUserCommand(Models.DatabaseContext.User user, NavigationWindow navigationWindow)
+        public DeleteUserCommand(ref Models.DatabaseContext.User user, NavigationWindow navigationWindow)
         {
             this.user = user;
 
             this.navigationWindow = navigationWindow;
         }
 
-        public DeleteUserCommand(Models.DatabaseContext.User user, UserProfileView window, NavigationWindow navigationWindow)
+        public DeleteUserCommand(ref Models.DatabaseContext.User user, UserProfileView window, NavigationWindow navigationWindow)
         {
             this.user = user;
             this.window = window;

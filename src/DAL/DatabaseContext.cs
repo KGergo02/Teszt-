@@ -180,13 +180,16 @@ namespace Teszt__.src.DAL
             }
         }
 
-        public static void UpdateUser(string initialUsername, User user)
+        public static void UpdateUser(string initialUsername, ref User user)
         {
             using (DatabaseContext database = new DatabaseContext())
             {
                 User savedUser = database.Users.Find(initialUsername);
 
-                database.Users.Remove(savedUser);
+                if(savedUser != null)
+                {
+                    database.Users.Remove(savedUser);
+                }
 
                 database.Users.Add(user);
 

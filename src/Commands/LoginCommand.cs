@@ -80,7 +80,7 @@ namespace Teszt__.src.Commands
 
                         LoginWindow.Close();
 
-                        Services.NavigationService.NavigateToOktatoView(user, _navigationWindow);
+                        Services.NavigationService.NavigateToOktatoView(ref user, _navigationWindow);
                     }
                     else
                     {

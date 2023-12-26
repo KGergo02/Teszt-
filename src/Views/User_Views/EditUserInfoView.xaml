@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Teszt__.src.Views.User_Views"
         mc:Ignorable="d"
-        Title="Adatok módosítása" Height="450" Width="800" Background="Blue" WindowStartupLocation="CenterScreen" Icon="/src/Resources/favicon.ico"
+        Title="Adatok módosítása" Height="450" Width="800" Background="Blue" WindowStartupLocation="CenterScreen" Icon="/src/Resources/favicon.ico" KeyDown="SendUserData"
         >
     <ScrollViewer>
         <StackPanel Background="Blue">

@@ -15,12 +15,12 @@ namespace Teszt__.src.Commands.User_Commands
         private DatabaseContext.User user;
         private UserProfileView window;
 
-        public EditUserInfoCommand(DatabaseContext.User user)
+        public EditUserInfoCommand(ref DatabaseContext.User user)
         {
             this.user = user;
         }
 
-        public EditUserInfoCommand(DatabaseContext.User user, UserProfileView window) : this(user)
+        public EditUserInfoCommand(ref DatabaseContext.User user, UserProfileView window) : this(ref user)
         {
             this.window = window;
         }
@@ -29,7 +29,7 @@ namespace Teszt__.src.Commands.User_Commands
         {
             EditUserInfoView window = new EditUserInfoView();
 
-            window.DataContext = new EditUserInfoViewModel(user, window);
+            window.DataContext = new EditUserInfoViewModel(ref user, window);
 
             this.window.Close();
 
