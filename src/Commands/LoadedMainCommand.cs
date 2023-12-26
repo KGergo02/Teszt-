@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Teszt__.src.DAL;
-using static Teszt__.src.Models.DatabaseContext;
+﻿using Teszt__.src.DAL;
 
 namespace Teszt__.src.Commands
 {
