@@ -177,5 +177,18 @@ namespace Teszt__.src.DAL
                 }
             }
         }
+
+        public static void DeleteUser(User user)
+        {
+            using (DatabaseContext database = new DatabaseContext())
+            {
+                if(database.Users.Contains(user))
+                {
+                    database.Users.Remove(user);
+
+                    database.SaveChanges();
+                }
+            }
+        }
     }
 }
