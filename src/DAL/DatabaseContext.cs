@@ -1,7 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Windows.Documents;
 using Teszt__.src.Services;
 using static Teszt__.src.Models.DatabaseContext;
 
@@ -175,6 +177,20 @@ namespace Teszt__.src.DAL
                 {
                     Message.Error($"Hiba történt az adatbáziban a művelet végrehajtásakor!\nHiba:\n{DUE.InnerException.Message}");
                 }
+            }
+        }
+
+        public static void UpdateUser(string initialUsername, User user)
+        {
+            using (DatabaseContext database = new DatabaseContext())
+            {
+                User savedUser = database.Users.Find(initialUsername);
+
+                database.Users.Remove(savedUser);
+
+                database.Users.Add(user);
+
+                database.SaveChanges();
             }
         }
 
