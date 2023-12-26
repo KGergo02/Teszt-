@@ -3,6 +3,7 @@ using System.Windows.Input;
 using System.Windows.Navigation;
 using Teszt__.src.Commands;
 using Teszt__.src.Commands.Oktato_Commands;
+using Teszt__.src.Commands.User_Commands;
 using Teszt__.src.Services;
 using Teszt__.src.Views.Oktato_Views;
 using static Teszt__.src.Models.DatabaseContext;
@@ -66,6 +67,8 @@ namespace Teszt__.src.ViewModels.Oktato_ViewModels
 
             SendCommand = new SendCommand(ref grid, ref _mainStackPanel, this);
 
+            ShowUserProfileCommand = new ShowUserProfileCommand(user, navigationWindow);
+
             navigationWindow.Closing += WindowService.OnWindowClosingLogoutUserQuestion;
         }
 
@@ -76,5 +79,7 @@ namespace Teszt__.src.ViewModels.Oktato_ViewModels
         public ICommand AddNewRowCommand { get; }
         public ICommand SendCommand { get; }
         public ICommand ViewCourseCommand { get; }
+
+        public ICommand ShowUserProfileCommand { get; }
     }
 }

@@ -49,6 +49,8 @@ namespace Teszt__.src.Commands
 
                     Message.Success("A regisztráció sikeres volt!");
 
+                    viewModel.RegisterWindow.Closing -= WindowService.OnWindowClosing;
+
                     viewModel.RegisterWindow.Close();
                 }
             }          

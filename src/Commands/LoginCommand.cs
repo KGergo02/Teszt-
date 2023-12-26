@@ -80,11 +80,7 @@ namespace Teszt__.src.Commands
 
                         LoginWindow.Close();
 
-                        OktatoMainView window = new OktatoMainView();
-
-                        window.DataContext = new OktatoMainViewModel(user, window, _navigationWindow);
-
-                        _navigationWindow.Navigate(window);
+                        Services.NavigationService.NavigateToOktatoView(user, _navigationWindow);
                     }
                     else
                     {
@@ -103,11 +99,7 @@ namespace Teszt__.src.Commands
 
                     LoginWindow.Close();
 
-                    _navigationWindow.Navigate(new HallgatoMainView()
-                    {
-                        DataContext = new HallgatoMainViewModel(user, _navigationWindow)
-                    }
-                    );
+                    Services.NavigationService.NavigateToHallgatoView(user, _navigationWindow);
                 }
             }
             else
