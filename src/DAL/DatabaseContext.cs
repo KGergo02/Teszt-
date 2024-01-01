@@ -19,6 +19,8 @@ namespace Teszt__.src.DAL
 
         public DbSet<Answer> Answers { get; set; }
 
+        public DbSet<User_Course> User_Courses { get; set; }
+
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -84,6 +86,14 @@ namespace Teszt__.src.DAL
                 Console.WriteLine(e.Message);
 
                 return null;
+            }
+        }
+
+        public List<User_Course> GetUser_CourseListOfUser(User user)
+        {
+            using (DatabaseContext database = new DatabaseContext())
+            {
+                return database.User_Courses.Where(item => item.User_name == user.Name).ToList();
             }
         }
 

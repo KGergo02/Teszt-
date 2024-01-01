@@ -246,6 +246,7 @@
     <Compile Include="src\Models\Question.cs" />
     <Compile Include="src\Models\Test.cs" />
     <Compile Include="src\Models\User.cs" />
+    <Compile Include="src\Models\User_Course.cs" />
     <Compile Include="src\Services\GridService.cs" />
     <Compile Include="src\Services\JelszoTitkosito.cs" />
     <Compile Include="src\Services\Message.cs" />
