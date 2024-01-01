@@ -79,7 +79,7 @@
             <StackPanel x:Name="mainStackPanel" Margin="0,20,0,0" HorizontalAlignment="Center" VerticalAlignment="Center">
 
             </StackPanel>
-
+            
         </StackPanel>
     </ScrollViewer>
 

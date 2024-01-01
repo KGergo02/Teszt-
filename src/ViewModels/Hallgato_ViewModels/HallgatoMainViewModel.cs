@@ -1,8 +1,16 @@
-﻿using System.Windows.Input;
+﻿using System.Collections.Generic;
+using System.Drawing;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Documents;
+using System.Windows.Input;
+using System.Windows.Media;
 using System.Windows.Navigation;
 using Teszt__.src.Commands;
 using Teszt__.src.Commands.User_Commands;
+using Teszt__.src.DAL;
 using Teszt__.src.Services;
+using Teszt__.src.Views.Hallgato_Views;
 using static Teszt__.src.Models.DatabaseContext;
 
 namespace Teszt__.src.ViewModels
@@ -37,15 +45,25 @@ namespace Teszt__.src.ViewModels
             }
         }
 
+        private User _user;
+
         private NavigationWindow _navigationWindow;
 
-        public HallgatoMainViewModel(User user, NavigationWindow navigationWindow)
+        private StackPanel _mainStackPanel;
+
+        public HallgatoMainViewModel(ref User user, HallgatoMainView window, NavigationWindow navigationWindow)
         {
             _navigationWindow = navigationWindow;
             
             _username = user.Name;
 
-            _titleName = $"Főoldal - {user.Name}";
+            _titleName = $"Főoldal - {_username}";
+
+            _mainStackPanel = window.mainStackPanel;
+
+            _user = user;
+
+            FillStackPanelWithCourseCards();
 
             _navigationWindow.Closing += WindowService.OnWindowClosingLogoutUserQuestion;
 
@@ -56,5 +74,31 @@ namespace Teszt__.src.ViewModels
 
         public ICommand ShowUserProfileCommand { get; }
         public ICommand LogOutCommand { get; }
+
+        public void FillStackPanelWithCourseCards()
+        {
+            List<User_Course> user_courses;
+
+            using (DatabaseContext database = new DatabaseContext())
+            {
+                user_courses = database.GetUser_CourseListOfUser(_user);
+            }
+            
+            if(user_courses.Count == 0)
+            {
+                Label label = new Label()
+                {
+                    Content = "Nincs megjeleníthető kurzus",
+                    FontWeight = FontWeights.Bold,
+                    FontSize = 36,
+                    VerticalAlignment = VerticalAlignment.Center,
+                    HorizontalAlignment = HorizontalAlignment.Center,
+                    Foreground = System.Windows.Media.Brushes.White,
+                    Margin = new Thickness(0, 70, 0, 0)
+                };
+
+                _mainStackPanel.Children.Add(label);
+            }
+        }
     }
 }
