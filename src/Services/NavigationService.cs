@@ -24,12 +24,13 @@ namespace Teszt__.src.Services
             navigationWindow.Navigate(window);
         }
 
-        public static void NavigateToHallgatoView(User user, NavigationWindow navigationWindow)
+        public static void NavigateToHallgatoView(ref User user, NavigationWindow navigationWindow)
         {
-            navigationWindow.Navigate(new HallgatoMainView()
-            {
-                DataContext = new HallgatoMainViewModel(user, navigationWindow)
-            });
+            HallgatoMainView window = new HallgatoMainView();
+
+            window.DataContext = new HallgatoMainViewModel(ref user, window, navigationWindow);
+
+            navigationWindow.Navigate(window);
         }
     }
 }

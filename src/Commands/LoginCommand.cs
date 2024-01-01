@@ -99,7 +99,7 @@ namespace Teszt__.src.Commands
 
                     LoginWindow.Close();
 
-                    Services.NavigationService.NavigateToHallgatoView(user, _navigationWindow);
+                    Services.NavigationService.NavigateToHallgatoView(ref user, _navigationWindow);
                 }
             }
             else
