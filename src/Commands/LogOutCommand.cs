@@ -20,14 +20,9 @@ namespace Teszt__.src.Commands
 
         public override void Execute(object parameter)
         {
-            MessageBoxResult result = Message.Question("Biztosan ki szeretnél jelentkezni?");
+            _navigationWindow.Closing -= WindowService.OnWindowClosingLogoutUserQuestion;
 
-            if (result.Equals(MessageBoxResult.Yes))
-            {
-                _navigationWindow.Closing -= WindowService.OnWindowClosingLogoutUserQuestion;
-
-                _navigationWindow.Source = new Uri("MainWindowView.xaml", UriKind.Relative);
-            }
+            Services.NavigationService.NavigateToHomePage(_navigationWindow);
         }
     }
 }
