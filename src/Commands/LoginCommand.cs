@@ -18,17 +18,13 @@ namespace Teszt__.src.Commands
 
         private LoginWindowView LoginWindow;
 
-        private NavigationWindow _navigationWindow;
-
-        public LoginCommand(LoginWindowViewModel viewModel, LoginWindowView window, bool admin, NavigationWindow navWindow)
+        public LoginCommand(LoginWindowViewModel viewModel, LoginWindowView window, bool admin)
         {
             this.admin = admin;
 
             this.viewModel = viewModel;
 
             LoginWindow = window;
-
-            this._navigationWindow = navWindow;
         }
 
         public override void Execute(object parameter)
@@ -80,7 +76,7 @@ namespace Teszt__.src.Commands
 
                         LoginWindow.Close();
 
-                        Services.NavigationService.NavigateToOktatoView(ref user, _navigationWindow);
+                        Services.NavigationService.NavigateToOktatoView(ref user);
                     }
                     else
                     {
@@ -99,7 +95,7 @@ namespace Teszt__.src.Commands
 
                     LoginWindow.Close();
 
-                    Services.NavigationService.NavigateToHallgatoView(ref user, _navigationWindow);
+                    Services.NavigationService.NavigateToHallgatoView(ref user);
                 }
             }
             else

@@ -1,6 +1,5 @@
 ﻿using System.Windows.Controls;
 using System.Windows.Input;
-using System.Windows.Navigation;
 using Teszt__.src.Commands;
 using Teszt__.src.Commands.Oktato_Commands;
 using Teszt__.src.Commands.User_Commands;
@@ -12,8 +11,6 @@ namespace Teszt__.src.ViewModels.Oktato_ViewModels
 {
     public class OktatoMainViewModel : ViewModelBase
     {
-        private NavigationWindow _navigationWindow;
-
         private string _titleName;
         public string TitleName
         {
@@ -41,13 +38,11 @@ namespace Teszt__.src.ViewModels.Oktato_ViewModels
 
         public int modelType = 0;
 
-        public OktatoMainViewModel(ref User user, OktatoMainView window, NavigationWindow navigationWindow)
+        public OktatoMainViewModel(ref User user, OktatoMainView window)
         {
             TitleName = $"Főoldal - {user.Name}";
 
             _user = user;
-
-            _navigationWindow = navigationWindow;
 
             _mainStackPanel = window.mainStackPanel;
 
@@ -61,15 +56,15 @@ namespace Teszt__.src.ViewModels.Oktato_ViewModels
 
             CreateQuestionCommand = new CreateQuestionCommand(ref grid, ref _mainStackPanel, this);
 
-            LogOutCommand = new LogOutCommand(_navigationWindow);
+            LogOutCommand = new LogOutCommand();
 
             AddNewRowCommand = new AddNewRowCommand(ref grid, this);
 
             SendCommand = new SendCommand(ref grid, ref _mainStackPanel, this);
 
-            ShowUserProfileCommand = new ShowUserProfileCommand(ref user, navigationWindow);
+            ShowUserProfileCommand = new ShowUserProfileCommand(ref user);
 
-            navigationWindow.Closing += WindowService.OnWindowClosingLogoutUserQuestion;
+            NavigationService.GetNavigationWindow().Closing += WindowService.OnWindowClosingLogoutUserQuestion;
         }
 
         public ICommand CreateCourseCommand { get; }

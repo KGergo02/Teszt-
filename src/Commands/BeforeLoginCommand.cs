@@ -11,14 +11,10 @@ namespace Teszt__.src.Commands
 {
     class BeforeLoginCommand : CommandBase
     {
-        private NavigationWindow _navigationWindow;
-
         public bool admin;
 
-        public BeforeLoginCommand(NavigationWindow window, bool admin)
+        public BeforeLoginCommand(bool admin)
         {
-            _navigationWindow = window;
-
             this.admin = admin;
         }
 
@@ -26,7 +22,7 @@ namespace Teszt__.src.Commands
         {
             LoginWindowView window = new LoginWindowView();
 
-            window.DataContext = new LoginWindowViewModel(window, admin, _navigationWindow);
+            window.DataContext = new LoginWindowViewModel(window, admin);
 
             window.ShowDialog();
         }

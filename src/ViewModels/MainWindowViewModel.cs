@@ -16,13 +16,18 @@ namespace Teszt__.src.ViewModels
     {
         private NavigationWindow _navigationWindow;
 
+        public NavigationWindow GetNavigationWindow()
+        {
+            return _navigationWindow;
+        }
+
         public MainWindowViewModel(NavigationWindow navWindow)
         {
             _navigationWindow = navWindow;
 
-            HallgatoLoginCommand = new BeforeLoginCommand(_navigationWindow, false);
+            HallgatoLoginCommand = new BeforeLoginCommand(false);
 
-            OktatoLoginCommand = new BeforeLoginCommand(_navigationWindow, true);
+            OktatoLoginCommand = new BeforeLoginCommand(true);
 
             LoadedMainCommand = new LoadedMainCommand();
 

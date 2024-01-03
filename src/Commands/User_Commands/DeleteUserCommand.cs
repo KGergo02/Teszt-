@@ -16,21 +16,17 @@ namespace Teszt__.src.Commands.User_Commands
     {
         private Models.DatabaseContext.User user;
         
-        private NavigationWindow navigationWindow;
         private UserProfileView window;
 
-        public DeleteUserCommand(ref Models.DatabaseContext.User user, NavigationWindow navigationWindow)
+        public DeleteUserCommand(ref Models.DatabaseContext.User user)
         {
             this.user = user;
-
-            this.navigationWindow = navigationWindow;
         }
 
-        public DeleteUserCommand(ref Models.DatabaseContext.User user, UserProfileView window, NavigationWindow navigationWindow)
+        public DeleteUserCommand(ref Models.DatabaseContext.User user, UserProfileView window)
         {
             this.user = user;
             this.window = window;
-            this.navigationWindow = navigationWindow;
         }
 
         public override void Execute(object parameter)
@@ -43,11 +39,11 @@ namespace Teszt__.src.Commands.User_Commands
                 
                 Message.Success("Fiók sikeresen törölve!");
 
-                navigationWindow.Closing -= WindowService.OnWindowClosingLogoutUserQuestion;
+                NavigationService.GetNavigationWindow().Closing -= WindowService.OnWindowClosingLogoutUserQuestion;
 
                 window.Close();
 
-                NavigationService.NavigateToHomePage(navigationWindow);
+                NavigationService.NavigateToHomePage();
             }
         }
     }

@@ -36,11 +36,9 @@ namespace Teszt__.src.Services
             {
                 e.Cancel = true;
 
-                NavigationWindow navigationWindow = (NavigationWindow)sender;
+                NavigationService.GetNavigationWindow().Closing -= OnWindowClosingLogoutUserQuestion;
 
-                navigationWindow.Closing -= OnWindowClosingLogoutUserQuestion;
-
-                NavigationService.NavigateToHomePage(navigationWindow);
+                NavigationService.NavigateToHomePage();
             }
         }
 

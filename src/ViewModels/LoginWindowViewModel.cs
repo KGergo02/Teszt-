@@ -29,11 +29,11 @@ namespace Teszt__.src.ViewModels
 
         public InputField inputField;
 
-        public LoginWindowViewModel(LoginWindowView window, bool admin, NavigationWindow navigationWindow)
+        public LoginWindowViewModel(LoginWindowView window, bool admin)
         {
             inputField = window.inputField;
 
-            LoginCommand = new LoginCommand(this, window, admin, navigationWindow);
+            LoginCommand = new LoginCommand(this, window, admin);
 
             window.Closing += WindowService.OnWindowClosing;
         }

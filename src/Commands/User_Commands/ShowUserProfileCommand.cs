@@ -13,23 +13,17 @@ namespace Teszt__.src.Commands.User_Commands
     class ShowUserProfileCommand : CommandBase
     {
         private DatabaseContext.User user;
-        private NavigationWindow navigationWindow;
 
         public ShowUserProfileCommand(ref DatabaseContext.User user)
         {
             this.user = user;
         }
 
-        public ShowUserProfileCommand(ref DatabaseContext.User user, NavigationWindow navigationWindow) : this(ref user)
-        {
-            this.navigationWindow = navigationWindow;
-        }
-
         public override void Execute(object parameter)
         {
             UserProfileView profileView = new UserProfileView();
 
-            profileView.DataContext = new UserProfileViewModel(ref user, profileView, navigationWindow);
+            profileView.DataContext = new UserProfileViewModel(ref user, profileView);
            
             profileView.ShowDialog();
         }

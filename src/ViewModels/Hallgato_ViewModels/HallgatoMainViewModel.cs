@@ -51,7 +51,7 @@ namespace Teszt__.src.ViewModels
 
         private StackPanel _mainStackPanel;
 
-        public HallgatoMainViewModel(ref User user, HallgatoMainView window, NavigationWindow navigationWindow)
+        public HallgatoMainViewModel(ref User user, HallgatoMainView window)
         {
             _navigationWindow = navigationWindow;
             
@@ -65,11 +65,11 @@ namespace Teszt__.src.ViewModels
 
             FillStackPanelWithCourseCards();
 
-            _navigationWindow.Closing += WindowService.OnWindowClosingLogoutUserQuestion;
+            NavigationService.GetNavigationWindow().Closing += WindowService.OnWindowClosingLogoutUserQuestion;
 
             ShowUserProfileCommand = new ShowUserProfileCommand(ref user);
 
-            LogOutCommand = new LogOutCommand(navigationWindow);
+            LogOutCommand = new LogOutCommand();
         }
 
         public ICommand ShowUserProfileCommand { get; }
