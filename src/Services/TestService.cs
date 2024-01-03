@@ -78,7 +78,7 @@ namespace Teszt__.src.Services
 
         public static void StartTest(Test test)
         {
-            NavigationService.NavigateToHomePage();
+            throw new NotImplementedException();
         }
     }
 }
