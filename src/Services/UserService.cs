@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Security;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -119,6 +120,42 @@ namespace Teszt__.src.Services
 
                 inputField.ChangeColor("email");
             }
+        }
+
+        public static async Task<DateTime> GetCurrentTimeAsync()
+        {
+            string apiUrl = "http://worldtimeapi.org/api/ip";
+
+            try
+            {
+                using (HttpClient client = new HttpClient())
+                {
+                    HttpResponseMessage response = await client.GetAsync(apiUrl);
+
+                    if (response.IsSuccessStatusCode)
+                    {
+                        string responseData = await response.Content.ReadAsStringAsync();
+                        DateTime currentTime = Newtonsoft.Json.JsonConvert.DeserializeObject<WorldTimeApiResponse>(responseData).Datetime;
+
+                        return currentTime;
+                    }
+                    else
+                    {
+                        Message.Error("Hiba történt:\n" + response.ReasonPhrase);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Message.Error("Hiba történt:\n" + ex.Message);
+            }
+
+            return new DateTime();
+        }
+
+        public class WorldTimeApiResponse
+        {
+            public DateTime Datetime { get; set; }
         }
     }
 }
