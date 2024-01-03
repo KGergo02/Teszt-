@@ -73,17 +73,15 @@ namespace Teszt__.src.DAL
             {
                 return this.Users.Where(b => b.Name == name).ToList().Count == 1 ? this.Users.Where(b => b.Name == name).ToList()[0] : null;
             }
-            catch(InvalidOperationException e)
+            catch(InvalidOperationException IOE)
             {
-                Console.WriteLine(e.Message);
-
-                Message.Error("Nem sikerült kapcsolódni az adatbázishoz!");
+                Message.Error($"Hiba történt: {IOE.Message}");
 
                 return null;
             }
             catch(Exception e)
             {
-                Console.WriteLine(e.Message);
+                Message.Error($"Hiba történt:\n{e.Message}");
 
                 return null;
             }
@@ -93,7 +91,33 @@ namespace Teszt__.src.DAL
         {
             using (DatabaseContext database = new DatabaseContext())
             {
-                return database.User_Courses.Where(item => item.User_name == user.Name).ToList();
+                try
+                {
+                    return database.User_Courses.Where(item => item.User_name == user.Name).ToList();
+                }
+                catch (DbUpdateException DUE)
+                {
+                    Message.Error($"Hiba történt az adatbáziban a művelet végrehajtásakor!\nHiba:\n{DUE.InnerException.Message}");
+
+                    return null;
+                }
+            }
+        }
+
+        public List<Test> GetTestsOfCourse(Course course)
+        {
+            using (DatabaseContext database = new DatabaseContext())
+            {
+                try
+                {
+                    return database.Tests.Where(item => item.CourseId == course.Id).OrderBy(item => item.StartTime).OrderBy(item => item.Date).ToList();
+                }
+                catch (DbUpdateException DUE)
+                {
+                    Message.Error($"Hiba történt az adatbáziban a művelet végrehajtásakor!\nHiba:\n{DUE.InnerException.Message}");
+
+                    return null;
+                }
             }
         }
 
@@ -194,21 +218,28 @@ namespace Teszt__.src.DAL
         {
             using (DatabaseContext database = new DatabaseContext())
             {
-                User savedUser = database.Users.Find(initialUsername);
-
-                if(savedUser == user)
+                try
                 {
-                    return;
-                }
+                    User savedUser = database.Users.Find(initialUsername);
 
-                if(savedUser != null)
+                    if (savedUser == user)
+                    {
+                        return;
+                    }
+
+                    if (savedUser != null)
+                    {
+                        database.Users.Remove(savedUser);
+                    }
+
+                    database.Users.Add(user);
+
+                    database.SaveChanges();
+                }
+                catch (DbUpdateException DUE)
                 {
-                    database.Users.Remove(savedUser);
+                    Message.Error($"Hiba történt az adatbáziban a művelet végrehajtásakor!\nHiba:\n{DUE.InnerException.Message}");
                 }
-
-                database.Users.Add(user);
-
-                database.SaveChanges();
             }
         }
 
@@ -216,11 +247,18 @@ namespace Teszt__.src.DAL
         {
             using (DatabaseContext database = new DatabaseContext())
             {
-                if(database.Users.Contains(user))
+                try
                 {
-                    database.Users.Remove(user);
+                    if (database.Users.Contains(user))
+                    {
+                        database.Users.Remove(user);
 
-                    database.SaveChanges();
+                        database.SaveChanges();
+                    }
+                }
+                catch (DbUpdateException DUE)
+                {
+                    Message.Error($"Hiba történt az adatbáziban a művelet végrehajtásakor!\nHiba:\n{DUE.InnerException.Message}");
                 }
             }
         }

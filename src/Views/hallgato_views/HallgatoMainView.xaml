@@ -60,6 +60,8 @@
                         </LinearGradientBrush>
                     </Menu.Background>
                     <MenuItem Header="Kurzus felvétele" Height="Auto" FontSize="30px" Style="{StaticResource MenuItem}"></MenuItem>
+                    <MenuItem Header="Eredmények megtekintése" Height="Auto" FontSize="30px" Style="{StaticResource MenuItem}"></MenuItem>
+                    <MenuItem Header="Súgó" Height="Auto" FontSize="30px" Style="{StaticResource MenuItem}"></MenuItem>
                 </Menu>
                 <Menu HorizontalAlignment="Right" Foreground="Cyan">
                     <Menu.Background>
@@ -76,7 +78,7 @@
             </Grid>
 
 
-            <StackPanel x:Name="mainStackPanel" Margin="0,20,0,0" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <StackPanel x:Name="mainStackPanel" Margin="0,40,0,0" HorizontalAlignment="Center" VerticalAlignment="Center">
 
             </StackPanel>
             
