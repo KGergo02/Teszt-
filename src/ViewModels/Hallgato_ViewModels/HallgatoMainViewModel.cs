@@ -48,8 +48,8 @@ namespace Teszt__.src.ViewModels
 
         private StackPanel _mainStackPanel;
 
-        public HallgatoMainViewModel(ref User user, HallgatoMainView window)
-        { 
+        public HallgatoMainViewModel(HallgatoMainView window)
+        {
             _user = UserService.GetCurrentUser();
 
             _username = _user.Name;
@@ -58,13 +58,9 @@ namespace Teszt__.src.ViewModels
 
             _mainStackPanel = window.mainStackPanel;
 
-            _user = user;
-
             FillStackPanelWithCourseCards();
 
-            NavigationService.GetNavigationWindow().Closing += WindowService.OnWindowClosingLogoutUserQuestion;
-
-            ShowUserProfileCommand = new ShowUserProfileCommand(ref user);
+            ShowUserProfileCommand = new ShowUserProfileCommand();
 
             LogOutCommand = new LogOutCommand();
         }
@@ -136,7 +132,7 @@ namespace Teszt__.src.ViewModels
                     _mainStackPanel.Children.Add(line);
 
                     foreach (Test test in tests)
-                    {
+                    {    
                         Label testLabel = new Label()
                         {
                             Content = test.Name,
@@ -160,6 +156,7 @@ namespace Teszt__.src.ViewModels
                             VerticalAlignment = VerticalAlignment.Center,
                             HorizontalAlignment = HorizontalAlignment.Center,
                             Foreground = Brushes.White,
+                            Margin = new Thickness(0,0,0,15),
                         };
 
                         testLabels.Add(testLabel);

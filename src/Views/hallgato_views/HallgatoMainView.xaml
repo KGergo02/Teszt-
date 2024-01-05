@@ -81,7 +81,7 @@
             </Grid>
 
 
-            <StackPanel x:Name="mainStackPanel" Margin="0,40,0,0" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <StackPanel x:Name="mainStackPanel" Margin="0,40,0,30" HorizontalAlignment="Center" VerticalAlignment="Center">
 
             </StackPanel>
             

@@ -23,7 +23,10 @@ namespace Teszt__.src.Views
         {
             LoadedMainCommand command = new LoadedMainCommand();
 
-            command.Execute(this);
+            if (command.CanExecute(this))
+            {
+                command.Execute(this);
+            }
         }
     }
 }
