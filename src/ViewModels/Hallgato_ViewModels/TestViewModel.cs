@@ -21,7 +21,7 @@ namespace Teszt__.src.ViewModels.Hallgato_ViewModels
 
         public TestViewModel(Test test)
         {
-            RemainingTime = TimeSpan.FromSeconds(10);
+            RemainingTime = TimeSpan.FromSeconds(3600);
 
             System.Windows.Forms.Timer timer = new System.Windows.Forms.Timer();
 

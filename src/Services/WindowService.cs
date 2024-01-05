@@ -56,7 +56,7 @@ namespace Teszt__.src.Services
 
                 NavigationService.GetNavigationWindow().Closing -= OnTestClosing;
 
-                NavigationService.NavigateToHomePage();
+                NavigationService.NavigateToHallgatoView();
             }
         }
 
