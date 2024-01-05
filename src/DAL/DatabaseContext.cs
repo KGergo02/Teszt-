@@ -143,12 +143,17 @@ namespace Teszt__.src.DAL
             }
         }
 
+            return null;
+        }
+
         public static void SaveUser(User user)
         {
             using (DatabaseContext database = new DatabaseContext())
             {
                 try
                 {
+                    user.Id = database.Users.Count() + 1;
+
                     database.Users.Add(user);
 
                     database.SaveChanges();
@@ -256,13 +261,15 @@ namespace Teszt__.src.DAL
         }
         }
 
-        public static void UpdateUser(string initialUsername, ref User user)
+        public static void UpdateUser()
         {
+            User user = UserService.GetCurrentUser();
+
             using (DatabaseContext database = new DatabaseContext())
             {
                 try
                 {
-                    User savedUser = database.Users.Find(initialUsername);
+                    User savedUser = database.Users.Find(user.Id);
 
                     if (savedUser == user)
                     {
@@ -271,7 +278,7 @@ namespace Teszt__.src.DAL
 
                     if (savedUser != null)
                     {
-                        database.Users.Remove(savedUser);
+                        savedUser.CopyUser(user);
                     }
 
                     database.Users.Add(user);
@@ -287,9 +294,12 @@ namespace Teszt__.src.DAL
                     Message.Error($"Ismeretlen hiba történt! Kérlek jelentsd az alábbi hibát a fejlesztőknek!\n{pokemon.Message}");
             }
         }
+        }
 
-        public static void DeleteUser(User user)
+        public static void DeleteUser()
         {
+            User user = UserService.GetCurrentUser();
+
             using (DatabaseContext database = new DatabaseContext())
             {
                 try
