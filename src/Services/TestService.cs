@@ -84,7 +84,9 @@ namespace Teszt__.src.Services
 
         public static void StartTest(Test test)
         {
-            throw new NotImplementedException();
+            NavigationService.GetNavigationWindow().Closing += WindowService.OnTestClosing;
+
+            NavigationService.NavigateToTestView(test);
         }
     }
 }
