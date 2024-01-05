@@ -75,13 +75,13 @@ namespace Teszt__.src.DAL
             }
             catch(InvalidOperationException IOE)
             {
-                Message.Error($"Hiba történt: {IOE.Message}");
+                Message.Error($"Hiba történt:\n{IOE.Message}");
 
                 return null;
             }
-            catch(Exception e)
+            catch (Exception pokemon)
             {
-                Message.Error($"Hiba történt:\n{e.Message}");
+                Message.Error($"Ismeretlen hiba történt! Kérlek jelentsd az alábbi hibát a fejlesztőknek!\n{pokemon.Message}");
 
                 return null;
             }
@@ -93,7 +93,7 @@ namespace Teszt__.src.DAL
             {
                 try
                 {
-                    return database.User_Courses.Where(item => item.User_name == user.Name).ToList();
+                    return database.User_Courses.Where(item => item.User_name == user.Name).OrderBy(item => item.Course_name).ToList();
                 }
                 catch (DbUpdateException DUE)
                 {
@@ -101,7 +101,13 @@ namespace Teszt__.src.DAL
 
                     return null;
                 }
+                catch (Exception pokemon)
+                {
+                    Message.Error($"Ismeretlen hiba történt! Kérlek jelentsd az alábbi hibát a fejlesztőknek!\n{pokemon.Message}");
+
+                    return null;
             }
+        }
         }
 
         public List<Test> GetTestsOfCourse(Course course)
@@ -118,6 +124,22 @@ namespace Teszt__.src.DAL
 
                     return null;
                 }
+                catch (Exception pokemon)
+                {
+                    Message.Error($"Ismeretlen hiba történt! Kérlek jelentsd az alábbi hibát a fejlesztőknek!\n{pokemon.Message}");
+
+                    return null;
+                }
+            }
+        }
+
+        public int? GetUserCourseIdByName(string name)
+        {
+            foreach (User_Course item in User_Courses)
+            {
+                if(item.User_name == name)
+                {
+                    return item.Id;
             }
         }
 
@@ -134,6 +156,10 @@ namespace Teszt__.src.DAL
                 catch (DbUpdateException DUE)
                 {
                     Message.Error($"Hiba történt az adatbáziban a művelet végrehajtásakor!\nHiba:\n{DUE.InnerException.Message}");
+                }
+                catch (Exception pokemon)
+                {
+                    Message.Error($"Ismeretlen hiba történt! Kérlek jelentsd az alábbi hibát a fejlesztőknek!\n{pokemon.Message}");
                 }
             }
         }
@@ -154,7 +180,11 @@ namespace Teszt__.src.DAL
                 {
                     Message.Error($"Hiba történt az adatbáziban a művelet végrehajtásakor!\nHiba:\n{DUE.InnerException.Message}");
                 }
+                catch (Exception pokemon)
+                {
+                    Message.Error($"Ismeretlen hiba történt! Kérlek jelentsd az alábbi hibát a fejlesztőknek!\n{pokemon.Message}");
             }
+        }
         }
 
         public static void SaveTest(Test test) 
@@ -173,7 +203,11 @@ namespace Teszt__.src.DAL
                 {
                     Message.Error($"Hiba történt az adatbáziban a művelet végrehajtásakor!\nHiba:\n{DUE.InnerException.Message}");
                 }
+                catch (Exception pokemon)
+                {
+                    Message.Error($"Ismeretlen hiba történt! Kérlek jelentsd az alábbi hibát a fejlesztőknek!\n{pokemon.Message}");
             }
+        }
         }
 
         public static void SaveQuestion(Question question)
@@ -192,7 +226,11 @@ namespace Teszt__.src.DAL
                 {
                     Message.Error($"Hiba történt az adatbáziban a művelet végrehajtásakor!\nHiba:\n{DUE.InnerException.Message}");
                 }
+                catch (Exception pokemon)
+                {
+                    Message.Error($"Ismeretlen hiba történt! Kérlek jelentsd az alábbi hibát a fejlesztőknek!\n{pokemon.Message}");
             }
+        }
         }
 
         public static void SaveAnswer(Answer answer)
@@ -211,7 +249,11 @@ namespace Teszt__.src.DAL
                 {
                     Message.Error($"Hiba történt az adatbáziban a művelet végrehajtásakor!\nHiba:\n{DUE.InnerException.Message}");
                 }
+                catch (Exception pokemon)
+                {
+                    Message.Error($"Ismeretlen hiba történt! Kérlek jelentsd az alábbi hibát a fejlesztőknek!\n{pokemon.Message}");
             }
+        }
         }
 
         public static void UpdateUser(string initialUsername, ref User user)
@@ -240,6 +282,9 @@ namespace Teszt__.src.DAL
                 {
                     Message.Error($"Hiba történt az adatbáziban a művelet végrehajtásakor!\nHiba:\n{DUE.InnerException.Message}");
                 }
+                catch (Exception pokemon)
+                {
+                    Message.Error($"Ismeretlen hiba történt! Kérlek jelentsd az alábbi hibát a fejlesztőknek!\n{pokemon.Message}");
             }
         }
 
@@ -259,6 +304,10 @@ namespace Teszt__.src.DAL
                 catch (DbUpdateException DUE)
                 {
                     Message.Error($"Hiba történt az adatbáziban a művelet végrehajtásakor!\nHiba:\n{DUE.InnerException.Message}");
+                }
+                catch (Exception pokemon)
+                {
+                    Message.Error($"Ismeretlen hiba történt! Kérlek jelentsd az alábbi hibát a fejlesztőknek!\n{pokemon.Message}");
                 }
             }
         }
