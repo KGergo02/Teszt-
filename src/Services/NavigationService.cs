@@ -6,6 +6,7 @@ using Teszt__.src.Views.Oktato_Views;
 using Teszt__.src.ViewModels;
 using Teszt__.src.Views.Hallgato_Views;
 using System.Windows;
+using Teszt__.src.ViewModels.Hallgato_ViewModels;
 
 namespace Teszt__.src.Services
 {
@@ -23,20 +24,30 @@ namespace Teszt__.src.Services
             GetNavigationWindow().Navigate(new Uri("src/Views/MainWindowView.xaml", UriKind.Relative));
         }
 
-        public static void NavigateToOktatoView(ref User user)
+        public static void NavigateToOktatoView()
         {
             OktatoMainView window = new OktatoMainView();
 
-            window.DataContext = new OktatoMainViewModel(ref user, window);
+            window.DataContext = new OktatoMainViewModel(window);
 
             GetNavigationWindow().Navigate(window);
         }
 
-        public static void NavigateToHallgatoView(ref User user)
+        public static void NavigateToHallgatoView()
         {
             HallgatoMainView window = new HallgatoMainView();
 
-            window.DataContext = new HallgatoMainViewModel(ref user, window);
+            window.DataContext = new HallgatoMainViewModel(window);
+
+            GetNavigationWindow().Navigate(window);
+        }
+
+        public static void NavigateToTestView(Test test)
+        {
+            TestView window = new TestView()
+            {
+                DataContext = new TestViewModel(test),
+            };
 
             GetNavigationWindow().Navigate(window);
         }
