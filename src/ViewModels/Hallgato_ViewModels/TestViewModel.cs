@@ -1,9 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Threading;
 using Teszt__.src.Services;
 using Teszt__.src.Views.Hallgato_Views;
 using static Teszt__.src.Models.DatabaseContext;
@@ -28,9 +23,9 @@ namespace Teszt__.src.ViewModels.Hallgato_ViewModels
         {
             RemainingTime = TimeSpan.FromSeconds(10);
 
-            DispatcherTimer timer = new DispatcherTimer();
+            System.Windows.Forms.Timer timer = new System.Windows.Forms.Timer();
 
-            timer.Interval = TimeSpan.FromSeconds(0.8999999999);
+            timer.Interval = 1000;
 
             timer.Tick += UpdateRemainingTime;
 
@@ -43,7 +38,7 @@ namespace Teszt__.src.ViewModels.Hallgato_ViewModels
 
             if(RemainingTime.Equals(TimeSpan.Zero))
             {
-                ((DispatcherTimer)sender).Stop();
+                ((System.Windows.Forms.Timer)sender).Stop();
 
                 Message.Success("A teszt befejeződött!");
 
