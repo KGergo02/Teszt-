@@ -38,6 +38,12 @@ namespace Teszt__.src.Services
 
             List<string> date = test.Date.Replace(" ", "").Split('.').ToList();
 
+            if (endTestTimes[0].Equals("24"))
+            {
+                endTestTimes[0] = "23";
+                endTestTimes[1] = "59";
+            }
+
             DateTime testDate = new DateTime(
                 Convert.ToInt32(date[0]),
                 Convert.ToInt32(date[1]),
