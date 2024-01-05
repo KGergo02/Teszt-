@@ -87,6 +87,46 @@ namespace Teszt__.src.DAL
             }
         }
 
+        public int GetUserIdByName(string name)
+        {
+            try
+            {
+                return Users.Where(item => item.Name == name).ToList()[0].Id;
+            }
+            catch (InvalidOperationException IOE)
+            {
+                Message.Error($"Hiba történt:\n{IOE.Message}");
+
+                return 0;
+            }
+            catch (Exception pokemon)
+            {
+                Message.Error($"Ismeretlen hiba történt! Kérlek jelentsd az alábbi hibát a fejlesztőknek!\n{pokemon.Message}");
+
+                return 0;
+            }
+        }
+
+        public async Task<User> GetUserByNameAsync(string name)
+        {
+            try
+            {
+                return await Users.FindAsync(GetUserIdByName(name));
+            }
+            catch (InvalidOperationException IOE)
+            {
+                Message.Error($"Hiba történt:\n{IOE.Message}");
+
+                return null;
+            }
+            catch (Exception pokemon)
+            {
+                Message.Error($"Ismeretlen hiba történt! Kérlek jelentsd az alábbi hibát a fejlesztőknek!\n{pokemon.Message}");
+
+                return null;
+            }
+        }
+
         public List<User_Course> GetUser_CourseListOfUser(User user)
         {
             using (DatabaseContext database = new DatabaseContext())
