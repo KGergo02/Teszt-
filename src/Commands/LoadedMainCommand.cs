@@ -1,13 +1,14 @@
-﻿using System.Windows;
+﻿using System.Threading.Tasks;
+using System.Windows;
 using Teszt__.src.DAL;
 using Teszt__.src.Services;
 using Teszt__.src.ViewModels;
 
 namespace Teszt__.src.Commands
 {
-    class LoadedMainCommand : CommandBase
+    class LoadedMainCommand
     {
-        public override bool CanExecute(object parameter)
+        public bool CanExecute()
         {
             bool needsLoading = ((MainWindowViewModel)Application.Current.MainWindow.DataContext).NeedsLoading;
 
@@ -16,11 +17,11 @@ namespace Teszt__.src.Commands
             return needsLoading;
         }
 
-        public override void Execute(object parameter)
+        public async Task Execute()
         {
             using (DatabaseContext database = new DatabaseContext())
             {
-                database.GetUserByName("KGergo02");
+                await database.GetUserByNameAsync("KGergo02");
             }
         }
     }
