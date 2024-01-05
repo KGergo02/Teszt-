@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Gép: localhost
--- Létrehozás ideje: 2024. Jan 01. 18:03
+-- Létrehozás ideje: 2024. Jan 04. 23:15
 -- Kiszolgáló verziója: 10.4.25-MariaDB
 -- PHP verzió: 8.1.10
 
@@ -53,7 +53,9 @@ CREATE TABLE `courses` (
 --
 
 INSERT INTO `courses` (`id`, `name`, `user_limit`) VALUES
-(1, 'Játékok', 10);
+(1, 'Kurzus1', 10),
+(2, 'Programozás I.', 200),
+(3, 'Adatbázisok', 100);
 
 -- --------------------------------------------------------
 
@@ -90,7 +92,14 @@ CREATE TABLE `tests` (
 --
 
 INSERT INTO `tests` (`id`, `name`, `submit_limit`, `date`, `startTime`, `endTime`, `CourseId`) VALUES
-(1, 'League Of Legends', 1, '2023. 12. 16.', '10:00', '12:00', 1);
+(1, 'League Of Legends', 1, '2023. 12. 16.', '10:00', '12:00', 1),
+(2, 'Teszt1', 1, '2024. 01. 04.', '12:00', '13:00', NULL),
+(3, 'Teszt2', 1, '2024. 01. 05.', '12:00', '12:05', NULL),
+(4, 'Future', 2, '2024. 01. 04.', '10:00', '12:00', 1),
+(5, 'Correct', 1, '2024. 01. 03.', '16:00', '16:02', 1),
+(6, 'Objektum orientált tervezés', 1, '2024. 01. 03.', '16:00', '17:00', 2),
+(7, 'Normalizálás', 1, '2024. 01. 03.', '17:00', '20:00', 3),
+(8, 'Első', 10, '2023. 12. 13.', '06:00', '07:00', 1);
 
 -- --------------------------------------------------------
 
@@ -99,6 +108,7 @@ INSERT INTO `tests` (`id`, `name`, `submit_limit`, `date`, `startTime`, `endTime
 --
 
 CREATE TABLE `users` (
+  `id` int(11) NOT NULL,
   `name` varchar(100) COLLATE utf8_hungarian_ci NOT NULL,
   `password` varchar(100) COLLATE utf8_hungarian_ci NOT NULL,
   `email` varchar(100) COLLATE utf8_hungarian_ci NOT NULL,
@@ -109,9 +119,9 @@ CREATE TABLE `users` (
 -- A tábla adatainak kiíratása `users`
 --
 
-INSERT INTO `users` (`name`, `password`, `email`, `admin`) VALUES
-('ASD', '/rA2D/Mil+M=', 'asd@asd.com', 1),
-('KGergo02', 'UQH6OyTUF0PU8A/9fJOrkg==', 'kassa.gergo2002@gmail.com', 1);
+INSERT INTO `users` (`id`, `name`, `password`, `email`, `admin`) VALUES
+(1, 'KGergo02', 'jJYWPRZl0WA=', 'kassa.gergo2002@gmail.com', 1),
+(2, 'ASD', '/rA2D/Mil+M=', 'asd@asd.com', 1);
 
 -- --------------------------------------------------------
 
@@ -124,6 +134,13 @@ CREATE TABLE `user_courses` (
   `user_name` varchar(100) COLLATE utf8_hungarian_ci NOT NULL,
   `course_name` varchar(100) COLLATE utf8_hungarian_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_hungarian_ci;
+
+--
+-- A tábla adatainak kiíratása `user_courses`
+--
+
+INSERT INTO `user_courses` (`id`, `user_name`, `course_name`) VALUES
+(1, 'ASD', 'Kurzus1');
 
 --
 -- Indexek a kiírt táblákhoz
@@ -161,7 +178,7 @@ ALTER TABLE `tests`
 -- A tábla indexei `users`
 --
 ALTER TABLE `users`
-  ADD PRIMARY KEY (`name`);
+  ADD PRIMARY KEY (`id`);
 
 --
 -- A tábla indexei `user_courses`
@@ -197,13 +214,19 @@ ALTER TABLE `questions`
 -- AUTO_INCREMENT a táblához `tests`
 --
 ALTER TABLE `tests`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+--
+-- AUTO_INCREMENT a táblához `users`
+--
+ALTER TABLE `users`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT a táblához `user_courses`
 --
 ALTER TABLE `user_courses`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- Megkötések a kiírt táblákhoz
