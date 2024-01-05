@@ -257,6 +257,7 @@
     <Compile Include="src\Services\UserService.cs" />
     <Compile Include="src\Services\WindowService.cs" />
     <Compile Include="src\ViewModels\Hallgato_ViewModels\HallgatoMainViewModel.cs" />
+    <Compile Include="src\ViewModels\Hallgato_ViewModels\TestViewModel.cs" />
     <Compile Include="src\ViewModels\LoginWindowViewModel.cs" />
     <Compile Include="src\ViewModels\MainWindowViewModel.cs" />
     <Compile Include="src\ViewModels\Oktato_ViewModels\OktatoMainViewModel.cs" />
@@ -266,6 +267,9 @@
     <Compile Include="src\ViewModels\ViewModelBase.cs" />
     <Compile Include="src\Views\Hallgato_Views\HallgatoMainView.xaml.cs">
       <DependentUpon>HallgatoMainView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="src\Views\Hallgato_Views\TestView.xaml.cs">
+      <DependentUpon>TestView.xaml</DependentUpon>
     </Compile>
     <Compile Include="src\Views\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
@@ -319,6 +323,10 @@
   </ItemGroup>
   <ItemGroup>
     <Page Include="src\Views\Hallgato_Views\HallgatoMainView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="src\Views\Hallgato_Views\TestView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
