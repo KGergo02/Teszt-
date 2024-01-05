@@ -106,8 +106,8 @@ namespace Teszt__.src.DAL
                     Message.Error($"Ismeretlen hiba történt! Kérlek jelentsd az alábbi hibát a fejlesztőknek!\n{pokemon.Message}");
 
                     return null;
+                }
             }
-        }
         }
 
         public List<Test> GetTestsOfCourse(Course course)
@@ -140,8 +140,8 @@ namespace Teszt__.src.DAL
                 if(item.User_name == name)
                 {
                     return item.Id;
+                }
             }
-        }
 
             return null;
         }
@@ -188,8 +188,8 @@ namespace Teszt__.src.DAL
                 catch (Exception pokemon)
                 {
                     Message.Error($"Ismeretlen hiba történt! Kérlek jelentsd az alábbi hibát a fejlesztőknek!\n{pokemon.Message}");
+                }
             }
-        }
         }
 
         public static void SaveTest(Test test) 
@@ -211,8 +211,8 @@ namespace Teszt__.src.DAL
                 catch (Exception pokemon)
                 {
                     Message.Error($"Ismeretlen hiba történt! Kérlek jelentsd az alábbi hibát a fejlesztőknek!\n{pokemon.Message}");
+                }
             }
-        }
         }
 
         public static void SaveQuestion(Question question)
@@ -234,8 +234,8 @@ namespace Teszt__.src.DAL
                 catch (Exception pokemon)
                 {
                     Message.Error($"Ismeretlen hiba történt! Kérlek jelentsd az alábbi hibát a fejlesztőknek!\n{pokemon.Message}");
+                }
             }
-        }
         }
 
         public static void SaveAnswer(Answer answer)
@@ -257,8 +257,8 @@ namespace Teszt__.src.DAL
                 catch (Exception pokemon)
                 {
                     Message.Error($"Ismeretlen hiba történt! Kérlek jelentsd az alábbi hibát a fejlesztőknek!\n{pokemon.Message}");
+                }
             }
-        }
         }
 
         public static void UpdateUser()
@@ -281,8 +281,6 @@ namespace Teszt__.src.DAL
                         savedUser.CopyUser(user);
                     }
 
-                    database.Users.Add(user);
-
                     database.SaveChanges();
                 }
                 catch (DbUpdateException DUE)
@@ -292,8 +290,8 @@ namespace Teszt__.src.DAL
                 catch (Exception pokemon)
                 {
                     Message.Error($"Ismeretlen hiba történt! Kérlek jelentsd az alábbi hibát a fejlesztőknek!\n{pokemon.Message}");
+                }
             }
-        }
         }
 
         public static void DeleteUser()
