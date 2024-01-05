@@ -25,7 +25,7 @@ namespace Teszt__.src.Views
         {
             InitializeComponent();
 
-            this.DataContext = new MainWindowViewModel(this);
+            DataContext = new MainWindowViewModel(this);
         }
     }
 }

@@ -31,7 +31,7 @@ namespace Teszt__.src.ViewModels
 
             OktatoLoginCommand = new BeforeLoginCommand(true);
 
-            LoadedMainCommand = new LoadedMainCommand();
+            RegisterLabelCommand = new RegisterLabelCommand();
 
             navWindow.Navigating += WindowService.OnWindowNavigation;
         }
@@ -46,7 +46,7 @@ namespace Teszt__.src.ViewModels
             get;
         }
 
-        public ICommand LoadedMainCommand
+        public ICommand RegisterLabelCommand 
         {
             get;
         }
