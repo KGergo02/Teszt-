@@ -16,6 +16,8 @@ namespace Teszt__.src.ViewModels
     {
         private NavigationWindow _navigationWindow;
 
+        public bool NeedsLoading = true;
+
         public NavigationWindow GetNavigationWindow()
         {
             return _navigationWindow;
