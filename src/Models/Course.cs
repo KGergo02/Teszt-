@@ -10,9 +10,11 @@ namespace Teszt__.src.Models
         {
             [Key]
             public int Id { get; set; }
-            public string Name { get; set; } 
-            public int User_limit { get; set; }
 
+            public string Name { get; set; } 
+            
+            public int User_limit { get; set; }
+            
             public Course()
             {
 
