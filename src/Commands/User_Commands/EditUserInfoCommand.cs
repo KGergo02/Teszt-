@@ -12,15 +12,10 @@ namespace Teszt__.src.Commands.User_Commands
 {
     public class EditUserInfoCommand : CommandBase
     {
-        private DatabaseContext.User user;
         private UserProfileView window;
 
-        public EditUserInfoCommand(ref DatabaseContext.User user)
-        {
-            this.user = user;
-        }
 
-        public EditUserInfoCommand(ref DatabaseContext.User user, UserProfileView window) : this(ref user)
+        public EditUserInfoCommand(UserProfileView window)
         {
             this.window = window;
         }
@@ -29,7 +24,7 @@ namespace Teszt__.src.Commands.User_Commands
         {
             EditUserInfoView window = new EditUserInfoView();
 
-            window.DataContext = new EditUserInfoViewModel(ref user, window);
+            window.DataContext = new EditUserInfoViewModel(window);
 
             this.window.Close();
 

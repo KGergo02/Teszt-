@@ -50,7 +50,9 @@ namespace Teszt__.src.ViewModels
 
         public HallgatoMainViewModel(ref User user, HallgatoMainView window)
         { 
-            _username = user.Name;
+            _user = UserService.GetCurrentUser();
+
+            _username = _user.Name;
 
             _titleName = $"Főoldal - {_username}";
 

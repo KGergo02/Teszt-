@@ -13,11 +13,11 @@ namespace Teszt__.src.ViewModels.User_ViewModels
 {
     public class UserProfileViewModel : ViewModelBase
     {
-        public UserProfileViewModel(ref DatabaseContext.User user, UserProfileView window)
+        public UserProfileViewModel(UserProfileView window)
         {
-            EditUserInfoCommand = new EditUserInfoCommand(ref user, window);
+            EditUserInfoCommand = new EditUserInfoCommand(window);
 
-            DeleteUserCommand = new DeleteUserCommand(ref user, window);
+            DeleteUserCommand = new DeleteUserCommand(window);
         }
 
         public ICommand EditUserInfoCommand { get; }

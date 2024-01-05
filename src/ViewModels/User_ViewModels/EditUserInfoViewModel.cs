@@ -9,13 +9,12 @@ using Teszt__.src.Commands.User_Commands;
 using Teszt__.src.Models;
 using Teszt__.src.Services;
 using Teszt__.src.Views.User_Views;
+using static Teszt__.src.Models.DatabaseContext;
 
 namespace Teszt__.src.ViewModels.User_ViewModels
 {
     public class EditUserInfoViewModel : ViewModelBase
-    {
-        private DatabaseContext.User user;
-        
+    {   
         private EditUserInfoView window;
 
         private string _username;
@@ -45,10 +44,10 @@ namespace Teszt__.src.ViewModels.User_ViewModels
         public SecureString Password1 { get; private set; }
         public SecureString Password2 { get; private set; }
 
-        public EditUserInfoViewModel(ref DatabaseContext.User user, EditUserInfoView window)
+        public EditUserInfoViewModel(EditUserInfoView window)
         {
-            this.user = user;
-            
+            User user = UserService.GetCurrentUser();
+
             this.window = window;
 
             inputField = window.inputField;
@@ -63,7 +62,7 @@ namespace Teszt__.src.ViewModels.User_ViewModels
             
             inputField.passwordBoxes["password2"].Password = JelszoTitkosito.Decrypt(user.Password);
 
-            UpdateUserInfoCommand = new UpdateUserInfoCommand(ref user, inputField, window);
+            UpdateUserInfoCommand = new UpdateUserInfoCommand(inputField, window);
         }
 
         public void SetPasswords(SecureString password1, SecureString password2)

@@ -13,19 +13,11 @@ using NavigationService = Teszt__.src.Services.NavigationService;
 namespace Teszt__.src.Commands.User_Commands
 {
     public class DeleteUserCommand : CommandBase
-    {
-        private Models.DatabaseContext.User user;
-        
+    {   
         private UserProfileView window;
 
-        public DeleteUserCommand(ref Models.DatabaseContext.User user)
+        public DeleteUserCommand(UserProfileView window)
         {
-            this.user = user;
-        }
-
-        public DeleteUserCommand(ref Models.DatabaseContext.User user, UserProfileView window)
-        {
-            this.user = user;
             this.window = window;
         }
 
@@ -35,7 +27,7 @@ namespace Teszt__.src.Commands.User_Commands
 
             if(result == MessageBoxResult.Yes)
             {
-                DatabaseContext.DeleteUser(user);
+                DatabaseContext.DeleteUser();
                 
                 Message.Success("Fiók sikeresen törölve!");
 

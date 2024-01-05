@@ -6,7 +6,6 @@ using System.Text;
 using System.Threading.Tasks;
 using Teszt__.src.Models;
 using Teszt__.src.Services;
-using Teszt__.src.DAL;
 using static Teszt__.src.Models.DatabaseContext;
 using Teszt__.src.Views.User_Views;
 
@@ -24,9 +23,9 @@ namespace Teszt__.src.Commands.User_Commands
 
         EditUserInfoView window;
 
-        public UpdateUserInfoCommand(ref User user, InputField inputField, Views.User_Views.EditUserInfoView window)
+        public UpdateUserInfoCommand(InputField inputField, EditUserInfoView window)
         {
-            this.user = user;
+            user = UserService.GetCurrentUser();
 
             initialUsername = user.Name;
 
@@ -57,7 +56,7 @@ namespace Teszt__.src.Commands.User_Commands
 
                 List<User> users = database.Users.ToList();
 
-                User currentUser = (User)database.FindByName(initialUsername, typeof(User));
+                User currentUser = UserService.GetCurrentUser();
 
                 users.Remove(currentUser);
 
@@ -69,8 +68,6 @@ namespace Teszt__.src.Commands.User_Commands
                 }
                 else
                 {
-                    //user = new User(username, JelszoTitkosito.Encrypt(SecureStringConvert.ToString(password1)), email, isAdmin);
-
                     user.Name = username;
 
                     user.Email = email;
@@ -79,7 +76,7 @@ namespace Teszt__.src.Commands.User_Commands
 
                     user.Admin = isAdmin;
 
-                    DAL.DatabaseContext.UpdateUser(initialUsername, ref user);
+                    DAL.DatabaseContext.UpdateUser();
 
                     window.Closing -= WindowService.OnWindowClosing;
 

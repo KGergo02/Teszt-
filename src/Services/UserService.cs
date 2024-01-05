@@ -157,5 +157,10 @@ namespace Teszt__.src.Services
         {
             public DateTime Datetime { get; set; }
         }
+
+        public static User GetCurrentUser()
+        {
+            return (User)NavigationService.GetNavigationWindow().Tag;
+        }
     }
 }

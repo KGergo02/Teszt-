@@ -1,6 +1,5 @@
 ﻿using Teszt__.src.ViewModels;
 using Teszt__.src.Views;
-using System.Windows.Navigation;
 using Teszt__.src.Views.Hallgato_Views;
 using Teszt__.src.Views.Oktato_Views;
 using Teszt__.src.Services;
@@ -76,7 +75,9 @@ namespace Teszt__.src.Commands
 
                         LoginWindow.Close();
 
-                        Services.NavigationService.NavigateToOktatoView(ref user);
+                        NavigationService.GetNavigationWindow().Tag = user;
+
+                        NavigationService.NavigateToOktatoView();
                     }
                     else
                     {
@@ -95,7 +96,9 @@ namespace Teszt__.src.Commands
 
                     LoginWindow.Close();
 
-                    Services.NavigationService.NavigateToHallgatoView(ref user);
+                    NavigationService.GetNavigationWindow().Tag = user;
+
+                    NavigationService.NavigateToHallgatoView();
                 }
             }
             else

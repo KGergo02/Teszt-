@@ -38,11 +38,11 @@ namespace Teszt__.src.ViewModels.Oktato_ViewModels
 
         public int modelType = 0;
 
-        public OktatoMainViewModel(ref User user, OktatoMainView window)
+        public OktatoMainViewModel(OktatoMainView window)
         {
-            TitleName = $"Főoldal - {user.Name}";
+            _user = UserService.GetCurrentUser();
 
-            _user = user;
+            TitleName = $"Főoldal - {_user.Name}";
 
             _mainStackPanel = window.mainStackPanel;
 
@@ -62,7 +62,7 @@ namespace Teszt__.src.ViewModels.Oktato_ViewModels
 
             SendCommand = new SendCommand(ref grid, ref _mainStackPanel, this);
 
-            ShowUserProfileCommand = new ShowUserProfileCommand(ref user);
+            ShowUserProfileCommand = new ShowUserProfileCommand();
 
             NavigationService.GetNavigationWindow().Closing += WindowService.OnWindowClosingLogoutUserQuestion;
         }

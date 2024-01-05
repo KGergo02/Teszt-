@@ -12,18 +12,11 @@ namespace Teszt__.src.Commands.User_Commands
 {
     class ShowUserProfileCommand : CommandBase
     {
-        private DatabaseContext.User user;
-
-        public ShowUserProfileCommand(ref DatabaseContext.User user)
-        {
-            this.user = user;
-        }
-
         public override void Execute(object parameter)
         {
             UserProfileView profileView = new UserProfileView();
 
-            profileView.DataContext = new UserProfileViewModel(ref user, profileView);
+            profileView.DataContext = new UserProfileViewModel(profileView);
            
             profileView.ShowDialog();
         }
