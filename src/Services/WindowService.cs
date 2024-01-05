@@ -42,6 +42,24 @@ namespace Teszt__.src.Services
             }
         }
 
+        public static void OnTestClosing(object sender, CancelEventArgs e)
+        {
+            MessageBoxResult result = Message.Question("Biztosan be szeretnéd zárni a tesztet?\nHa bezárod az ablakot, akkor a teszt eredményei elküldésre kerülnek!");
+
+            if (result.Equals(MessageBoxResult.No))
+            {
+                e.Cancel = true;
+            }
+            else if (result.Equals(MessageBoxResult.Yes))
+            {
+                e.Cancel = true;
+
+                NavigationService.GetNavigationWindow().Closing -= OnTestClosing;
+
+                NavigationService.NavigateToHomePage();
+            }
+        }
+
         public static void OnWindowNavigation(object sender, NavigatingCancelEventArgs e)
         {
             if(e.NavigationMode == NavigationMode.Back || e.NavigationMode == NavigationMode.Forward)
