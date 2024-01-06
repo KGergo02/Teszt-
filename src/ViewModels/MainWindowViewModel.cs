@@ -34,6 +34,13 @@ namespace Teszt__.src.ViewModels
             RegisterLabelCommand = new RegisterLabelCommand();
 
             navWindow.Navigating += WindowService.OnWindowNavigation;
+
+            LoadedMainCommand loadedMainCommand = new LoadedMainCommand(NeedsLoading);
+
+            if (loadedMainCommand.CanExecute(this))
+            {
+                loadedMainCommand.Execute(this);
+            }
         }
 
         public ICommand HallgatoLoginCommand

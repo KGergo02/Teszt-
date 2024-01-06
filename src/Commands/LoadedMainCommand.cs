@@ -6,18 +6,21 @@ using Teszt__.src.ViewModels;
 
 namespace Teszt__.src.Commands
 {
-    class LoadedMainCommand
+    class LoadedMainCommand : CommandBase
     {
-        public bool CanExecute()
+        private bool needsLoading;
+
+        public LoadedMainCommand(bool needsLoading)
         {
-            bool needsLoading = ((MainWindowViewModel)Application.Current.MainWindow.DataContext).NeedsLoading;
+            this.needsLoading = needsLoading;
+        }
 
-            ((MainWindowViewModel)Application.Current.MainWindow.DataContext).NeedsLoading = false;
-
+        public override bool CanExecute(object parameter)
+        {
             return needsLoading;
         }
 
-        public async Task Execute()
+        public override async void Execute(object parameter)
         {
             using (DatabaseContext database = new DatabaseContext())
             {

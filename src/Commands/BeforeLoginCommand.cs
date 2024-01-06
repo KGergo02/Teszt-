@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Navigation;
 using Teszt__.src.DAL;
@@ -12,6 +13,8 @@ namespace Teszt__.src.Commands
 {
     class BeforeLoginCommand : CommandBase
     {
+        public Thread startLoading;
+
         public bool admin;
 
         public BeforeLoginCommand(bool admin)
@@ -19,20 +22,13 @@ namespace Teszt__.src.Commands
             this.admin = admin;
         }
 
-        public override async void Execute(object parameter)
+        public override void Execute(object parameter)
         {
             LoginWindowView window = new LoginWindowView();
 
             window.DataContext = new LoginWindowViewModel(window, admin);
 
             window.ShowDialog();
-
-            LoadedMainCommand loadedMainCommand = new LoadedMainCommand();
-
-            if(loadedMainCommand.CanExecute())
-            {
-                await loadedMainCommand.Execute();
-            }
         }
     }
 }

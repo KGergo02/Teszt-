@@ -12,15 +12,8 @@ namespace Teszt__.src.Commands
 {
     class RegisterLabelCommand : CommandBase
     {
-        public override async void Execute(object parameter)
+        public override void Execute(object parameter)
         {
-            LoadedMainCommand loadedMainCommand = new LoadedMainCommand();
-
-            if (loadedMainCommand.CanExecute())
-            {
-                await loadedMainCommand.Execute();
-            }
-
             RegisterWindowView window = new RegisterWindowView();
 
             window.DataContext = new RegisterWindowViewModel(window);
