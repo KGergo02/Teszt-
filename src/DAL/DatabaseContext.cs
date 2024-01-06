@@ -173,6 +173,52 @@ namespace Teszt__.src.DAL
             }
         }
 
+        public List<Question> GetQuestionsOfTest(Test test)
+        {
+            using (DatabaseContext database = new DatabaseContext())
+            {
+                try
+                {
+                    return this.Questions.Where(item => item.TestId == test.Id).ToList();
+                }
+                catch (DbUpdateException DUE)
+                {
+                    Message.Error($"Hiba történt az adatbáziban a művelet végrehajtásakor!\nHiba:\n{DUE.InnerException.Message}");
+
+                    return null;
+                }
+                catch (Exception pokemon)
+                {
+                    Message.Error($"Ismeretlen hiba történt! Kérlek jelentsd az alábbi hibát a fejlesztőknek!\n{pokemon.Message}");
+
+                    return null;
+                }
+            }
+        }
+
+        public List<Answer> GetAnswersOfQuestion(Question question)
+        {
+            using (DatabaseContext database = new DatabaseContext())
+            {
+                try
+                {
+                    return this.Answers.Where(item => item.QuestionId == question.Id).ToList();
+                }
+                catch (DbUpdateException DUE)
+                {
+                    Message.Error($"Hiba történt az adatbáziban a művelet végrehajtásakor!\nHiba:\n{DUE.InnerException.Message}");
+
+                    return null;
+                }
+                catch (Exception pokemon)
+                {
+                    Message.Error($"Ismeretlen hiba történt! Kérlek jelentsd az alábbi hibát a fejlesztőknek!\n{pokemon.Message}");
+
+                    return null;
+                }
+            }
+        }
+
         public int? GetUserCourseIdByName(string name)
         {
             foreach (User_Course item in User_Courses)
@@ -186,14 +232,35 @@ namespace Teszt__.src.DAL
             return null;
         }
 
+        public static int CalculateMaxTestPoint(Test test)
+        {
+            using (DatabaseContext database = new DatabaseContext())
+            {
+                try
+                {
+                    return database.Questions.Where(item => item.TestId == test.Id).Select(item => item.Value).Sum();
+                }
+                catch (DbUpdateException DUE)
+                {
+                    Message.Error($"Hiba történt az adatbáziban a művelet végrehajtásakor!\nHiba:\n{DUE.InnerException.Message}");
+
+                    return 0;
+                }
+                catch (Exception pokemon)
+                {
+                    Message.Error($"Ismeretlen hiba történt! Kérlek jelentsd az alábbi hibát a fejlesztőknek!\n{pokemon.Message}");
+
+                    return 0;
+                }
+            }
+        }
+
         public static void SaveUser(User user)
         {
             using (DatabaseContext database = new DatabaseContext())
             {
                 try
                 {
-                    user.Id = database.Users.Count() + 1;
-
                     database.Users.Add(user);
 
                     database.SaveChanges();
@@ -215,8 +282,6 @@ namespace Teszt__.src.DAL
             {
                 try
                 {
-                    course.Id = database.Courses.Count() + 1;
-
                     database.Courses.Add(course);
 
                     database.SaveChanges();
@@ -238,8 +303,6 @@ namespace Teszt__.src.DAL
             {
                 try
                 {
-                    test.Id = database.Tests.Count() + 1;
-
                     database.Tests.Add(test);
 
                     database.SaveChanges();
@@ -261,8 +324,6 @@ namespace Teszt__.src.DAL
             {
                 try
                 {
-                    question.Id = database.Questions.Count() + 1;
-
                     database.Questions.Add(question);
 
                     database.SaveChanges();
@@ -284,8 +345,6 @@ namespace Teszt__.src.DAL
             {
                 try
                 {
-                    answer.Id = database.Answers.Count() + 1;
-
                     database.Answers.Add(answer);
 
                     database.SaveChanges();

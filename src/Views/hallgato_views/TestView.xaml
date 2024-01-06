@@ -7,7 +7,7 @@
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="TestView">
-    
+
     <Page.Background>
         <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
             <GradientStop Color="Black" Offset="1"/>
@@ -15,14 +15,59 @@
         </LinearGradientBrush>
     </Page.Background>
 
+    <Page.Resources>
 
-    <ScrollViewer VerticalScrollBarVisibility="Auto">
+        <Style x:Key="h1" TargetType="Label">
+            <Setter Property="Foreground" Value="Cyan"/>
+            <Setter Property="FontSize" Value="46"/>
+            <Setter Property="FontFamily" Value="Impact"/>
+            <Setter Property="Margin" Value="-10,0,0,10"/>
+        </Style>
 
-        <StackPanel x:Name="mainStackPanel" Margin="50,0,0,0">
-            <StackPanel x:Name="timeStackPanel" Orientation="Vertical" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,0,20,0">
-                <Label Content="Hátralévő idő" Foreground="White" FontFamily="Impact" FontSize="36"></Label>
-                <Label x:Name="timeLabel" Content="{Binding RemainingTime, UpdateSourceTrigger=PropertyChanged}" Foreground="Red" FontFamily="Impact" FontSize="36" HorizontalAlignment="Center"/>
-            </StackPanel>
+        <Style x:Key="h2" TargetType="Label">
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontSize" Value="35"/>
+            <Setter Property="FontFamily" Value="Impact"/>
+            <Setter Property="Margin" Value="-5,0,0,10"/>
+        </Style>
+
+        <Style x:Key="CB" TargetType="CheckBox">
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontSize" Value="35"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Margin" Value="0,0,0,5"/>
+        </Style>
+
+        <Style x:Key="RB" TargetType="RadioButton">
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontSize" Value="35"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Margin" Value="0,0,0,5"/>
+        </Style>
+
+    </Page.Resources>
+
+
+    <DockPanel>
+        <StackPanel VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0,20,20,0" Orientation="Horizontal" DockPanel.Dock="Top">
+            <Button Content="Teszt befejezése" FontSize="25" Width="200" Height="42" Cursor="Hand" FontWeight="Bold" Command="{Binding SendTestAnswersCommand}">
+                <Button.Foreground>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="Black" Offset="1"/>
+                        <GradientStop Color="Blue" Offset="0.526"/>
+                    </LinearGradientBrush>
+                </Button.Foreground>
+            </Button>
         </StackPanel>
-    </ScrollViewer>
+
+        <StackPanel Orientation="Vertical" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,-50,0,0" DockPanel.Dock="Top">
+            <Label Content="Hátralévő idő" Foreground="White" FontFamily="Impact" FontSize="36"></Label>
+            <Label x:Name="timeLabel" Content="{Binding RemainingTime, UpdateSourceTrigger=PropertyChanged}" Foreground="Red" FontFamily="Impact" FontSize="36" HorizontalAlignment="Center"/>
+        </StackPanel>
+
+        <ScrollViewer IsTabStop="True" Margin="0,15,0,30" CanContentScroll="True" VerticalScrollBarVisibility="Hidden" Focusable="False">
+            <DockPanel x:Name="mainDockPanel" Margin="100,0,0,0"/>
+        </ScrollViewer>
+
+    </DockPanel>
 </Page>

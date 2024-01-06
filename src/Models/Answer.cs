@@ -39,6 +39,16 @@ namespace Teszt__.src.Models
                 Correct = correct;
                 QuestionId = questionId;
             }
+
+            public override bool Equals(object obj)
+            {
+                if(obj == null || !(obj is Answer answer))
+                {
+                    return false;
+                }
+
+                return this.Value == answer.Value && this.Correct == answer.Correct && this.QuestionId == answer.QuestionId;
+            }
         }
     }
 }

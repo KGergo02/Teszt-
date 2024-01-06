@@ -227,6 +227,8 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="src\Commands\Hallgato_Commands\CloseResultWindowCommand.cs" />
+    <Compile Include="src\Commands\Hallgato_Commands\SendTestAnswersCommand.cs" />
     <Compile Include="src\Commands\LoadedMainCommand.cs" />
     <Compile Include="src\Commands\Oktato_Commands\AddNewRowCommand.cs" />
     <Compile Include="src\Commands\CommandBase.cs" />
@@ -253,13 +255,16 @@
     <Compile Include="src\Services\ControlEventService.cs" />
     <Compile Include="src\Services\GridService.cs" />
     <Compile Include="src\Services\JelszoTitkosito.cs" />
+    <Compile Include="src\Services\ListService.cs" />
     <Compile Include="src\Services\Message.cs" />
     <Compile Include="src\Services\NavigationService.cs" />
+    <Compile Include="src\Services\QuestionService.cs" />
     <Compile Include="src\Services\SecureStringConvert.cs" />
     <Compile Include="src\Services\TestService.cs" />
     <Compile Include="src\Services\UserService.cs" />
     <Compile Include="src\Services\WindowService.cs" />
     <Compile Include="src\ViewModels\Hallgato_ViewModels\HallgatoMainViewModel.cs" />
+    <Compile Include="src\ViewModels\Hallgato_ViewModels\ResultViewModel.cs" />
     <Compile Include="src\ViewModels\Hallgato_ViewModels\TestViewModel.cs" />
     <Compile Include="src\ViewModels\LoginWindowViewModel.cs" />
     <Compile Include="src\ViewModels\MainWindowViewModel.cs" />
@@ -270,6 +275,9 @@
     <Compile Include="src\ViewModels\ViewModelBase.cs" />
     <Compile Include="src\Views\Hallgato_Views\HallgatoMainView.xaml.cs">
       <DependentUpon>HallgatoMainView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="src\Views\Hallgato_Views\ResultView.xaml.cs">
+      <DependentUpon>ResultView.xaml</DependentUpon>
     </Compile>
     <Compile Include="src\Views\Hallgato_Views\TestView.xaml.cs">
       <DependentUpon>TestView.xaml</DependentUpon>
@@ -329,6 +337,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="src\Views\Hallgato_Views\ResultView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="src\Views\Hallgato_Views\TestView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -362,9 +374,7 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="src\Commands\Hallgato_Commands\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Resource Include="src\Resources\favicon.ico" />
   </ItemGroup>

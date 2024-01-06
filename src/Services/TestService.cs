@@ -7,20 +7,25 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Forms.VisualStyles;
 using System.Windows.Input;
+using Teszt__.src.DAL;
 using Teszt__.src.ViewModels;
+using Teszt__.src.ViewModels.Hallgato_ViewModels;
+using Teszt__.src.Views.Hallgato_Views;
 using static Teszt__.src.Models.DatabaseContext;
 
 namespace Teszt__.src.Services
 {
     public static class TestService
     {
+        private static bool testNeedsToBeSent;
+
         public static void TestLabelClickedEvent(object sender, MouseButtonEventArgs e)
         {
             Label label = (Label)sender;
             
             Test test = (Test)label.Tag;
 
-            MessageBoxResult result = Message.Question($"Biztos indítani szeretnéd a {test.Name} nevű tesztet?");
+            MessageBoxResult result = Message.Question($"Biztos indítani szeretnéd a {test.Name} nevű tesztet?\n\nEgy teszt indítása több időt is igénybe vehet, kérem várjon!");
             
             if(result == MessageBoxResult.Yes)
             {
@@ -84,9 +89,110 @@ namespace Teszt__.src.Services
 
         public static void StartTest(Test test)
         {
+            testNeedsToBeSent = true;
+
             NavigationService.GetNavigationWindow().Closing += WindowService.OnTestClosing;
 
             NavigationService.NavigateToTestView(test);
+        }
+
+        public static void EndTest(Test test, TestView window)
+        {
+            if(!testNeedsToBeSent)
+            {
+                return;
+            }
+            
+            int pontSzam = 0;
+
+            int elerhetoPontszam = DatabaseContext.CalculateMaxTestPoint(test);
+
+            List<Answer> userAnswers = new List<Answer>();
+
+            foreach (StackPanel stackPanel in window.mainDockPanel.Children)
+            {
+                foreach (Control item in stackPanel.Children)
+                {
+                    if(item.Tag != null)
+                    {
+                        Answer answer = new Answer();
+
+                        answer.QuestionId = Convert.ToInt32(item.Tag.ToString());
+
+                        if (item is RadioButton radioButton)
+                        {
+                            answer.Value = radioButton.Content.ToString();
+                            
+                            answer.Correct = radioButton.IsChecked.Equals(true);
+                        }
+                        else if(item is CheckBox checkBox)
+                        {
+                            answer.Value = checkBox.Content.ToString();
+
+                            answer.Correct = checkBox.IsChecked.Equals(true);
+                        }
+
+                        userAnswers.Add(answer);
+                    }
+                }
+
+                Question question = null;
+
+                bool answeredCorrectly = true;
+
+                foreach (Answer answer in userAnswers)
+                {
+                    using (DatabaseContext database = new DatabaseContext())
+                    {
+                        if(question == null)
+                        {
+                            question = (Question)database.FindById(answer.QuestionId, typeof(Question));
+                        }
+
+                        List<Answer> answers = database.GetAnswersOfQuestion(question);
+
+                        Answer correctAnswer = null;
+
+                        foreach (Answer item in answers)
+                        {
+                            if(item.QuestionId == answer.QuestionId && item.Value == answer.Value)
+                            {
+                                correctAnswer = item;
+
+                                break;
+                            }
+                        }
+
+                        if(!correctAnswer.Equals(answer))
+                        {
+                            answeredCorrectly = false;
+                        }
+                    }
+                }
+
+                if (answeredCorrectly)
+                {
+                    pontSzam += question.Value;
+                }
+
+                answeredCorrectly = true;
+
+                userAnswers.Clear();
+            }
+
+            testNeedsToBeSent = false;
+
+            NavigationService.GetNavigationWindow().Closing -= WindowService.OnTestClosing;
+
+            NavigationService.NavigateToHallgatoView();
+
+            NavigationService.GetNavigationWindow().Closing += WindowService.OnWindowClosingLogoutUserQuestion;
+
+            ResultView resultView = new ResultView();
+
+            resultView.DataContext = new ResultViewModel(pontSzam, elerhetoPontszam, resultView);
+            
+            resultView.ShowDialog();
         }
     }
 }

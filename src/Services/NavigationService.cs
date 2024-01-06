@@ -44,10 +44,9 @@ namespace Teszt__.src.Services
 
         public static void NavigateToTestView(Test test)
         {
-            TestView window = new TestView()
-            {
-                DataContext = new TestViewModel(test),
-            };
+            TestView window = new TestView();
+
+            window.DataContext = new TestViewModel(test, window);
 
             GetNavigationWindow().Navigate(window);
         }
