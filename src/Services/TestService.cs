@@ -131,6 +131,24 @@ namespace Teszt__.src.Services
 
                             answer.Correct = checkBox.IsChecked.Equals(true);
                         }
+                        else if (item is TextBox textBox)
+                        {
+                            answer.Value = textBox.Text;
+
+                            using (DatabaseContext database = new DatabaseContext())
+                            {
+                                Answer correctAnswer = database.Answers.Where(answ => answ.Value.ToUpper() == answer.Value.ToUpper() && answ.QuestionId == answer.QuestionId).ToList()[0];
+
+                                if(correctAnswer != null)
+                                {
+                                    answer.Correct = true;
+                                }
+                                else
+                                {
+                                    answer.Correct = false;
+                                }
+                            }
+                        }
 
                         userAnswers.Add(answer);
                     }
@@ -155,7 +173,7 @@ namespace Teszt__.src.Services
 
                         foreach (Answer item in answers)
                         {
-                            if(item.QuestionId == answer.QuestionId && item.Value == answer.Value)
+                            if(item.QuestionId == answer.QuestionId && item.Value.ToUpper() == answer.Value.ToUpper())
                             {
                                 correctAnswer = item;
 
@@ -180,19 +198,22 @@ namespace Teszt__.src.Services
                 userAnswers.Clear();
             }
 
-            testNeedsToBeSent = false;
+            if(testNeedsToBeSent)
+            {
+                testNeedsToBeSent = false;
 
-            NavigationService.GetNavigationWindow().Closing -= WindowService.OnTestClosing;
+                NavigationService.GetNavigationWindow().Closing -= WindowService.OnTestClosing;
 
-            NavigationService.NavigateToHallgatoView();
+                NavigationService.NavigateToHallgatoView();
 
-            NavigationService.GetNavigationWindow().Closing += WindowService.OnWindowClosingLogoutUserQuestion;
+                NavigationService.GetNavigationWindow().Closing += WindowService.OnWindowClosingLogoutUserQuestion;
 
-            ResultView resultView = new ResultView();
+                ResultView resultView = new ResultView();
 
-            resultView.DataContext = new ResultViewModel(pontSzam, elerhetoPontszam, resultView);
-            
-            resultView.ShowDialog();
+                resultView.DataContext = new ResultViewModel(pontSzam, elerhetoPontszam, resultView);
+
+                resultView.ShowDialog();
+            }
         }
     }
 }

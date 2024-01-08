@@ -45,6 +45,13 @@
             <Setter Property="Margin" Value="0,0,0,5"/>
         </Style>
 
+        <Style x:Key="TB" TargetType="TextBox">
+            <Setter Property="FontSize" Value="35"/>
+            <Setter Property="Width" Value="300"/>
+            <Setter Property="Height" Value="50"/>
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+        </Style>
+
     </Page.Resources>
 
 
@@ -66,7 +73,8 @@
         </StackPanel>
 
         <ScrollViewer IsTabStop="True" Margin="0,15,0,30" CanContentScroll="True" VerticalScrollBarVisibility="Hidden" Focusable="False">
-            <DockPanel x:Name="mainDockPanel" Margin="100,0,0,0"/>
+            <DockPanel x:Name="mainDockPanel" Margin="100,0,0,0">
+            </DockPanel>
         </ScrollViewer>
 
     </DockPanel>

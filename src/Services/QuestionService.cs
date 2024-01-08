@@ -22,6 +22,8 @@ namespace Teszt__.src.Services
 
             Style rb = window.FindResource("RB") as Style;
 
+            Style tb = window.FindResource("TB") as Style;
+
             using (DatabaseContext database = new DatabaseContext())
             {
                 List<Question> questions = database.GetQuestionsOfTest(test);
@@ -57,17 +59,9 @@ namespace Teszt__.src.Services
 
                     answers = ListService.Shuffle(answers);
 
-                    Dictionary<string, int> questionDetails = new Dictionary<string, int>();
-
                     for (int j = 0; j < answers.Count; j++)
                     {
-                        Control answerOption = null;
-
-                        questionDetails.Clear();
-
-                        questionDetails.Add("Id", answers[j].Id);
-
-                        questionDetails.Add("QuestionId", answers[j].QuestionId);
+                        Control answerOption = new Control();
 
                         if (questions[i].QuestionType.Equals("Rádiógomb"))
                         {
@@ -84,6 +78,14 @@ namespace Teszt__.src.Services
                             {
                                 Style = cb,
                                 Content = $"{answers[j].Value}",
+                                Tag = $"{answers[j].QuestionId}",
+                            };
+                        }
+                        else if (questions[i].QuestionType.Equals("Szöveges válasz"))
+                        {
+                            answerOption = new TextBox()
+                            {
+                                Style = tb,
                                 Tag = $"{answers[j].QuestionId}",
                             };
                         }

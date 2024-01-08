@@ -31,7 +31,7 @@ namespace Teszt__.src.ViewModels.Hallgato_ViewModels
 
         public TestViewModel(Test test, TestView window)
         {
-            RemainingTime = TimeSpan.FromSeconds(10);
+            RemainingTime = TimeSpan.FromSeconds(3600);
 
             MainDockPanel = window.mainDockPanel;
 

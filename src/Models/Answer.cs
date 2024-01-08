@@ -47,7 +47,7 @@ namespace Teszt__.src.Models
                     return false;
                 }
 
-                return this.Value == answer.Value && this.Correct == answer.Correct && this.QuestionId == answer.QuestionId;
+                return this.Value.ToUpper() == answer.Value.ToUpper() && this.Correct == answer.Correct && this.QuestionId == answer.QuestionId;
             }
         }
     }
