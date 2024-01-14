@@ -131,6 +131,13 @@ namespace Teszt__.src.Services
                         {
                             answer.Value = textBox.Text;
 
+                            if(answer.Value == String.Empty)
+                            {
+                                answer.Correct = false;
+
+                                break;
+                            }
+
                             using (DatabaseContext database = new DatabaseContext())
                             {
                                 Answer correctAnswer = database.Answers.Where(answ => answ.Value.ToUpper() == answer.Value.ToUpper() && answ.QuestionId == answer.QuestionId).ToList()[0];
@@ -184,7 +191,7 @@ namespace Teszt__.src.Services
                     }
                 }
 
-                if (answeredCorrectly)
+                if (question != null && answeredCorrectly)
                 {
                     pontSzam += question.Value;
                 }
