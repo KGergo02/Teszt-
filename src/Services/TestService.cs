@@ -97,9 +97,7 @@ namespace Teszt__.src.Services
 
         public static void EndTest(Test test, TestView window)
         {
-            TestViewModel testViewModel = (TestViewModel)window.DataContext;
-
-            testViewModel.Timer.Stop();
+            ((TestViewModel)window.DataContext).Timer.Stop();
 
             int pontSzam = 0;
 
