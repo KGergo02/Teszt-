@@ -15,9 +15,11 @@ namespace Teszt__.src.ViewModels.Hallgato_ViewModels
 
         public DockPanel MainDockPanel;
 
-        private Test Test { get; set; }
+        public Test Test { get; set; }
 
         private TestView Window { get; set; }
+
+        public System.Windows.Forms.Timer Timer { get; set; }
 
         public TimeSpan RemainingTime
         {
@@ -31,7 +33,7 @@ namespace Teszt__.src.ViewModels.Hallgato_ViewModels
 
         public TestViewModel(Test test, TestView window)
         {
-            RemainingTime = TimeSpan.FromSeconds(3600);
+            RemainingTime = TimeSpan.FromSeconds(10);
 
             MainDockPanel = window.mainDockPanel;
 
@@ -43,13 +45,13 @@ namespace Teszt__.src.ViewModels.Hallgato_ViewModels
 
             QuestionService.CreateQuestionCards(test, ref MainDockPanel, window);
 
-            System.Windows.Forms.Timer timer = new System.Windows.Forms.Timer();
+            Timer = new System.Windows.Forms.Timer();
 
-            timer.Interval = 1000;
+            Timer.Interval = 1000;
 
-            timer.Tick += UpdateRemainingTime;
+            Timer.Tick += UpdateRemainingTime;
 
-            timer.Start();
+            Timer.Start();
         }
 
         public void UpdateRemainingTime(object sender, EventArgs e)

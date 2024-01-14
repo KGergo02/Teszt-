@@ -8,7 +8,9 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Navigation;
 using Teszt__.src.ViewModels;
+using Teszt__.src.ViewModels.Hallgato_ViewModels;
 using Teszt__.src.Views;
+using Teszt__.src.Views.Hallgato_Views;
 
 namespace Teszt__.src.Services
 {
@@ -54,9 +56,17 @@ namespace Teszt__.src.Services
             {
                 e.Cancel = true;
 
+                MainWindow mainWindow = sender as MainWindow;
+
+                TestView window = (TestView)mainWindow.Content;
+
+                TestViewModel testViewModel = (TestViewModel)window.DataContext;
+
+                testViewModel.Timer.Stop();
+
                 NavigationService.GetNavigationWindow().Closing -= OnTestClosing;
 
-                NavigationService.NavigateToHallgatoView();
+                TestService.EndTest(testViewModel.Test, window);
             }
         }
 

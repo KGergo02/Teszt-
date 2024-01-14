@@ -10,6 +10,7 @@ using System.Windows.Input;
 using Teszt__.src.DAL;
 using Teszt__.src.ViewModels;
 using Teszt__.src.ViewModels.Hallgato_ViewModels;
+using Teszt__.src.Views;
 using Teszt__.src.Views.Hallgato_Views;
 using static Teszt__.src.Models.DatabaseContext;
 
@@ -17,8 +18,6 @@ namespace Teszt__.src.Services
 {
     public static class TestService
     {
-        private static bool testNeedsToBeSent;
-
         public static void TestLabelClickedEvent(object sender, MouseButtonEventArgs e)
         {
             Label label = (Label)sender;
@@ -89,7 +88,7 @@ namespace Teszt__.src.Services
 
         public static void StartTest(Test test)
         {
-            testNeedsToBeSent = true;
+            NavigationService.GetNavigationWindow().Closing -= WindowService.OnWindowClosingLogoutUserQuestion;
 
             NavigationService.GetNavigationWindow().Closing += WindowService.OnTestClosing;
 
@@ -98,11 +97,10 @@ namespace Teszt__.src.Services
 
         public static void EndTest(Test test, TestView window)
         {
-            if(!testNeedsToBeSent)
-            {
-                return;
-            }
-            
+            TestViewModel testViewModel = (TestViewModel)window.DataContext;
+
+            testViewModel.Timer.Stop();
+
             int pontSzam = 0;
 
             int elerhetoPontszam = DatabaseContext.CalculateMaxTestPoint(test);
@@ -198,22 +196,17 @@ namespace Teszt__.src.Services
                 userAnswers.Clear();
             }
 
-            if(testNeedsToBeSent)
-            {
-                testNeedsToBeSent = false;
+            NavigationService.GetNavigationWindow().Closing -= WindowService.OnTestClosing;
 
-                NavigationService.GetNavigationWindow().Closing -= WindowService.OnTestClosing;
+            NavigationService.NavigateToHallgatoView();
 
-                NavigationService.NavigateToHallgatoView();
+            NavigationService.GetNavigationWindow().Closing += WindowService.OnWindowClosingLogoutUserQuestion;
 
-                NavigationService.GetNavigationWindow().Closing += WindowService.OnWindowClosingLogoutUserQuestion;
+            ResultView resultView = new ResultView();
 
-                ResultView resultView = new ResultView();
+            resultView.DataContext = new ResultViewModel(pontSzam, elerhetoPontszam, resultView);
 
-                resultView.DataContext = new ResultViewModel(pontSzam, elerhetoPontszam, resultView);
-
-                resultView.ShowDialog();
-            }
+            resultView.ShowDialog();
         }
     }
 }
