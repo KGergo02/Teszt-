@@ -64,6 +64,8 @@ namespace Teszt__.src.ViewModels
             ShowUserProfileCommand = new ShowUserProfileCommand();
 
             LogOutCommand = new LogOutCommand();
+
+            NavigationService.GetNavigationWindow().Closing += WindowService.OnWindowClosingLogoutUserQuestion;
         }
 
         public ICommand ShowUserProfileCommand { get; }
@@ -71,6 +73,8 @@ namespace Teszt__.src.ViewModels
 
         public void FillStackPanelWithCourseCards()
         {
+            _mainStackPanel.Children.Clear();
+
             List<User_Course> user_courses;
 
             List<Result> results;
@@ -157,7 +161,7 @@ namespace Teszt__.src.ViewModels
                     }
 
                     foreach (Test test in tests)
-                    {    
+                    {
                         Result currentResult = results.FindAll(result => result.TestId == test.Id).OrderByDescending(result => result.Value).FirstOrDefault();
 
                         int resultsCount = results.FindAll(result => result.TestId == test.Id).Count();
@@ -174,8 +178,6 @@ namespace Teszt__.src.ViewModels
                             Cursor = resultsCount < test.Submit_Limit ? Cursors.Hand : Cursors.Arrow,
                             Tag = test,
                         };
-
-                        testLabel.MouseDown += TestService.TestLabelClickedEvent;
 
                         Label testDescriptionLabel = new Label()
                         {
@@ -198,7 +200,7 @@ namespace Teszt__.src.ViewModels
                         }
 
                         testLabels.Add(testLabel);
-                        
+
                         testLabels.Add(testDescriptionLabel);
 
                         courseLabel.Tag = testLabels;
