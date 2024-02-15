@@ -249,6 +249,7 @@
     <Compile Include="src\Models\Course.cs" />
     <Compile Include="src\Models\InputField.cs" />
     <Compile Include="src\Models\Question.cs" />
+    <Compile Include="src\Models\Result.cs" />
     <Compile Include="src\Models\Test.cs" />
     <Compile Include="src\Models\User.cs" />
     <Compile Include="src\Models\User_Course.cs" />
