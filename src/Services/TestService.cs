@@ -172,17 +172,12 @@ namespace Teszt__.src.Services
 
                         List<Answer> answers = database.GetAnswersOfQuestion(question);
 
-                        Answer correctAnswer = null;
-
-                        foreach (Answer item in answers)
-                        {
-                            if(item.QuestionId == answer.QuestionId && item.Value.ToUpper() == answer.Value.ToUpper())
-                            {
-                                correctAnswer = item;
-
-                                break;
-                            }
-                        }
+                        Answer correctAnswer = answers.Find(
+                            item =>
+                            item.QuestionId == answer.QuestionId &&
+                            question.QuestionType == "Szöveges válasz" ? 
+                            item.Value.ToUpper() == answer.Value.ToUpper() : item.Value == answer.Value
+                            );
 
                         if(!correctAnswer.Equals(answer))
                         {
@@ -209,7 +204,7 @@ namespace Teszt__.src.Services
 
             ResultView resultView = new ResultView();
 
-            resultView.DataContext = new ResultViewModel(pontSzam, elerhetoPontszam, resultView);
+            resultView.DataContext = new ResultViewModel(pontSzam, elerhetoPontszam, resultView, test.Id);
 
             resultView.ShowDialog();
         }
