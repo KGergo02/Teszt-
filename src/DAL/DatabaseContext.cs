@@ -219,6 +219,29 @@ namespace Teszt__.src.DAL
             }
         }
 
+        public List<Result> GetResultsOfUser(User user)
+        {
+            using (DatabaseContext database = new DatabaseContext())
+            {
+                try
+                {
+                    return database.Results.Where(item => item.Username == user.Name).ToList();
+                }
+                catch (DbUpdateException DUE)
+                {
+                    Message.Error($"Hiba történt a művelet végrehajtásakor az adatbázisban!\nHiba:\n{DUE.InnerException.Message}");
+
+                    return null;
+                }
+                catch (Exception pokemon)
+                {
+                    Message.Error($"Ismeretlen hiba történt! Kérlek jelentsd az alábbi hibát a fejlesztőknek!\n{pokemon.Message}");
+
+                    return null;
+                }
+            }
+        }
+
         public int? GetUserCourseIdByName(string name)
         {
             foreach (User_Course item in User_Courses)
