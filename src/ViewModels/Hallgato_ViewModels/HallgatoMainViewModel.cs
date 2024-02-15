@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Documents;
@@ -72,9 +73,13 @@ namespace Teszt__.src.ViewModels
         {
             List<User_Course> user_courses;
 
+            List<Result> results;
+
             using (DatabaseContext database = new DatabaseContext())
             {
                 user_courses = database.GetUser_CourseListOfUser(_user);
+
+                results = database.GetResultsOfUser(_user);
             }
             
             if(user_courses.Count == 0)
@@ -131,18 +136,42 @@ namespace Teszt__.src.ViewModels
                     
                     _mainStackPanel.Children.Add(line);
 
-                    foreach (Test test in tests)
-                    {    
-                        Label testLabel = new Label()
+                    if(tests.Count == 0)
+                    {
+                        Label testDescriptionLabel = new Label()
                         {
-                            Content = test.Name,
+                            Content = "Nincs kitölthető teszt",
                             FontWeight = FontWeights.Bold,
                             FontSize = 25,
                             VerticalAlignment = VerticalAlignment.Center,
                             HorizontalAlignment = HorizontalAlignment.Center,
                             Foreground = Brushes.White,
                             Margin = new Thickness(0, 10, 0, 0),
-                            Cursor = Cursors.Hand,
+                        };
+
+                        testLabels.Add(testDescriptionLabel);
+
+                        _mainStackPanel.Children.Add(testDescriptionLabel);
+
+                        courseLabel.Tag = testLabels;
+                    }
+
+                    foreach (Test test in tests)
+                    {    
+                        Result currentResult = results.FindAll(result => result.TestId == test.Id).OrderByDescending(result => result.Value).FirstOrDefault();
+
+                        int resultsCount = results.FindAll(result => result.TestId == test.Id).Count();
+
+                        Label testLabel = new Label()
+                        {
+                            Content = currentResult == null ? test.Name : $"{test.Name}:\t[{currentResult.Value}]/[{DatabaseContext.CalculateMaxTestPoint(test)}]",
+                            FontWeight = FontWeights.Bold,
+                            FontSize = 25,
+                            VerticalAlignment = VerticalAlignment.Center,
+                            HorizontalAlignment = HorizontalAlignment.Center,
+                            Foreground = Brushes.White,
+                            Margin = new Thickness(0, 10, 0, 0),
+                            Cursor = resultsCount < test.Submit_Limit ? Cursors.Hand : Cursors.Arrow,
                             Tag = test,
                         };
 
@@ -150,14 +179,23 @@ namespace Teszt__.src.ViewModels
 
                         Label testDescriptionLabel = new Label()
                         {
-                            Content = $"Kitölthető: {test.Date}, ({test.StartTime} - {test.EndTime})",
+                            Content = currentResult == null ? $"Kitölthető: {test.Date}, ({test.StartTime} - {test.EndTime})" : resultsCount >= test.Submit_Limit ? $"Kitöltve: {currentResult.Date}" : $"Kitöltve: {currentResult.Date}\nEzt a tesztet még [{test.Submit_Limit - resultsCount}] alkalommal töltheted ki",
                             FontStyle = FontStyles.Italic,
                             FontSize = 20,
                             VerticalAlignment = VerticalAlignment.Center,
-                            HorizontalAlignment = HorizontalAlignment.Center,
+                            HorizontalAlignment = currentResult == null ? HorizontalAlignment.Center : HorizontalAlignment.Left,
                             Foreground = Brushes.White,
-                            Margin = new Thickness(0,0,0,15),
+                            Margin = new Thickness(0, 0, 0, 15),
+                            Cursor = resultsCount < test.Submit_Limit ? Cursors.Hand : Cursors.Arrow,
+                            Tag = test,
                         };
+
+                        if (resultsCount < test.Submit_Limit)
+                        {
+                            testLabel.MouseDown += TestService.TestLabelClickedEvent;
+
+                            testDescriptionLabel.MouseDown += TestService.TestLabelClickedEvent; 
+                        }
 
                         testLabels.Add(testLabel);
                         
@@ -168,6 +206,7 @@ namespace Teszt__.src.ViewModels
                         _mainStackPanel.Children.Add(testLabel);
 
                         _mainStackPanel.Children.Add(testDescriptionLabel);
+
                     }
 
                     courseLabel.MouseDown += ControlEventService.OnCourseCardLabelClick;
