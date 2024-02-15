@@ -40,6 +40,11 @@ namespace Teszt__.src.Models
                 QuestionId = questionId;
             }
 
+            public override int GetHashCode()
+            {
+                return base.GetHashCode();
+            }
+
             public override bool Equals(object obj)
             {
                 if(obj == null || !(obj is Answer answer))
