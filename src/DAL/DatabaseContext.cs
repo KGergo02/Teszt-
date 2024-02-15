@@ -137,7 +137,7 @@ namespace Teszt__.src.DAL
                 }
                 catch (DbUpdateException DUE)
                 {
-                    Message.Error($"Hiba történt az adatbáziban a művelet végrehajtásakor!\nHiba:\n{DUE.InnerException.Message}");
+                    Message.Error($"Hiba történt a művelet végrehajtásakor az adatbázisban!\nHiba:\n{DUE.InnerException.Message}");
 
                     return null;
                 }
@@ -160,7 +160,7 @@ namespace Teszt__.src.DAL
                 }
                 catch (DbUpdateException DUE)
                 {
-                    Message.Error($"Hiba történt az adatbáziban a művelet végrehajtásakor!\nHiba:\n{DUE.InnerException.Message}");
+                    Message.Error($"Hiba történt a művelet végrehajtásakor az adatbázisban!\nHiba:\n{DUE.InnerException.Message}");
 
                     return null;
                 }
@@ -179,11 +179,11 @@ namespace Teszt__.src.DAL
             {
                 try
                 {
-                    return this.Questions.Where(item => item.TestId == test.Id).ToList();
+                    return database.Questions.Where(item => item.TestId == test.Id).ToList();
                 }
                 catch (DbUpdateException DUE)
                 {
-                    Message.Error($"Hiba történt az adatbáziban a művelet végrehajtásakor!\nHiba:\n{DUE.InnerException.Message}");
+                    Message.Error($"Hiba történt a művelet végrehajtásakor az adatbázisban!\nHiba:\n{DUE.InnerException.Message}");
 
                     return null;
                 }
@@ -202,11 +202,11 @@ namespace Teszt__.src.DAL
             {
                 try
                 {
-                    return this.Answers.Where(item => item.QuestionId == question.Id).ToList();
+                    return database.Answers.Where(item => item.QuestionId == question.Id).ToList();
                 }
                 catch (DbUpdateException DUE)
                 {
-                    Message.Error($"Hiba történt az adatbáziban a művelet végrehajtásakor!\nHiba:\n{DUE.InnerException.Message}");
+                    Message.Error($"Hiba történt a művelet végrehajtásakor az adatbázisban!\nHiba:\n{DUE.InnerException.Message}");
 
                     return null;
                 }
@@ -242,7 +242,7 @@ namespace Teszt__.src.DAL
                 }
                 catch (DbUpdateException DUE)
                 {
-                    Message.Error($"Hiba történt az adatbáziban a művelet végrehajtásakor!\nHiba:\n{DUE.InnerException.Message}");
+                    Message.Error($"Hiba történt a művelet végrehajtásakor az adatbázisban!\nHiba:\n{DUE.InnerException.Message}");
 
                     return 0;
                 }
@@ -267,7 +267,7 @@ namespace Teszt__.src.DAL
                 }
                 catch (DbUpdateException DUE)
                 {
-                    Message.Error($"Hiba történt az adatbáziban a művelet végrehajtásakor!\nHiba:\n{DUE.InnerException.Message}");
+                    Message.Error($"Hiba történt a művelet végrehajtásakor az adatbázisban!\nHiba:\n{DUE.InnerException.Message}");
                 }
                 catch (Exception pokemon)
                 {
@@ -288,7 +288,7 @@ namespace Teszt__.src.DAL
                 }
                 catch(DbUpdateException DUE)
                 {
-                    Message.Error($"Hiba történt az adatbáziban a művelet végrehajtásakor!\nHiba:\n{DUE.InnerException.Message}");
+                    Message.Error($"Hiba történt a művelet végrehajtásakor az adatbázisban!\nHiba:\n{DUE.InnerException.Message}");
                 }
                 catch (Exception pokemon)
                 {
@@ -309,7 +309,7 @@ namespace Teszt__.src.DAL
                 }
                 catch (DbUpdateException DUE)
                 {
-                    Message.Error($"Hiba történt az adatbáziban a művelet végrehajtásakor!\nHiba:\n{DUE.InnerException.Message}");
+                    Message.Error($"Hiba történt a művelet végrehajtásakor az adatbázisban!\nHiba:\n{DUE.InnerException.Message}");
                 }
                 catch (Exception pokemon)
                 {
@@ -330,7 +330,7 @@ namespace Teszt__.src.DAL
                 }
                 catch (DbUpdateException DUE)
                 {
-                    Message.Error($"Hiba történt az adatbáziban a művelet végrehajtásakor!\nHiba:\n{DUE.InnerException.Message}");
+                    Message.Error($"Hiba történt a művelet végrehajtásakor az adatbázisban!\nHiba:\n{DUE.InnerException.Message}");
                 }
                 catch (Exception pokemon)
                 {
@@ -351,7 +351,28 @@ namespace Teszt__.src.DAL
                 }
                 catch (DbUpdateException DUE)
                 {
-                    Message.Error($"Hiba történt az adatbáziban a művelet végrehajtásakor!\nHiba:\n{DUE.InnerException.Message}");
+                    Message.Error($"Hiba történt a művelet végrehajtásakor az adatbázisban!\nHiba:\n{DUE.InnerException.Message}");
+                }
+                catch (Exception pokemon)
+                {
+                    Message.Error($"Ismeretlen hiba történt! Kérlek jelentsd az alábbi hibát a fejlesztőknek!\n{pokemon.Message}");
+                }
+            }
+        }
+
+        public static void SaveResult(Result result)
+        {
+            using (DatabaseContext database = new DatabaseContext())
+            {
+                try
+                {
+                    database.Results.Add(result);
+
+                    database.SaveChanges();
+                }
+                catch(DbUpdateException DUE)
+                {
+                    Message.Error($"Hiba történt a művelet végrehajtásakor az adatbázisban!\nHiba:\n{DUE.InnerException.Message}");
                 }
                 catch (Exception pokemon)
                 {
@@ -384,7 +405,7 @@ namespace Teszt__.src.DAL
                 }
                 catch (DbUpdateException DUE)
                 {
-                    Message.Error($"Hiba történt az adatbáziban a művelet végrehajtásakor!\nHiba:\n{DUE.InnerException.Message}");
+                    Message.Error($"Hiba történt a művelet végrehajtásakor az adatbázisban!\nHiba:\n{DUE.InnerException.Message}");
                 }
                 catch (Exception pokemon)
                 {
@@ -410,7 +431,7 @@ namespace Teszt__.src.DAL
                 }
                 catch (DbUpdateException DUE)
                 {
-                    Message.Error($"Hiba történt az adatbáziban a művelet végrehajtásakor!\nHiba:\n{DUE.InnerException.Message}");
+                    Message.Error($"Hiba történt a művelet végrehajtásakor az adatbázisban!\nHiba:\n{DUE.InnerException.Message}");
                 }
                 catch (Exception pokemon)
                 {
