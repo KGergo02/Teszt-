@@ -14,6 +14,11 @@ namespace Teszt__.src.Services
         {
             Label courseLabel = (Label)sender;
 
+            if(courseLabel.Tag == null)
+            {
+                return;
+            }
+
             foreach (Label item in (List<Label>)courseLabel.Tag)
             {
                 if(item.IsVisible)
