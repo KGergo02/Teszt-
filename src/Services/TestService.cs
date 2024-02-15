@@ -140,7 +140,7 @@ namespace Teszt__.src.Services
 
                             using (DatabaseContext database = new DatabaseContext())
                             {
-                                Answer correctAnswer = database.Answers.Where(answ => answ.Value.ToUpper() == answer.Value.ToUpper() && answ.QuestionId == answer.QuestionId).ToList()[0];
+                                Answer correctAnswer = database.Answers.ToList().Find(answ => answ.Value.ToUpper() == answer.Value.ToUpper() && answ.QuestionId == answer.QuestionId);
 
                                 if(correctAnswer != null)
                                 {
@@ -179,7 +179,7 @@ namespace Teszt__.src.Services
                             item.Value.ToUpper() == answer.Value.ToUpper() : item.Value == answer.Value
                             );
 
-                        if(!correctAnswer.Equals(answer))
+                        if(correctAnswer == null || !correctAnswer.Equals(answer))
                         {
                             answeredCorrectly = false;
                         }
@@ -198,9 +198,9 @@ namespace Teszt__.src.Services
 
             NavigationService.GetNavigationWindow().Closing -= WindowService.OnTestClosing;
 
-            NavigationService.NavigateToHallgatoView();
+            DatabaseContext.SaveResult(new Result(UserService.GetCurrentUser().Name, pontSzam, test.Id, DateTime.Now.ToString()));
 
-            NavigationService.GetNavigationWindow().Closing += WindowService.OnWindowClosingLogoutUserQuestion;
+            NavigationService.NavigateToHallgatoView();
 
             ResultView resultView = new ResultView();
 
