@@ -21,6 +21,8 @@ namespace Teszt__.src.DAL
 
         public DbSet<User_Course> User_Courses { get; set; }
 
+        public DbSet<Result> Results { get; set; }
+
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
