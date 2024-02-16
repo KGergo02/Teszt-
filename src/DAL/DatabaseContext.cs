@@ -129,13 +129,59 @@ namespace Teszt__.src.DAL
             }
         }
 
-        public List<User_Course> GetUser_CourseListOfUser(User user)
+        public List<Course> GetCourses()
+        {
+            using (DatabaseContext database = new DatabaseContext())
+            {
+                try
+                {
+                    return database.Courses.OrderBy(item => item.Name).ToList();
+                }
+                catch (DbUpdateException DUE)
+                {
+                    Message.Error($"Hiba történt a művelet végrehajtásakor az adatbázisban!\nHiba:\n{DUE.InnerException.Message}");
+
+                    return null;
+                }
+                catch (Exception pokemon)
+                {
+                    Message.Error($"Ismeretlen hiba történt! Kérlek jelentsd az alábbi hibát a fejlesztőknek!\n{pokemon.Message}");
+
+                    return null;
+                }
+            }
+        }
+
+        public List<User_Course> GetCourseListOfUser(User user)
         {
             using (DatabaseContext database = new DatabaseContext())
             {
                 try
                 {
                     return database.User_Courses.Where(item => item.User_name == user.Name).OrderBy(item => item.Course_name).ToList();
+                }
+                catch (DbUpdateException DUE)
+                {
+                    Message.Error($"Hiba történt a művelet végrehajtásakor az adatbázisban!\nHiba:\n{DUE.InnerException.Message}");
+
+                    return null;
+                }
+                catch (Exception pokemon)
+                {
+                    Message.Error($"Ismeretlen hiba történt! Kérlek jelentsd az alábbi hibát a fejlesztőknek!\n{pokemon.Message}");
+
+                    return null;
+                }
+            }
+        }
+
+        public List<User_Course> GetCourseListOfUser(User user, string searchString)
+        {
+            using (DatabaseContext database = new DatabaseContext())
+            {
+                try
+                {
+                    return database.User_Courses.Where(item => item.User_name == user.Name && item.Course_name.Contains(searchString)).ToList();
                 }
                 catch (DbUpdateException DUE)
                 {
@@ -280,6 +326,54 @@ namespace Teszt__.src.DAL
             }
         }
 
+        public static int CountCourseLimit(Course course)
+        {
+            using (DatabaseContext database = new DatabaseContext())
+            {
+                try
+                {
+                    return database.User_Courses.Where(item => item.Course_name == course.Name).Count();
+                }
+                catch (DbUpdateException DUE)
+                {
+                    Message.Error($"Hiba történt a művelet végrehajtásakor az adatbázisban!\nHiba:\n{DUE.InnerException.Message}");
+
+                    return 0;
+                }
+                catch (Exception pokemon)
+                {
+                    Message.Error($"Ismeretlen hiba történt! Kérlek jelentsd az alábbi hibát a fejlesztőknek!\n{pokemon.Message}");
+
+                    return 0;
+                }
+            }
+        }
+
+        public static int CountUserSubmissionsOfCourse(User user, Course course)
+        {
+            using (DatabaseContext database = new DatabaseContext())
+            {
+                try
+                {
+                    List<int> currentTestIds = database.GetTestsOfCourse(course).Select(item => item.Id).ToList(); 
+
+                    return database.Results.Where(item => item.Username == user.Name && currentTestIds.Contains(item.TestId)).Count();
+                }
+                catch (DbUpdateException DUE)
+                {
+                    Message.Error($"Hiba történt a művelet végrehajtásakor az adatbázisban!\nHiba:\n{DUE.InnerException.Message}");
+
+                    return 0;
+                }
+                catch (Exception pokemon)
+                {
+                    Message.Error($"Ismeretlen hiba történt! Kérlek jelentsd az alábbi hibát a fejlesztőknek!\n{pokemon.Message}");
+
+                    return 0;
+                }
+            }
+        }
+
         public static void SaveUser(User user)
         {
             using (DatabaseContext database = new DatabaseContext())
@@ -406,6 +500,41 @@ namespace Teszt__.src.DAL
             }
         }
 
+        public static void SaveUserCourse(User user, Course course)
+        {
+            using (DatabaseContext database = new DatabaseContext())
+            {
+                try
+                {
+                    User_Course userCourse = new User_Course()
+                    {
+                        Course_name = course.Name,
+                        User_name = user.Name,
+                    };
+
+                    database.User_Courses.Add(userCourse);
+
+                    database.SaveChanges();
+                }
+                catch (DbUpdateException DUE)
+                {
+                    Message.Error($"Hiba történt a művelet végrehajtásakor az adatbázisban!\nHiba:\n{DUE.InnerException.Message}");
+                }
+                catch (Exception pokemon)
+                {
+                    Message.Error($"Ismeretlen hiba történt! Kérlek jelentsd az alábbi hibát a fejlesztőknek!\n{pokemon.Message}");
+                }
+            }
+        }
+
+        public static void SaveUserCourse(User user, List<Course> course)
+        {
+            foreach (Course item in course)
+            {
+                SaveUserCourse(user, item);
+            }
+        }
+
         public static void UpdateUser()
         {
             User user = UserService.GetCurrentUser();
@@ -462,6 +591,37 @@ namespace Teszt__.src.DAL
                 {
                     Message.Error($"Ismeretlen hiba történt! Kérlek jelentsd az alábbi hibát a fejlesztőknek!\n{pokemon.Message}");
                 }
+            }
+        }
+
+        public static void DeleteUserCourse(User user, Course course)
+        {
+            using (DatabaseContext database = new DatabaseContext())
+            {
+                try
+                {
+                    User_Course userCourse = database.User_Courses.Where(item => item.User_name == user.Name && item.Course_name == course.Name).FirstOrDefault();
+
+                    database.User_Courses.Remove(userCourse);
+
+                    database.SaveChanges();
+                }
+                catch (DbUpdateException DUE)
+                {
+                    Message.Error($"Hiba történt a művelet végrehajtásakor az adatbázisban!\nHiba:\n{DUE.InnerException.Message}");
+                }
+                catch (Exception pokemon)
+                {
+                    Message.Error($"Ismeretlen hiba történt! Kérlek jelentsd az alábbi hibát a fejlesztőknek!\n{pokemon.Message}");
+                }
+            }
+        }
+
+        public static void DeleteUserCourse(User user, List<Course> course)
+        {
+            foreach (Course item in course)
+            {
+                DeleteUserCourse(user, item);
             }
         }
     }
