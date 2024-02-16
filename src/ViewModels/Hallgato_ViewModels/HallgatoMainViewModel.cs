@@ -85,11 +85,18 @@ namespace Teszt__.src.ViewModels
 
             LogOutCommand = new LogOutCommand();
 
+            AddCourseCommand = new CourseCommand(true);
+            
+            DeleteCourseCommand = new CourseCommand(false);
+
             NavigationService.GetNavigationWindow().Closing += WindowService.OnWindowClosingLogoutUserQuestion;
         }
 
         public ICommand ShowUserProfileCommand { get; }
         public ICommand LogOutCommand { get; }
+
+        public ICommand AddCourseCommand { get; }
+        public ICommand DeleteCourseCommand { get; }
 
         public void FillStackPanelWithCourseCards()
         {
