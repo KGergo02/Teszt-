@@ -7,6 +7,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Shapes;
 using Teszt__.src.Commands;
+using Teszt__.src.Commands.Hallgato_Commands;
 using Teszt__.src.Commands.User_Commands;
 using Teszt__.src.DAL;
 using Teszt__.src.Services;
@@ -49,6 +50,25 @@ namespace Teszt__.src.ViewModels
 
         private StackPanel _mainStackPanel;
 
+        private string _searchString;
+
+        public string SearchString
+        {
+            get
+            {
+                return _searchString;
+            }
+            
+            set
+            {
+                _searchString = value;
+                
+                OnPropertyChanged(nameof(SearchString));
+                
+                FillStackPanelWithCourseCards();
+            }
+        }
+
         public HallgatoMainViewModel(HallgatoMainView window)
         {
             _user = UserService.GetCurrentUser();
@@ -81,7 +101,7 @@ namespace Teszt__.src.ViewModels
 
             using (DatabaseContext database = new DatabaseContext())
             {
-                user_courses = database.GetUser_CourseListOfUser(_user);
+                user_courses = _searchString == null || _searchString == string.Empty ? database.GetCourseListOfUser(_user) : database.GetCourseListOfUser(_user, _searchString);
 
                 results = database.GetResultsOfUser(_user);
             }
