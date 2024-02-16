@@ -42,8 +42,8 @@
     </Page.Background>
 
 
-    <ScrollViewer VerticalScrollBarVisibility="Auto">
-        <StackPanel>
+    <DockPanel>
+        <StackPanel DockPanel.Dock="Top">
             <Grid >
                 <Grid.Background>
                     <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
@@ -86,17 +86,22 @@
                     </MenuItem>
                 </Menu>
             </Grid>
+        </StackPanel>
 
 
-            <StackPanel x:Name="mainStackPanel" Margin="0,20,0,0" HorizontalAlignment="Center" VerticalAlignment="Center">
+        <ScrollViewer VerticalScrollBarVisibility="Auto" IsTabStop="True" CanContentScroll="True" DockPanel.Dock="Top">
+            <DockPanel>
+                <StackPanel x:Name="mainStackPanel" Margin="0,20,0,0" HorizontalAlignment="Center" VerticalAlignment="Center">
 
-            </StackPanel>
+                </StackPanel>
+            </DockPanel>
+        </ScrollViewer>
 
+        <StackPanel DockPanel.Dock="Bottom">
             <WrapPanel HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,100,0,10">
                 <Button x:Name="AddNewRowButton" Content="Új sor" FontSize="30px" Width="150px" Height="45px" Command="{Binding AddNewRowCommand}" Margin="0,0,100,0"/>
                 <Button Content="Küldés" FontSize="30px" Width="150px" Height="45px" Command="{Binding SendCommand}"/>
             </WrapPanel>
-
         </StackPanel>
-    </ScrollViewer>
+    </DockPanel>
 </Page>
