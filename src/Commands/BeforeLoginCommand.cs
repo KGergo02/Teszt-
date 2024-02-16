@@ -13,8 +13,6 @@ namespace Teszt__.src.Commands
 {
     class BeforeLoginCommand : CommandBase
     {
-        public Thread startLoading;
-
         public bool admin;
 
         public BeforeLoginCommand(bool admin)
