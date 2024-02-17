@@ -189,7 +189,7 @@ namespace Teszt__.src.ViewModels
 
                     foreach (Test test in tests)
                     {
-                        Result currentResult = results.FindAll(result => result.TestId == test.Id).OrderByDescending(result => result.Value).FirstOrDefault();
+                        Result currentResult = test.Best_Submitted_Result_Counts ? results.FindAll(result => result.TestId == test.Id).OrderByDescending(result => result.Value).FirstOrDefault() : results.FindAll(result => result.TestId == test.Id).OrderBy(result => result.Value).FirstOrDefault();
 
                         int resultsCount = results.FindAll(result => result.TestId == test.Id).Count();
 
@@ -206,9 +206,18 @@ namespace Teszt__.src.ViewModels
                             Tag = test,
                         };
 
+                        string currentResultDate = null;
+
+                        if (currentResult != null)
+                        {
+                            currentResultDate = currentResult.Date.Substring(0, 13).Replace(" ", "");
+
+                            currentResultDate += currentResult.Date.Substring(13, 9);
+                        }
+
                         Label testDescriptionLabel = new Label()
                         {
-                            Content = currentResult == null ? $"Kitölthető: {test.Date}, ({test.StartTime} - {test.EndTime})" : resultsCount >= test.Submit_Limit ? $"Kitöltve: {currentResult.Date}" : $"Kitöltve: {currentResult.Date}\nEzt a tesztet még [{test.Submit_Limit - resultsCount}] alkalommal töltheted ki",
+                            Content = currentResult == null ? $"Kitölthető: [{test.StartDate.Replace(" ", "")} {test.StartTime}] - [{test.EndDate.Replace(" ", "")} {test.EndTime}]\nEzt a tesztet [{test.Submit_Limit - resultsCount}] alkalommal töltheted ki" : resultsCount >= test.Submit_Limit ? $"Kitöltve: [{currentResultDate}]" : $"Kitöltve: [{currentResultDate}]\nEzt a tesztet még [{test.Submit_Limit - resultsCount}] alkalommal töltheted ki",
                             FontStyle = FontStyles.Italic,
                             FontSize = 20,
                             VerticalAlignment = VerticalAlignment.Center,
