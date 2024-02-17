@@ -81,7 +81,7 @@ namespace Teszt__.src.Services
                                 Tag = $"{answers[j].QuestionId}",
                             };
                         }
-                        else if (questions[i].QuestionType.Equals("Szöveges válasz"))
+                        else if (questions[i].QuestionType.Equals("Rövid választ igénylő feladat"))
                         {
                             answerOption = new TextBox()
                             {
