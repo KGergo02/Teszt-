@@ -40,33 +40,23 @@ namespace Teszt__.src.Services
             
             List<string> endTestTimes = test.EndTime.Split(':').ToList();
 
-            List<string> date = test.Date.Replace(" ", "").Split('.').ToList();
+            List<string> testStartDate = test.StartDate.Replace(" ", "").Split('.').ToList();
 
-            if (endTestTimes[0].Equals("24"))
-            {
-                endTestTimes[0] = "23";
-                endTestTimes[1] = "59";
-            }
-
-            DateTime testDate = new DateTime(
-                Convert.ToInt32(date[0]),
-                Convert.ToInt32(date[1]),
-                Convert.ToInt32(date[2])
-                );
+            List<string> testEndDate = test.EndDate.Replace(" ", "").Split('.').ToList();
 
             DateTime startDateTime = new DateTime(
-                testDate.Year,
-                testDate.Month, 
-                testDate.Day, 
+                Convert.ToInt32(testStartDate[0]),
+                Convert.ToInt32(testStartDate[1]),
+                Convert.ToInt32(testStartDate[2]),
                 Convert.ToInt32(startTestTimes[0]), 
                 Convert.ToInt32(startTestTimes[1]), 
                 0
                 );
 
             DateTime endDateTime = new DateTime(
-                testDate.Year,
-                testDate.Month,
-                testDate.Day,
+                Convert.ToInt32(testEndDate[0]),
+                Convert.ToInt32(testEndDate[1]),
+                Convert.ToInt32(testEndDate[2]),
                 Convert.ToInt32(endTestTimes[0]),
                 Convert.ToInt32(endTestTimes[1]),
                 0
@@ -78,7 +68,7 @@ namespace Teszt__.src.Services
             }
             else if(startDateTime > currentTime)
             {
-                Message.Error($"A kezdési idő előtt a teszt nem indítható!\n\nIndítható:\n{test.Date.Replace(" ", "")} ({test.StartTime} - {test.EndTime})");
+                Message.Error($"A kezdési idő előtt a teszt nem indítható!\n\nIndítható:\n{test.StartDate.Replace(" ", "")} ({test.StartTime} - {test.EndTime})");
             }
             else if(currentTime > endDateTime)
             {
@@ -175,7 +165,7 @@ namespace Teszt__.src.Services
                         Answer correctAnswer = answers.Find(
                             item =>
                             item.QuestionId == answer.QuestionId &&
-                            question.QuestionType == "Szöveges válasz" ? 
+                            question.QuestionType == "Rövid választ igénylő feladat" ? 
                             item.Value.ToUpper() == answer.Value.ToUpper() : item.Value == answer.Value
                             );
 
