@@ -16,9 +16,13 @@ namespace Teszt__.src.Models
 
             public int Submit_Limit { get; set; }
 
-            public string Date { get; set; }
+            public bool Best_Submitted_Result_Counts { get; set; }
+
+            public string StartDate { get; set; }
 
             public string StartTime { get; set; }
+
+            public string EndDate { get; set; }
 
             public string EndTime { get; set; }
 
@@ -29,33 +33,14 @@ namespace Teszt__.src.Models
 
             }
 
-            public Test(string name, int submit_limit, string date, string startTime, string endTime, int courseid)
-            {
-                this.Name = name;
-                this.Submit_Limit = submit_limit;
-                this.Date = date;
-                this.StartTime = startTime;
-                this.EndTime = endTime;
-                this.CourseId = courseid;
-            }
-
-            public Test(string name, int submit_Limit, string date, string startTime, string endTime, int? courseId)
+            public Test(string name, int submit_Limit, bool best_Submitted_Answer_Counts, string startDate, string startTime, string endDate, string endTime, int? courseId)
             {
                 Name = name;
                 Submit_Limit = submit_Limit;
-                Date = date;
+                Best_Submitted_Result_Counts = best_Submitted_Answer_Counts;
+                StartDate = startDate;
                 StartTime = startTime;
-                EndTime = endTime;
-                CourseId = courseId;
-            }
-
-            public Test(int id, string name, int submit_Limit, string date, string startTime, string endTime, int courseId)
-            {
-                Id = id;
-                Name = name;
-                Submit_Limit = submit_Limit;
-                Date = date;
-                StartTime = startTime;
+                EndDate = endDate;
                 EndTime = endTime;
                 CourseId = courseId;
             }
