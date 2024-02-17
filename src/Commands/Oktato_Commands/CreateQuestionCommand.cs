@@ -28,6 +28,8 @@ namespace Teszt__.src.Commands.Oktato_Commands
 
             _viewModel._AddNewRowButton.Content = "Új válasz";
 
+            _viewModel._AddNewRowButton.Visibility = System.Windows.Visibility.Visible;
+
             GridService.ClearGrid(ref grid, ref mainStackPanel);
 
             grid = GridService.CreateQuestionGrid(grid, mainStackPanel);

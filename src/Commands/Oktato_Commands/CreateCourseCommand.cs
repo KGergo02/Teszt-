@@ -33,6 +33,8 @@ namespace Teszt__.src.Commands.Oktato_Commands
 
             _viewModel._AddNewRowButton.Content = "Új sor";
 
+            _viewModel._AddNewRowButton.Visibility = System.Windows.Visibility.Visible;
+
             GridService.ClearGrid(ref _grid, ref _mainStackPanel);
 
             _grid = GridService.CreateCourseGrid(ref _grid, ref _mainStackPanel);
