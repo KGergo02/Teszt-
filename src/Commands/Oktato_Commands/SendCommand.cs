@@ -35,7 +35,7 @@ namespace Teszt__.src.Commands.Oktato_Commands
             {
                 List<Control> controls = new List<Control>();
                 
-                if(_viewModel.modelType != 2)
+                if(_viewModel.modelType == 0)
                 {
                     for (int j = 0; j < _grid.ColumnDefinitions.Count; j++)
                     {
@@ -44,7 +44,7 @@ namespace Teszt__.src.Commands.Oktato_Commands
                         controls.Add(item);
                     }
                 }
-                else if(_viewModel.modelType == 2)
+                else
                 {
                     for (int j = 0; j < _grid.Children.Count; j++)
                     {
@@ -80,24 +80,23 @@ namespace Teszt__.src.Commands.Oktato_Commands
                         break;
 
                     case 1:
-                        if(!IfSaveTestWasSuccessful(controls))
+                        if(IfSaveTestWasSuccessful(controls))
                         {
-                            return;
+                            goto NotifyUser;
                         }
                         break;
                     case 2:
                         if (IfSaveQuestionWasSuccessful(controls))
                         {
-                            return;
+                            goto NotifyUser;
                         }
-                        else
-                        {
-                            return;
-                        }
+                        break;
                 }
 
                 controls.Clear();
             }
+
+            NotifyUser:
 
             GridService.ClearGrid(ref _grid, ref _mainStackPanel);
 
@@ -112,6 +111,10 @@ namespace Teszt__.src.Commands.Oktato_Commands
                 case 1:
                     type = "Teszt";
                     _grid = GridService.CreateTestGrid(ref _grid, ref _mainStackPanel);
+                    break;
+                case 2:
+                    type = "Kérdés";
+                    _grid = GridService.CreateQuestionGrid(_grid, _mainStackPanel);
                     break;
 
 
@@ -142,29 +145,56 @@ namespace Teszt__.src.Commands.Oktato_Commands
                         return false;
                     }
 
-                    if (tb.Tag != null && !CheckIfTime(tb.Text, tb.Tag.ToString()))
+                    if(_viewModel.modelType == 1)
                     {
-                        Message.Error("Nem jó formátumban adtad meg az időt!\nHelyes formátum: 00:00");
+                        List<DateTime> dates = new List<DateTime>();
 
-                        return false;
-                    }
-                    else if (tb.Tag != null && tb.Tag.ToString() == "time" && !CheckIfStartTimeIsLessThanEndTime())
-                    {
-                        Message.Error("Az indítási időpont nem lehet előbb, mint a befejezési idő!");
+                        foreach (Control datePickerControl in controls)
+                        {
+                            if (datePickerControl is DatePicker datePicker)
+                            {
+                                if (datePicker.SelectedDate == null)
+                                {
+                                    Message.Error("Nem adtál meg dátumot!");
 
-                        return false;
-                    }
+                                    return false;
+                                }
 
-                }
-                else if (item is DatePicker)
-                {
-                    DatePicker dp = (DatePicker)item;
+                                dates.Add(datePicker.SelectedDate.Value.Date);
+                            }
+                        }
 
-                    if (dp.SelectedDate == null)
-                    {
-                        Message.Error("Nem adtál meg dátumot!");
+                        if (dates[0] > dates[1])
+                        {
+                            Message.Error("Nem választhatsz kezdési nap előtti napot!");
 
-                        return false;
+                            return false;
+                        }
+
+                        if (dates[0] == dates[1])
+                        {
+                            if (tb.Tag != null && !CheckIfTime(tb.Text, tb.Tag.ToString()))
+                            {
+                                Message.Error("Nem jó formátumban adtad meg az időt!\nHelyes formátum: 00:00");
+
+                                return false;
+                            }
+                            else if (tb.Tag != null && tb.Tag.ToString() == "time" && !CheckIfStartTimeIsLessThanEndTime())
+                            {
+                                Message.Error("Az indítási időpont nem lehet előbb, mint a befejezési idő!");
+
+                                return false;
+                            }
+                        }
+                        else
+                        {
+                            if (tb.Tag != null && !CheckIfTime(tb.Text, tb.Tag.ToString()))
+                            {
+                                Message.Error("Nem jó formátumban adtad meg az időt!\nHelyes formátum: 00:00");
+
+                                return false;
+                            }
+                        }
                     }
                 }
                 else if (item is ComboBox)
@@ -202,7 +232,7 @@ namespace Teszt__.src.Commands.Oktato_Commands
         {
             if(tag == "time")
             {
-                string pattern = @"^([0-1]?[0-9]|2[0-3]){2}:[0-5][0-9]$";
+                string pattern = @"^(?:[01]?\d|2[0-3])(?::[0-5]\d){1,2}$";
 
                 Regex regex = new Regex(pattern);
 
@@ -339,21 +369,25 @@ namespace Teszt__.src.Commands.Oktato_Commands
             using (DatabaseContext database = new DatabaseContext())
             {
 
-                TextBox name = (TextBox)controls[0];
+                ComboBox course = (ComboBox)controls[0];
 
-                TextBox submit_limit = (TextBox)controls[1];
+                CheckBox bestAnswer = (CheckBox)controls[1];
 
-                DatePicker datePicker = (DatePicker)controls[2];
+                TextBox name = (TextBox)controls[2];
 
-                TextBox startTime = (TextBox)controls[3];
+                TextBox submit_limit = (TextBox)controls[3];
+
+                DatePicker startDatePicker = (DatePicker)controls[4];
             
-                TextBox endTime = (TextBox)controls[4];
+                TextBox startTime = (TextBox)controls[5];
 
-                ComboBox course = (ComboBox)controls[5];
+                DatePicker endDatePicker = (DatePicker)controls[6];
+
+                TextBox endTime = (TextBox)controls[7];
 
                 Course currentCourse = (Course) database.FindByName(course.SelectedValue.ToString(), typeof(Course));
 
-                Test newTest = new Test(name.Text.ToString(), Convert.ToInt32(submit_limit.Text), datePicker.SelectedDate.Value.Date.ToShortDateString(), startTime.Text.ToString(), endTime.Text.ToString(), currentCourse.Id);
+                Test newTest = new Test(name.Text.ToString(), Convert.ToInt32(submit_limit.Text), (bool)bestAnswer.IsChecked, startDatePicker.SelectedDate.Value.Date.ToShortDateString(), startTime.Text.ToString(), endDatePicker.SelectedDate.Value.Date.ToShortDateString(), endTime.Text.ToString(), currentCourse.Id);
 
                 DatabaseContext.SaveTest(newTest);
             }
@@ -407,19 +441,13 @@ namespace Teszt__.src.Commands.Oktato_Commands
                         answer = true;
                     }
 
-                    Question questionForAnswer = database.Questions.Where(item => item.Name == questionName.Text.ToString()).FirstOrDefault();
+                    Question questionForAnswer = database.Questions.Where(item => item.Name == question.Name && item.QuestionType == item.QuestionType).AsEnumerable().LastOrDefault();
 
                     Answer newAnswer = new Answer(questionValue.Text.ToString(), answer, questionForAnswer.Id);
 
                     DatabaseContext.SaveAnswer(newAnswer);
                 }
             }
-
-            GridService.ClearGrid(ref _grid, ref _mainStackPanel);
-
-            _grid = GridService.CreateQuestionGrid(_grid, _mainStackPanel);
-
-            Message.Success($"Kérdés sikeresen létrehozva!");
 
             return true;
         }
