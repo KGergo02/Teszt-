@@ -204,7 +204,7 @@ namespace Teszt__.src.DAL
             {
                 try
                 {
-                    return database.Tests.Where(item => item.CourseId == course.Id).OrderBy(item => item.StartTime).OrderBy(item => item.Date).ToList();
+                    return database.Tests.Where(item => item.CourseId == course.Id).OrderBy(item => item.StartTime).OrderBy(item => item.StartDate).ToList();
                 }
                 catch (DbUpdateException DUE)
                 {
