@@ -23,7 +23,7 @@
 
                 <Label Foreground="White" FontSize="50" Canvas.Left="337" Canvas.Top="14" Margin="0,20,0,0">Kurzusok kiválasztása</Label>
                 <ListBox x:Name="listBox" Margin="0,20,0,0" SelectionMode="Multiple" ItemsSource="{Binding Courses, UpdateSourceTrigger=PropertyChanged}" FontSize="20" VerticalContentAlignment="Center"/>
-                <Label x:Name="NoDataLabel" Foreground="Red" FontSize="40" FontStyle="Italic" Canvas.Left="337" Canvas.Top="14" Margin="0,50,0,0" Content="{Binding NoDataLabelText}"></Label>
+                <Label x:Name="NoDataLabel" Foreground="Red" HorizontalAlignment="Center" FontSize="40" FontStyle="Italic" Canvas.Left="337" Canvas.Top="14" Margin="0,50,0,0" Content="{Binding NoDataLabelText}"></Label>
                 <Button FontSize="30" Width="290" Margin="0,60,0,30" Content="{Binding ButtonText}" Command="{Binding CourseSendCommand}"></Button>
             </StackPanel>
         </StackPanel>
