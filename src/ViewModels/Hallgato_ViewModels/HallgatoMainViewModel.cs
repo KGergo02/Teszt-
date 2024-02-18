@@ -1,5 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Documents;
@@ -98,9 +101,11 @@ namespace Teszt__.src.ViewModels
         public ICommand AddCourseCommand { get; }
         public ICommand DeleteCourseCommand { get; }
 
-        public void FillStackPanelWithCourseCards()
+        public async void FillStackPanelWithCourseCards()
         {
-            _mainStackPanel.Children.Clear();
+            _mainStackPanel.Children.Clear();;
+
+            DateTime currentDateTime = await UserService.GetCurrentTimeAsync();
 
             List<User_Course> user_courses;
 
@@ -126,7 +131,10 @@ namespace Teszt__.src.ViewModels
                     Margin = new Thickness(0, 70, 0, 0)
                 };
 
-                _mainStackPanel.Children.Add(label);
+               if(_mainStackPanel.Children.Count == 0)
+                {
+                    _mainStackPanel.Children.Add(label);
+                }
             }
             else
             {
@@ -199,10 +207,10 @@ namespace Teszt__.src.ViewModels
                             FontWeight = FontWeights.Bold,
                             FontSize = 25,
                             VerticalAlignment = VerticalAlignment.Center,
-                            HorizontalAlignment = HorizontalAlignment.Center,
+                            HorizontalAlignment = HorizontalAlignment.Left,
                             Foreground = Brushes.White,
                             Margin = new Thickness(0, 10, 0, 0),
-                            Cursor = resultsCount < test.Submit_Limit ? Cursors.Hand : Cursors.Arrow,
+                            Cursor = Cursors.Hand,
                             Tag = test,
                         };
 
@@ -215,16 +223,17 @@ namespace Teszt__.src.ViewModels
                             currentResultDate += currentResult.Date.Substring(13, 9);
                         }
 
+                        
+
                         Label testDescriptionLabel = new Label()
                         {
-                            Content = currentResult == null ? $"Kitölthető: [{test.StartDate.Replace(" ", "")} {test.StartTime}] - [{test.EndDate.Replace(" ", "")} {test.EndTime}]\nEzt a tesztet [{test.Submit_Limit - resultsCount}] alkalommal töltheted ki" : resultsCount >= test.Submit_Limit ? $"Kitöltve: [{currentResultDate}]" : $"Kitöltve: [{currentResultDate}]\nEzt a tesztet még [{test.Submit_Limit - resultsCount}] alkalommal töltheted ki",
                             FontStyle = FontStyles.Italic,
                             FontSize = 20,
                             VerticalAlignment = VerticalAlignment.Center,
-                            HorizontalAlignment = currentResult == null ? HorizontalAlignment.Center : HorizontalAlignment.Left,
+                            HorizontalAlignment = HorizontalAlignment.Left,
                             Foreground = Brushes.White,
                             Margin = new Thickness(0, 0, 0, 15),
-                            Cursor = resultsCount < test.Submit_Limit ? Cursors.Hand : Cursors.Arrow,
+                            Cursor = Cursors.Hand,
                             Tag = test,
                         };
 
@@ -232,8 +241,61 @@ namespace Teszt__.src.ViewModels
                         {
                             testLabel.MouseDown += TestService.TestLabelClickedEvent;
 
-                            testDescriptionLabel.MouseDown += TestService.TestLabelClickedEvent; 
+                            testDescriptionLabel.MouseDown += TestService.TestLabelClickedEvent;
                         }
+
+                        if (currentDateTime > test.GetEndDateTime())
+                        {
+                            if(currentResult == null)
+                            {
+                                testDescriptionLabel.Content = "A teszt határideje lejárt!";
+
+                                testLabel.Content = $"{test.Name}:\t[{0}]/[{DatabaseContext.CalculateMaxTestPoint(test)}]";
+
+                                testLabel.MouseDown -= TestService.TestLabelClickedEvent;
+                                
+                                testLabel.Cursor = Cursors.Arrow;
+
+                                testDescriptionLabel.MouseDown -= TestService.TestLabelClickedEvent;
+                                
+                                testDescriptionLabel.Cursor = Cursors.Arrow;
+                            }
+                            else
+                            {
+                                testDescriptionLabel.Content = $"Kitöltve: \t[{currentResultDate}]";
+
+                                testLabel.MouseDown -= TestService.TestLabelClickedEvent;
+
+                                testLabel.Cursor = Cursors.Arrow;
+
+                                testDescriptionLabel.MouseDown -= TestService.TestLabelClickedEvent;
+
+                                testDescriptionLabel.Cursor = Cursors.Arrow;
+                            }
+                        }
+                        else
+                        {
+                            if(currentResult == null)
+                            {
+                                testDescriptionLabel.Content = $"Kitölthető: [{test.StartDate.Replace(" ", "")} {test.StartTime}] - [{test.EndDate.Replace(" ", "")} {test.EndTime}]\nEzt a tesztet [{test.Submit_Limit - resultsCount}] alkalommal töltheted ki";
+                            }
+                            else if(resultsCount >= test.Submit_Limit)
+                            {
+                                testDescriptionLabel.Content = $"Kitöltve: \t[{currentResultDate}]";
+
+                                testLabel.MouseDown -= TestService.TestLabelClickedEvent;
+
+                                testLabel.Cursor = Cursors.Arrow;
+
+                                testDescriptionLabel.MouseDown -= TestService.TestLabelClickedEvent;
+
+                                testDescriptionLabel.Cursor = Cursors.Arrow;
+                            }
+                            else
+                            {
+                                testDescriptionLabel.Content = $"Határidő: [{test.StartDate.Replace(" ", "")} {test.StartTime}] - [{test.EndDate.Replace(" ", "")} {test.EndTime}]\nKitöltve: \t[{currentResultDate}]\nEzt a tesztet még [{test.Submit_Limit - resultsCount}] alkalommal töltheted ki";
+                            }
+                        }                  
 
                         testLabels.Add(testLabel);
 
