@@ -1,7 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Linq;
+using static Teszt__.src.Models.DatabaseContext;
 
 namespace Teszt__.src.Models
 {
@@ -43,6 +46,38 @@ namespace Teszt__.src.Models
                 EndDate = endDate;
                 EndTime = endTime;
                 CourseId = courseId;
+            }
+
+            public DateTime GetStartDateTime()
+            {
+                List<string> testStartDate = this.StartDate.Replace(" ", "").Split('.').ToList();
+
+                List<string> startTestTimes = this.StartTime.Split(':').ToList();
+
+                return new DateTime(
+                Convert.ToInt32(testStartDate[0]),
+                Convert.ToInt32(testStartDate[1]),
+                Convert.ToInt32(testStartDate[2]),
+                Convert.ToInt32(startTestTimes[0]),
+                Convert.ToInt32(startTestTimes[1]),
+                0
+                );
+            }
+
+            public DateTime GetEndDateTime()
+            {
+                List<string> testEndDate = this.EndDate.Replace(" ", "").Split('.').ToList();
+
+                List<string> endTestTimes = this.EndTime.Split(':').ToList();
+
+                return new DateTime(
+                Convert.ToInt32(testEndDate[0]),
+                Convert.ToInt32(testEndDate[1]),
+                Convert.ToInt32(testEndDate[2]),
+                Convert.ToInt32(endTestTimes[0]),
+                Convert.ToInt32(endTestTimes[1]),
+                0
+                );
             }
         }
     }
