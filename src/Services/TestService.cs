@@ -73,8 +73,10 @@ namespace Teszt__.src.Services
 
             List<Answer> userAnswers = new List<Answer>();
 
-            foreach (StackPanel stackPanel in window.mainDockPanel.Children)
+            foreach (Border border in window.mainDockPanel.Children)
             {
+                StackPanel stackPanel = (StackPanel)border.Child;
+
                 foreach (Control item in stackPanel.Children)
                 {
                     if(item.Tag != null)

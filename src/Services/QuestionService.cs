@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media;
 using Teszt__.src.DAL;
 using static Teszt__.src.Models.DatabaseContext;
 
@@ -32,12 +33,23 @@ namespace Teszt__.src.Services
                 
                 for (int i = 0; i < questions.Count; i++)
                 {
-                    StackPanel stackPanel = new StackPanel()
+                    Border border = new Border()
                     {
-                        Margin = new Thickness(0, 0, 0, 40),
+                        BorderBrush = Brushes.White,
+                        Margin = new Thickness(0,30,0,30),
+                        BorderThickness = new Thickness(5),
+                        CornerRadius = new CornerRadius(10),
+                        HorizontalAlignment = HorizontalAlignment.Left,
                     };
 
-                    DockPanel.SetDock(stackPanel, Dock.Top);
+                    StackPanel stackPanel = new StackPanel()
+                    {
+                        Margin = new Thickness(40, 0, 50, 20),
+                    };
+
+                    border.Child = stackPanel;
+
+                    DockPanel.SetDock(border, Dock.Top);
 
                     Label questionNumberLabel = new Label()
                     {
@@ -93,7 +105,7 @@ namespace Teszt__.src.Services
                         stackPanel.Children.Add(answerOption);
                     }
 
-                    dockPanel.Children.Add(stackPanel);
+                    dockPanel.Children.Add(border);
                 }
             }
         }

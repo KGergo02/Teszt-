@@ -22,28 +22,43 @@
             <Setter Property="FontSize" Value="46"/>
             <Setter Property="FontFamily" Value="Impact"/>
             <Setter Property="Margin" Value="-10,0,0,10"/>
+            <Setter Property="HorizontalAlignment" Value="Left"/>
         </Style>
 
         <Style x:Key="h2" TargetType="Label">
             <Setter Property="Foreground" Value="White"/>
             <Setter Property="FontSize" Value="35"/>
             <Setter Property="FontFamily" Value="Impact"/>
-            <Setter Property="Margin" Value="-5,0,0,10"/>
+            <Setter Property="Margin" Value="-10,0,0,20"/>
+            <Setter Property="HorizontalAlignment" Value="Left"/>
         </Style>
 
         <Style x:Key="CB" TargetType="CheckBox">
             <Setter Property="Foreground" Value="White"/>
-            <Setter Property="FontSize" Value="35"/>
+            <Setter Property="FontSize" Value="16"/>
             <Setter Property="VerticalContentAlignment" Value="Center"/>
-            <Setter Property="Margin" Value="0,0,0,5"/>
+            <Setter Property="Margin" Value="0,0,0,20"/>
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+            <Setter Property="RenderTransform">
+                <Setter.Value>
+                    <ScaleTransform ScaleX="2" ScaleY="2"/>
+                </Setter.Value>
+            </Setter>
         </Style>
 
         <Style x:Key="RB" TargetType="RadioButton">
             <Setter Property="Foreground" Value="White"/>
-            <Setter Property="FontSize" Value="35"/>
+            <Setter Property="FontSize" Value="16"/>
             <Setter Property="VerticalContentAlignment" Value="Center"/>
-            <Setter Property="Margin" Value="0,0,0,5"/>
+            <Setter Property="Margin" Value="0,0,0,20"/>
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+            <Setter Property="RenderTransform">
+                <Setter.Value>
+                    <ScaleTransform ScaleX="2" ScaleY="2"/>
+                </Setter.Value>
+            </Setter>
         </Style>
+
 
         <Style x:Key="TB" TargetType="TextBox">
             <Setter Property="FontSize" Value="35"/>
@@ -73,7 +88,7 @@
         </StackPanel>
 
         <ScrollViewer IsTabStop="True" Margin="0,15,0,30" CanContentScroll="True" VerticalScrollBarVisibility="Hidden" Focusable="False">
-            <DockPanel x:Name="mainDockPanel" Margin="100,0,0,0">
+            <DockPanel x:Name="mainDockPanel" Margin="30,0,0,0">
             </DockPanel>
         </ScrollViewer>
 
