@@ -36,12 +36,8 @@ namespace Teszt__.src.ViewModels
 
         public string NoDataLabelText { get; set; }
 
-        private CourseView Window;
-
         public CourseViewModel(bool mode, CourseView window)
         {
-            Window = window;
-
             using (DatabaseContext database = new DatabaseContext())
             {
                 List<string> userCourses = database.GetCourseListOfUser(UserService.GetCurrentUser()).Select(item => item.Course_name).ToList();
@@ -58,7 +54,7 @@ namespace Teszt__.src.ViewModels
 
                     foreach (Course course in courses)
                     {
-                        if (!userCourses.Contains(course.Name) && DatabaseContext.CountCourseLimit(course) < course.User_limit)
+                        if (!userCourses.Contains(course.Name) && DatabaseContext.CountCourseLimit(course) < course.User_limit && DatabaseContext.AreAllTestsOfCourseSubmittable(course))
                         {
                             coursesAvailableForListBox.Add(course.Name);
                         }
@@ -72,7 +68,7 @@ namespace Teszt__.src.ViewModels
 
                     foreach (Course course in courses)
                     {
-                        if (userCourses.Contains(course.Name) && DatabaseContext.CountUserSubmissionsOfCourse(UserService.GetCurrentUser(), course) == 0)
+                        if (userCourses.Contains(course.Name) && DatabaseContext.CountUserSubmissionsOfCourse(UserService.GetCurrentUser(), course) == 0 && DatabaseContext.AreAllTestsOfCourseSubmittable(course))
                         {
                             coursesAvailableForListBox.Add(course.Name);
                         }
