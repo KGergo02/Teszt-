@@ -36,31 +36,9 @@ namespace Teszt__.src.Services
         {
             DateTime currentTime = await UserService.GetCurrentTimeAsync();
 
-            List<string> startTestTimes = test.StartTime.Split(':').ToList();
-            
-            List<string> endTestTimes = test.EndTime.Split(':').ToList();
+            DateTime startDateTime = test.GetStartDateTime();
 
-            List<string> testStartDate = test.StartDate.Replace(" ", "").Split('.').ToList();
-
-            List<string> testEndDate = test.EndDate.Replace(" ", "").Split('.').ToList();
-
-            DateTime startDateTime = new DateTime(
-                Convert.ToInt32(testStartDate[0]),
-                Convert.ToInt32(testStartDate[1]),
-                Convert.ToInt32(testStartDate[2]),
-                Convert.ToInt32(startTestTimes[0]), 
-                Convert.ToInt32(startTestTimes[1]), 
-                0
-                );
-
-            DateTime endDateTime = new DateTime(
-                Convert.ToInt32(testEndDate[0]),
-                Convert.ToInt32(testEndDate[1]),
-                Convert.ToInt32(testEndDate[2]),
-                Convert.ToInt32(endTestTimes[0]),
-                Convert.ToInt32(endTestTimes[1]),
-                0
-                );
+            DateTime endDateTime = test.GetEndDateTime();
 
             if(startDateTime <= currentTime && currentTime < endDateTime)
             {
