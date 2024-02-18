@@ -197,7 +197,7 @@ namespace Teszt__.src.ViewModels
 
                     foreach (Test test in tests)
                     {
-                        Result currentResult = test.Best_Submitted_Result_Counts ? results.FindAll(result => result.TestId == test.Id).OrderByDescending(result => result.Value).FirstOrDefault() : results.FindAll(result => result.TestId == test.Id).OrderBy(result => result.Value).FirstOrDefault();
+                        Result currentResult = test.Best_Submitted_Result_Counts ? results.FindAll(result => result.TestId == test.Id).OrderByDescending(result => result.Value).FirstOrDefault() : results.FindAll(result => result.TestId == test.Id).LastOrDefault();
 
                         int resultsCount = results.FindAll(result => result.TestId == test.Id).Count();
 
