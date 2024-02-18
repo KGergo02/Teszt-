@@ -374,6 +374,41 @@ namespace Teszt__.src.DAL
             }
         }
 
+        public static bool AreAllTestsOfCourseSubmittable(Course course)
+        {
+            using (DatabaseContext database = new DatabaseContext())
+            {
+                try
+                {
+                    DateTime currentDateTime = DateTime.UtcNow;
+
+                    List<Test> tests = database.GetTestsOfCourse(course);
+
+                    foreach (Test test in tests)
+                    {
+                        if(currentDateTime > test.GetEndDateTime())
+                        {
+                            return false;
+                        }
+                    }
+                }
+                catch (DbUpdateException DUE)
+                {
+                    Message.Error($"Hiba történt a művelet végrehajtásakor az adatbázisban!\nHiba:\n{DUE.InnerException.Message}");
+
+                    return false;
+                }
+                catch (Exception pokemon)
+                {
+                    Message.Error($"Ismeretlen hiba történt! Kérlek jelentsd az alábbi hibát a fejlesztőknek!\n{pokemon.Message}");
+
+                    return false;
+                }
+
+                return true;
+            }
+        }
+
         public static void SaveUser(User user)
         {
             using (DatabaseContext database = new DatabaseContext())
