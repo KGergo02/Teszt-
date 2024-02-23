@@ -1,9 +1,11 @@
-﻿using System;
+﻿using Google.Protobuf.WellKnownTypes;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 using static Teszt__.src.Models.DatabaseContext;
 
 namespace Teszt__.src.Models
@@ -78,6 +80,21 @@ namespace Teszt__.src.Models
                 Convert.ToInt32(endTestTimes[1]),
                 0
                 );
+            }
+
+            public Dictionary<string, string> GetNameOfProperties()
+            {
+                return new Dictionary<string, string>
+                {
+                    { nameof(Name), "Teszt Neve" },
+                    { nameof(Submit_Limit), "Maximum Kitöltések Száma" },
+                    { nameof(Best_Submitted_Result_Counts), "Legjobb Eredmény Számít" },
+                    { nameof(StartDate), "Teszt Indítási Napja" },
+                    { nameof(StartTime), "Teszt Indítási Ideje" },
+                    { nameof(EndDate), "Teszt Befejezési Napja" },
+                    { nameof(EndTime), "Teszt Befejezési Ideje" },
+
+                };
             }
         }
     }

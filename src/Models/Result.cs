@@ -32,6 +32,16 @@ namespace Teszt__.src.Models
                 TestId = testId;
                 Date = dateTime;
             }
+
+            public Dictionary<string, string> GetNameOfProperties()
+            {
+                return new Dictionary<string, string>
+                {
+                    { nameof(Username), "Felhasználónév" },
+                    { nameof(Value), "Elért Pontszám" },
+                    { nameof(Date), "Kitöltés Dátuma" }
+                };
+            }
         }
     }
 }

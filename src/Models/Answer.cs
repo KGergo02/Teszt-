@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 
 namespace Teszt__.src.Models
 {
@@ -53,6 +54,15 @@ namespace Teszt__.src.Models
                 }
 
                 return this.Value.ToUpper() == answer.Value.ToUpper() && this.Correct == answer.Correct && this.QuestionId == answer.QuestionId;
+            }
+
+            public Dictionary<string, string> GetNameOfProperties()
+            {
+                return new Dictionary<string, string>
+                {
+                    { nameof(Value), "Válaszlehetőség" },
+                    { nameof(Correct), "Helyes válasz" },
+                };
             }
         }
     }

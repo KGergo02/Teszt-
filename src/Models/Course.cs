@@ -1,6 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using Google.Protobuf.WellKnownTypes;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 
 namespace Teszt__.src.Models
 {
@@ -31,6 +33,15 @@ namespace Teszt__.src.Models
                 Id = id;
                 Name = name;
                 User_limit = user_limit;
+            }
+
+            public Dictionary<string, string> GetNameOfProperties()
+            {
+                return new Dictionary<string, string>
+                {
+                    { nameof(Name), "Kurzus Neve" },
+                    { nameof(User_limit), "Kurzus Létszáma" },
+                };
             }
         }
     }
