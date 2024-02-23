@@ -17,7 +17,7 @@ using Teszt__.src.Services;
 using Teszt__.src.Views.Hallgato_Views;
 using static Teszt__.src.Models.DatabaseContext;
 
-namespace Teszt__.src.ViewModels
+namespace Teszt__.src.ViewModels.Hallgato_ViewModels
 {
     public class HallgatoMainViewModel : ViewModelBase
     {
@@ -67,7 +67,7 @@ namespace Teszt__.src.ViewModels
                 _searchString = value;
                 
                 OnPropertyChanged(nameof(SearchString));
-                
+
                 FillStackPanelWithCourseCards();
             }
         }
@@ -103,11 +103,13 @@ namespace Teszt__.src.ViewModels
 
         public async void FillStackPanelWithCourseCards()
         {
-            _mainStackPanel.Children.Clear();;
+            _mainStackPanel.Children.Clear();
 
             DateTime currentDateTime = await UserService.GetCurrentTimeAsync();
 
             List<User_Course> user_courses;
+
+            int testsCount = 0;
 
             List<Result> results;
 
@@ -151,6 +153,8 @@ namespace Teszt__.src.ViewModels
                         course = (Course)database.FindByName(item.Course_name, typeof(Course));
 
                         tests = database.GetTestsOfCourse(course);
+
+                        testsCount += tests.Count;
                     }
 
                     Label courseLabel = new Label()
@@ -312,6 +316,14 @@ namespace Teszt__.src.ViewModels
                     courseLabel.MouseDown += ControlEventService.OnCourseCardLabelClick;
                 }
             }
+
+            int correctNumberOfControlsNeeded = user_courses.Count * 2 + testsCount * 2;
+
+            if (user_courses.Count != 0 && _mainStackPanel.Children.Count != correctNumberOfControlsNeeded)
+            {
+                _mainStackPanel.Children.RemoveRange(correctNumberOfControlsNeeded, _mainStackPanel.Children.Count - correctNumberOfControlsNeeded);
+            }
+
         }
     }
 }
