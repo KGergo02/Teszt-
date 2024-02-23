@@ -46,7 +46,7 @@ namespace Teszt__.src.DAL
 
             return null;
         }
-        
+
         public object FindByName(string name, Type type)
         {
             if (type.Equals(typeof(User)))
@@ -251,6 +251,29 @@ namespace Teszt__.src.DAL
                 try
                 {
                     return database.Answers.Where(item => item.QuestionId == question.Id).ToList();
+                }
+                catch (DbUpdateException DUE)
+                {
+                    Message.Error($"Hiba történt a művelet végrehajtásakor az adatbázisban!\nHiba:\n{DUE.InnerException.Message}");
+
+                    return null;
+                }
+                catch (Exception pokemon)
+                {
+                    Message.Error($"Ismeretlen hiba történt! Kérlek jelentsd az alábbi hibát a fejlesztőknek!\n{pokemon.Message}");
+
+                    return null;
+                }
+            }
+        }
+
+        public static List<Result> GetResultsOfAllUsers()
+        {
+            using (DatabaseContext database = new DatabaseContext())
+            {
+                try
+                {
+                    return database.Results.ToList();
                 }
                 catch (DbUpdateException DUE)
                 {
@@ -657,6 +680,29 @@ namespace Teszt__.src.DAL
             foreach (Course item in course)
             {
                 DeleteUserCourse(user, item);
+            }
+        }
+
+        public static void DeleteResult(Result result)
+        {
+            if (result == null) return;
+
+            using (DatabaseContext database = new DatabaseContext())
+            {
+                try
+                {
+                    database.Results.Remove(result);
+
+                    database.SaveChanges();
+                }
+                catch (DbUpdateException DUE)
+                {
+                    Message.Error($"Hiba történt a művelet végrehajtásakor az adatbázisban!\nHiba:\n{DUE.InnerException.Message}");
+                }
+                catch (Exception pokemon)
+                {
+                    Message.Error($"Ismeretlen hiba történt! Kérlek jelentsd az alábbi hibát a fejlesztőknek!\n{pokemon.Message}");
+                }
             }
         }
     }
