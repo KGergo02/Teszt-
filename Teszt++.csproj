@@ -242,6 +242,7 @@
     <Compile Include="src\Commands\Oktato_Commands\CreateQuestionCommand.cs" />
     <Compile Include="src\Commands\Oktato_Commands\CreateTestCommand.cs" />
     <Compile Include="src\Commands\Oktato_Commands\SendCommand.cs" />
+    <Compile Include="src\Commands\Oktato_Commands\ShowResultsCommand.cs" />
     <Compile Include="src\Commands\RegisterCommand.cs" />
     <Compile Include="src\Commands\RegisterLabelCommand.cs" />
     <Compile Include="src\Commands\User_Commands\DeleteUserCommand.cs" />
@@ -257,6 +258,7 @@
     <Compile Include="src\Models\User.cs" />
     <Compile Include="src\Models\User_Course.cs" />
     <Compile Include="src\Services\ControlEventService.cs" />
+    <Compile Include="src\Services\DataGridService.cs" />
     <Compile Include="src\Services\GridService.cs" />
     <Compile Include="src\Services\JelszoTitkosito.cs" />
     <Compile Include="src\Services\ListService.cs" />
@@ -267,13 +269,14 @@
     <Compile Include="src\Services\TestService.cs" />
     <Compile Include="src\Services\UserService.cs" />
     <Compile Include="src\Services\WindowService.cs" />
-    <Compile Include="src\ViewModels\CourseViewModel.cs" />
+    <Compile Include="src\ViewModels\Hallgato_ViewModels\CourseViewModel.cs" />
     <Compile Include="src\ViewModels\Hallgato_ViewModels\HallgatoMainViewModel.cs" />
     <Compile Include="src\ViewModels\Hallgato_ViewModels\ResultViewModel.cs" />
     <Compile Include="src\ViewModels\Hallgato_ViewModels\TestViewModel.cs" />
     <Compile Include="src\ViewModels\LoginWindowViewModel.cs" />
     <Compile Include="src\ViewModels\MainWindowViewModel.cs" />
     <Compile Include="src\ViewModels\Oktato_ViewModels\OktatoMainViewModel.cs" />
+    <Compile Include="src\ViewModels\Oktato_ViewModels\ShowDataViewModel.cs" />
     <Compile Include="src\ViewModels\RegisterWindowViewModel.cs" />
     <Compile Include="src\ViewModels\User_ViewModels\EditUserInfoViewModel.cs" />
     <Compile Include="src\ViewModels\User_ViewModels\UserProfileViewModel.cs" />
@@ -295,6 +298,9 @@
     </Compile>
     <Compile Include="src\Views\Oktato_Views\OktatoMainView.xaml.cs">
       <DependentUpon>OktatoMainView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="src\Views\Oktato_Views\ShowDataView.xaml.cs">
+      <DependentUpon>ShowDataView.xaml</DependentUpon>
     </Compile>
     <Compile Include="src\Views\RegisterWindowView.xaml.cs">
       <DependentUpon>RegisterWindowView.xaml</DependentUpon>
@@ -370,6 +376,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="src\Views\Oktato_Views\OktatoMainView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="src\Views\Oktato_Views\ShowDataView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

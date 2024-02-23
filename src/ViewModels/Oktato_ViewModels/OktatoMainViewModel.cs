@@ -64,6 +64,8 @@ namespace Teszt__.src.ViewModels.Oktato_ViewModels
 
             ShowUserProfileCommand = new ShowUserProfileCommand();
 
+            ShowResultsCommand = new ShowResultsCommand();
+
             NavigationService.GetNavigationWindow().Closing += WindowService.OnWindowClosingLogoutUserQuestion;
         }
 
@@ -74,7 +76,7 @@ namespace Teszt__.src.ViewModels.Oktato_ViewModels
         public ICommand AddNewRowCommand { get; }
         public ICommand SendCommand { get; }
         public ICommand ViewCourseCommand { get; }
-
         public ICommand ShowUserProfileCommand { get; }
+        public ICommand ShowResultsCommand { get; }
     }
 }

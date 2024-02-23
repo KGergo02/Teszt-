@@ -71,7 +71,7 @@
                         <MenuItem Header="Kérdések megtekintése" FontSize="20px" Height="30px" Background="Black" Foreground="Cyan" Style="{StaticResource NoHoverMenuItemStyle}"></MenuItem>
                         <MenuItem Header="Új Kérdés létrehozása" FontSize="20px" Height="30px" Background="Black" Foreground="Cyan" Style="{StaticResource NoHoverMenuItemStyle}" Command="{Binding CreateQuestionCommand}"/>
                     </MenuItem>
-                    <MenuItem Header="Eredmények megtekintése" FontSize="30px" Style="{StaticResource MenuItem}"/>
+                    <MenuItem Header="Eredmények megtekintése" FontSize="30px" Style="{StaticResource MenuItem}" Command="{Binding ShowResultsCommand}"/>
                 </Menu>
                 <Menu HorizontalAlignment="Right" Foreground="Cyan">
                     <Menu.Background>
