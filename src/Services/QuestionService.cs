@@ -36,10 +36,11 @@ namespace Teszt__.src.Services
                     Border border = new Border()
                     {
                         BorderBrush = Brushes.White,
-                        Margin = new Thickness(0,30,0,30),
-                        BorderThickness = new Thickness(5),
+                        Margin = new Thickness(0,20,0,40),
+                        BorderThickness = new Thickness(8),
                         CornerRadius = new CornerRadius(10),
                         HorizontalAlignment = HorizontalAlignment.Left,
+                        Background = Brushes.Black,
                     };
 
                     StackPanel stackPanel = new StackPanel()
