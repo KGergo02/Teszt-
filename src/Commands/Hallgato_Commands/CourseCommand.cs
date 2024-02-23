@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Teszt__.src.ViewModels;
+using Teszt__.src.ViewModels.Hallgato_ViewModels;
 using Teszt__.src.Views.Hallgato_Views;
 
 namespace Teszt__.src.Commands.Hallgato_Commands
