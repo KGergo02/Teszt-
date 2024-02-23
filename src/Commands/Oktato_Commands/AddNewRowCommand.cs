@@ -189,12 +189,12 @@ namespace Teszt__.src.Commands.Oktato_Commands
                     FontSize = 30,
                     Margin = new System.Windows.Thickness(20),
                     TextWrapping = System.Windows.TextWrapping.Wrap,
-                    VerticalAlignment = rowcount == 8 ? System.Windows.VerticalAlignment.Center : rowcount == 9 ? System.Windows.VerticalAlignment.Bottom : System.Windows.VerticalAlignment.Top,
+                    VerticalAlignment = System.Windows.VerticalAlignment.Top,
                     HorizontalAlignment = System.Windows.HorizontalAlignment.Center,
                 };
 
                 Grid.SetColumn(tb, 1);
-                Grid.SetRow(tb, rowcount <= 9 ? 6 : rowcount);
+                Grid.SetRow(tb, rowcount);
 
                 CheckBox cb = new CheckBox()
                 {
@@ -204,12 +204,12 @@ namespace Teszt__.src.Commands.Oktato_Commands
                     Foreground = System.Windows.Media.Brushes.White,
                     HorizontalContentAlignment = System.Windows.HorizontalAlignment.Center,
                     VerticalContentAlignment = System.Windows.VerticalAlignment.Center,
-                    VerticalAlignment = rowcount == 8 ? System.Windows.VerticalAlignment.Center : rowcount == 9 ? System.Windows.VerticalAlignment.Bottom : System.Windows.VerticalAlignment.Top,
+                    VerticalAlignment = System.Windows.VerticalAlignment.Top,
                     HorizontalAlignment = System.Windows.HorizontalAlignment.Right,
                 };
 
                 Grid.SetColumn(cb, 2);
-                Grid.SetRow(cb, rowcount <= 9 ? 6 : rowcount);
+                Grid.SetRow(cb, rowcount);
 
                 _grid.Children.Add(tb);
                 _grid.Children.Add(cb);
@@ -224,12 +224,12 @@ namespace Teszt__.src.Commands.Oktato_Commands
                     FontSize = 30,
                     Margin = new System.Windows.Thickness(20),
                     TextWrapping = System.Windows.TextWrapping.Wrap,
-                    VerticalAlignment = rowcount == 8 ? System.Windows.VerticalAlignment.Center : rowcount == 9 ? System.Windows.VerticalAlignment.Bottom : System.Windows.VerticalAlignment.Top,
+                    VerticalAlignment = System.Windows.VerticalAlignment.Top,
                     HorizontalAlignment = System.Windows.HorizontalAlignment.Center,
                 };
 
                 Grid.SetColumn(tb, 1);
-                Grid.SetRow(tb, rowcount <= 9 ? 6 : rowcount);
+                Grid.SetRow(tb, rowcount);
 
                 RadioButton cb = new RadioButton()
                 {
@@ -239,11 +239,11 @@ namespace Teszt__.src.Commands.Oktato_Commands
                     Foreground = System.Windows.Media.Brushes.White,
                     HorizontalContentAlignment = System.Windows.HorizontalAlignment.Center,
                     VerticalContentAlignment = System.Windows.VerticalAlignment.Center,
-                    VerticalAlignment = rowcount == 8 ? System.Windows.VerticalAlignment.Center : rowcount == 9 ? System.Windows.VerticalAlignment.Bottom : System.Windows.VerticalAlignment.Top,
+                    VerticalAlignment = System.Windows.VerticalAlignment.Top,
                 };
 
                 Grid.SetColumn(cb, 2);
-                Grid.SetRow(cb, rowcount <= 9 ? 6 : rowcount);
+                Grid.SetRow(cb, rowcount);
 
                 _grid.Children.Add(tb);
                 _grid.Children.Add(cb);

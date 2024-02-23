@@ -617,7 +617,7 @@ namespace Teszt__.src.Services
 
             _grid.Children.Add(ValaszokLabel);
 
-            TextBox tb = new TextBox()
+            TextBox tb1 = new TextBox()
             {
                 Width = 200,
                 FontSize = 30,
@@ -627,12 +627,12 @@ namespace Teszt__.src.Services
                 HorizontalAlignment = HorizontalAlignment.Center,
             };
 
-            Grid.SetColumn(tb, 1);
-            Grid.SetRow(tb, 6);
+            Grid.SetColumn(tb1, 1);
+            Grid.SetRow(tb1, 6);
 
-            _grid.Children.Add(tb);
+            _grid.Children.Add(tb1);
 
-            CheckBox cb = new CheckBox()
+            CheckBox cb1 = new CheckBox()
             {
                 Content = "Válasz?",
                 FontSize = 30,
@@ -644,10 +644,74 @@ namespace Teszt__.src.Services
                 HorizontalAlignment = HorizontalAlignment.Right,
             };
 
-            Grid.SetColumn(cb, 2);
-            Grid.SetRow(cb, 6);
+            Grid.SetColumn(cb1, 2);
+            Grid.SetRow(cb1, 6);
 
-            _grid.Children.Add(cb);
+            _grid.Children.Add(cb1);
+
+            TextBox tb2 = new TextBox()
+            {
+                Width = 200,
+                FontSize = 30,
+                Margin = new Thickness(20),
+                TextWrapping = TextWrapping.Wrap,
+                VerticalAlignment = VerticalAlignment.Center,
+                HorizontalAlignment = HorizontalAlignment.Center,
+            };
+
+            Grid.SetColumn(tb2, 1);
+            Grid.SetRow(tb2, 6);
+
+            _grid.Children.Add(tb2);
+
+            CheckBox cb2 = new CheckBox()
+            {
+                Content = "Válasz?",
+                FontSize = 30,
+                Margin = new Thickness(20),
+                Foreground = Brushes.White,
+                HorizontalContentAlignment = HorizontalAlignment.Center,
+                VerticalContentAlignment = VerticalAlignment.Center,
+                VerticalAlignment = VerticalAlignment.Center,
+                HorizontalAlignment = HorizontalAlignment.Right,
+            };
+
+            Grid.SetColumn(cb2, 2);
+            Grid.SetRow(cb2, 6);
+
+            _grid.Children.Add(cb2);
+
+            TextBox tb3 = new TextBox()
+            {
+                Width = 200,
+                FontSize = 30,
+                Margin = new Thickness(20),
+                TextWrapping = TextWrapping.Wrap,
+                VerticalAlignment = VerticalAlignment.Bottom,
+                HorizontalAlignment = HorizontalAlignment.Center,
+            };
+
+            Grid.SetColumn(tb3, 1);
+            Grid.SetRow(tb3, 6);
+
+            _grid.Children.Add(tb3);
+
+            CheckBox cb3 = new CheckBox()
+            {
+                Content = "Válasz?",
+                FontSize = 30,
+                Margin = new Thickness(20),
+                Foreground = Brushes.White,
+                HorizontalContentAlignment = HorizontalAlignment.Center,
+                VerticalContentAlignment = VerticalAlignment.Center,
+                VerticalAlignment = VerticalAlignment.Bottom,
+                HorizontalAlignment = HorizontalAlignment.Right,
+            };
+
+            Grid.SetColumn(cb3, 2);
+            Grid.SetRow(cb3, 6);
+
+            _grid.Children.Add(cb3);
         }
 
         private static void CreateQuestionGridRadioButtonControls()
@@ -668,7 +732,7 @@ namespace Teszt__.src.Services
 
             _grid.Children.Add(ValaszokLabel);
 
-            TextBox tb = new TextBox()
+            TextBox tb1 = new TextBox()
             {
                 Width = 200,
                 FontSize = 30,
@@ -678,12 +742,12 @@ namespace Teszt__.src.Services
                 HorizontalAlignment = HorizontalAlignment.Center,
             };
 
-            Grid.SetColumn(tb, 1);
-            Grid.SetRow(tb, 6);
+            Grid.SetColumn(tb1, 1);
+            Grid.SetRow(tb1, 6);
 
-            _grid.Children.Add(tb);
+            _grid.Children.Add(tb1);
 
-            RadioButton cb = new RadioButton()
+            RadioButton cb1 = new RadioButton()
             {
                 Content = "Helyes válasz",
                 FontSize = 30,
@@ -694,10 +758,72 @@ namespace Teszt__.src.Services
                 VerticalAlignment = VerticalAlignment.Top,
             };
 
-            Grid.SetColumn(cb, 2);
-            Grid.SetRow(cb, 6);
+            Grid.SetColumn(cb1, 2);
+            Grid.SetRow(cb1, 6);
 
-            _grid.Children.Add(cb);
+            _grid.Children.Add(cb1);
+
+            TextBox tb2 = new TextBox()
+            {
+                Width = 200,
+                FontSize = 30,
+                Margin = new Thickness(30),
+                TextWrapping = TextWrapping.Wrap,
+                VerticalAlignment = VerticalAlignment.Center,
+                HorizontalAlignment = HorizontalAlignment.Center,
+            };
+
+            Grid.SetColumn(tb2, 1);
+            Grid.SetRow(tb2, 6);
+
+            _grid.Children.Add(tb2);
+
+            RadioButton cb2 = new RadioButton()
+            {
+                Content = "Helyes válasz",
+                FontSize = 30,
+                Margin = new Thickness(20),
+                Foreground = Brushes.White,
+                HorizontalContentAlignment = HorizontalAlignment.Center,
+                VerticalContentAlignment = VerticalAlignment.Center,
+                VerticalAlignment = VerticalAlignment.Center,
+            };
+
+            Grid.SetColumn(cb2, 2);
+            Grid.SetRow(cb2, 6);
+
+            _grid.Children.Add(cb2);
+
+            TextBox tb3 = new TextBox()
+            {
+                Width = 200,
+                FontSize = 30,
+                Margin = new Thickness(30),
+                TextWrapping = TextWrapping.Wrap,
+                VerticalAlignment = VerticalAlignment.Bottom,
+                HorizontalAlignment = HorizontalAlignment.Center,
+            };
+
+            Grid.SetColumn(tb3, 1);
+            Grid.SetRow(tb3, 6);
+
+            _grid.Children.Add(tb3);
+
+            RadioButton cb3 = new RadioButton()
+            {
+                Content = "Helyes válasz",
+                FontSize = 30,
+                Margin = new Thickness(20),
+                Foreground = Brushes.White,
+                HorizontalContentAlignment = HorizontalAlignment.Center,
+                VerticalContentAlignment = VerticalAlignment.Center,
+                VerticalAlignment = VerticalAlignment.Bottom,
+            };
+
+            Grid.SetColumn(cb3, 2);
+            Grid.SetRow(cb3, 6);
+
+            _grid.Children.Add(cb3);
         }
 
         private static void CreateQuestionTextBoxControls()
