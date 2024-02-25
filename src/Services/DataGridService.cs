@@ -77,8 +77,10 @@ namespace Teszt__.src.Services
                     FontSize = 35,
                     Foreground = Brushes.White,
                     Content = "Kurzus",
-                    HorizontalAlignment = HorizontalAlignment.Left,
+                    HorizontalAlignment = HorizontalAlignment.Center,
                     VerticalAlignment = VerticalAlignment.Center,
+                    HorizontalContentAlignment = HorizontalAlignment.Center,
+                    VerticalContentAlignment = VerticalAlignment.Center,
                     Margin = new Thickness(5),
                 };
 
@@ -93,7 +95,7 @@ namespace Teszt__.src.Services
                     FontSize = 35,
                     Foreground = Brushes.White,
                     Content = "Teszt",
-                    HorizontalAlignment = HorizontalAlignment.Left,
+                    HorizontalAlignment = HorizontalAlignment.Center,
                     VerticalAlignment = VerticalAlignment.Center,
                     Margin = new Thickness(5),
                 };
@@ -111,7 +113,7 @@ namespace Teszt__.src.Services
                     Margin = new Thickness(0, 0, 0, 30),
                     Width = 250,
                     Height = 50,
-                    HorizontalAlignment = HorizontalAlignment.Left,
+                    HorizontalAlignment = HorizontalAlignment.Center,
                 };
 
                 Grid.SetColumn(courseComboBox, 0);
@@ -127,7 +129,7 @@ namespace Teszt__.src.Services
                     Margin = new Thickness(0, 0, 0, 30),
                     Width = 250,
                     Height = 50,
-                    HorizontalAlignment = HorizontalAlignment.Left,
+                    HorizontalAlignment = HorizontalAlignment.Center,
                 };
 
                 Grid.SetColumn(testComboBox, 1);
