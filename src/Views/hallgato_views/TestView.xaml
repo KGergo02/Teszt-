@@ -27,9 +27,9 @@
 
         <Style x:Key="h2" TargetType="Label">
             <Setter Property="Foreground" Value="White"/>
-            <Setter Property="FontSize" Value="35"/>
+            <Setter Property="FontSize" Value="40"/>
             <Setter Property="FontFamily" Value="Impact"/>
-            <Setter Property="Margin" Value="-10,10,10,20"/>
+            <Setter Property="Margin" Value="0,10,10,10"/>
             <Setter Property="HorizontalAlignment" Value="Left"/>
         </Style>
 
