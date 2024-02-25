@@ -50,5 +50,14 @@ namespace Teszt__.src.Services
 
             GetNavigationWindow().Navigate(window);
         }
+
+        public static void NavigateToDataView(string mode)
+        {
+            ShowDataView window = new ShowDataView();
+
+            window.DataContext = new ShowDataViewModel(mode, window.mainStackPanel, window.sendButton);
+
+            GetNavigationWindow().Navigate(window);
+        }
     }
 }
