@@ -283,9 +283,14 @@ namespace Teszt__.src.Services
                 {
                     if (models[0] is Result)
                     {
-                        DatabaseContext.DeleteResult((Result)((Button)sender).DataContext);
+                        MessageBoxResult prompt = Message.Question("Biztosan törölni szeretnéd ezt a bejegyzést?");
 
-                        CreateDataGrid("results", ref _MainStackPanel, ref SendButton);
+                        if(prompt == MessageBoxResult.Yes)
+                        {
+                            DatabaseContext.DeleteResult((Result)((Button)sender).DataContext);
+
+                            CreateDataGrid("results", ref _MainStackPanel, ref SendButton);
+                        }
                     }
                 }));
 
