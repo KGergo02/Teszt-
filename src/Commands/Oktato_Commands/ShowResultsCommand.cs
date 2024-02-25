@@ -16,11 +16,7 @@ namespace Teszt__.src.Commands.Oktato_Commands
     {
         public override void Execute(object parameter)
         {
-            ShowDataView window = new ShowDataView();
-
-            window.DataContext = new ShowDataViewModel("results", window.mainStackPanel, window.sendButton);
-
-            window.ShowDialog();
+            NavigationService.NavigateToDataView("results");
         }
     }
 }

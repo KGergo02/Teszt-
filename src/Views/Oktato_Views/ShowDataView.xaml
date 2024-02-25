@@ -1,26 +1,85 @@
-﻿<Window x:Class="Teszt__.src.Views.Oktato_Views.ShowDataView"
+﻿<Page x:Class="Teszt__.src.Views.Oktato_Views.ShowDataView"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Teszt__.src.Views.Oktato_Views"
         mc:Ignorable="d"
-        Title="Teszt++" Height="700" Width="1000" Icon="/src/Resources/favicon.ico" WindowStartupLocation="CenterScreen" WindowState="Maximized">
-    <Window.Background>
+        Title="Teszt++">
+    <Page.Background>
         <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
             <GradientStop Color="Black" Offset="1"/>
             <GradientStop Color="#FF03389A"/>
         </LinearGradientBrush>
-    </Window.Background>
+    </Page.Background>
+
+    <Page.Resources>
+        <Style x:Key="NoHoverMenuItemStyle" TargetType="MenuItem">
+            <Setter Property="OverridesDefaultStyle" Value="True"/>
+            <Setter Property="Foreground" Value="Cyan"/>
+            <Setter Property="Background" Value="Black"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="MenuItem">
+                        <Border x:Name="Border" Background="{TemplateBinding Background}">
+                            <ContentPresenter Content="{TemplateBinding Header}" />
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="Border" Property="TextBlock.Foreground" Value="Yellow"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="MenuItem" TargetType="MenuItem">
+            <Setter Property="Margin" Value="200,0,0,0"></Setter>
+        </Style>
+    </Page.Resources>
 
     <DockPanel>
+
+        <StackPanel DockPanel.Dock="Top">
+            <Grid >
+                <Grid.Background>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="Black" Offset="0.977"/>
+                        <GradientStop Color="Cyan" Offset="1"/>
+                    </LinearGradientBrush>
+                </Grid.Background>
+                <Menu HorizontalAlignment="Left" FontWeight="Bold" Foreground="Cyan">
+                    <Menu.Background>
+                        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                            <GradientStop Color="Black" Offset="0.977"/>
+                            <GradientStop Color="Cyan" Offset="1"/>
+                        </LinearGradientBrush>
+                    </Menu.Background>
+                    <MenuItem Header="Vissza" Height="Auto" FontSize="30px" Style="{StaticResource MenuItem}" Command="{Binding NavigateToOktatoViewCommand}">
+                    </MenuItem>
+                </Menu>
+                <Menu HorizontalAlignment="Right" Foreground="Cyan">
+                    <Menu.Background>
+                        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                            <GradientStop Color="Black" Offset="0.977"/>
+                            <GradientStop Color="Cyan" Offset="1"/>
+                        </LinearGradientBrush>
+                    </Menu.Background>
+                    <MenuItem Header="Profil" FontSize="30px"  VerticalAlignment="Top" FontWeight="Bold" Margin="0,0,50,0">
+                        <MenuItem Header="Adatok módosítása" FontSize="20px" Height="30px" Background="Black" Foreground="Cyan" Style="{StaticResource NoHoverMenuItemStyle}" Command="{Binding ShowUserProfileCommand}"/>
+                        <MenuItem Header="Kijelentkezés" FontSize="20px" Height="30px" Background="Black" Foreground="Cyan" Style="{StaticResource NoHoverMenuItemStyle}" Command="{Binding LogOutCommand}"/>
+                    </MenuItem>
+                </Menu>
+            </Grid>
+        </StackPanel>
+
         <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalAlignment="Center" Margin="0,40,0,0" DockPanel.Dock="Top">
             <DockPanel>
-                <StackPanel x:Name="mainStackPanel">
+                <StackPanel x:Name="mainStackPanel" DockPanel.Dock="Top">
                     
                 </StackPanel>
             </DockPanel>
         </ScrollViewer>
         <Button x:Name="sendButton" FontSize="30" Width="170" Height="50" DockPanel.Dock="Bottom">Küldés</Button>
     </DockPanel>
-</Window>
+</Page>

@@ -241,6 +241,7 @@
     <Compile Include="src\Commands\Oktato_Commands\CreateCourseCommand.cs" />
     <Compile Include="src\Commands\Oktato_Commands\CreateQuestionCommand.cs" />
     <Compile Include="src\Commands\Oktato_Commands\CreateTestCommand.cs" />
+    <Compile Include="src\Commands\Oktato_Commands\NavigateToOktatoViewCommand.cs" />
     <Compile Include="src\Commands\Oktato_Commands\SendCommand.cs" />
     <Compile Include="src\Commands\Oktato_Commands\ShowResultsCommand.cs" />
     <Compile Include="src\Commands\RegisterCommand.cs" />

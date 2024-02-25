@@ -17,7 +17,7 @@ namespace Teszt__.src.Views.Oktato_Views
     /// <summary>
     /// Interaction logic for ShowDataView.xaml
     /// </summary>
-    public partial class ShowDataView : Window
+    public partial class ShowDataView : Page
     {
         public ShowDataView()
         {
