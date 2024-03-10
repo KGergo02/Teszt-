@@ -246,6 +246,10 @@ namespace Teszt__.src.Services
 
                 dataGrid.ItemsSource = models;
 
+                dataGrid.CellStyle = new Style(typeof(DataGridCell));
+
+                dataGrid.CellStyle.Setters.Add(new Setter(TextBlock.TextAlignmentProperty, TextAlignment.Center));
+
                 Dictionary<string, string> namesOfColumns = new Dictionary<string, string>();
 
                 if (models[0] is Result result)
